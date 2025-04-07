@@ -143,7 +143,7 @@ export default async function Page() {
               </div>
               <div>
                 <label htmlFor="question4" className="block text-sm font-medium text-gray-700">
-                  If you didn't use the focus strategy, why not?
+                  If you didn&apos;t use the focus strategy, why not?
                 </label>
                 <textarea
                   id="question4"
