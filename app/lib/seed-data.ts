@@ -6,14 +6,24 @@ const users = [
       name: 'User',
       email: 'user@nextmail.com',
       password: '123456',
-      phone: ''
+      phone: '',
+      setup: true
     },
     {
       id: '410544b2-4001-4271-9855-fec4b6a6442b',
       name: 'User2',
       email: 'user2@nextmail.com',
       password: '123456',
-      phone: ''
+      phone: '',
+      setup: true
+    },
+    {
+      id: '410544b2-4001-4271-9855-fec4b6a6442d',
+      name: 'User3',
+      email: 'user3@nextmail.com',
+      password: '123456',
+      phone: '',
+      setup: false
     },
   ];
   
