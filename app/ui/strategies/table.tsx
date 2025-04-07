@@ -1,8 +1,6 @@
-import Image from 'next/image';
-// import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import TableData from '@/app/ui/strategies/table-data';
 
-export default async function InvoicesTable() {
+export default async function StrategiesTable() {
   const strategies = [
     "Background Sound",
     "Check List",
@@ -14,17 +12,6 @@ export default async function InvoicesTable() {
     "Task Switching",
     "Work Partners",
   ]
-  const strategyMap = {
-    background_sound: "Background Sound",
-    check_list: "Check List",
-    chunking: "Chunking",
-    daily_planner: "Daily Planner",
-    environmental_shift: "Environmental Shift",
-    pomodoro_timer: "Pomodoro Timer",
-    small_rewards: "Small Rewards",
-    task_switching: "Task Switching",
-    work_partners: "Work Partners",
-  };
 
   return (
     <div className="mt-6 flow-root">

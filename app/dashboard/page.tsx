@@ -1,15 +1,12 @@
-import {
-    ClockIcon,
-  } from '@heroicons/react/24/outline';
 import { Card } from '@/app/ui/dashboard/cards';
 import { lusitana } from '@/app/ui/fonts';
-import { fetchUserStrategies, fetchAssignedStrategies, fetchLatestAssignedStrategy } from '@/app/lib/data';
+import { fetchLatestAssignedStrategy } from '@/app/lib/data';
 
 export default async function Page() {
   const latestStrategy = await fetchLatestAssignedStrategy();
   console.log('Latest Strategy:', latestStrategy);
-  const assignedStrategies = await fetchAssignedStrategies();
-  const userStrategies = await fetchUserStrategies();
+//   const assignedStrategies = await fetchAssignedStrategies();
+//   const userStrategies = await fetchUserStrategies();
   
   return (
     <main>

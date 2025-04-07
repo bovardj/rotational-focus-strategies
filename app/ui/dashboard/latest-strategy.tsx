@@ -1,4 +1,3 @@
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { lusitana } from '@/app/ui/fonts';
 import { LatestAssignedStrategy } from '@/app/lib/definitions';
