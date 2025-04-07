@@ -12,7 +12,7 @@ export type User = {
 
 export type UserStrategies = {
   id: string;
-  user: string;
+  user_id: string;
   strategies: [string];
 };
 
