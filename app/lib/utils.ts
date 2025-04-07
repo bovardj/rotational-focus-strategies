@@ -1,13 +1,13 @@
 export const strategies = [
-  { name: "Background Sound", href: 'bg-sound' },
-  { name: "Check List", href: 'check-list' },
+  { name: "Background Sound", href: 'bg_sound' },
+  { name: "Check List", href: 'check_list' },
   { name: "Chunking", href: 'chunking' },
-  { name: "Daily Planner", href: 'daily-planner' },
-  { name: "Environmental Shift", href: 'environmental-shift' },
+  { name: "Daily Planner", href: 'daily_planner' },
+  { name: "Environmental Shift", href: 'environmental_shift' },
   { name: "Pomodoro Timer", href: 'pomodoro' },
-  { name: "Small Rewards", href: 'small-rewards' },
-  { name: "Task Switching", href: 'task-switching' },
-  { name: "Work Partners", href: 'work-partners' },
+  { name: "Small Rewards", href: 'small_rewards' },
+  { name: "Task Switching", href: 'task_switching' },
+  { name: "Work Partners", href: 'work_partners' },
 ];
 
 

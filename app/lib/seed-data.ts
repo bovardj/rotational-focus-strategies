@@ -27,7 +27,7 @@ const selected_strategies = [
     {
       id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
       user_id: users[1].id,
-      strategies: ['pomodoro', 'check_list', 'partner'],
+      strategies: ['pomodoro', 'check_list', 'work_partners'],
       date_selected: '2024-10-01',
     }
   ];
