@@ -10,19 +10,19 @@ export type User = {
   phone: string;
 };
 
-export type User_Strategies = {
+export type UserStrategies = {
   id: string;
   user: string;
   strategies: [string];
 };
 
-export type latestAssignedStrategy = {
+export type LatestAssignedStrategy = {
   user_id: string;
   strategy: string;
   date: string;
 };
 
-export type Assigned_Strategies = {
+export type AssignedStrategies = {
   id: string;
   user_id: string;
   strategy: string;
