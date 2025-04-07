@@ -1,6 +1,4 @@
-import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
-// import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
-import { notFound } from 'next/navigation';
+import Breadcrumbs from '@/app/ui/strategies/breadcrumbs';
 import { Metadata } from 'next';
 import { strategies } from '@/app/lib/utils';
  
@@ -11,19 +9,6 @@ export const metadata: Metadata = {
 export default async function Page(props: { params: Promise<{ strategy: string }> }) {
   const params = await props.params;
   const strategy = params.strategy;
-//   const [invoice, customers] = await Promise.all([
-//     fetchInvoiceById(id),
-//     fetchCustomers(),
-//   ]);
-
-//   if (!invoice) {
-//     notFound();
-//   }
-// const link = `/dashboard/strategies/${strategies.find(link => link.name === strategy)?.href || ''}`;
-
-//   if (!strategies.some(strat => strat.name === strategy)) {
-//     notFound();
-//   }
 
   const formattedStrategy = strategies.find(
     (strat) => strat.href === strategy,
@@ -41,7 +26,6 @@ export default async function Page(props: { params: Promise<{ strategy: string }
           },
         ]}
       />
-      {/* <Form invoice={invoice} customers={customers} /> */}
     </main>
   );
 }
