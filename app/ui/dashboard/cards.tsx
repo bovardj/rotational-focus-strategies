@@ -1,23 +1,10 @@
 import {
-  BanknotesIcon,
   ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
   LightBulbIcon
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
-
-const strategyMap = {
-  background_sound: "Background Sound",
-  check_list: "Check List",
-  chunking: "Chunking",
-  daily_planner: "Daily Planner",
-  environmental_shift: "Environmental Shift",
-  pomodoro_timer: "Pomodoro Timer",
-  small_rewards: "Small Rewards",
-  task_switching: "Task Switching",
-  work_partners: "Work Partners",
-};
+import Link from 'next/link';
+import { strategies } from '@/app/lib/utils';
 
 export default async function CardWrapper() {
   return (
@@ -40,28 +27,36 @@ export function Card({
   title,
   value,
   date,
-  // type,
 }: {
   title: string;
-  value: keyof typeof strategyMap;
+  // value: keyof typeof strategyMap;
+  value: string;
   date?: string;
-  // type: 'background_sound' | 'check_list' | 'chunking' | 'daily_planner' | 'environmental_shift' | 
-  // 'pomodoro_timer' | 'small_rewards' | 'task_switching' | 'work_partners';
 }) {
-  const value_formatted = strategyMap[value];
+  // const value_formatted = strategyMap[value];
+  const formatted_value = strategies.find(
+    (strat) => strat.href === value,
+  )?.name || value;
+
+  console.log('Formatted Value:', formatted_value);
+  console.log('Value:', value);
 
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm md:col-span-2 lg:col-span-4 max-w-md mx-auto">
       <div className="flex p-4">
-      <LightBulbIcon className="h-5 w-5 text-gray-700" />
-      <h3 className="ml-2 text-sm font-medium">{title}</h3>
+        <LightBulbIcon className="h-5 w-5 text-gray-700" />
+        <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <p
-      className={`${lusitana.className}
-        truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-      >
-      {value_formatted}
-      </p>
+      <Link 
+        key={formatted_value}
+        href={`dashboard/strategies/${value}`}>
+        <p
+        className={`${lusitana.className}
+          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+        >
+        {formatted_value}
+        </p>
+      </Link>
       <p className="text-center text-sm py-2 text-gray-500">
       {date ? (
         <span>
