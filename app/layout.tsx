@@ -1,9 +1,9 @@
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
+  // SignInButton,
+  // SignUpButton,
   SignedIn,
-  SignedOut,
+  // SignedOut,
   UserButton,
 } from '@clerk/nextjs'
 import '@/app/ui/global.css';
@@ -19,10 +19,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.className} antialiased`}>
           <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
+            {/* <SignedOut>
               <SignInButton />
               <SignUpButton />
-            </SignedOut>
+            </SignedOut> */}
             <SignedIn>
               <UserButton />
             </SignedIn>
