@@ -5,7 +5,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
-import { SignIn, SignInButton } from '@clerk/nextjs';
+import { SignUpButton, SignInButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuth } from '@clerk/nextjs';
@@ -52,12 +52,17 @@ export default function Page() {
             <span>Sign in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link> */}
 
-          <Link
+          <SignUpButton>
+            <button className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
+              <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
+            </button>
+          </SignUpButton>
+          {/* <Link
             href="/sign-up"
             className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
           >
             <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
+          </Link> */}
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
         {/* Add Hero Images Here */}
