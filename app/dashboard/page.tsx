@@ -17,18 +17,6 @@ export default async function Page() {
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-          <div className="flex p-4">
-            <ClockIcon className="h-5 w-5 text-gray-700" />
-            <h3 className="ml-2 text-sm font-medium">Latest Strategy</h3>
-          </div>
-          <p
-            className={`${lusitana.className}
-              truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-          >
-            {latestStrategy[0]?.strategy}
-          </p>
-        </div> */}
         <Card
           title="Latest Strategy" 
           value={latestStrategy[0]?.strategy as "background_sound" | "check_list" | "chunking" | "daily_planner" | "environmental_shift" | "pomodoro_timer" | "small_rewards" | "task_switching" | "work_partners"}
