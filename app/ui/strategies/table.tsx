@@ -1,33 +1,36 @@
 import TableData from '@/app/ui/strategies/table-data';
+import { strategies } from '@/app/lib/utils';
 
 export default async function StrategiesTable() {
-  const strategies = [
-    "Background Sound",
-    "Check List",
-    "Chunking",
-    "Daily Planner",
-    "Environmental Shift",
-    "Pomodoro Timer",
-    "Small Rewards",
-    "Task Switching",
-    "Work Partners",
-  ]
+  // const strategyNames = strategies.map((strategy) => strategy.name);
+
+  // const strategies = [
+  //   "Background Sound",
+  //   "Check List",
+  //   "Chunking",
+  //   "Daily Planner",
+  //   "Environmental Shift",
+  //   "Pomodoro Timer",
+  //   "Small Rewards",
+  //   "Task Switching",
+  //   "Work Partners",
+  // ]
 
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <p className="mb-4 text-xl md:text-2xl">Strategy</p>
-          </div>
+          </div> */}
           <div className="overflow-x-auto">
             <table className="min-w-full text-gray-900">
               <tbody className="whitespace-nowrap px-3 py-3">
 
                 {strategies?.map((strat) => (
-                  <tr key={strat} className="flex items-center justify-between">
+                  <tr key={strat.name} className="flex items-center justify-between">
                     <td className="flex items-center justify-start gap-2">
-                      <TableData strategy={strat} />
+                      <TableData strategy={strat.name} />
                     </td>
                   </tr>
                 ))}

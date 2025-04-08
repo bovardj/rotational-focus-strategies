@@ -22,9 +22,11 @@ export default async function StrategiesTable() {
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
-            <p className="mb-4 text-xl md:text-2xl">Strategy</p>
-          </div>
+            <div className='px-4 pt-4'>
+            <p className="mb-4 text-lg md:text-xl underline">
+              Your Focus Strategies
+            </p>
+            </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-gray-900">
               <tbody className="whitespace-nowrap px-3 py-3">
