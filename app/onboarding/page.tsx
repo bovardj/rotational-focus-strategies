@@ -6,6 +6,8 @@ import { completeOnboarding } from './_actions'
 import { lusitana } from '@/app/ui/fonts';
 import { strategies } from '../lib/utils'
 import { useState } from 'react';
+import { Button } from '../ui/button';
+import Breadcrumbs from '../ui/strategies/breadcrumbs';
 
 export default function OnboardingComponent() {
   const [error, setError] = useState('')
@@ -22,6 +24,10 @@ export default function OnboardingComponent() {
         : [...prevSelected, item]
     );
   };
+
+  // const formattedStrategy = strategies.find(
+  //   (strat) => strat.href === strategy,
+  // )?.name || strategy;
 
   const isValid = selectedItems.length === requiredStrategies;
 
@@ -70,6 +76,16 @@ export default function OnboardingComponent() {
           </div>
           {strategies.map((strategy, index) => (
             <div key={index} className="flex items-center">
+              {/* <Breadcrumbs
+                breadcrumbs={[
+                  { label: 'Focus Strategies', href: '/dashboard/strategies' },
+                  {
+                    label: formattedStrategy,
+                    href: `/dashboard/strategies/${strategy}/`,
+                    active: true,
+                  },
+                ]}
+              /> */}
               <input
                 type="checkbox"
                 id={`strategy-${index}`}
@@ -107,7 +123,15 @@ export default function OnboardingComponent() {
               });
             `}
           </script> */}
-          <button
+          <Button className={`mt-4 ${
+              isValid ? '' : 'opacity-50 cursor-not-allowed'
+            }`}
+            disabled={!isValid}
+          >
+            Submit
+          </Button>
+
+          {/* <button
             type="submit"
             className={`mt-4 px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 ${
               isValid ? '' : 'opacity-50 cursor-not-allowed'
@@ -115,7 +139,7 @@ export default function OnboardingComponent() {
             disabled={!isValid}
           >
             Submit
-          </button>
+          </button> */}
           {error && <p className="text-red-600 mt-2">{error}</p>}
         </form>
 

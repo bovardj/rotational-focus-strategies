@@ -1,4 +1,6 @@
 onlyBuiltDependencies:
   - '@clerk/shared'
   - bcrypt
+  - browser-tabs-lock
+  - core-js
   - sharp

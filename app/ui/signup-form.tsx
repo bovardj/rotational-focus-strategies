@@ -16,11 +16,14 @@ import {
     UserIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import { completeSignup } from '@/app/lib/actions'
 
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp()
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [verifying, setVerifying] = useState(false)
   const [code, setCode] = useState('')
   const router = useRouter()
@@ -51,11 +54,15 @@ export default function Page() {
 
     if (!isLoaded) return
 
+    const formData = new FormData(e.currentTarget as HTMLFormElement)
+
     // Start the sign-up process using the email and password provided
     try {
       await signUp.create({
         emailAddress,
         password,
+        firstName,
+        lastName
       })
 
       // Send the user an email with the verification code
@@ -71,6 +78,18 @@ export default function Page() {
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
     }
+
+    // console.log('Attempting to save data to Supabase...')
+    // try { 
+    //     const res = await completeSignup(formData)
+    //     if (res) {
+    //         console.log(res.message)
+    //     }
+    //     console.log('Data saved to Supabase successfully!')
+    // } catch (error) {
+    //     console.error('Error:', error)
+    //     return
+    // }
   }
 
   // Handle the submission of the verification form
@@ -141,7 +160,9 @@ export default function Page() {
                   type="string"
                   name="firstName"
                   placeholder="Enter your first name"
+                  value={firstName}
                   required
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
                 <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
               </div>
@@ -160,7 +181,9 @@ export default function Page() {
                   type="string"
                   name="lastName"
                   placeholder="Enter your last name"
+                  value={lastName}
                   required
+                  onChange={(e) => setLastName(e.target.value)}
                 />
                 <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
               </div>

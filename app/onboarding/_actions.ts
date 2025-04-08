@@ -12,8 +12,8 @@ export const completeOnboarding = async (formData: FormData) => {
 
   ////////////////////////////////////////////////////////////////////////////
   //// TODO: Check if this route actually works and make the db table for it
-  console.log('WAIT!!! This method is incomplete and not tested yet')
-  throw new Error('This method is incomplete and not tested yet')
+  // console.log('WAIT!!! This method is incomplete and not tested yet')
+  // throw new Error('This method is incomplete and not tested yet')
 
   const selectedStrategies = formData.getAll('strategy') as string[]
   const supabase = createClient(
@@ -23,12 +23,17 @@ export const completeOnboarding = async (formData: FormData) => {
 
   const { error } = await supabase
     .from('user_strategies')
-    .insert(
-      selectedStrategies.map((strategy) => ({
-        user_id: userId,
-        strategy,
-      }))
-    )
+    .insert({
+      user_id: userId,
+      strategies: selectedStrategies,
+    })
+
+    // .insert(
+    //   selectedStrategies.map((strategy) => ({
+    //     user_id: userId,
+    //     strategy,
+    //   }))
+    // )
   ////////////////////////////////////////////////////////////////////////////
 
   if (error) {
