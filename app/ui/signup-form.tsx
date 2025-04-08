@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { useSignUp } from '@clerk/nextjs'
-// import { SignUpForm } from '@/app/ui/signup-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { lusitana } from '@/app/ui/fonts'
 import { Button } from '@/app/ui/button'
@@ -16,7 +15,6 @@ import {
     UserIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { completeSignup } from '@/app/lib/actions'
 
 export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp()
@@ -78,18 +76,6 @@ export default function Page() {
       // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
     }
-
-    // console.log('Attempting to save data to Supabase...')
-    // try { 
-    //     const res = await completeSignup(formData)
-    //     if (res) {
-    //         console.log(res.message)
-    //     }
-    //     console.log('Data saved to Supabase successfully!')
-    // } catch (error) {
-    //     console.error('Error:', error)
-    //     return
-    // }
   }
 
   // Handle the submission of the verification form
@@ -138,8 +124,6 @@ export default function Page() {
   // Display the initial sign-up form to capture the email and password
   return (
     <>
-      {/* <h1>Sign up</h1> */}
-
       <form onSubmit={handleSubmit} className="space-y-3">
         <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
           <h1 className={`${lusitana.className} mb-3 text-2xl`}>
@@ -253,18 +237,6 @@ export default function Page() {
         <Button className="mt-7 w-full">
           Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
-        {/* <div
-          className="flex h-8 items-end space-x-1"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {errorMessage && (
-            <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
-          )}
-        </div> */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
                 Already have an account?{' '}
