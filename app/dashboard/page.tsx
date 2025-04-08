@@ -2,9 +2,14 @@ import { Card } from '@/app/ui/dashboard/cards';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestAssignedStrategy } from '@/app/lib/data';
 
+export const metadata = {
+  title: 'Dashboard',
+  description: 'The dashboard is the main page of the app, where you can see your latest assigned strategies and link to other important pages.',
+};
+
 export default async function Page() {
   const latestStrategy = await fetchLatestAssignedStrategy();
-  console.log('Latest Strategy:', latestStrategy);
+  // console.log('Latest Strategy:', latestStrategy);
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>

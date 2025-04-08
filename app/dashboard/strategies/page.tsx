@@ -1,11 +1,16 @@
 import Table from '@/app/ui/strategies/table';
 import { lusitana } from '@/app/ui/fonts';
- 
+
+export const metadata = {
+  title: 'Focus Strategies',
+  description: 'Focus Strategies',
+};
+
 export default async function Page() {
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Strategies</h1>
+        <h1 className={`${lusitana.className} text-2xl`}>Focus Strategies</h1>
         </div>
             <div className="hidden md:block mt-4 w-full">
                 <Table />
