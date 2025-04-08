@@ -1,0 +1,45 @@
+import TableData from '@/app/ui/dashboard/table-data';
+import { strategies } from '@/app/lib/utils';
+import { fetchUserStrategies } from '@/app/lib/data';
+import { currentUser } from '@clerk/nextjs/server';
+
+export default async function StrategiesTable() {
+  const user = await currentUser();
+  const userId = user?.id;
+  if (!userId) {
+    return <p className="text-center text-gray-500">Loading...</p>;
+  }
+  const userStrategies = await fetchUserStrategies(userId);
+  
+  const strategyNames = strategies.map((strategy) => {
+    const matchedStrategy = userStrategies.some(
+      (userStrategy) =>
+        userStrategy.includes(strategy.href)) ? strategy : null;
+    return matchedStrategy ? strategy.name : null;
+  }).filter((name) => name !== null);
+
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <div className="md:hidden">
+            <p className="mb-4 text-xl md:text-2xl">Strategy</p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-gray-900">
+              <tbody className="whitespace-nowrap px-3 py-3">
+                {strategyNames?.map((strat, index) => (
+                  <tr key={index} className="flex items-center justify-between">
+                    <td className="flex items-center justify-start gap-2">
+                      <TableData strategy={strat} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
