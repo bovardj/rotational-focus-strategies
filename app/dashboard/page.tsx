@@ -1,8 +1,7 @@
 import { Card } from '@/app/ui/dashboard/cards';
 import { lusitana } from '@/app/ui/fonts';
-import { useUser } from '@clerk/nextjs';
-import { fetchLatestAssignedStrategy, fetchUserStrategies } from '@/app/lib/data';
 import StrategiesTable from '@/app/ui/dashboard/table';
+import { getDailyStrategy } from '../lib/actions';
 
 export const metadata = {
   title: 'Dashboard',
@@ -10,19 +9,19 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const latestStrategy = await fetchLatestAssignedStrategy();
+  const latestStrategy = await getDailyStrategy();
+  // console.log('latestStrategy', latestStrategy);
 
   return (
     <main>
-      {/* <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}> */}
       <h1 className={`${lusitana.className} mb-4 text-2xl`}>
         Dashboard
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Card
           title="Latest Strategy" 
-          value={latestStrategy[0]?.strategy as "background_sound" | "check_list" | "chunking" | "daily_planner" | "environmental_shift" | "pomodoro_timer" | "small_rewards" | "task_switching" | "work_partners"}
-          date={latestStrategy[0]?.date}
+          value={latestStrategy.strategy}
+          date={latestStrategy.date}
         />
       </div>
       <div className="mt-6">

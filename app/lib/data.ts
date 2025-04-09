@@ -26,7 +26,7 @@ export async function fetchUserStrategies(userId: string) {
 
     // const data = await sql<UserStrategies[]>`SELECT * FROM strategies`;
     const strategiesArray = data.map((item) => item.strategies);
-    console.log('User Strategies:', strategiesArray);
+    // console.log('User Strategies:', strategiesArray);
     return strategiesArray;
   } catch (error) {
     console.error('Database Error:', error);
