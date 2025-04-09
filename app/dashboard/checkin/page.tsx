@@ -2,6 +2,8 @@ import { lusitana } from '@/app/ui/fonts';
 
 export default async function Page() {
   
+
+  
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-2xl`}>
@@ -10,6 +12,18 @@ export default async function Page() {
     <div className="flex justify-center">
       <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
         <form className="space-y-6 bg-white p-6 rounded-lg shadow-md" style={{ maxWidth: '400px' }}>
+            <div className="mb-6">
+            <label htmlFor="submissionDate" className="block text-sm font-medium text-gray-700">
+              What day is this for?
+            </label>
+            <input
+              type="date"
+              id="submissionDate"
+              name="submissionDate"
+              defaultValue={new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }).split(',')[0]}
+              className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+            </div>
           <div>
             <label htmlFor="question1" className="block text-sm font-medium text-gray-700">
               How satisfied are you with today?
