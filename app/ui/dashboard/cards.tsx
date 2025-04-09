@@ -19,15 +19,6 @@ export function Card({
     (strat) => strat.href === value,
   )?.name || value;
 
-  // console.log('Formatted Value:', formatted_value);
-  // console.log('Value:', value);
-  // console.log('Date:', date);
-  // console.log('Formatted date:', date ? new Date(date).toLocaleDateString('en-US', {
-  //   year: 'numeric',
-  //   month: 'long',
-  //   day: 'numeric',
-  // }) : 'No date available');
-
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm md:col-span-2 lg:col-span-4 max-w-md mx-auto">
       <div className="flex p-4">
@@ -48,11 +39,7 @@ export function Card({
         {date ? (
           <span>
           <ClockIcon className="h-4 w-4 inline-block mr-1" />
-          {new Date(date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+          {new Date().toLocaleDateString('en-us', { timeZone: 'America/Denver' }) + ' MDT'}
           </span>
         ) : (
         <span>

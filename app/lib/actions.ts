@@ -32,6 +32,9 @@ export async function getDailyStrategy() {
   const yesterday = getYesterday(new Date());
 //   const weekStart = getStartOfWeek(new Date());
 
+  // console.log('Today:', today);
+  // console.log('Yesterday:', yesterday);
+
 //   Check today's assignment
   const { data: existing } = await supabase
     .from('assigned_strategies')
@@ -40,6 +43,8 @@ export async function getDailyStrategy() {
     .eq('date', today)
     .single();
 
+  // console.log('User ID:', userId);
+  // console.log('Existing Strategy:', existing);
   if (existing) {
     // console.log('Returning existing Strategy:', existing);
     return existing;
@@ -97,6 +102,7 @@ export async function getDailyStrategy() {
     // console.log('Strategy successfully inserted:', chosen);
   }
 
+  // console.log('Newly assigned strategy:', chosen);
   const dailyStrategy = { "strategy": chosen, "date": today }
   return dailyStrategy;
 }
