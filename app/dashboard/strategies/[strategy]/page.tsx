@@ -20,7 +20,7 @@ export async function generateMetadata({
 }
 
 export default async function Page(props: { params: { strategy: string } }) {
-  const params = await props.params;
+  const params = props.params;
   const strategy = params.strategy;
 
   const formattedStrategy = strategies.find(
