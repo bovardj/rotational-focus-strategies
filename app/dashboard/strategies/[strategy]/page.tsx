@@ -1,6 +1,7 @@
 import Breadcrumbs from '@/app/ui/strategies/breadcrumbs';
 import { Metadata } from 'next';
 import { strategies } from '@/app/lib/utils';
+import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
 
 export async function generateMetadata({
   params,
@@ -38,6 +39,9 @@ export default async function Page(props: { params: Promise<{ strategy: string }
           },
         ]}
       />
+      <div className="flex w-full items-center justify-between">
+        <StrategyDescriptions strategy={strategy} />
+      </div>
     </main>
   );
 }
