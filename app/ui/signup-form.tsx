@@ -11,8 +11,7 @@ import {
     AtSymbolIcon,
     EyeIcon,
     EyeSlashIcon,
-    KeyIcon,
-    UserIcon
+    KeyIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
@@ -20,8 +19,6 @@ export default function Page() {
   const { isLoaded, signUp, setActive } = useSignUp()
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
   const [verifying, setVerifying] = useState(false)
   const [code, setCode] = useState('')
   const router = useRouter()
@@ -59,8 +56,6 @@ export default function Page() {
       await signUp.create({
         emailAddress,
         password,
-        firstName,
-        lastName
       })
 
       // Send the user an email with the verification code
@@ -130,48 +125,6 @@ export default function Page() {
             Please sign up to continue.
           </h1>
           <div className="w-full">
-            <div>
-              <label
-                className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-                htmlFor="firstName"
-              >
-                First Name
-              </label>
-              <div className="relative">
-                <input
-                  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                  id="firstName"
-                  type="string"
-                  name="firstName"
-                  placeholder="Enter your first name"
-                  value={firstName}
-                  required
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-              </div>
-            </div>
-            <div>
-              <label
-                className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-                htmlFor="lastName"
-              >
-                Last Name
-              </label>
-              <div className="relative">
-                <input
-                  className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                  id="lastName"
-                  type="string"
-                  name="lastName"
-                  placeholder="Enter your last name"
-                  value={lastName}
-                  required
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-              </div>
-            </div>
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"

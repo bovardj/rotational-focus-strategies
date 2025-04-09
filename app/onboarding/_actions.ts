@@ -3,15 +3,42 @@
 import { auth, clerkClient } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
 
+const supabase = createClient(
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || ''
+)
+
+export const initializeDaysExpected = async () => {
+  const { userId } = await auth()
+  if (!userId) {
+    return { message: 'No Logged In User' }
+  }
+  // const supabase = createClient(
+  //   process.env.SUPABASE_URL || '',
+  //   process.env.SUPABASE_ANON_KEY || ''
+  // )
+  const { error } = await supabase
+    .from('days_expected')
+    .insert({
+      user_id: userId,
+      baseline_days: 1,
+      daily_days: 2
+    });
+  if (error) {
+    throw new Error('Error updating days_expected in Supabase: ' + error.message)
+  }
+  return { message: 'Days expected initialized to 0' }
+}
+
 export const initializeDaysCompleted = async () => {
   const { userId } = await auth()
   if (!userId) {
     return { message: 'No Logged In User' }
   }
-  const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_ANON_KEY || ''
-  )
+  // const supabase = createClient(
+  //   process.env.SUPABASE_URL || '',
+  //   process.env.SUPABASE_ANON_KEY || ''
+  // )
   const { error } = await supabase
     .from('days_completed')
     .insert({user_id: userId});

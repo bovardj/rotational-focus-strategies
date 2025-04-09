@@ -31,9 +31,7 @@ export default function SyncUserToSupabase() {
       if (!existingUser) {
         const { error } = await supabase.from('users').insert({
           user_id: userId,
-          email: user.primaryEmailAddress?.emailAddress,
-          first_name: user.firstName,
-          last_name: user.lastName,
+          email: user.primaryEmailAddress?.emailAddress
         });
 
         if (error) {
