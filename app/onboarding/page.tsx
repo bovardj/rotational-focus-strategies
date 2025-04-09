@@ -2,7 +2,7 @@
 
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
-import { completeOnboarding } from './_actions'
+import { completeOnboarding, initializeDaysCompleted } from './_actions'
 import { lusitana } from '@/app/ui/fonts';
 import { strategies } from '../lib/utils'
 import { useState } from 'react';
@@ -51,11 +51,22 @@ export default function OnboardingComponent() {
     if (res?.message) {
       // Reloads the user's data from the Clerk API
       await user?.reload()
-      router.push('/')
+      await initializeDaysCompleted()
+      router.push('/dashboard')
     }
     if (res?.error) {
       setError(res?.error)
     }
+
+    // await initializeDaysCompleted()
+    // if (res?.message) {
+    //   // Reloads the user's data from the Clerk API
+    //   await user?.reload()
+    //   router.push('/')
+    // }
+    // if (res?.error) {
+    //   setError(res?.error)
+    // }
   }
 
   return (
