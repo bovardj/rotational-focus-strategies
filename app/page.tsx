@@ -1,5 +1,7 @@
 'use client';
 
+// import { createClient } from '@/app/utils/supabase/server'
+// import { cookies } from 'next/headers'
 import AcmeLogo from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 // import Link from 'next/link';
