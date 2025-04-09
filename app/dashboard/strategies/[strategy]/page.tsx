@@ -19,7 +19,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page(props: { params: Promise<{ strategy: string }> }) {
+export default async function Page(props: { params: { strategy: string } }) {
   const params = await props.params;
   const strategy = params.strategy;
 
