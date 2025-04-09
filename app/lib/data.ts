@@ -4,29 +4,19 @@ import {
   LatestAssignedStrategy,
   AssignedStrategies,
 } from './definitions';
-import { stat } from 'fs';
-// import { useUser } from '@clerk/nextjs';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export async function fetchUserStrategies(userId: string) {
   try {
-    // const userId = process.env.USER_ID;
-    // const { user } = useUser();
-    // const userId = user?.id;
-    // if (!userId) {
-    //   throw new Error('USER_ID is not defined in the environment variables.');
-    // }
-
     const data = await sql<UserStrategies[]>`
       SELECT user_strategies.strategies
       FROM user_strategies
       WHERE user_strategies.user_id = ${userId}
     `;
 
-    // const data = await sql<UserStrategies[]>`SELECT * FROM strategies`;
     const strategiesArray = data.map((item) => item.strategies);
-    // console.log('User Strategies:', strategiesArray);
+
     return strategiesArray;
   } catch (error) {
     console.error('Database Error:', error);

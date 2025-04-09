@@ -1,14 +1,6 @@
-// import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { strategies } from '@/app/lib/utils';
 
 export default function StrategyDescriptions({ strategy }: { strategy: string }) {
-  // const pathname = usePathname();
-
-  const formattedStrategy = strategies.find(
-    (strat) => strat.href === strategy,
-  )?.name || strategy;
-
   if (strategy === "bg_sound") return (
     <div>
       <div>
@@ -189,7 +181,7 @@ export default function StrategyDescriptions({ strategy }: { strategy: string })
     <div>
       <p className="text-lg">
         Work partners are a great way to stay focused and avoid feeling overwhelmed by a task. 
-        This doesn't necessarily mean working with someone else, but rather working nearby to
+        This doesn&apos;t necessarily mean working with someone else, but rather working nearby to
         someone else who is also working on a task. Along with individuals, it can also be a group of
         people who are working independently on different tasks, but are in the same space.
       </p>

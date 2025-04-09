@@ -6,8 +6,7 @@ import {
     getBaselineSurveysCompleted,
     getDailySurveysCompleted,
     getDailySurveysExpected,
-    getDaysCompleted,
-    getEndSurveyCompleted
+    getDaysCompleted
   } from '@/app/dashboard/checkin/_data';
 import {
   insertBaselineSurvey,

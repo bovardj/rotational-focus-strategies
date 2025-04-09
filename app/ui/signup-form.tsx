@@ -49,8 +49,6 @@ export default function Page() {
 
     if (!isLoaded) return
 
-    const formData = new FormData(e.currentTarget as HTMLFormElement)
-
     // Start the sign-up process using the email and password provided
     try {
       await signUp.create({

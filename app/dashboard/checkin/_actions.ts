@@ -31,7 +31,7 @@ export const insertBaselineSurvey = async (formData: FormData) => {
 }
 
 // Add 1 to the number of baseline surveys completed
-export const setBaselineSurveysCompleted = async (baselineSurveysCompleted: BigInt, daysCompleted: BigInt) => {
+export const setBaselineSurveysCompleted = async (baselineSurveysCompleted: bigint, daysCompleted: bigint) => {
     const { userId } = await auth()
     if (!userId) {
         return { message: 'No Logged In User' }
@@ -97,7 +97,7 @@ export const insertDailySurvey = async (formData: FormData) => {
 }
 
 // Add 1 to the number of daily surveys completed
-export const setDailySurveysCompleted = async (dailySurveysCompleted: BigInt, daysCompleted: BigInt) => {
+export const setDailySurveysCompleted = async (dailySurveysCompleted: bigint, daysCompleted: bigint) => {
     const { userId } = await auth()
     if (!userId) {
         return { message: 'No Logged In User' }

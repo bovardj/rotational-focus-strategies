@@ -13,10 +13,7 @@ export const initializeDaysExpected = async () => {
   if (!userId) {
     return { message: 'No Logged In User' }
   }
-  // const supabase = createClient(
-  //   process.env.SUPABASE_URL || '',
-  //   process.env.SUPABASE_ANON_KEY || ''
-  // )
+
   const { error } = await supabase
     .from('days_expected')
     .insert({
@@ -35,10 +32,7 @@ export const initializeDaysCompleted = async () => {
   if (!userId) {
     return { message: 'No Logged In User' }
   }
-  // const supabase = createClient(
-  //   process.env.SUPABASE_URL || '',
-  //   process.env.SUPABASE_ANON_KEY || ''
-  // )
+
   const { error } = await supabase
     .from('days_completed')
     .insert({user_id: userId});
@@ -55,11 +49,6 @@ export const completeOnboarding = async (formData: FormData) => {
     return { message: 'No Logged In User' }
   }
 
-  ////////////////////////////////////////////////////////////////////////////
-  //// TODO: Check if this route actually works and make the db table for it
-  // console.log('WAIT!!! This method is incomplete and not tested yet')
-  // throw new Error('This method is incomplete and not tested yet')
-
   const selectedStrategies = formData.getAll('strategy') as string[]
   const supabase = createClient(
     process.env.SUPABASE_URL || '',
@@ -73,28 +62,9 @@ export const completeOnboarding = async (formData: FormData) => {
       strategies: selectedStrategies,
     })
 
-    // .insert(
-    //   selectedStrategies.map((strategy) => ({
-    //     user_id: userId,
-    //     strategy,
-    //   }))
-    // )
-  ////////////////////////////////////////////////////////////////////////////
-
   if (error) {
     throw new Error('Error inserting strategies into Supabase: ' + error.message)
   }
-
-  // const { error_onboarding } = await supabase
-  //   .from('onboarding')
-  //   .insert({
-  //     user_id: userId,
-  //     onboarding_complete: true,
-  //   })
-
-  // if (error) {
-  //   throw new Error('Error inserting onboarding into Supabase: ' + error_onboarding.message)
-  // }
 
   const client = await clerkClient()
 
@@ -107,7 +77,7 @@ export const completeOnboarding = async (formData: FormData) => {
       },
     })
     return { message: res.publicMetadata }
-  } catch (err) {
+  } catch (err) { // eslint-disable-line
     return { error: 'There was an error updating the user metadata.' }
   }
 }
