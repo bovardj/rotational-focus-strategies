@@ -6,9 +6,9 @@ import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
 export async function generateMetadata({
   params,
 }: {
-  params: { strategy: string };
+  params: Promise<{ strategy: string }>;
 }): Promise<Metadata> {
-  const strategy = params.strategy;
+  const { strategy } = await params;
 
   const formattedStrategy =
     strategies.find((strat) => strat.href === strategy)?.name || strategy;
