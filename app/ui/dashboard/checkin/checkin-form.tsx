@@ -77,20 +77,19 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
   // const handleSubmit = async (formData: FormData) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
-    // const checkedGenders = formData.getAll('gender_identity');
-    const checkedGenders = form.querySelectorAll('input[name="gender_identity"]:checked');
+    const formData = new FormData(form);
+    const checkedGenders = formData.getAll('gender_identity');
     if (checkedGenders.length === 0) {
       e.preventDefault();
       alert('Please select at least one gender identity.');
       return;
     }
-    const checkedRaces = form.querySelectorAll('input[name="racial_identity"]:checked');
+    const checkedRaces = formData.getAll('racial_identity');
     if (checkedRaces.length === 0) {
       e.preventDefault();
       alert('Please select at least one racial identity.');
       return;
     }
-    const formData = new FormData(form);
 
     const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
     if (submitButton) {
@@ -98,12 +97,6 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
       submitButton.disabled = true;
       submitButton.classList.add('opacity-50');
     }
-    
-    // const formData = new FormData(e.currentTarget);
-    // const selectedRaces = formData.getAll('racial_identity');
-    // console.log(selectedRaces);
-    // console.log('Form data:', Object.fromEntries(formData.entries()));
-    // return;
 
     const baselineSurveysExpected = await getBaselineSurveysExpected();
     const baselineSurveysCompleted = await getBaselineSurveysCompleted();
