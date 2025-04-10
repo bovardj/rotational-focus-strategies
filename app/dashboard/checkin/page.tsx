@@ -1,5 +1,5 @@
 import { lusitana } from '@/app/ui/fonts';
-import CheckInForm from '@/app/ui/dashboard/checkin-form';
+import CheckInForm from '@/app/ui/dashboard/checkin/checkin-form';
 import {
   getBaselineCompleted,
   getDailyCompleted,
