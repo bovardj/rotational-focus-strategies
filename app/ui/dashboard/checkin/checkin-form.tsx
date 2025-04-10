@@ -20,60 +20,14 @@ import {
 } from '@/app/dashboard/checkin/_actions';
 import LikertScaleForm from '@/app/ui/dashboard/checkin/question-forms/likertScale-form';
 import CheckboxForm from '@/app/ui/dashboard/checkin/question-forms/checkBox-form';
-import { get } from 'http';
-// import { useEffect } from 'react';
 
 interface CheckInFormProps {
   dailyCompleted: boolean;
   baselineCompleted: boolean;
 }
 
-// const handleCheckboxRequirement = (checkboxName: string) => useEffect(() => {
-//   const form = document.querySelector('form');
-//   const errorDiv = document.getElementById(`${checkboxName}_error`);
-//   const handleFormSubmit = (e: Event) => {
-//       const checkboxes = document.querySelectorAll(`input[name="${checkboxName}"]:checked`);
-//       if (checkboxes.length === 0) {
-//           e.preventDefault();
-//           if (errorDiv) errorDiv.style.display = 'block';
-//       } else {
-//           if (errorDiv) errorDiv.style.display = 'none';
-//       }
-//   };
-//   if (form) {
-//       form.addEventListener('submit', handleFormSubmit);
-//   }
-//   return () => {
-//       if (form) {
-//           form.removeEventListener('submit', handleFormSubmit);
-//       }
-//   };
-// }, []);
-
-// handleCheckboxRequirement('racial_identity');
-// handleCheckboxRequirement('gender_identity');
-
-
-
 export default function CheckInForm({ dailyCompleted, baselineCompleted }: CheckInFormProps) {
   const router = useRouter();
-
-  // const handleOtherCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, checkbox_id: string, input_id: string) => {
-  //   const otherCheckbox = document.getElementById(checkbox_id) as HTMLInputElement;
-  //   const otherInput = document.getElementById(input_id) as HTMLInputElement;
-  //   if (otherCheckbox.checked) {
-  //     otherInput.required = true;
-  //   } else {
-  //     otherInput?.removeAttribute('required');
-  //   }
-  // }
-
-  // const handleClientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.currentTarget);
-  //   const selectedRaces = formData.getAll('racial_identity');
-  //   console.log(selectedRaces);
-  // }
 
   // const handleSubmit = async (formData: FormData) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface CheckboxFormProps {
     inputName: string;
     options: string[];
@@ -19,35 +17,6 @@ export default function CheckboxForm(
         questionAlt: questionAlt=null,
         condition=null
     }: CheckboxFormProps) {
-
-  // const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  // const [otherValue, setOtherValue] = useState<string>('');
-
-  // const handleCheckboxChange = (e: { target: { value: string; }; }) => {
-  //   if (selectedValues.includes(e.target.value)) {
-  //     setSelectedValues(selectedValues.filter((value) => value !== e.target.value));
-  //   } else {
-  //     setSelectedValues([...selectedValues, e.target.value]);
-  //   }
-  //   console.log('Current selectedValues: ', selectedValues);
-  // }
-
-  // const handleCheckboxChange = (e: {
-  //   target: { checked: boolean; value: React.SetStateAction<string>; };
-  // }) => {
-  //   const { value, checked: isChecked } = e.target;
-  //   const checkboxes = document.getElementsByName(inputName) as NodeListOf<HTMLInputElement>;
-  //   const selectedValues: string[] = [];
-  //   checkboxes.forEach((checkbox) => {
-  //     if (checkbox.checked) {
-  //       selectedValues.push(checkbox.value);
-  //     }
-  //   });
-  //   console.log(selectedValues);
-
-
-  // }
-    
 
   const handleOtherCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, checkbox_id: string, input_id: string) => {
     const otherCheckbox = document.getElementById(checkbox_id) as HTMLInputElement;
@@ -76,8 +45,6 @@ export default function CheckboxForm(
               name={inputName}
               value={option}
               className="form-checkbox text-indigo-600"
-              // checked={selectedValues.includes(option)}
-              // onChange={(e) => handleCheckboxChange(e)}
             />
             <span className="ml-2 text-sm">{option}</span>
             </label>
@@ -103,7 +70,6 @@ export default function CheckboxForm(
                   name={`${inputName}_other`}
                   className="mr-2 mt-1 inline-block w-full shadow-sm text-sm border-gray-300 rounded-md"
                   placeholder={otherPlaceholder}
-                  // disabled={!selectedValues.includes("other")}
                 />
               </label>
             </div>
