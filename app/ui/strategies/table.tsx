@@ -10,7 +10,6 @@ export default async function StrategiesTable() {
           <div className="overflow-x-auto">
             <table className="min-w-full text-gray-900">
               <tbody className="whitespace-nowrap px-3 py-3">
-
                 {strategies?.map((strat) => (
                   <tr key={strat.name} className="flex items-center justify-between">
                     <td className="flex items-center justify-start gap-2">
