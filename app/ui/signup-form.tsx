@@ -87,7 +87,7 @@ export default function Page() {
       // and redirect the user
       if (signUpAttempt.status === 'complete') {
         await setActive({ session: signUpAttempt.createdSessionId })
-        router.push('/')
+        router.push('/dashboard')
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.

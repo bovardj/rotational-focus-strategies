@@ -49,7 +49,7 @@ export default function SignInForm() {
       // and redirect the user
       if (signInAttempt.status === 'complete') {
         await setActive({ session: signInAttempt.createdSessionId })
-        router.push('/')
+        router.push('/dashboard')
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
@@ -76,7 +76,7 @@ export default function SignInForm() {
                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                 htmlFor="email"
               >
-                Email
+                Email address
               </label>
               <div className="relative">
                 <input
@@ -92,7 +92,6 @@ export default function SignInForm() {
                 <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
               </div>
             </div>
-          </div>
           <div className="mt-4">
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
@@ -133,21 +132,20 @@ export default function SignInForm() {
             </div>
           </div>
         </div>
-        <Button className="mt-4 w-full">
+        <Button className="mt-7 w-full">
           Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
-            Don&apos;t have an account?{' '}
-            <Link
-              href="/sign-up"
-              className="font-medium text-blue-600 hover:underline"
-            >
-              Sign up
-            </Link>
-          </p>
-        </div>
-        <div className="flex h-8 items-end space-x-1">
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Don&apos;t have an account?{' '}
+              <Link
+                href="/sign-up"
+                className="font-medium text-blue-600 hover:underline"
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
       </form>
     </>

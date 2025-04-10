@@ -16,6 +16,7 @@ export default async function Page() {
             </div>
       <div className="mt-5 flex w-full justify-center">
         <form action="/onboarding" method="GET">
+        
           <Button
             type="submit"
             className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">

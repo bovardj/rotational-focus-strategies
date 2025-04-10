@@ -8,6 +8,9 @@ import { strategies } from '../lib/utils'
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+// import Collapse from '@/app/ui/onboarding/components/collapse-menu';
+import Collapse from '@geist-ui/react/esm/collapse/collapse';
+import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
 // import Breadcrumbs from '../ui/strategies/breadcrumbs';
 
 export default function OnboardingComponent() {
@@ -49,9 +52,11 @@ export default function OnboardingComponent() {
       </h1>
       <div className="grid gap-6 grid-cols-1">
         <div>
-          <p className="mb-4 text-lg md:text-xl">
-            A useful guide to installing the app as a PWA can be found 
-            <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html">here</Link>.
+          <p className="mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
+            While completely optional, you may install this app onto your device, such as a smartphone or computer,
+            as a Progressive Web App (PWA) if you would like. A useful guide to installing the app as a PWA can be found&nbsp;
+            <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html" className="text-blue-500 hover:underline">
+            here</Link>.
           </p>
         </div>
         <form action={handleSubmit}>
@@ -80,7 +85,7 @@ export default function OnboardingComponent() {
                 id={`strategy-${index}`}
                 name="strategy"
                 value={strategy.href}
-                className="mr-2"
+                className="mr-4"
                 checked={selectedItems.includes(strategy.href)}
                 onChange={() => handleCheckboxChange(strategy.href)}
                 disabled={
@@ -88,19 +93,30 @@ export default function OnboardingComponent() {
                   !selectedItems.includes(strategy.href)
                 }
               />
-              <label htmlFor={`strategy-${index}`}>{strategy.name}</label>
+              {/* <label htmlFor={`strategy-${index}`}> */}
+                {/* <Link href={`@/app/onboarding/strategies/${strategy.href}`}>{strategy.name}</Link></label> */}
+                <div className="flex items-center sm:w-2/3 lg:w-1/2">
+                <Collapse title={strategy.name} className="mb-4">
+                  <StrategyDescriptions strategy={strategy.href} />
+                  {/* <p className="mb-4">{strategy.description}</p> */}
+                </Collapse>
+                </div>
+              {/* </label> */}
             </div>
           ))}
           <p className="text-red-600" id="strategy-error" style={{ display: 'none' }}>
             You must select exactly 3 strategies.
           </p>
-          <Button className={`mt-4 ${
+            {/* <div className="flex justify-center"></div> */}
+            <div className="flex justify-center sm:w-2/3 lg:w-1/2">
+            <Button className={`mt-4 ${
               isValid ? '' : 'opacity-50 cursor-not-allowed'
-            }`}
-            disabled={!isValid}
-          >
-            Submit
-          </Button>
+              }`}
+              disabled={!isValid}
+            >
+              Submit
+            </Button>
+            </div>
           {error && <p className="text-red-600 mt-2">{error}</p>}
         </form>
       </div>

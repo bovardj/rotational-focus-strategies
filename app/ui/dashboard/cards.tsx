@@ -5,6 +5,7 @@ import {
 import { lusitana } from '@/app/ui/fonts';
 import Link from 'next/link';
 import { strategies } from '@/app/lib/utils';
+import clsx from 'clsx';
 
 export function Card({
   title,
@@ -29,8 +30,9 @@ export function Card({
         key={formatted_value}
         href={`dashboard/strategies/${value}`}>
         <p
-          className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+          className={clsx(
+            `${lusitana.className} truncate text-center gap-2 rounded-xl bg-white px-4 py-8 text-2xl hover:bg-sky-100 hover:text-blue-600`
+          )}
         >
           {formatted_value}
         </p>

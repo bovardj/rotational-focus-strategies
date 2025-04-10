@@ -3,9 +3,9 @@ import Link from 'next/link';
 export default function StrategyDescriptions({ strategy }: { strategy: string }) {
   return (
     <div className='flex flex-col xl:flex-row gap-4'>
-      <div className='xl:w-2/3 2xl:w-1/2'>
+      {/* <div className='xl:w-3/4 2xl:w-2/3'> */}
         <StrategyDetails strategy={strategy} />
-      </div>
+      {/* </div> */}
     </div>
   )
 }
