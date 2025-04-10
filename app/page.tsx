@@ -6,7 +6,7 @@ import { SignUpButton, SignInButton } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useAuth } from '@clerk/nextjs';
-import RFSLogo from '@/app/ui/rfs-logo';
+// import RFSLogo from '@/app/ui/rfs-logo';
 
 export default function Page() {
   const router = useRouter();
