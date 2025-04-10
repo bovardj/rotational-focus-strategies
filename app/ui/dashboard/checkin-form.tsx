@@ -250,6 +250,61 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
           </label>
         </div>
       </div>
+      { baselineCompleted && dailyCompleted && (
+        <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+          <label htmlFor="usefulness_score" className="block text-sm font-medium text-gray-700">
+              Did you feel like rotating focus strategies was for useful?
+            <span className="text-red-500">*</span>
+          </label>
+          <div className="mt-4 grid grid-cols-1 gap-4">
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="usefulness_score"
+                value="1"
+                className="form-radio text-indigo-600"
+              />
+              <span className="ml-2 text-sm">1 - Very useful</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="usefulness_score"
+                value="2"
+                className="form-radio text-indigo-600"
+              />
+              <span className="ml-2 text-sm">2 - Somewhat useful</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="usefulness_score"
+                value="3"
+                className="form-radio text-indigo-600"
+              />
+              <span className="ml-2 text-sm">3 - Neutral</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="usefulness_score"
+                value="4"
+                className="form-radio text-indigo-600"
+              />
+              <span className="ml-2 text-sm">4 - Somewhat useful</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="radio"
+                name="usefulness_score"
+                value="5"
+                className="form-radio text-indigo-600"
+              />
+              <span className="ml-2 text-sm">5 - Very useful</span>
+            </label>
+          </div>
+        </div>
+      )}
       { baselineCompleted && !dailyCompleted && (
         <>
           <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
