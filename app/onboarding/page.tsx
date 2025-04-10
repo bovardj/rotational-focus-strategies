@@ -56,7 +56,7 @@ export default function OnboardingComponent() {
             Looking for the log out button?
           </p>
           <p className="mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            You can find it, along with account management, in the top right corner of the screen. (You may have to scroll up a tiny bit to see it, sorry!)
+            You can find it, along with account management, in the top right corner of the page.
           </p>
           <p className="italic underline mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
             Progressive Web App functionality coming Soon!
