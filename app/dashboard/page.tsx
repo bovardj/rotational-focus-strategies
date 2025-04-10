@@ -63,7 +63,7 @@ export default async function Page() {
       {/* <div className="hidden md:block mt-4 w-full"> */}
       <div className="mt-4 w-full">
         <p className="text-sm text-gray-500">
-          Have questions? Need help? Send me an email at john.bovard@utah.edu
+          Have questions? Find a bug? Need help? Send me an email at john.bovard@utah.edu
         </p>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
