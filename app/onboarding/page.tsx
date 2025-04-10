@@ -7,6 +7,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { strategies } from '../lib/utils'
 import { useState } from 'react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 // import Breadcrumbs from '../ui/strategies/breadcrumbs';
 
 export default function OnboardingComponent() {
@@ -47,6 +48,12 @@ export default function OnboardingComponent() {
         Welcome
       </h1>
       <div className="grid gap-6 grid-cols-1">
+        <div>
+          <p className="mb-4 text-lg md:text-xl">
+            A useful guide to installing the app as a PWA can be found 
+            <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html">here</Link>.
+          </p>
+        </div>
         <form action={handleSubmit}>
           <div className="flex items-center">
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
