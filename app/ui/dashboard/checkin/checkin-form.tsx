@@ -34,17 +34,19 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const checkedGenders = formData.getAll('gender_identity');
-    if (checkedGenders.length === 0) {
-      e.preventDefault();
-      alert('Please select at least one gender identity.');
-      return;
-    }
-    const checkedRaces = formData.getAll('racial_identity');
-    if (checkedRaces.length === 0) {
-      e.preventDefault();
-      alert('Please select at least one racial identity.');
-      return;
+    if (dailyCompleted) {
+      const checkedGenders = formData.getAll('gender_identity');
+      if (checkedGenders.length === 0) {
+        e.preventDefault();
+        alert('Please select at least one gender identity.');
+        return;
+      }
+      const checkedRaces = formData.getAll('racial_identity');
+      if (checkedRaces.length === 0) {
+        e.preventDefault();
+        alert('Please select at least one racial identity.');
+        return;
+      }
     }
 
     const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
