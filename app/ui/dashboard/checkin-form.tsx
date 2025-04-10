@@ -66,12 +66,12 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
   }
 
   const handleSubmit = async (formData: FormData) => {
-    const submissionDate = formData.get('submission_date') || new Date().toISOString().split('T')[0];
-    const satisfactionResponse = formData.get('satisfaction_score');
-    const productivityResponse = formData.get('productivity_score');
-    const usedStrategyBool = formData.get('used_strategy');
-    const usedStrategyText = formData.get('strategy_response');
-    const openResponse = formData.get('open_response');
+    const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
+    if (submitButton) {
+      submitButton.innerText = 'Submitting...';
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-50');
+    }
     const baselineSurveysExpected = await getBaselineSurveysExpected();
     const baselineSurveysCompleted = await getBaselineSurveysCompleted();
     const dailySurveysExpected = await getDailySurveysExpected();
@@ -515,6 +515,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
         </div>
         <button
           type="submit"
+          id="form_submit_button"
           className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Submit
