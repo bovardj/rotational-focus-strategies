@@ -144,6 +144,18 @@ export const insertEndSurvey = async (formData: FormData) => {
         return { message: 'No Logged In User' }
     }
 
+    let gender_identity_other: string | null
+    let racial_identity_other: string | null
+
+    const gender_identity = formData.getAll('gender_identity')
+    const racial_identity = formData.getAll('racial_identity')
+    if (gender_identity.includes('other')) {
+        gender_identity_other = formData.get('gender_identity_other') as string | null
+    } else { gender_identity_other = null }
+    if (racial_identity.includes('other')) {
+        racial_identity_other = formData.get('racial_identity_other') as string | null
+    } else { racial_identity_other = null }
+    
 
     const { error } = await supabase
         .from('end_survey_responses')
@@ -153,6 +165,10 @@ export const insertEndSurvey = async (formData: FormData) => {
             productivity_score: formData.get('productivity_score'),
             usefulness_score: formData.get('usefulness_score'),
             open_response: formData.get('open_response'),
+            gender_identity: gender_identity,
+            gender_identity_other: gender_identity_other,
+            racial_identity: racial_identity,
+            racial_identity_other: racial_identity_other,
         })
     if (error) {
         throw new Error('Error inserting response to baseline_survey_responses in Supabase: ' + error.message)
