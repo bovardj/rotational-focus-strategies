@@ -20,6 +20,7 @@ import {
 } from '@/app/dashboard/checkin/_actions';
 import LikertScaleForm from '@/app/ui/dashboard/checkin/question-forms/likertScale-form';
 import CheckboxForm from '@/app/ui/dashboard/checkin/question-forms/checkBox-form';
+import { get } from 'http';
 // import { useEffect } from 'react';
 
 interface CheckInFormProps {
@@ -103,6 +104,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
     const dailySurveysExpected = await getDailySurveysExpected();
     const dailySurveysCompleted = await getDailySurveysCompleted();
     const daysCompleted = await getDaysCompleted();
+    const endSurveyCompleted = await getEndSurveyCompleted();
     let settingDailyCompleted = false;
 
 
@@ -141,7 +143,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
       }
     }
 
-    if (settingDailyCompleted) {
+    if (settingDailyCompleted && !endSurveyCompleted) {
       router.push('/dashboard/checkin');
     } else {
       router.push('/dashboard')
