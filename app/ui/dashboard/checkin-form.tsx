@@ -72,6 +72,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
       submitButton.disabled = true;
       submitButton.classList.add('opacity-50');
     }
+
     const baselineSurveysExpected = await getBaselineSurveysExpected();
     const baselineSurveysCompleted = await getBaselineSurveysCompleted();
     const dailySurveysExpected = await getDailySurveysExpected();
@@ -79,15 +80,6 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
     const daysCompleted = await getDaysCompleted();
     let settingDailyCompleted = false;
 
-    // Handle the form submission logic here
-    console.log({
-      submissionDate,
-      satisfactionResponse,
-      productivityResponse,
-      usedStrategyBool,
-      usedStrategyText,
-      openResponse,
-    });
 
     if (!baselineCompleted) {
       const res = await insertBaselineSurvey(formData);
