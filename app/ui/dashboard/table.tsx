@@ -21,7 +21,7 @@ export default async function StrategiesTable() {
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0 grid gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
             <div className='px-4 pt-4'>
             <p className="mb-4 text-lg md:text-xl underline">
               Your Focus Strategies
