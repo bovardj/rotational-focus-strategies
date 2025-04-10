@@ -30,20 +30,15 @@ interface CheckInFormProps {
 export default function CheckInForm({ dailyCompleted, baselineCompleted }: CheckInFormProps) {
   const router = useRouter();
 
-  // const handleSubmit = async (formData: FormData) => {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  const handleSubmit = async (formData: FormData) => {
     if (dailyCompleted) {
       const checkedGenders = formData.getAll('gender_identity');
       if (checkedGenders.length === 0) {
-        e.preventDefault();
         alert('Please select at least one gender identity.');
         return;
       }
       const checkedRaces = formData.getAll('racial_identity');
       if (checkedRaces.length === 0) {
-        e.preventDefault();
         alert('Please select at least one racial identity.');
         return;
       }
@@ -101,6 +96,9 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
     }
 
     if (settingDailyCompleted && !endSurveyCompleted) {
+      submitButton.innerText = 'Submit';
+      submitButton.disabled = false;
+      submitButton.classList.remove('opacity-50');
       router.push('/dashboard/checkin');
     } else {
       router.push('/dashboard')
@@ -108,8 +106,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
   }
 
   return (
-    // <form action={handleSubmit}>
-    <form onSubmit={handleSubmit}>
+    <form action={handleSubmit}>
       <div className="space-y-6 bg-white p-6 rounded-lg shadow-md" style={{ maxWidth: '400px' }}>
         { (!baselineCompleted || !dailyCompleted) && (
           <div className="mb-6">
