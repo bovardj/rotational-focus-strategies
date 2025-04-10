@@ -10,6 +10,7 @@ import {
   getDailySurveysExpected
 } from '@/app/dashboard/checkin/_data';
 import CollapseInstructions from '../ui/dashboard/collapse-instructions';
+import CollapseNotes from '../ui/dashboard/collapse-notes';
 
 export const metadata = {
   title: 'Dashboard',
@@ -40,6 +41,7 @@ export default async function Page() {
       </h1>
       <div className="grid gap-6 grid-cols-1">
         <CollapseInstructions />
+        <CollapseNotes />
       </div>
       <div className='mt-6 flex w-full items-center justify-between' />
       { baselineCompleted ? (
