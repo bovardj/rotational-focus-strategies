@@ -32,6 +32,13 @@ export default function OnboardingComponent() {
   const isValid = selectedItems.length === requiredStrategies;
 
   const handleSubmit = async (formData: FormData) => {
+    const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
+    if (submitButton) {
+      submitButton.innerText = 'Submitting...';
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-50');
+    }
+
     const res = await completeOnboarding(formData)
     if (res?.message) {
       // Reloads the user's data from the Clerk API
@@ -121,7 +128,7 @@ export default function OnboardingComponent() {
           </p>
             {/* <div className="flex justify-center"></div> */}
             <div className="flex justify-center sm:w-2/3 lg:w-1/2">
-            <Button className={`mt-4 ${
+            <Button id='form_submit_button' className={`mt-4 ${
               isValid ? '' : 'opacity-50 cursor-not-allowed'
               }`}
               disabled={!isValid}

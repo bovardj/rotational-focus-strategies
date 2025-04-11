@@ -31,6 +31,13 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
+    const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
+    if (submitButton) {
+      submitButton.innerText = 'Submitting...';
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-50');
+    }
+
     if (dailyCompleted) {
       const checkedGenders = formData.getAll('gender_identity');
       if (checkedGenders.length === 0) {
@@ -42,13 +49,6 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
         alert('Please select at least one racial identity.');
         return;
       }
-    }
-
-    const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
-    if (submitButton) {
-      submitButton.innerText = 'Submitting...';
-      submitButton.disabled = true;
-      submitButton.classList.add('opacity-50');
     }
 
     const baselineSurveysExpected = await getBaselineSurveysExpected();
