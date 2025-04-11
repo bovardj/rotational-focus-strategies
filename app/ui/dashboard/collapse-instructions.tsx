@@ -16,15 +16,15 @@ export default function CollapseInstructions() {
           </p>
           <p className="mb-4 text-lg md:text-lg">
             tl;dr:
-            <ul className="list-disc pl-6">
-              <li className="mb-2">
-                Use your assigned focus strategy for the day.
-              </li>
-              <li className="mb-2">
-                At the end of the day, complete the survey about your experience with that strategy.
-              </li>
-            </ul>
-          </p>
+        </p>
+        <ul className="list-disc pl-6">
+            <li className="mb-2">
+            Use your assigned focus strategy for the day.
+            </li>
+            <li className="mb-2">
+            At the end of the day, complete the survey about your experience with that strategy.
+            </li>
+        </ul>
         </Collapse>
       </div>
     )

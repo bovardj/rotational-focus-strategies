@@ -70,12 +70,14 @@ export default async function Page() {
       {/* <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3"> */}
       <div className={`${cssSettings}`}>
         <div className="mt-4 list-disc pl-6 *:rounded-md">
-          <li className="mb-2">
-            You have completed {baselineSurveysCompleted} out of {baselineSurveysExpected} baseline surveys.
-          </li>
-          <li className="mb-2">
-            You have completed {dailyCompleted} out of {dailyExpected} daily (post-baseline) surveys.
-          </li>
+          <ul className="list-disc pl-6">
+            <li className="mb-2">
+              You have completed {baselineSurveysCompleted} out of {baselineSurveysExpected} baseline surveys.
+            </li>
+            <li className="mb-2">
+              You have completed {dailyCompleted} out of {dailyExpected} daily (post-baseline) surveys.
+            </li>
+          </ul>
         </div>
       </div>
       <div className="mt-6">

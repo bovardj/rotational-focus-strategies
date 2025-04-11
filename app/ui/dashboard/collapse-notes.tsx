@@ -29,12 +29,12 @@ export default function CollapseNotes() {
           </p>
           <p className="mb-4 text-lg md:text-lg">
             Known issues:
-            <ul className="list-disc pl-6">
-              <li className="mb-2">
-                Sometimes there is an bug which assigns a new focus strategy every time you load the dashboard page.
-              </li>
-            </ul>
           </p>
+          <ul className="list-disc pl-6">
+            <li className="mb-2">
+            Sometimes there is an bug which assigns a new focus strategy every time you load the dashboard page.
+            </li>
+          </ul>
         </div>
         </Collapse>
       </div>
