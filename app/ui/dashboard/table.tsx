@@ -1,5 +1,5 @@
 import TableData from '@/app/ui/dashboard/table-data';
-import { strategies } from '@/app/lib/utils';
+import { strategyDictionary } from '@/app/lib/utils';
 import { fetchUserStrategies } from '@/app/lib/data';
 import { currentUser } from '@clerk/nextjs/server';
 
@@ -11,7 +11,7 @@ export default async function StrategiesTable() {
   }
   const userStrategies = await fetchUserStrategies(userId);
   
-  const strategyNames = strategies.map((strategy) => {
+  const strategyNames = strategyDictionary.map((strategy) => {
     const matchedStrategy = userStrategies.some(
       (userStrategy) =>
         userStrategy.includes(strategy.href)) ? strategy : null;

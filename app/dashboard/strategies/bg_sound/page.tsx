@@ -1,11 +1,11 @@
 import Breadcrumbs from '@/app/ui/strategies/breadcrumbs';
 // import { Metadata } from 'next';
-import { strategies } from '@/app/lib/utils';
+import { strategyDictionary } from '@/app/lib/utils';
 import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
 
 export default async function Page() {
   const strategy = 'bg_sound';
-  const formattedStrategy = strategies.find(
+  const formattedStrategy = strategyDictionary.find(
     (strat) => strat.href === strategy,
   )?.name || strategy;
 

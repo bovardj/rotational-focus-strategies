@@ -1,5 +1,5 @@
 import TableData from '@/app/ui/strategies/table-data';
-import { strategies } from '@/app/lib/utils';
+import { strategyDictionary } from '@/app/lib/utils';
 
 export default async function StrategiesTable() {
 
@@ -10,7 +10,7 @@ export default async function StrategiesTable() {
           <div className="overflow-x-auto">
             <table className="min-w-full text-gray-900">
               <tbody className="whitespace-nowrap px-3 py-3">
-                {strategies?.map((strat) => (
+                {strategyDictionary?.map((strat) => (
                   <tr key={strat.name} className="flex items-center justify-between">
                     <td className="flex items-center justify-start gap-2">
                       <TableData strategy={strat.name} />

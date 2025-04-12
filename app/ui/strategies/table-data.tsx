@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { strategies } from '@/app/lib/utils';
+import { strategyDictionary } from '@/app/lib/utils';
 
 export default function TableData({ strategy }: { strategy: string }) {
   const pathname = usePathname();
-  const link = `/dashboard/strategies/${strategies.find(link => link.name === strategy)?.href || ''}`
+  const link = `/dashboard/strategies/${strategyDictionary.find(link => link.name === strategy)?.href || ''}`
 
   return (
     <>

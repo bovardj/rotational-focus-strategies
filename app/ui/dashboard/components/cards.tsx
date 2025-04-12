@@ -4,7 +4,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import Link from 'next/link';
-import { strategies } from '@/app/lib/utils';
+import { strategyDictionary } from '@/app/lib/utils';
 import clsx from 'clsx';
 
 export function Card({
@@ -16,7 +16,7 @@ export function Card({
   value: string;
   date?: string;
 }) {
-  const formatted_value = strategies.find(
+  const formatted_value = strategyDictionary.find(
     (strat) => strat.href === value,
   )?.name || value;
 

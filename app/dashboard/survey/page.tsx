@@ -1,10 +1,10 @@
 import { lusitana } from '@/app/ui/fonts';
-import CheckInForm from '@/app/ui/dashboard/checkin/checkin-form';
+import SurveyForm from '@/app/ui/dashboard/survey/survey-form';
 import {
   getBaselineCompleted,
   getDailyCompleted,
   getEndSurveyCompleted
-} from '@/app/dashboard/checkin/_data';
+} from '@/app/dashboard/survey/_data';
 
 export default async function Page() {
   const baselineCompleted = await getBaselineCompleted();
@@ -16,14 +16,14 @@ export default async function Page() {
       <h1 className={`${lusitana.className} mb-4 text-2xl`}>
         { endSurveyCompleted ? "End of Project Survey" :
           `${ dailyCompleted ? "End of Project Survey" :
-            `End of Day Check In ${ baselineCompleted ?
+            `End of Day Survey ${ baselineCompleted ?
             " - Daily" : " - Baseline"}`
           }`
         }
         </h1>
       <div className="flex justify-center">
         <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
-          <CheckInForm
+          <SurveyForm
             dailyCompleted={dailyCompleted}
             baselineCompleted={baselineCompleted}
           />

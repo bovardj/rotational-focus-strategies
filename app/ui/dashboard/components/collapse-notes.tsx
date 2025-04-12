@@ -7,27 +7,27 @@ export default function CollapseNotes() {
 
     return (
       <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
-        <Collapse title="Notes and Known Issues">
+        <Collapse shadow title="Notes and Known Issues" className='bg-gray-50'>
         <div>
-          <p className="italic underline mb-4 text-lg md:text-lg">
+          <p className="italic underline mb-4 text-md">
             Looking for the log out button?
           </p>
-          <p className="mb-4 text-lg md:text-lg">
+          <p className="mb-4 text-md">
             You can find it, along with account management, in the top right corner of the page.
           </p>
-          <p className="italic underline mb-4 text-lg md:text-lg">
+          <p className="italic underline mb-4 text-md">
             Progressive Web App functionality coming Soon!
           </p>
-          <p className="mb-4 text-lg md:text-lg">
+          <p className="mb-4 text-md">
             In the mean time, it will work just as well in a web browser. Thank you for your patience!
           </p>
-          <p className="hidden mb-4 text-lg md:text-lg">
+          <p className="hidden mb-4 text-md">
             While completely optional, you may install this app onto your device, such as a smartphone or computer,
             as a Progressive Web App (PWA) if you would like. A useful guide to installing the app as a PWA can be found&nbsp;
             <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html" className="text-blue-500 hover:underline">
             here</Link>.
           </p>
-          <p className="mb-4 text-lg md:text-lg">
+          <p className="mb-4 text-md">
             Known issues:
           </p>
           <ul className="list-disc pl-6">

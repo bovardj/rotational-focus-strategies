@@ -18,7 +18,7 @@ const links = [
     href: '/dashboard/strategies',
     icon: DocumentDuplicateIcon,
   },
-  { name: 'End of Day Check in', href: '/dashboard/checkin', icon: UserGroupIcon },
+  { name: 'End of Day Survey', href: '/dashboard/survey', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {

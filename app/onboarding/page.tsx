@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { completeOnboarding, initializeDaysCompleted, initializeDaysExpected } from './_actions'
 import { lusitana } from '@/app/ui/fonts';
-import { strategies } from '../lib/utils'
+import { strategyDictionary } from '../lib/utils'
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
@@ -87,7 +87,7 @@ export default function OnboardingComponent() {
               Choose the strategies that you would like to use.
             </p>
           </div>
-          {strategies.map((strategy, index) => (
+          {strategyDictionary.map((strategy, index) => (
             <div key={index} className="flex items-center">
               {/* <Breadcrumbs
                 breadcrumbs={[

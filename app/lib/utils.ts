@@ -1,4 +1,4 @@
-export const strategies = [
+export const strategyDictionary = [
   { name: "Background Sound", href: 'bg_sound' },
   { name: "Check List", href: 'check_list' },
   { name: "Chunking", href: 'chunking' },

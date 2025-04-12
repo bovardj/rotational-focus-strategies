@@ -8,7 +8,7 @@ import {
     getDailySurveysExpected,
     getDaysCompleted,
     getEndSurveyCompleted
-  } from '@/app/dashboard/checkin/_data';
+  } from '@/app/dashboard/survey/_data';
 import {
   insertBaselineSurvey,
   setBaselineSurveysCompleted,
@@ -18,16 +18,16 @@ import {
   setDailyCompleted,
   insertEndSurvey,
   setEndSurveyCompleted
-} from '@/app/dashboard/checkin/_actions';
-import LikertScaleForm from '@/app/ui/dashboard/checkin/question-forms/likertScale-form';
-import CheckboxForm from '@/app/ui/dashboard/checkin/question-forms/checkBox-form';
+} from '@/app/dashboard/survey/_actions';
+import LikertScaleForm from '@/app/ui/dashboard/survey/question-forms/likertScale-form';
+import CheckboxForm from '@/app/ui/dashboard/survey/question-forms/checkBox-form';
 
-interface CheckInFormProps {
+interface SurveyFormProps {
   dailyCompleted: boolean;
   baselineCompleted: boolean;
 }
 
-export default function CheckInForm({ dailyCompleted, baselineCompleted }: CheckInFormProps) {
+export default function SurveyForm({ dailyCompleted, baselineCompleted }: SurveyFormProps) {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
@@ -99,7 +99,7 @@ export default function CheckInForm({ dailyCompleted, baselineCompleted }: Check
       submitButton.innerText = 'Submit';
       submitButton.disabled = false;
       submitButton.classList.remove('opacity-50');
-      router.push('/dashboard/checkin');
+      router.push('/dashboard/survey');
     } else {
       router.push('/dashboard')
     }
