@@ -16,6 +16,14 @@ export default function CollapseNotes() {
             You can find it, along with account management, in the top right corner of the page.
           </p>
           <p className="italic underline mb-4 text-md">
+            Multiple strategies assigned in a single day?
+          </p>
+          <p className="mb-4 text-md">
+            I have seen a bug where sometimes when you refresh the dashboard page, it assigns a new focus strategy every time.
+            This is a bug that I am working on fixing. If you see this, please let me know. I can fix this on my end until I can
+            get a more permanent fix in place.
+          </p>
+          <p className="italic underline mb-4 text-md">
             Progressive Web App functionality coming Soon!
           </p>
           <p className="mb-4 text-md">
