@@ -103,9 +103,27 @@ export default async function Page() {
       <div className="mt-6 pt-6 flex w-full items-center justify-between">
         <h2 className={`${lusitana.className} text-lg`}>Questions, Bug Reporting & Help</h2>
       </div>
-      <div className={`${cssSettings}`}>
+      <div className="grid md:w-3/4 lg:w-2/3 xl:w-1/2">
         <p className="text-sm text-gray-500">
-          Have questions? Find a bug? Need help? Send me an email at john.bovard@utah.edu
+          Have questions? Find a bug? Need help? Send me an email at john.bovard@utah.edu. 
+        </p>
+        <p className="text-sm mt-4 text-gray-500">
+          For bug reporting, please include the following information if possible:
+        </p>
+        <p className="text-sm text-gray-500">
+          - A screenshot of the error message or page when you experienced the unexpected behavior
+        </p>
+        <p className="text-sm text-gray-500">
+          - What you were doing when the error occurred
+        </p>
+        <p className="text-sm text-gray-500">
+          - The web browser and device you are using (e.g., Chrome on Windows, Safari on iPhone)
+        </p>
+        <p className="text-sm text-gray-500">
+          - Any other relevant details that might help me understand the issue
+        </p>
+        <p className="text-sm mt-2 text-gray-500">
+          Thank you for your help in making this app better!
         </p>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
