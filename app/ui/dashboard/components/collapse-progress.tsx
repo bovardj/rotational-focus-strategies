@@ -5,15 +5,15 @@ import Collapse from '@geist-ui/react/esm/collapse/collapse'
 interface CollapseProgressProps {
     baselineSurveysCompleted: number;
     baselineSurveysExpected: number;
-    dailyCompleted: number;
-    dailyExpected: number;
+    dailySurveysCompleted: number;
+    dailySurveysExpected: number;
 }
 
 export default function CollapseProgress(
     { baselineSurveysCompleted,
       baselineSurveysExpected,
-      dailyCompleted,
-      dailyExpected }: CollapseProgressProps) {
+      dailySurveysCompleted,
+      dailySurveysExpected,
 
     return (
       <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
@@ -21,10 +21,11 @@ export default function CollapseProgress(
             <div className="list-disc pl-6 *:rounded-md">
             <ul className="list-disc pl-6">
                 <li className="mb-2">
-                Baseline surveys: {baselineSurveysCompleted} / {baselineSurveysExpected} surveys
+                  Baseline surveys: {baselineSurveysCompleted} / {baselineSurveysExpected} surveys
                 </li>
-                <li>
-                You have completed {dailyCompleted} out of {dailyExpected} daily (post-baseline) surveys.
+                <li className='mb-2'>
+                  You have completed {dailySurveysCompleted} out of {dailySurveysExpected} daily (post-baseline) surveys.
+                </li>
                 </li>
             </ul>
             </div>
