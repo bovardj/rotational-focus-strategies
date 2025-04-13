@@ -1,6 +1,6 @@
 import { Card } from '@/app/ui/dashboard/components/cards';
 import { lusitana } from '@/app/ui/fonts';
-import { getDailyStrategy } from '../lib/actions';
+import { getDailyStrategy } from '@/app//lib/actions';
 import {
   getBaselineCompleted,
   getBaselineSurveysExpected,
@@ -12,9 +12,10 @@ import CollapseInstructions from '@/app/ui/dashboard/components/collapse-instruc
 import CollapseNotes from '@/app/ui/dashboard/components/collapse-notes';
 import Link from 'next/link';
 import { currentUser } from '@clerk/nextjs/server';
-import { fetchUserStrategies } from '../lib/data';
-import { strategyDictionary } from '../lib/utils';
-import StrategyCollapse from '../ui/dashboard/components/collapse-strategy';
+import { fetchUserStrategies } from '@/app//lib/data';
+import { strategyDictionary } from '@/app//lib/utils';
+import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
+import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 
 export const metadata = {
   title: 'Dashboard',
@@ -79,21 +80,16 @@ export default async function Page() {
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseInstructions />
       </div>
-      <div className={`${cssSettings} bg-gray-50 rounded-md mt-6`}>
-        <h2 className={`${lusitana.className} ml-4 text-xl mt-2 underline`}>Your Progress</h2>
-        <div className="list-disc pl-6 *:rounded-md">
-          <ul className="list-disc pl-6">
-            <li className="mb-2">
-              Baseline surveys: {baselineSurveysCompleted} / {baselineSurveysExpected} surveys
-            </li>
-            <li className="mb-2">
-              You have completed {dailyCompleted} out of {dailyExpected} daily (post-baseline) surveys.
-            </li>
-          </ul>
-        </div>
+      <div className="grid gap-6 grid-cols-1 mt-6">
+        <CollapseProgress
+          baselineSurveysCompleted={baselineSurveysCompleted}
+          baselineSurveysExpected={baselineSurveysExpected}
+          dailyCompleted={dailyCompleted}
+          dailyExpected={dailyExpected}
+        />
       </div>
       <div className="mt-6">
-        <StrategyCollapse strategyList={strategyList} />
+        <CollapseStrategy strategyList={strategyList} />
       </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseNotes />
