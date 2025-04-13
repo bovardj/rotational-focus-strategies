@@ -26,7 +26,7 @@ export default function CollapseProgress(
                   Baseline surveys: {baselineSurveysCompleted} / {baselineSurveysExpected} surveys
                 </li>
                 <li className='mb-2'>
-                  You have completed {dailySurveysCompleted} out of {dailySurveysExpected} daily (post-baseline) surveys.
+                  You have completed {dailySurveysCompleted} / {dailySurveysExpected} daily (post-baseline) surveys.
                 </li>
                 <li className='mb-2'>
                   You have completed {endSurveyCompleted ? 'the' : 'not completed the'} exit survey.
