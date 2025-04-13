@@ -12,14 +12,16 @@ const supabase = createClient(
 const getYesterday = (date: Date) => {
     const d = new Date(date);
     d.setDate(d.getDate() - 1);
-    return d.toLocaleDateString('en-us', { timeZone: 'America/Denver' });
+    return d.toLocaleDateString('en-us', { timeZone: 'America/Los_Angeles' });
+    // return d.toLocaleDateString('en-us', { timeZone: 'America/Denver' });
 };
 
 export async function getDailyStrategy() {
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
 
-  const today = new Date().toLocaleDateString('en-us', { timeZone: 'America/Denver' });
+  // const today = new Date().toLocaleDateString('en-us', { timeZone: 'America/Denver' });
+  const today = new Date().toLocaleDateString('en-us', { timeZone: 'America/Los_Angeles' });
   const yesterday = getYesterday(new Date());
 
 //   Check today's assignment
