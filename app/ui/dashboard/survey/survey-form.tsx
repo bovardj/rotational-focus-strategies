@@ -112,6 +112,7 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
           <div className="mb-6">
             <label htmlFor="submission_date" className="block text-sm font-medium text-gray-700">
               What day is this for?
+              <span className="text-red-500">*</span>
             </label>
             <input
               type="date"
