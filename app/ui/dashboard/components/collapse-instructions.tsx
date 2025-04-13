@@ -47,6 +47,9 @@ export default function CollapseInstructions(
                 At the end of the day, complete the <Link href='./dashboard/survey' className='underline'>survey</Link> about your experience with that strategy.
                 <span className='italic'> (Also accessible from the &apos;End of Day Survey&apos; button on the dashboard.)</span>
               </li>
+              <li className="mb-2">
+                When you submit your last end of day survey, you will be directed to a brief exit survey. 
+              </li>
           </ul>
           </Collapse>
         </Collapse>
