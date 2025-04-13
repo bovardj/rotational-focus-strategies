@@ -87,11 +87,11 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
       }
     }
     else {
-      console.log('Submitting end survey');
+      console.log('Submitting exit survey');
       const res = await insertEndSurvey(formData);
       if (res?.message) {
         await setEndSurveyCompleted();
-        console.log('End survey submitted successfully');
+        console.log('Exit survey submitted successfully');
       }
     }
 
