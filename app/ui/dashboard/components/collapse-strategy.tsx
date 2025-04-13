@@ -3,7 +3,7 @@
 import { Collapse } from '@geist-ui/react';
 import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
 
-export default function StrategyCollapse({ strategyList: strategyList }: { strategyList: { name: string, href: string }[] }) {
+export default function CollapseStrategy({ strategyList: strategyList }: { strategyList: { name: string, href: string }[] }) {
 
     return (
         <>
