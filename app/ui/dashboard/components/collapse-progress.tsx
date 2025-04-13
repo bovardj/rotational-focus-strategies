@@ -7,6 +7,7 @@ interface CollapseProgressProps {
     baselineSurveysExpected: number;
     dailySurveysCompleted: number;
     dailySurveysExpected: number;
+    endSurveyCompleted: boolean;
 }
 
 export default function CollapseProgress(
@@ -14,6 +15,7 @@ export default function CollapseProgress(
       baselineSurveysExpected,
       dailySurveysCompleted,
       dailySurveysExpected,
+      endSurveyCompleted }: CollapseProgressProps) {
 
     return (
       <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
@@ -26,6 +28,8 @@ export default function CollapseProgress(
                 <li className='mb-2'>
                   You have completed {dailySurveysCompleted} out of {dailySurveysExpected} daily (post-baseline) surveys.
                 </li>
+                <li className='mb-2'>
+                  You have completed {endSurveyCompleted ? 'the' : 'not completed the'} exit survey.
                 </li>
             </ul>
             </div>

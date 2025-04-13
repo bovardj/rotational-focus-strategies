@@ -6,7 +6,8 @@ import {
   getBaselineSurveysExpected,
   getBaselineSurveysCompleted,
   getDailySurveysCompleted,
-  getDailySurveysExpected
+  getDailySurveysExpected,
+  getEndSurveyCompleted
 } from '@/app/dashboard/survey/_data';
 import CollapseInstructions from '@/app/ui/dashboard/components/collapse-instructions';
 import CollapseNotes from '@/app/ui/dashboard/components/collapse-notes';
@@ -31,6 +32,7 @@ export default async function Page() {
   const baselineSurveysCompleted = await getBaselineSurveysCompleted();
   const dailySurveysCompleted = await getDailySurveysCompleted();
   const dailySurveysExpected = await getDailySurveysExpected();
+  const endSurveyCompleted = await getEndSurveyCompleted();
   
   const user = await currentUser();
     const userId = user?.id;
@@ -89,6 +91,7 @@ export default async function Page() {
           baselineSurveysExpected={baselineSurveysExpected}
           dailySurveysCompleted={dailySurveysCompleted}
           dailySurveysExpected={dailySurveysExpected}
+          endSurveyCompleted={endSurveyCompleted}
         />
       </div>
       <div className="mt-6">
