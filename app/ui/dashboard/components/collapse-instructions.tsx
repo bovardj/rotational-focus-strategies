@@ -3,7 +3,14 @@
 import Collapse from '@geist-ui/react/esm/collapse/collapse'
 import Link from 'next/link'
 
-export default function CollapseInstructions() {
+interface CollapseInstructionsProps {
+  baselineSurveysExpected: number;
+  dailySurveysExpected: number;
+}
+
+export default function CollapseInstructions(
+  { baselineSurveysExpected,
+    dailySurveysExpected }: CollapseInstructionsProps) {
 
     return (
       <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
@@ -20,7 +27,7 @@ export default function CollapseInstructions() {
             You only need to select what day the survey is for in the survey. Please try to complete the
             survey as soon as possible after the end of each day, though.
           </p>
-          <Collapse shadow title="Baseline Days (first days)" className='bg-gray-50'>
+          <Collapse shadow title={`Baseline Days (first ${baselineSurveysExpected} days)`} className='bg-gray-50'>
           <ul className="list-disc pl-6">
               <li className="mb-2">
                 Go about your day as you normally would.
@@ -31,7 +38,7 @@ export default function CollapseInstructions() {
               </li>
           </ul>
           </Collapse>
-          <Collapse shadow title="Assigned Focus Strategy Days (all days after baseline)" className='bg-gray-50'>
+          <Collapse shadow title={`Assigned Focus Strategy Days (for ${dailySurveysExpected} days after baseline)`} className='bg-gray-50'>
           <ul className="list-disc pl-6">
               <li className="mb-2">
                 Use your assigned focus strategy for the day.

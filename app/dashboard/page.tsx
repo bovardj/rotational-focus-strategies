@@ -29,8 +29,8 @@ export default async function Page() {
   const baselineCompleted = await getBaselineCompleted();
   const baselineSurveysExpected = await getBaselineSurveysExpected();
   const baselineSurveysCompleted = await getBaselineSurveysCompleted();
-  const dailyCompleted = await getDailySurveysCompleted();
-  const dailyExpected = await getDailySurveysExpected();
+  const dailySurveysCompleted = await getDailySurveysCompleted();
+  const dailySurveysExpected = await getDailySurveysExpected();
   
   const user = await currentUser();
     const userId = user?.id;
@@ -78,14 +78,17 @@ export default async function Page() {
         </>
       )}
       <div className="grid gap-6 grid-cols-1 mt-6">
-        <CollapseInstructions />
+        <CollapseInstructions
+          baselineSurveysExpected={baselineSurveysExpected}
+          dailySurveysExpected={dailySurveysExpected}
+        />
       </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseProgress
           baselineSurveysCompleted={baselineSurveysCompleted}
           baselineSurveysExpected={baselineSurveysExpected}
-          dailyCompleted={dailyCompleted}
-          dailyExpected={dailyExpected}
+          dailySurveysCompleted={dailySurveysCompleted}
+          dailySurveysExpected={dailySurveysExpected}
         />
       </div>
       <div className="mt-6">
