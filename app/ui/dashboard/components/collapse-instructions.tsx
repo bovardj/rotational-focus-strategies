@@ -48,7 +48,7 @@ export default function CollapseInstructions(
                 <span className='italic'> (Also accessible from the &apos;End of Day Survey&apos; button on the dashboard.)</span>
               </li>
               <li className="mb-2">
-                When you submit your last end of day survey, you will be directed to a brief exit survey. 
+                When you submit your last end of day survey, you will be directed to a brief exit <Link href='./dashboard/survey' className='underline'>survey</Link>. 
               </li>
           </ul>
           </Collapse>
