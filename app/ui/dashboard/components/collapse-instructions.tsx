@@ -15,17 +15,20 @@ export default function CollapseInstructions(
     return (
       <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
         <Collapse shadow title="Instructions" initialVisible className='bg-gray-50'>
-          <p className="mb-4 text-md md:text-md">
+          <p className="mb-4">
             The purpose of this project is to see if rotating focus strategies assists in a feeling of
             self-satisfaction and productivity. Once baseline measurements are recorded, you will be
             assigned a random focus strategy (from your selected strategies) to use each day. Then, at
             the end of the day, you will be asked to complete a survey about your experience with that
             strategy.
           </p>
-          <p>
+          <p className='mb-4'>
             <b>If you forget to complete the survey at the end of the day, you can still complete it later.</b>
             You only need to select what day the survey is for in the survey. Please try to complete the
             survey as soon as possible after the end of each day, though.
+          </p>
+          <p>
+            Please note that new focus strategies are assigned at 1am MDT (3am EDT) each day.
           </p>
           <Collapse shadow title={`Baseline Days (first ${baselineSurveysExpected} days)`} className='bg-gray-50'>
           <ul className="list-disc pl-6">
