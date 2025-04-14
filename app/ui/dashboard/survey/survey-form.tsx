@@ -266,6 +266,10 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
             placeholder="Write your response here (max 500 characters)..."
           ></textarea>
         </div>
+        <p className="text-sm text-gray-500 mb-2">
+          To ensure your submission is recorded, please do not close this page or navigate away after clicking submit.
+          Your responses will be saved and you will be redirected when submission is complete.
+        </p>
         <button
           type="submit"
           id="form_submit_button"
