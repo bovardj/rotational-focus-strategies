@@ -54,7 +54,7 @@ export default function CollapseInstructions(
               </li>
               <li>
                 At the end of the day, complete a Baseline <Link href='./dashboard/survey' className='underline'>Survey</Link> about your day.
-                <span className='italic'> (Also accessible from the &apos;End of Day Survey&apos; button on the dashboard.)</span>
+                <span className='italic'> (Also accessible from the &apos;Surveys&apos; button on the dashboard.)</span>
               </li>
           </ul>
           </Collapse>
@@ -66,11 +66,12 @@ export default function CollapseInstructions(
               <li className="mb-2">
                 At the end of the day, complete the Daily <Link href='./dashboard/survey' className='underline'>
                 Survey</Link> about your experience with that strategy.
-                <span className='italic'> (Also accessible from the &apos;End of Day Survey&apos; button on the dashboard.)</span>
+                <span className='italic'> (Also accessible from the &apos;Surveys&apos; button on the dashboard.)</span>
               </li>
               <li>
                 When you submit your last Daily (post-Basline) Survey, you will be redirected to a brief
-                Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>. 
+                Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>. If you return to this page,
+                simply click on either the 'Surveys' button to access it.
               </li>
           </ul>
           </Collapse>
@@ -78,7 +79,8 @@ export default function CollapseInstructions(
           <ul className="list-disc pl-6">
               <li className='mb-2'>
                 When you submit your last Daily (post-Basline) Survey, you will be redirected to a brief
-                Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>.
+                Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>. If you return to this page,
+                simply click on either the 'Surveys' button to access it.
               </li>
               <li>
                 <p className='mb-2'>
