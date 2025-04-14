@@ -2,6 +2,7 @@
 
 import { Collapse } from '@geist-ui/react';
 import { strategyDictionary } from '@/app/lib/utils';
+import { parseDateString } from '@/app/lib/utils';
 
 export default function CollapsePreviousStrategy(
     { previousStrategyList: previousStrategyList }:
@@ -16,12 +17,13 @@ export default function CollapsePreviousStrategy(
                     <table className="min-w-full text-gray-900">
                     <tbody className="whitespace-nowrap px-3 py-3">
                     {previousStrategyList.map((strategy, index) => (
-
                         <tr key={index} className="flex items-center justify-between">
                         <td className="flex items-center justify-start gap-2">
                             { strategyDictionary.find(strat => strat.href === strategy.strategy)?.name }
                         </td>
-                        <td className="flex items-center justify-start gap-2">{new Date(strategy.date).toLocaleDateString()}</td>
+                        <td>
+                            { parseDateString(strategy.date).toLocaleDateString() }
+                        </td>
                         </tr>
                     ))}
                     </tbody>

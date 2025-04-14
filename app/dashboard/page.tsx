@@ -18,6 +18,7 @@ import { strategyDictionary } from '@/app//lib/utils';
 import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
 import CollapsePreviousStrategy from '@/app/ui/dashboard/components/collapse-previous-strategies';
 import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
+import { parseDateString } from '@/app//lib/utils';
 
 export const metadata = {
   title: 'Dashboard',
@@ -34,14 +35,22 @@ export default async function Page() {
   const dailySurveysCompleted = await getDailySurveysCompleted();
   const dailySurveysExpected = await getDailySurveysExpected();
   const endSurveyCompleted = await getEndSurveyCompleted();
-  
+
   const user = await currentUser();
     const userId = user?.id;
     if (!userId) {
       return <p className="text-center text-gray-500">Loading...</p>;
     }
     const userStrategies = await fetchUserStrategies(userId);
+
+    // Fetch the user's assigned strategies and filter them to only include those that are before today
     const userAssignedStrategies = await fetchAssignedStrategies(userId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const filteredAssignedStrategies = userAssignedStrategies.filter((strategy) => {
+      const convertedDate = parseDateString(strategy.date);
+      return convertedDate < today;
+    });
     
     const strategyList = strategyDictionary.map((strategy) => {
       const matchedStrategy = userStrategies.some(
@@ -53,7 +62,6 @@ export default async function Page() {
   let latestStrategy = null;
   if (baselineCompleted) {
     latestStrategy = await getDailyStrategy();
-
   }
 
   return (
@@ -100,7 +108,7 @@ export default async function Page() {
         <CollapseStrategy strategyList={strategyList} />
       </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
-        <CollapsePreviousStrategy previousStrategyList={userAssignedStrategies} />
+        <CollapsePreviousStrategy previousStrategyList={filteredAssignedStrategies} />
       </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseNotes />
