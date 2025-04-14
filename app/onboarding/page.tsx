@@ -7,11 +7,8 @@ import { lusitana } from '@/app/ui/fonts';
 import { strategyDictionary } from '../lib/utils'
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import Link from 'next/link';
-// import Collapse from '@/app/ui/onboarding/components/collapse-menu';
 import Collapse from '@geist-ui/react/esm/collapse/collapse';
 import StrategyDescriptions from '@/app/ui/dashboard/strategy-descriptions';
-// import Breadcrumbs from '../ui/strategies/breadcrumbs';
 
 export default function OnboardingComponent() {
   const [error, setError] = useState('')
@@ -77,16 +74,6 @@ export default function OnboardingComponent() {
           </div>
           {strategyDictionary.map((strategy, index) => (
             <div key={index} className="flex items-center">
-              {/* <Breadcrumbs
-                breadcrumbs={[
-                  { label: 'Focus Strategies', href: '/dashboard/strategies' },
-                  {
-                    label: formattedStrategy,
-                    href: `/dashboard/strategies/${strategy}/`,
-                    active: true,
-                  },
-                ]}
-              /> */}
               <input
                 type="checkbox"
                 id={`strategy-${index}`}
@@ -100,21 +87,16 @@ export default function OnboardingComponent() {
                   !selectedItems.includes(strategy.href)
                 }
               />
-              {/* <label htmlFor={`strategy-${index}`}> */}
-                {/* <Link href={`@/app/onboarding/strategies/${strategy.href}`}>{strategy.name}</Link></label> */}
-                <div className="flex items-center sm:w-2/3 lg:w-1/2">
-                <Collapse title={strategy.name} className="mb-4">
-                  <StrategyDescriptions strategy={strategy.href} />
-                  {/* <p className="mb-4">{strategy.description}</p> */}
-                </Collapse>
-                </div>
-              {/* </label> */}
+              <div className="flex items-center sm:w-2/3 lg:w-1/2">
+              <Collapse title={strategy.name} className="mb-4">
+                <StrategyDescriptions strategy={strategy.href} />
+              </Collapse>
+              </div>
             </div>
           ))}
           <p className="text-red-600" id="strategy-error" style={{ display: 'none' }}>
             You must select exactly 3 strategies.
           </p>
-            {/* <div className="flex justify-center"></div> */}
             <div className="flex justify-center sm:w-2/3 lg:w-1/2">
             <Button id='form_submit_button' className={`mt-4 ${
               isValid ? '' : 'opacity-50 cursor-not-allowed'
