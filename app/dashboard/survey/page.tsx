@@ -40,14 +40,6 @@ export default async function Page() {
         </div>
         </>
         )}
-      {/* <div className="flex justify-center">
-        <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
-          <SurveyForm
-            dailyCompleted={dailyCompleted}
-            baselineCompleted={baselineCompleted}
-          />
-        </div>
-      </div> */}
     </main>
   );
 }
