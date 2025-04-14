@@ -45,13 +45,8 @@ export async function fetchLatestAssignedStrategy() {
   }
 }
 
-export async function fetchAssignedStrategies() {
+export async function fetchAssignedStrategies(userId: string) {
   try {
-    const userId = process.env.USER_ID;
-    if (!userId) {
-      throw new Error('USER_ID is not defined in the environment variables.');
-    }
-
     const data = await sql<AssignedStrategies[]>`
       SELECT assigned_strategies.strategy, assigned_strategies.date
       FROM assigned_strategies
