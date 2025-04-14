@@ -13,9 +13,10 @@ import CollapseInstructions from '@/app/ui/dashboard/components/collapse-instruc
 import CollapseNotes from '@/app/ui/dashboard/components/collapse-notes';
 import Link from 'next/link';
 import { currentUser } from '@clerk/nextjs/server';
-import { fetchUserStrategies } from '@/app//lib/data';
+import { fetchUserStrategies, fetchAssignedStrategies } from '@/app//lib/data';
 import { strategyDictionary } from '@/app//lib/utils';
 import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
+import CollapsePreviousStrategy from '@/app/ui/dashboard/components/collapse-previous-strategies';
 import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 
 export const metadata = {
@@ -40,6 +41,7 @@ export default async function Page() {
       return <p className="text-center text-gray-500">Loading...</p>;
     }
     const userStrategies = await fetchUserStrategies(userId);
+    const userAssignedStrategies = await fetchAssignedStrategies(userId);
     
     const strategyList = strategyDictionary.map((strategy) => {
       const matchedStrategy = userStrategies.some(
@@ -94,8 +96,11 @@ export default async function Page() {
           endSurveyCompleted={endSurveyCompleted}
         />
       </div>
-      <div className="mt-6">
+      <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseStrategy strategyList={strategyList} />
+      </div>
+      <div className="grid gap-6 grid-cols-1 mt-6">
+        <CollapsePreviousStrategy previousStrategyList={userAssignedStrategies} />
       </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseNotes />
