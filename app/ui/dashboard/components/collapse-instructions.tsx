@@ -71,7 +71,7 @@ export default function CollapseInstructions(
               <li>
                 When you submit your last Daily (post-Basline) Survey, you will be redirected to a brief
                 Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>. If you return to this page,
-                simply click on either the 'Surveys' button to access it.
+                simply click on either the &apos;Surveys&apos; button to access it.
               </li>
           </ul>
           </Collapse>
@@ -80,7 +80,7 @@ export default function CollapseInstructions(
               <li className='mb-2'>
                 When you submit your last Daily (post-Basline) Survey, you will be redirected to a brief
                 Exit <Link href='./dashboard/survey' className='underline'>Survey</Link>. If you return to this page,
-                simply click on either the 'Surveys' button to access it.
+                simply click on either the &apos;Surveys&apos; button to access it.
               </li>
               <li>
                 <p className='mb-2'>
