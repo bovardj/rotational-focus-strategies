@@ -24,10 +24,10 @@ export default function CollapseNotes() {
             get a more permanent fix in place.
           </p>
           <p className="italic underline mb-4 text-md">
-            Progressive Web App functionality coming Soon!
+            Progressive Web App functionality and Notifications coming Soon!
           </p>
           <p className="mb-4 text-md">
-            In the mean time, it will work just as well in a web browser. Thank you for your patience!
+            In the mean time, it will work just about as well in a web browser. Thank you for your patience!
           </p>
           <p className="hidden mb-4 text-md">
             While completely optional, you may install this app onto your device, such as a smartphone or computer,
@@ -35,14 +35,6 @@ export default function CollapseNotes() {
             <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html" className="text-blue-500 hover:underline">
             here</Link>.
           </p>
-          <p className="mb-4 text-md">
-            Known issues:
-          </p>
-          <ul className="list-disc pl-6">
-            <li className="mb-2">
-            Sometimes there is an bug which assigns a new focus strategy every time you load the dashboard page.
-            </li>
-          </ul>
         </div>
         </Collapse>
       </div>
