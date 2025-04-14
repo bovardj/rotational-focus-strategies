@@ -45,13 +45,14 @@ export async function fetchLatestAssignedStrategy() {
   }
 }
 
-export async function fetchAssignedStrategies(userId: string) {
+export async function fetchAssignedStrategies(userId: string, limit: number = 10) {
   try {
     const data = await sql<AssignedStrategies[]>`
       SELECT assigned_strategies.strategy, assigned_strategies.date
       FROM assigned_strategies
       WHERE assigned_strategies.user_id = ${userId}
-      ORDER BY assigned_strategies.date DESC`;
+      ORDER BY assigned_strategies.date DESC
+      LIMIT ${limit}`;
 
       return data;
   } catch (error) {
