@@ -84,7 +84,7 @@ export default async function Page() {
         <>
           <div className={`${cssSettings}`}>
             <p className="mb-4 ml-4">
-              Focus Strategy assignments will begin once you have completed all <Link href={'/dashboard/survey'} className='underline'>baseline surveys</Link>.              
+              Focus Strategy assignments will begin once you have completed all <Link href={'/dashboard/survey'} className='underline'>Baseline Surveys</Link>.              
             </p>
           </div>
         </>
