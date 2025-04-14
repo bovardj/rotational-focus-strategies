@@ -114,6 +114,7 @@ function urlBase64ToUint8Array(base64String: string) {
    
     useEffect(() => {
       setIsIOS(
+        // eslint-disable-next-line
         /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
       )
    
@@ -138,7 +139,7 @@ function urlBase64ToUint8Array(base64String: string) {
               {' '}
               ⎋{' '}
             </span>
-            and then "Add to Home Screen"
+            and then &quot;Add to Home Screen&quot;
             <span role="img" aria-label="plus icon">
               {' '}
               ➕{' '}
