@@ -63,19 +63,7 @@ export default function OnboardingComponent() {
             Looking for the log out button?
           </p>
           <p className="mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            You can find it, along with account management, in the top right corner of the page.
-          </p>
-          <p className="italic underline mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            Progressive Web App functionality coming Soon!
-          </p>
-          <p className="mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            In the mean time, it will work just as well in a web browser. Thank you for your patience!
-          </p>
-          <p className="hidden mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            While completely optional, you may install this app onto your device, such as a smartphone or computer,
-            as a Progressive Web App (PWA) if you would like. A useful guide to installing the app as a PWA can be found&nbsp;
-            <Link href="https://www.cdc.gov/niosh/mining/tools/installpwa.html" className="text-blue-500 hover:underline">
-            here</Link>.
+            You can find it, along with account management, in the top right corner of the page (you may need to scroll up).
           </p>
         </div>
         <form action={handleSubmit}>
