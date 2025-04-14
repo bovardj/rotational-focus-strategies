@@ -2,8 +2,8 @@ import Table from '@/app/ui/strategies/table';
 import { lusitana } from '@/app/ui/fonts';
 
 export const metadata = {
-  title: 'Focus Strategies',
-  description: 'Focus Strategies',
+  title: 'RFS | Focus Strategies',
+  description: 'A page listing all supported focus strategies',
 };
 
 export default async function Page() {

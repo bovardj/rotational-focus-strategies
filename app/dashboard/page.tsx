@@ -21,7 +21,7 @@ import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 import { parseDateString } from '@/app//lib/utils';
 
 export const metadata = {
-  title: 'Dashboard',
+  title: 'RFS | Dashboard',
   description: 'The dashboard is the main page of the app, where you can see your latest assigned strategies and link to other important pages.',
 };
 

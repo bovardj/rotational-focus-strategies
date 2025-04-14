@@ -6,6 +6,11 @@ import {
   getEndSurveyCompleted
 } from '@/app/dashboard/survey/_data';
 
+export const metadata = {
+  title: 'RFS | Survey',
+  description: 'The survey page for submitting responses about your day.',
+};
+
 export default async function Page() {
   const baselineCompleted = await getBaselineCompleted();
   const dailyCompleted = await getDailyCompleted();
