@@ -4,9 +4,14 @@ import { auth } from '@clerk/nextjs/server';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY! // server-only
-);
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || '',
+  {
+      async accessToken() {
+          return (await auth()).getToken()
+      }
+  }
+)
 
 // https://simonsc.medium.com/working-with-time-zones-in-javascript-1b57e716d273
 const getYesterday = (date: Date) => {

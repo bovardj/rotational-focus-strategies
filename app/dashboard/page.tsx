@@ -41,10 +41,10 @@ export default async function Page() {
     if (!userId) {
       return <p className="text-center text-gray-500">Loading...</p>;
     }
-    const userStrategies = await fetchUserStrategies(userId);
+    const userStrategies = await fetchUserStrategies();
 
     // Fetch the user's assigned strategies and filter them to only include those that are before today
-    const userAssignedStrategies = await fetchAssignedStrategies(userId);
+    const userAssignedStrategies = await fetchAssignedStrategies();
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const filteredAssignedStrategies = userAssignedStrategies.filter((strategy) => {
@@ -54,7 +54,7 @@ export default async function Page() {
     
     const strategyList = strategyDictionary.map((strategy) => {
       const matchedStrategy = userStrategies.some(
-        (userStrategy) =>
+        (userStrategy: string | string[]) =>
           userStrategy.includes(strategy.href)) ? strategy : null;
       return matchedStrategy ? {name: strategy.name, href: strategy.href} : null;
     }).filter((name) => name !== null);

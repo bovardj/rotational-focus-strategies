@@ -5,7 +5,12 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
     process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_ANON_KEY || ''
+    process.env.SUPABASE_ANON_KEY || '',
+    {
+        async accessToken() {
+            return (await auth()).getToken()
+        }
+    }
 )
 
 // Insert a new row into the baseline_survey_responses table

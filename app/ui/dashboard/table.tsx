@@ -9,11 +9,11 @@ export default async function StrategiesTable() {
   if (!userId) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }
-  const userStrategies = await fetchUserStrategies(userId);
   
+  const userStrategies = await fetchUserStrategies();
   const strategyNames = strategyDictionary.map((strategy) => {
     const matchedStrategy = userStrategies.some(
-      (userStrategy) =>
+      (userStrategy: string | string[]) =>
         userStrategy.includes(strategy.href)) ? strategy : null;
     return matchedStrategy ? strategy.name : null;
   }).filter((name) => name !== null);
