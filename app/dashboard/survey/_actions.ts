@@ -42,8 +42,6 @@ export const setBaselineSurveysCompleted = async (baselineSurveysCompleted: bigi
         return { message: 'No Logged In User' }
     }
 
-    console.log('Setting Baseline Surveys Completed:', baselineSurveysCompleted)
-
     const { error } = await supabase
         .from('days_completed')
         .update({
@@ -107,8 +105,6 @@ export const setDailySurveysCompleted = async (dailySurveysCompleted: bigint, da
     if (!userId) {
         return { message: 'No Logged In User' }
     }
-
-    console.log('Setting Daily Surveys Completed:', dailySurveysCompleted)
 
     const { error } = await supabase
         .from('days_completed')

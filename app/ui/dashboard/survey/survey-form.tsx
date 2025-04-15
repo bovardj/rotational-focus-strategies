@@ -70,7 +70,6 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
         if ((baselineSurveysCompleted + 1) >= baselineSurveysExpected) {
           await setBaselineCompleted();
         }
-        console.log('Baseline survey submitted successfully');
       }
     } else if (!dailyCompleted) {
       const res = await insertDailySurvey(formData);
@@ -83,15 +82,12 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
           await setDailyCompleted();
           settingDailyCompleted = true;
         }
-        console.log('Daily survey submitted successfully');
       }
     }
     else {
-      console.log('Submitting exit survey');
       const res = await insertEndSurvey(formData);
       if (res?.message) {
         await setEndSurveyCompleted();
-        console.log('Exit survey submitted successfully');
       }
     }
 
