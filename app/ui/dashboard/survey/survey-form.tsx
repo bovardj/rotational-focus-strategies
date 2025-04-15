@@ -196,7 +196,7 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
         <>
           <CheckboxForm
             inputName='gender_identity'
-            options={['Woman', 'Man', 'Nobinary', 'Transgender', 'Prefer not to say']}
+            options={['Woman', 'Man', 'Nonbinary', 'Transgender', 'Prefer not to say']}
             addOther={true}
             otherPlaceholder='Specify your gender identity'
             question='What is your gender identity? (Select all that apply)'
