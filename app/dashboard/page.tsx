@@ -19,6 +19,7 @@ import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
 import CollapsePreviousStrategy from '@/app/ui/dashboard/components/collapse-previous-strategies';
 import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 import { parseDateString } from '@/app//lib/utils';
+import { InstallPrompt, PushNotificationManager } from '@/app/components/pwaComponents';
 
 export const metadata = {
   title: 'RFS | Dashboard',
@@ -89,6 +90,10 @@ export default async function Page() {
           </div>
         </>
       )}
+      <div className={`${cssSettings} text-center`}>
+      <PushNotificationManager />
+      <InstallPrompt />
+      </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseInstructions
           baselineSurveysExpected={baselineSurveysExpected}
