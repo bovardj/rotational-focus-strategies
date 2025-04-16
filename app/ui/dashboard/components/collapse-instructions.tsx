@@ -13,7 +13,7 @@ export default function CollapseInstructions(
     dailySurveysExpected }: CollapseInstructionsProps) {
 
     return (
-      <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
+      <div>
         <Collapse shadow title="Instructions" initialVisible className='bg-gray-50'>
           <p className="mb-4">
             The purpose of this project is to see if rotating focus strategies assists in a feeling of

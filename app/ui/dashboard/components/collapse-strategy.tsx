@@ -7,7 +7,7 @@ export default function CollapseStrategy({ strategyList: strategyList }: { strat
 
     return (
         <>
-            <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
+            <div>
                 <Collapse shadow title="Your Focus Strategies" className='bg-gray-50'>
                     {strategyList.map((strategy, index) => (
                         <div key={index} className="flex items-center">

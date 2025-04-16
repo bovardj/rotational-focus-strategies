@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function CollapseNotes() {
 
     return (
-      <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
+      <div>
         <Collapse shadow title="Notes and Known Issues" className='bg-gray-50'>
         <div>
           <p className="italic underline mb-4 text-md">
