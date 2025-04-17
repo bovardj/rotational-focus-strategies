@@ -146,6 +146,17 @@ export default function SignInForm() {
               </Link>
             </p>
           </div>
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              Forgot your password?{' '}
+              <Link
+                href="/forgot-password"
+                className="font-medium text-blue-600 hover:underline"
+              >
+                Reset password
+              </Link>
+            </p>
+          </div>
         </div>
       </form>
     </>
