@@ -128,7 +128,7 @@ function urlBase64ToUint8Array(base64String: string) {
     return (
       <div>
         <h3>Install App</h3>
-        <p className="text-sm text-gray-500 mb-2">This only works for iOS devices.</p>
+        {/* <p className="text-sm text-gray-500 mb-2">This only works for iOS devices.</p> */}
         <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Add to Home Screen
         </button>
