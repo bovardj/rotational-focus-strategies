@@ -16,6 +16,12 @@ export default function CollapseNotes() {
             You can find it, along with account management, in the top right corner of the page.
           </p>
           <p className="italic underline mb-4 text-md">
+            Slow loading times?
+          </p>
+          <p className="mb-4 text-md">
+            This app may be a little slow--I apologize for that. I am working on improving the performance of the app.
+          </p>
+          <p className="italic underline mb-4 text-md">
             Multiple strategies assigned in a single day?
           </p>
           <p className="mb-4 text-md">
