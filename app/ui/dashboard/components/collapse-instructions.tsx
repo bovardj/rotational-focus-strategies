@@ -22,8 +22,8 @@ export default function CollapseInstructions(
             </p>
             <p className="mb-4">
               <b>Timing:</b> Please start the study as soon as you can. I understand that some days, such as
-              weekends, may not be normal "productive" times, but that's okay. If it is a day like that, you
-              can make a note of it in that day's survey if you'd like.
+              weekends, may not be normal &quot;productive&quot; times, but that&apos;s okay. If it is a day like that, you
+              can make a note of it in that day&apos;s survey if you&apos;d like.
             </p>
             <p className="mb-4">
               The purpose of this project is to see if rotating focus strategies assists in a feeling of
