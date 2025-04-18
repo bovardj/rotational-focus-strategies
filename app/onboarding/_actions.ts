@@ -23,8 +23,8 @@ export const initializeDaysExpected = async () => {
     .from('days_expected')
     .insert({
       user_id: userId,
-      baseline_days: 1,
-      daily_days: 2
+      baseline_days: 3,
+      daily_days: 4
     });
   if (error) {
     throw new Error('Error updating days_expected in Supabase: ' + error.message)
