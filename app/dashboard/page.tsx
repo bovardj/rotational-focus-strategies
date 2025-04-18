@@ -1,6 +1,6 @@
 import { Card } from '@/app/ui/dashboard/components/cards';
 import { lusitana } from '@/app/ui/fonts';
-import { getDailyStrategy } from '@/app//lib/actions';
+import { getDailyStrategy } from '@/app/lib/actions/actions';
 import {
   getBaselineCompleted,
   getBaselineSurveysExpected,

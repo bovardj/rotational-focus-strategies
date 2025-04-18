@@ -5,7 +5,8 @@
 // The VAPID key is a public key used to authenticate the push notifications
 
 import { useEffect, useState } from "react"
-import { sendNotification, subscribeUser, unsubscribeUser } from "@/app/lib/actions"
+// import { sendNotification, subscribeUser, unsubscribeUser } from "@/app/lib/actions/notifications"
+import { subscribeUser, unsubscribeUser } from "@/app/lib/actions/notifications"
 
 // This function is used to convert a base64 string to a Uint8Array
 // This is necessary for the VAPID key used in the web push notifications
@@ -29,7 +30,7 @@ function urlBase64ToUint8Array(base64String: string) {
     const [subscription, setSubscription] = useState<PushSubscription | null>(
       null
     )
-    const [message, setMessage] = useState('')
+    // const [message, setMessage] = useState('')
    
     useEffect(() => {
       if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -45,6 +46,16 @@ function urlBase64ToUint8Array(base64String: string) {
       })
       const sub = await registration.pushManager.getSubscription()
       setSubscription(sub)
+      
+      // Alternative from: https://www.magicbell.com/blog/using-push-notifications-in-pwas
+      // const registration = await navigator.serviceWorker.register('/sw.js')
+      // .then(async function(registration) {
+      //     const sub = await registration.pushManager.getSubscription()
+      //     setSubscription(sub)
+      //     console.log('Service Worker registered with scope:', registration.scope);
+      // }).catch(function(error) {
+      //     console.log('Service Worker registration failed:', error);
+      // })
     }
    
     async function subscribeToPush() {
@@ -66,12 +77,12 @@ function urlBase64ToUint8Array(base64String: string) {
       await unsubscribeUser()
     }
    
-    async function sendTestNotification() {
-      if (subscription) {
-        await sendNotification(message)
-        setMessage('')
-      }
-    }
+    // async function sendTestNotification() {
+    //   if (subscription) {
+    //     await sendNotification(message)
+    //     setMessage('')
+    //   }
+    // }
    
     if (!isSupported) {
       return <p>Push notifications are not supported in this browser.</p>
@@ -86,7 +97,7 @@ function urlBase64ToUint8Array(base64String: string) {
             <button onClick={unsubscribeFromPush} className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Unsubscribe from Push Notifications
                 </button>
-            <input
+            {/* <input
               type="text"
               placeholder="Enter notification message"
               value={message}
@@ -94,7 +105,7 @@ function urlBase64ToUint8Array(base64String: string) {
             />
             <button onClick={sendTestNotification} className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Send Test
-                </button>
+                </button> */}
           </>
         ) : (
           <>
