@@ -19,7 +19,7 @@ import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
 import CollapsePreviousStrategy from '@/app/ui/dashboard/components/collapse-previous-strategies';
 import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 import { parseDateString } from '@/app//lib/utils';
-import { InstallPrompt, PushNotificationManager } from '@/app/components/pwaComponents';
+// import { InstallPrompt, PushNotificationManager } from '@/app/components/pwaComponents';
 
 export const metadata = {
   title: 'RFS | Dashboard',
