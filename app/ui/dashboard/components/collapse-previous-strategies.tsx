@@ -12,7 +12,7 @@ export default function CollapsePreviousStrategy(
 
     return (
         <>
-            <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
+            <div>
                 <Collapse shadow title="Previously Assigned Strategies" className='bg-gray-50'>
                     <table className="min-w-full text-gray-900">
                     <tbody className="whitespace-nowrap px-3 py-3">

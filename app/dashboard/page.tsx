@@ -19,14 +19,12 @@ import CollapseStrategy from '@/app/ui/dashboard/components/collapse-strategy';
 import CollapsePreviousStrategy from '@/app/ui/dashboard/components/collapse-previous-strategies';
 import CollapseProgress from '@/app/ui/dashboard/components/collapse-progress';
 import { parseDateString } from '@/app//lib/utils';
+import { InstallPrompt, PushNotificationManager } from '@/app/components/pwaComponents';
 
 export const metadata = {
   title: 'RFS | Dashboard',
   description: 'The dashboard is the main page of the app, where you can see your latest assigned strategies and link to other important pages.',
 };
-
-// A lazy little shortcut
-const cssSettings = "grid gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2";
 
 export default async function Page() {
   const baselineCompleted = await getBaselineCompleted();
@@ -69,9 +67,11 @@ export default async function Page() {
       <h1 className={`${lusitana.className} mb-4 text-2xl`}>
         Dashboard
       </h1>
+      <div className="grid gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
       { baselineCompleted ? (
-        <div className={`${cssSettings}`}>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          {/* <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"> */}
+          <div className="justify-center">
             <Card
               title="Today's Focus Strategy" 
               value={latestStrategy?.strategy}
@@ -82,13 +82,19 @@ export default async function Page() {
       )
       : (
         <>
-          <div className={`${cssSettings}`}>
+          <div>
             <p className="mb-4 ml-4">
               Focus Strategy assignments will begin once you have completed all <Link href={'/dashboard/survey'} className='underline'>Baseline Surveys</Link>.              
             </p>
           </div>
         </>
       )}
+      <div>
+        <div className="grid gap-6 w-full text-center justify-center">
+          <PushNotificationManager />
+          <InstallPrompt />
+        </div>
+      </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseInstructions
           baselineSurveysExpected={baselineSurveysExpected}
@@ -116,7 +122,7 @@ export default async function Page() {
       <div className="mt-6 pt-6 flex w-full items-center justify-between">
         <h2 className={`${lusitana.className} text-lg`}>Questions, Bug Reporting & Help</h2>
       </div>
-      <div className="grid md:w-3/4 lg:w-2/3 xl:w-1/2">
+      <div>
         <p className="text-sm text-gray-500">
           Have questions? Find a bug? Need help? Send me an email at john.bovard@utah.edu. 
         </p>
@@ -140,6 +146,7 @@ export default async function Page() {
         </p>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      </div>
       </div>
     </main>
   );

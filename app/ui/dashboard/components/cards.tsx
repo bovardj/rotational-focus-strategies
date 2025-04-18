@@ -21,7 +21,7 @@ export function Card({
   )?.name || value;
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm md:col-span-2 lg:col-span-4 max-w-md mx-auto">
+    <div className="rounded-xl bg-gray-50 p-2 shadow-sm max-w-xs mx-auto justify-center">
       <div className="flex p-4">
         <LightBulbIcon className="h-5 w-5 text-gray-700" />
         <h3 className="ml-2 text-sm font-medium">{title}</h3>

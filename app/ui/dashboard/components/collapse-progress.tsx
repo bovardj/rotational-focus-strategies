@@ -19,7 +19,7 @@ export default function CollapseProgress(
       endSurveyCompleted }: CollapseProgressProps) {
 
     return (
-      <div className="grid gap-6 grid-cols-1 md:w-3/4 lg:w-2/3 xl:w-1/2">
+      <div>
         <Collapse shadow title="Your Progress" initialVisible className='bg-gray-50'>
             <div className="list-disc pl-6 *:rounded-md">
             <ul className="list-disc pl-6">
