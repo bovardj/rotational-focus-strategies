@@ -55,7 +55,7 @@ const ForgotPasswordForm: NextPage = () => {
         strategy: 'reset_password_email_code',
         identifier: email,
       })
-      .then((_) => {
+      .then((_) => { // eslint-disable-line
         setSuccessfulCreation(true)
         setError('')
       })
@@ -165,6 +165,11 @@ const ForgotPasswordForm: NextPage = () => {
                     <EyeIcon className="h-[18px] w-[18px]" />
                 )}
               </button>
+              {capsLockOnMessage && (
+                <div className="absolute bottom-[-20px] left-0 text-xs text-red-500">
+                  {capsLockOnMessage}
+                </div>
+              )}
             </div>
                 <label
                 className="mb-3 mt-5 block text-sm font-medium text-gray-900"
