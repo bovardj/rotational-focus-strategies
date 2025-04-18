@@ -143,7 +143,7 @@ export async function sendDueNotifications() {
 
 //   const now = new Date().toISOString();
   const now = new Date();
-  const currentTime = now.toISOString().slice(11, 16); // Get the current time in HH:MM format
+//   const currentTime = now.toISOString().slice(11, 16); // Get the current time in HH:MM format
 
   const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
   const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);  
