@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Rotational Focus Strategies PWA',
-    short_name: 'RFSPWA',
+    name: 'Rotational Focus Strategies',
+    short_name: 'RFS',
     description: 'A Progressive Web App for Rotational Focus Strategies',
     start_url: '/',
     display: 'standalone',
