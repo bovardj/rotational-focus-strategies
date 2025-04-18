@@ -89,12 +89,12 @@ export default async function Page() {
           </div>
         </>
       )}
-      {/* <div>
+      <div>
         <div className="grid gap-6 w-full text-center justify-center">
           <PushNotificationManager />
           <InstallPrompt />
         </div>
-      </div> */}
+      </div>
       <div className="grid gap-6 grid-cols-1 mt-6">
         <CollapseInstructions
           baselineSurveysExpected={baselineSurveysExpected}
