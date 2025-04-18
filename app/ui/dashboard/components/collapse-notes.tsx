@@ -29,12 +29,12 @@ export default function CollapseNotes() {
             This is a bug that I am working on fixing. If you see this, please let me know. I can fix this on my end until I can
             get a more permanent fix in place.
           </p>
-          <p className="italic underline mb-4 text-md">
+          {/* <p className="italic underline mb-4 text-md">
             Progressive Web App functionality and Notifications coming Soon!
           </p>
           <p className="mb-4 text-md">
             In the mean time, it will work just about as well in a web browser. Thank you for your patience!
-          </p>
+          </p> */}
           <p className="hidden mb-4 text-md">
             While completely optional, you may install this app onto your device, such as a smartphone or computer,
             as a Progressive Web App (PWA) if you would like. A useful guide to installing the app as a PWA can be found&nbsp;
