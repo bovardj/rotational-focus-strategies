@@ -145,10 +145,13 @@ export async function sendDueNotifications() {
   const now = new Date();
   const currentTime = now.toISOString().slice(11, 16); // Get the current time in HH:MM format
 
+  const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
+  const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);  
   const { data: due } = await supabase
     .from('scheduled_notifications')
     .select('*')
-    .lte('scheduled_at', currentTime);
+    .gte('scheduled_at', oneMinuteAgo)
+    .lte('scheduled_at', oneMinuteAhead);
 
 //   if (!due) return;
 
