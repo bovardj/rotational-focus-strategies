@@ -92,25 +92,32 @@ webpush.setVapidDetails(
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
   process.env.VAPID_PRIVATE_KEY!
 )
- 
-let subscription: {
-  endpoint: string;
-  expirationTime?: null | number;
-  keys: {
-    p256dh: string;
-    auth: string;
-  };
-} | null = null;
+
+let subscription: PushSubscription | null = null
+
+// I'm not sure where this came from
+// let subscription: {
+//   endpoint: string;
+//   expirationTime?: null | number;
+//   keys: {
+//     p256dh: string;
+//     auth: string;
+//   };
+// } | null = null;
  
 export async function subscribeUser(sub: PushSubscription) {
-  subscription = {
-    endpoint: sub.endpoint,
-    expirationTime: sub.expirationTime,
-    keys: {
-      p256dh: sub.getKey('p256dh') ? Buffer.from(sub.getKey('p256dh')!).toString('base64') : '',
-      auth: sub.getKey('auth') ? Buffer.from(sub.getKey('auth')!).toString('base64') : '',
-    },
-  };
+  subscription = sub
+
+  // I'm not sure where this came from
+  // subscription = {
+  //   endpoint: sub.endpoint,
+  //   expirationTime: sub.expirationTime,
+  //   keys: {
+  //     p256dh: sub.getKey('p256dh') ? Buffer.from(sub.getKey('p256dh')!).toString('base64') : '',
+  //     auth: sub.getKey('auth') ? Buffer.from(sub.getKey('auth')!).toString('base64') : '',
+  //   },
+  // };
+
   // In a production environment, you would want to store the subscription in a database
   // For example: await db.subscriptions.create({ data: sub })
   return { success: true }
