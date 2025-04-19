@@ -30,6 +30,16 @@ interface SurveyFormProps {
 export default function SurveyForm({ dailyCompleted, baselineCompleted }: SurveyFormProps) {
   const router = useRouter();
 
+  const handleNoRadioChange = (e: React.ChangeEvent<HTMLInputElement>, radio_id: string, input_id: string) => {
+    const noRadio = document.getElementById(radio_id) as HTMLInputElement;
+    const noInput = document.getElementById(input_id) as HTMLInputElement;
+    if (noRadio.checked) {
+      noInput.required = true;
+    } else {
+      noInput?.removeAttribute('required');
+    }
+  }
+
   const handleSubmit = async (formData: FormData) => {
     const submitButton = document.getElementById('form_submit_button') as HTMLButtonElement;
     if (submitButton) {
@@ -154,6 +164,7 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
             <div className="mt-4 grid grid-cols-1 gap-4">
               <label className="flex items-center">
                 <input
+                  id="yes_used_strategy"
                   type="radio"
                   name="used_strategy"
                   value="yes"
@@ -164,10 +175,12 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
               </label>
               <label className="flex items-center">
                 <input
+                  id="no_used_strategy"
                   type="radio"
                   name="used_strategy"
                   value="no"
                   className="form-radio text-indigo-600"
+                  onChange={(e) => handleNoRadioChange(e, "no_used_strategy", "strategy_response")}
                 />
                 <span className="ml-2 text-sm">No</span>
               </label>
@@ -175,7 +188,7 @@ export default function SurveyForm({ dailyCompleted, baselineCompleted }: Survey
           </div>
           <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
             <label htmlFor="strategy_response" className="block text-sm font-medium text-gray-700">
-              If you didn&apos;t use the focus strategy, why not?
+              If you didn&apos;t use the focus strategy, why not? <span className='italic'> (required if no is selected)</span>
             </label>
             <textarea
               id="strategy_response"
