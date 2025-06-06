@@ -2,11 +2,11 @@
 
 This is a web app for using rotational focus strategies (RFS) as a means of supporting users with ADHD. This was developed as a course project at the University of Utah in the spring of 2025. 
 
-The main components of this app are:
+#### The main stages for this project are:
 1. Sign up and RFS selection
 2. Baseline data gathering
 3. Daily RFS use and surveys
-4. Exit survey.
+4. Exit survey
 
 ### Available Focus Strategies
 
@@ -72,26 +72,11 @@ Work partners are a great way to stay focused and avoid feeling overwhelmed by a
 
 The references used in developing this project.
 
-1. W. Richard Carter, Paul L. Nesbit, Richard J. Badham, Sharon K. Parker, and Li-Kuo Sung. 2018. The effects of employee engagement
-and self-efficacy on job performance: a longitudinal field study. The international journal of human resource management 29, 17:
-2483–2502. https://doi.org/10.1080/09585192.2016.1244096
-2. Marie Sturesson Christiansen, Merete Labriola, Lilli Kirkeskov, and Thomas Lund. 2021. The impact of childhood diagnosed ADHD versus
-controls without ADHD diagnoses on later labour market attachment-a systematic review of longitudinal studies. Child and adolescent
-psychiatry and mental health 15, 1: 34. https://doi.org/10.1186/s13034-021-00386-2
-3. Renato Donfrancesco, Michela Di Trani, Maria Cristina Porfirio, Grazia Giana, Silvia Miano, and Elda Andriola. 2015. Might the
-temperament be a bias in clinical study on attention-deficit hyperactivity disorder (ADHD)?: Novelty Seeking dimension as a core feature
-of ADHD. Psychiatry research 227, 2–3: 333–338. https://doi.org/10.1016/j.psychres.2015.02.014
-4. 5. Geza Kovacs, Zhengxuan Wu, and Michael S. Bernstein. 2018. Rotating online behavior change interventions increases effectiveness but
-also increases attrition. Proceedings of the ACM on human-computer interaction 2, CSCW: 1–25. https://doi.org/10.1145/3274364
-Grischa Liebel, Noah Langlois, and Kiev Gama. 2024. Challenges, strengths, and strategies of software engineers with ADHD: A case
-study. In Proceedings of the 46th International Conference on Software Engineering: Software Engineering in Society, 57–68.
-https://doi.org/10.1145/3639475.3640107
-6. 7. Patrick Schober, Christa Boer, and Lothar A. Schwarte. 2018. Correlation coefficients: Appropriate use and interpretation. Anesthesia and
-analgesia 126, 5: 1763–1768. https://doi.org/10.1213/ANE.0000000000002864
-Brooke S. Staley, Lara R. Robinson, Angelika H. Claussen, Samuel M. Katz, Melissa L. Danielson, April D. Summers, Sherry L. Farr,
-Stephen J. Blumberg, and Sarah C. Tinker. 2024. Attention-deficit/hyperactivity disorder diagnosis, treatment, and telehealth use in adults
-- National Center for Health Statistics Rapid Surveys System, United States, October-November 2023. MMWR. Morbidity and mortality
-weekly report 73, 40: 890–895. https://doi.org/10.15585/mmwr.mm7340a1
-8. Wenxian Wang, Seung-Wan Kang, and Suk Bong Choi. 2021. Effects of employee well-being and self-efficacy on the relationship
-between coaching leadership and knowledge sharing intention: A study of UK and US employees. International journal of environmental
-research and public health 18, 20: 10638. https://doi.org/10.3390/ijerph182010638
+1. W. Richard Carter, Paul L. Nesbit, Richard J. Badham, Sharon K. Parker, and Li-Kuo Sung. 2018. The effects of employee engagement and self-efficacy on job performance: a longitudinal field study. The international journal of human resource management 29, 17: 2483–2502. https://doi.org/10.1080/09585192.2016.1244096
+2. Marie Sturesson Christiansen, Merete Labriola, Lilli Kirkeskov, and Thomas Lund. 2021. The impact of childhood diagnosed ADHD versus controls without ADHD diagnoses on later labour market attachment-a systematic review of longitudinal studies. Child and adolescent psychiatry and mental health 15, 1: 34. https://doi.org/10.1186/s13034-021-00386-2
+3. Renato Donfrancesco, Michela Di Trani, Maria Cristina Porfirio, Grazia Giana, Silvia Miano, and Elda Andriola. 2015. Might the temperament be a bias in clinical study on attention-deficit hyperactivity disorder (ADHD)?: Novelty Seeking dimension as a core feature of ADHD. Psychiatry research 227, 2–3: 333–338. https://doi.org/10.1016/j.psychres.2015.02.014
+4. Geza Kovacs, Zhengxuan Wu, and Michael S. Bernstein. 2018. Rotating online behavior change interventions increases effectiveness but also increases attrition. Proceedings of the ACM on human-computer interaction 2, CSCW: 1–25. https://doi.org/10.1145/3274364
+5. Grischa Liebel, Noah Langlois, and Kiev Gama. 2024. Challenges, strengths, and strategies of software engineers with ADHD: A case study. In Proceedings of the 46th International Conference on Software Engineering: Software Engineering in Society, 57–68. https://doi.org/10.1145/3639475.3640107
+6. Patrick Schober, Christa Boer, and Lothar A. Schwarte. 2018. Correlation coefficients: Appropriate use and interpretation. Anesthesia and analgesia 126, 5: 1763–1768. https://doi.org/10.1213/ANE.0000000000002864
+7. Brooke S. Staley, Lara R. Robinson, Angelika H. Claussen, Samuel M. Katz, Melissa L. Danielson, April D. Summers, Sherry L. Farr, Stephen J. Blumberg, and Sarah C. Tinker. 2024. Attention-deficit/hyperactivity disorder diagnosis, treatment, and telehealth use in adults - National Center for Health Statistics Rapid Surveys System, United States, October-November 2023. MMWR. Morbidity and mortality weekly report 73, 40: 890–895. https://doi.org/10.15585/mmwr.mm7340a1
+8. Wenxian Wang, Seung-Wan Kang, and Suk Bong Choi. 2021. Effects of employee well-being and self-efficacy on the relationship between coaching leadership and knowledge sharing intention: A study of UK and US employees. International journal of environmental research and public health 18, 20: 10638. https://doi.org/10.3390/ijerph182010638
