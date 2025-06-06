@@ -70,8 +70,6 @@ Work partners are a great way to stay focused and avoid feeling overwhelmed by a
 
 ### References 
 
-The references used in developing this project.
-
 1. W. Richard Carter, Paul L. Nesbit, Richard J. Badham, Sharon K. Parker, and Li-Kuo Sung. 2018. The effects of employee engagement and self-efficacy on job performance: a longitudinal field study. The international journal of human resource management 29, 17: 2483–2502. https://doi.org/10.1080/09585192.2016.1244096
 2. Marie Sturesson Christiansen, Merete Labriola, Lilli Kirkeskov, and Thomas Lund. 2021. The impact of childhood diagnosed ADHD versus controls without ADHD diagnoses on later labour market attachment-a systematic review of longitudinal studies. Child and adolescent psychiatry and mental health 15, 1: 34. https://doi.org/10.1186/s13034-021-00386-2
 3. Renato Donfrancesco, Michela Di Trani, Maria Cristina Porfirio, Grazia Giana, Silvia Miano, and Elda Andriola. 2015. Might the temperament be a bias in clinical study on attention-deficit hyperactivity disorder (ADHD)?: Novelty Seeking dimension as a core feature of ADHD. Psychiatry research 227, 2–3: 333–338. https://doi.org/10.1016/j.psychres.2015.02.014
