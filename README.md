@@ -15,12 +15,12 @@ This is a web app for using rotational focus strategies (RFS) as a means of supp
 Work with sounds in the background. This should strike a balance that may help you to focus on your work while not being too distracting. Some suggestions (some with external links) are:
 
 Ambient sounds
-[White noise](https://www.youtube.com/watch?v=dv2XyqC-EQ4&t=40s)
-[Brown noise](https://www.youtube.com/watch?v=P48QELwruQs)
-[Nature sounds](https://www.youtube.com/watch?v=ipf7ifVSeDU)
-Instrumental music
-[Lo-fi beats](https://www.youtube.com/watch?v=jfKfPfyJRdk)
-Classical music
+- [White noise](https://www.youtube.com/watch?v=dv2XyqC-EQ4&t=40s)
+- [Brown noise](https://www.youtube.com/watch?v=P48QELwruQs)
+- [Nature sounds](https://www.youtube.com/watch?v=ipf7ifVSeDU)
+- Instrumental music
+- [Lo-fi beats](https://www.youtube.com/watch?v=jfKfPfyJRdk)
+- Classical music
 
 You can also try to find a playlist that is specifically designed for studying or working. These playlists often have a mix of different types of music and sounds that can help you to focus.
 
