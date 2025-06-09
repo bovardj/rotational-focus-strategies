@@ -1,4 +1,4 @@
-## RFS - Rotational Focus Strategies
+## [RFS - Rotational Focus Strategies](https://www.focusapp.dev)
 
 This is a web app for using rotational focus strategies (RFS) as a means of supporting users with ADHD. This was developed as a course project at the University of Utah in the spring of 2025. 
 
