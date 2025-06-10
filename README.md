@@ -1,6 +1,6 @@
 ## [RFS - Rotational Focus Strategies](https://www.focusapp.dev)
 
-Rotational Focus Strategies (RFS) is a web app for supporting users with ADHD (Attention Deficit Hyperactivity Disorder) in maintaining productivity by assigning them with a rotating focus strategies. The focus strategies I use in RFS are drawn from an array of research literature investigating coping strategies of people diagnosed with ADHD. The web app also gathers data about the effectiveness of the focus strategies through daily surveys. Analysis of surveys from three participants revealed that RFS is promising not only in aiding user productivity, but also provided a strong boost to daily satisfaction, with a Pearson's Correlation Coefficient of 0.79. 
+Rotational Focus Strategies (RFS) is a web app for supporting users with ADHD (Attention Deficit Hyperactivity Disorder) in maintaining productivity by assigning them with a rotating focus strategies. The focus strategies I use in RFS are drawn from an array of research literature investigating coping strategies of people diagnosed with ADHD. The web app also gathers data about the effectiveness of the focus strategies through daily surveys. Analysis of surveys from three participants revealed that RFS is promising not only in aiding user productivity, but also by providing a strong boost to daily satisfaction, with a Pearson's Correlation Coefficient of 0.79. 
 
 This was developed as a course project at the University of Utah in the spring of 2025. 
 
