@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { lusitana } from '@/app/ui/fonts';
-import { LatestAssignedStrategy } from '@/app/lib/definitions';
+import clsx from "clsx";
+import { lusitana } from "@/app/ui/fonts";
+import { LatestAssignedStrategy } from "@/app/lib/definitions";
 
 export default async function LatestStrategy({
   latestStrategy,
@@ -19,10 +19,10 @@ export default async function LatestStrategy({
               <div
                 key={strategy.strategy}
                 className={clsx(
-                  'flex flex-row items-center justify-between py-4',
+                  "flex flex-row items-center justify-between py-4",
                   {
-                    'border-t': i !== 0,
-                  },
+                    "border-t": i !== 0,
+                  }
                 )}
               >
                 <div className="flex items-center">

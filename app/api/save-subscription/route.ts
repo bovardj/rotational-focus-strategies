@@ -10,8 +10,6 @@ export async function POST(req: NextRequest) {
 
   const subscription = await req.json();
 
-  // If you’re using Clerk/Auth helpers, pull user ID from session instead
-  // const user_id = '<retrieve-user-id-here>';
   const { userId } = await auth();
 
   const { error } = await supabase

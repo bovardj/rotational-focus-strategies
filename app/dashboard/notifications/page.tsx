@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { scheduleTimeNotification } from '@/app/lib/actions/notifications';
-import { useUser } from '@clerk/nextjs';
+import { useState } from "react";
+import { scheduleTimeNotification } from "@/app/lib/actions/notifications";
+import { useUser } from "@clerk/nextjs";
 
 export default function NotificationsPage() {
-  const [message, setMessage] = useState('');
-  const [time, setTime] = useState('');
-  const [status, setStatus] = useState('');
+  const [message, setMessage] = useState("");
+  const [time, setTime] = useState("");
+  const [status, setStatus] = useState("");
   const { user } = useUser();
   const userId = user?.id;
 
@@ -16,7 +16,7 @@ export default function NotificationsPage() {
 
     try {
       if (!userId) {
-        setStatus('❌ User ID is missing');
+        setStatus("❌ User ID is missing");
         return;
       }
 
@@ -26,11 +26,11 @@ export default function NotificationsPage() {
         scheduled_at: time,
       });
 
-      setStatus('✅ Scheduled!');
-      setMessage('');
-      setTime('');
+      setStatus("✅ Scheduled!");
+      setMessage("");
+      setTime("");
     } catch {
-      setStatus('❌ Failed to schedule');
+      setStatus("❌ Failed to schedule");
     }
   };
 

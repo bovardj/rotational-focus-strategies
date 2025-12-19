@@ -113,7 +113,7 @@ export const getDailySurveysCompleted = async () => {
     return data.daily_surveys
 }
 
-// Get if teh end survey is completed
+// Get if the end survey is completed
 export const getEndSurveyCompleted = async () => {
     const { userId } = await auth()
     if (!userId) {

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useUser } from '@clerk/nextjs';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { supabase } from '@/app/lib/supabase/client';
+import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/app/lib/supabase/client";
 
 export default function SyncUserToSupabase() {
   const { user } = useUser();
@@ -18,30 +18,30 @@ export default function SyncUserToSupabase() {
 
       // Check if user exists
       const { data: existingUser, error: findError } = await supabase
-        .from('users')
-        .select('user_id')
-        .eq('user_id', userId)
+        .from("users")
+        .select("user_id")
+        .eq("user_id", userId)
         .maybeSingle();
 
       if (findError) {
-        console.error('Error checking for existing user:', findError);
+        console.error("Error checking for existing user:", findError);
         return;
       }
 
       if (!existingUser) {
-        const { error } = await supabase.from('users').insert({
+        const { error } = await supabase.from("users").insert({
           user_id: userId,
-          email: user.primaryEmailAddress?.emailAddress
+          email: user.primaryEmailAddress?.emailAddress,
         });
 
         if (error) {
-          console.error('Error inserting user:', error.message);
+          console.error("Error inserting user:", error.message);
           return;
         }
       }
 
       setSynced(true);
-      router.push('/onboarding');
+      router.push("/onboarding");
     };
 
     sync();

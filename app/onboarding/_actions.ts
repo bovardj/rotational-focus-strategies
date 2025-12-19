@@ -7,9 +7,9 @@ const supabase = createClient(
   process.env.SUPABASE_URL || '',
   process.env.SUPABASE_ANON_KEY || '',
   {
-      async accessToken() {
-          return (await auth()).getToken()
-      }
+    async accessToken() {
+      return (await auth()).getToken()
+    }
   }
 )
 
@@ -40,7 +40,7 @@ export const initializeDaysCompleted = async () => {
 
   const { error } = await supabase
     .from('days_completed')
-    .insert({user_id: userId});
+    .insert({ user_id: userId });
   if (error) {
     throw new Error('Error updating days_completed in Supabase: ' + error.message)
   }

@@ -8,14 +8,13 @@ const supabase = createClient(
   process.env.SUPABASE_URL || '',
   process.env.SUPABASE_ANON_KEY || '',
   {
-      async accessToken() {
-          return (await auth()).getToken()
-      }
+    async accessToken() {
+      return (await auth()).getToken()
+    }
   }
 )
 
 // Notification actions:
-
 webpush.setVapidDetails(
   'mailto:johnbovard.dev@gmail.com',
   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
@@ -24,26 +23,8 @@ webpush.setVapidDetails(
 
 let subscription: PushSubscription | null = null
 
-// I'm not sure where this came from
-// let subscription: {
-//   endpoint: string;
-//   expirationTime?: null | number;
-//   keys: {
-//     p256dh: string;
-//     auth: string;
-//   };
-// } | null = null;
- 
 export async function subscribeUser(sub: PushSubscription) {
   subscription = sub
-//   subscription = {
-//     endpoint: sub.endpoint,
-//     expirationTime: sub.expirationTime,
-//     keys: {
-//       p256dh: sub.getKey('p256dh') ? Buffer.from(sub.getKey('p256dh')!).toString('base64') : '',
-//       auth: sub.getKey('auth') ? Buffer.from(sub.getKey('auth')!).toString('base64') : '',
-//     },
-//   };
 
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
@@ -52,7 +33,6 @@ export async function subscribeUser(sub: PushSubscription) {
     {
       user_id: userId,
       subscription: subscription,
-    //   subscription: sub,
     },
   ]);
 
@@ -60,13 +40,9 @@ export async function subscribeUser(sub: PushSubscription) {
     throw new Error(`Failed to save subscription: ${error.message}`);
   }
 
-  // I'm not sure where this came from
-
-  // In a production environment, you would want to store the subscription in a database
-  // For example: await db.subscriptions.create({ data: sub })
   return { success: true }
 }
- 
+
 export async function unsubscribeUser() {
   subscription = null
 
@@ -82,31 +58,8 @@ export async function unsubscribeUser() {
     throw new Error(`Failed to delete subscription: ${error.message}`);
   }
 
-  // In a production environment, you would want to remove the subscription from the database
-  // For example: await db.subscriptions.delete({ where: { ... } })
   return { success: true }
 }
- 
-// export async function sendNotification(message: string) {
-//   if (!subscription) {
-//     throw new Error('No subscription available')
-//   }
- 
-//   try {
-//     await webpush.sendNotification(
-//       subscription,
-//       JSON.stringify({
-//         title: 'Test Notification',
-//         body: message,
-//         icon: '/icon.png',
-//       })
-//     )
-//     return { success: true }
-//   } catch (error) {
-//     console.error('Error sending push notification:', error)
-//     return { success: false, error: 'Failed to send notification' }
-//   }
-// }
 
 export async function scheduleTimeNotification({
   user_id,
@@ -141,19 +94,15 @@ export async function sendDueNotifications() {
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
-//   const now = new Date().toISOString();
   const now = new Date();
-//   const currentTime = now.toISOString().slice(11, 16); // Get the current time in HH:MM format
 
   const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
-  const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);  
+  const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);
   const { data: due } = await supabase
     .from('scheduled_notifications')
     .select('*')
     .gte('scheduled_at', oneMinuteAgo)
     .lte('scheduled_at', oneMinuteAhead);
-
-//   if (!due) return;
 
   for (const notif of due ?? []) {
     // Check if the notification is already sent
@@ -180,4 +129,3 @@ export async function sendDueNotifications() {
     }
   }
 }
-

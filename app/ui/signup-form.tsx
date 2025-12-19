@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useState } from 'react'
-import { useSignUp } from '@clerk/nextjs'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { lusitana } from '@/app/ui/fonts'
-import { Button } from '@/app/ui/button'
+import * as React from "react";
+import { useState } from "react";
+import { useSignUp } from "@clerk/nextjs";
+import { useRouter, useSearchParams } from "next/navigation";
+import { lusitana } from "@/app/ui/fonts";
+import { Button } from "@/app/ui/button";
 import {
-    ArrowRightIcon,
-    AtSymbolIcon,
-    EyeIcon,
-    EyeSlashIcon,
-    KeyIcon
-} from '@heroicons/react/24/outline'
-import Link from 'next/link'
+  ArrowRightIcon,
+  AtSymbolIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  KeyIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Page() {
-  const { isLoaded, signUp, setActive } = useSignUp()
-  const [emailAddress, setEmailAddress] = useState('')
-  const [password, setPassword] = useState('')
-  const [verifying, setVerifying] = useState(false)
-  const [code, setCode] = useState('')
-  const router = useRouter()
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [verifying, setVerifying] = useState(false);
+  const [code, setCode] = useState("");
+  const router = useRouter();
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockOnMessage, setCapsLockOnMessage] = useState("");
@@ -45,60 +45,62 @@ export default function Page() {
 
   // Handle submission of the sign-up form
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     // Start the sign-up process using the email and password provided
     try {
       await signUp.create({
         emailAddress,
         password,
-      })
+      });
 
       // Send the user an email with the verification code
       await signUp.prepareEmailAddressVerification({
-        strategy: 'email_code',
-      })
+        strategy: "email_code",
+      });
 
       // Set 'verifying' true to display second form
       // and capture the OTP code
-      setVerifying(true)
-    } catch (err: any) { // eslint-disable-line
+      setVerifying(true);
+    } catch (err: any) {
+      // eslint-disable-line
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
     }
-  }
+  };
 
   // Handle the submission of the verification form
   const handleVerify = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!isLoaded) return
+    if (!isLoaded) return;
 
     try {
       // Use the code the user provided to attempt verification
       const signUpAttempt = await signUp.attemptEmailAddressVerification({
         code,
-      })
+      });
 
       // If verification was completed, set the session to active
       // and redirect the user
-      if (signUpAttempt.status === 'complete') {
-        await setActive({ session: signUpAttempt.createdSessionId })
-        router.push('/dashboard')
+      if (signUpAttempt.status === "complete") {
+        await setActive({ session: signUpAttempt.createdSessionId });
+        router.push("/dashboard");
       } else {
         // If the status is not complete, check why. User may need to
         // complete further steps.
-        console.error(JSON.stringify(signUpAttempt, null, 2))
+        console.error(JSON.stringify(signUpAttempt, null, 2));
       }
-    } catch (err: any) { // eslint-disable-line
+    } catch (err: any) {
+      // eslint-disable-line
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error('Error:', JSON.stringify(err, null, 2))
+      console.error("Error:", JSON.stringify(err, null, 2));
     }
-  }
+  };
 
   // Display the verification form to capture the OTP code
   if (verifying) {
@@ -107,11 +109,16 @@ export default function Page() {
         <h1>Verify your email</h1>
         <form onSubmit={handleVerify}>
           <label id="code">Enter your verification code</label>
-          <input value={code} id="code" name="code" onChange={(e) => setCode(e.target.value)} />
+          <input
+            value={code}
+            id="code"
+            name="code"
+            onChange={(e) => setCode(e.target.value)}
+          />
           <button type="submit">Verify</button>
         </form>
       </>
-    )
+    );
   }
 
   // Display the initial sign-up form to capture the email and password
@@ -149,7 +156,10 @@ export default function Page() {
                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                 htmlFor="password"
               >
-                Password <span className="text-xs text-gray-500">(min 8 characters)</span>
+                Password{" "}
+                <span className="text-xs text-gray-500">
+                  (min 8 characters)
+                </span>
               </label>
               <div className="relative">
                 <input
@@ -171,9 +181,9 @@ export default function Page() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                 >
                   {showPassword ? (
-                      <EyeSlashIcon className="h-[18px] w-[18px]" />
+                    <EyeSlashIcon className="h-[18px] w-[18px]" />
                   ) : (
-                      <EyeIcon className="h-[18px] w-[18px]" />
+                    <EyeIcon className="h-[18px] w-[18px]" />
                   )}
                 </button>
                 {capsLockOnMessage && (
@@ -185,22 +195,22 @@ export default function Page() {
             </div>
           </div>
           <input type="hidden" name="redirectTo" value={callbackUrl} />
-        <Button className="mt-7 w-full">
-          Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-        </Button>
+          <Button className="mt-7 w-full">
+            Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          </Button>
           <div className="text-center">
             <p className="text-sm text-gray-600">
-                Already have an account?{' '}
-                <Link
-                    href="/sign-in"
-                    className="font-medium text-blue-600 hover:underline"
-                >
-                    Sign in
-                </Link>
+              Already have an account?{" "}
+              <Link
+                href="/sign-in"
+                className="font-medium text-blue-600 hover:underline"
+              >
+                Sign in
+              </Link>
             </p>
           </div>
         </div>
       </form>
     </>
-  )
+  );
 }

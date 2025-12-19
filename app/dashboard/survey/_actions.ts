@@ -80,7 +80,7 @@ export const insertDailySurvey = async (formData: FormData) => {
     if (!userId) {
         return { message: 'No Logged In User' }
     }
-    
+
 
     const { error } = await supabase
         .from('daily_survey_responses')
@@ -156,7 +156,7 @@ export const insertEndSurvey = async (formData: FormData) => {
     if (racial_identity.includes('other')) {
         racial_identity_other = formData.get('racial_identity_other') as string | null
     } else { racial_identity_other = null }
-    
+
 
     const { error } = await supabase
         .from('end_survey_responses')

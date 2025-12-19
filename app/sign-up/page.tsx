@@ -1,10 +1,10 @@
-import SignupForm from '@/app/ui/signup-form';
-import { Suspense } from 'react';
-import { Metadata } from 'next';
+import SignupForm from "@/app/ui/signup-form";
+import { Suspense } from "react";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Sign Up',
-  description: 'Create an account to get started',
+  title: "Sign Up",
+  description: "Create an account to get started",
 };
 
 export default function SignupPage() {
