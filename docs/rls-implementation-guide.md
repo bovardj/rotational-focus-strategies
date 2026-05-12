@@ -12,10 +12,12 @@ Applying RLS in the wrong order will break the app. Two tables (`users`, `user_s
 ```
 Phase 1   ✓ COMPLETE   Database   Policies for tables already on the correct JWT client
 Phase 1.5 ✓ COMPLETE   Database   Policy for subscriptions (no code change required)
-Phase 2                Code       Fix the three broken client patterns
-Phase 3                Deploy     Push Phase 2 changes to production
-Phase 4                Database   Policies for tables that depended on Phase 2
-Phase 5                Cleanup    Restrict or drop unused tables
+Phase 2   ✓ COMPLETE   Code       Fix the three broken client patterns
+Phase 3   ✓ COMPLETE   Deploy     Push Phase 2 changes to production
+Phase 4   ✓ COMPLETE   Database   Policies for tables that depended on Phase 2
+Phase 5   ✓ COMPLETE   Cleanup    Restrict or drop unused tables
+
+Verification Checklist            Clerk needs updated first
 ```
 
 ---
@@ -282,7 +284,23 @@ ALTER TABLE phone_numbers ENABLE ROW LEVEL SECURITY;
 
 ### `onboarding`
 
-No Supabase table with this name exists. No action needed.
+> **Correction from earlier analysis:** this table does exist. Schema: `user_id` (text, Primary Key), `onboarding_complete` (bool), `created_at` (timestamptz).
+
+No application code reads from or writes to this table — the app manages onboarding state entirely through Clerk `publicMetadata` and separate Supabase tables (`days_expected`, `days_completed`). The table appears to be a vestige of an earlier design.
+
+**Confirm RLS is enabled and remove any permissive policies:**
+
+```sql
+ALTER TABLE onboarding ENABLE ROW LEVEL SECURITY;
+```
+
+Then in the Supabase dashboard, navigate to `Authentication → Policies → onboarding` and delete any existing policies. With RLS on and no policies, Supabase defaults to deny-all — no application or user can access rows until a policy explicitly permits it.
+
+- **Preferred:** If the table holds no meaningful data, drop it.
+  ```sql
+  DROP TABLE IF EXISTS onboarding;
+  ```
+- **Alternative:** Leave it in default-deny state. If a future feature needs it, add scoped policies at that point using the same `user_id = auth.jwt() ->> 'sub'` pattern.
 
 ---
 
