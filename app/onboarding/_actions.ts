@@ -82,3 +82,27 @@ export const completeOnboarding = async (formData: FormData) => {
     return { error: 'There was an error updating the user metadata.' }
   }
 }
+
+export const syncUserToSupabase = async () => {
+  const { userId } = await auth()
+  if (!userId) return
+
+  const { data: existingUser, error: selectError } = await supabase
+    .from('users')
+    .select('user_id')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  if (selectError) throw new Error('Error checking for existing user in Supabase: ' + selectError.message)
+
+  if (!existingUser) {
+    const client = await clerkClient()
+    const clerkUser = await client.users.getUser(userId)
+    const email = clerkUser.primaryEmailAddress?.emailAddress ?? null
+
+    const { error } = await supabase
+      .from('users')
+      .insert({ user_id: userId, email })
+    if (error) throw new Error('Error syncing user to Supabase: ' + error.message)
+  }
+}
