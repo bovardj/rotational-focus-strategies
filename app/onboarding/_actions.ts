@@ -55,10 +55,6 @@ export const completeOnboarding = async (formData: FormData) => {
   }
 
   const selectedStrategies = formData.getAll('strategy') as string[]
-  const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_ANON_KEY || ''
-  )
 
   const { error } = await supabase
     .from('user_strategies')
