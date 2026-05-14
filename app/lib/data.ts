@@ -3,15 +3,17 @@
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_PUBLISHABLE_KEY || '',
-  {
-    async accessToken() {
-      return (await auth()).getToken()
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_PUBLISHABLE_KEY || '',
+    {
+      async accessToken() {
+        return (await auth()).getToken()
+      }
     }
-  }
-)
+  )
+}
 
 export async function fetchUserStrategies() {
   const { userId } = await auth()
@@ -19,7 +21,7 @@ export async function fetchUserStrategies() {
     throw new Error('No Logged In User')
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('user_strategies')
     .select('strategies')
     .eq('user_id', userId)
@@ -37,7 +39,7 @@ export async function fetchLatestAssignedStrategy() {
   if (!userId) {
     throw new Error('No Logged In User')
   }
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('assigned_strategies')
     .select('strategy, date')
     .eq('user_id', userId)
@@ -55,7 +57,7 @@ export async function fetchAssignedStrategies(limit: number = 10) {
   if (!userId) {
     throw new Error('No Logged In User')
   }
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('assigned_strategies')
     .select('strategy, date')
     .eq('user_id', userId)

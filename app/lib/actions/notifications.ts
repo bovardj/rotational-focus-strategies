@@ -4,15 +4,17 @@ import { auth } from '@clerk/nextjs/server';
 import { createClient } from '@supabase/supabase-js';
 import webpush from 'web-push'
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_PUBLISHABLE_KEY || '',
-  {
-    async accessToken() {
-      return (await auth()).getToken()
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_PUBLISHABLE_KEY || '',
+    {
+      async accessToken() {
+        return (await auth()).getToken()
+      }
     }
-  }
-)
+  )
+}
 
 // Notification actions:
 webpush.setVapidDetails(
@@ -29,7 +31,7 @@ export async function subscribeUser(sub: PushSubscription) {
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
 
-  const { error } = await supabase.from('subscriptions').upsert([
+  const { error } = await getSupabase().from('subscriptions').upsert([
     {
       user_id: userId,
       subscription: subscription,
@@ -49,7 +51,7 @@ export async function unsubscribeUser() {
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('subscriptions')
     .delete()
     .eq('user_id', userId);
@@ -70,7 +72,7 @@ export async function scheduleTimeNotification({
   message: string
   scheduled_at: string
 }) {
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('scheduled_notifications')
     .insert([
       {
@@ -98,7 +100,7 @@ export async function sendDueNotifications() {
 
   const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
   const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);
-  const { data: due } = await supabase
+  const { data: due } = await getSupabase()
     .from('scheduled_notifications')
     .select('*')
     .gte('scheduled_at', oneMinuteAgo)

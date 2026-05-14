@@ -3,15 +3,17 @@
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_PUBLISHABLE_KEY || '',
-    {
-        async accessToken() {
-            return (await auth()).getToken()
+function getSupabase() {
+    return createClient(
+        process.env.SUPABASE_URL || '',
+        process.env.SUPABASE_PUBLISHABLE_KEY || '',
+        {
+            async accessToken() {
+                return (await auth()).getToken()
+            }
         }
-    }
-)
+    )
+}
 
 // Insert a new row into the baseline_survey_responses table
 export const insertBaselineSurvey = async (formData: FormData) => {
@@ -20,7 +22,7 @@ export const insertBaselineSurvey = async (formData: FormData) => {
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('baseline_survey_responses')
         .insert({
             user_id: userId,
@@ -42,7 +44,7 @@ export const setBaselineSurveysCompleted = async (baselineSurveysCompleted: bigi
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('days_completed')
         .update({
             days_completed: daysCompleted,
@@ -62,7 +64,7 @@ export const setBaselineCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('days_completed')
         .update({
             baseline_completed: true
@@ -82,7 +84,7 @@ export const insertDailySurvey = async (formData: FormData) => {
     }
 
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('daily_survey_responses')
         .insert({
             user_id: userId,
@@ -106,7 +108,7 @@ export const setDailySurveysCompleted = async (dailySurveysCompleted: bigint, da
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('days_completed')
         .update({
             days_completed: daysCompleted,
@@ -126,7 +128,7 @@ export const setDailyCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('days_completed')
         .update({
             daily_completed: true
@@ -158,7 +160,7 @@ export const insertEndSurvey = async (formData: FormData) => {
     } else { racial_identity_other = null }
 
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('end_survey_responses')
         .insert({
             user_id: userId,
@@ -184,7 +186,7 @@ export const setEndSurveyCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
         .from('days_completed')
         .update({
             end_survey_completed: true

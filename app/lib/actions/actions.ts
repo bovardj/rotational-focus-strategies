@@ -3,15 +3,17 @@
 import { auth } from '@clerk/nextjs/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_PUBLISHABLE_KEY || '',
-  {
-    async accessToken() {
-      return (await auth()).getToken()
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_PUBLISHABLE_KEY || '',
+    {
+      async accessToken() {
+        return (await auth()).getToken()
+      }
     }
-  }
-)
+  )
+}
 
 // https://simonsc.medium.com/working-with-time-zones-in-javascript-1b57e716d273
 const getYesterday = (date: Date) => {
@@ -28,7 +30,7 @@ export async function getDailyStrategy() {
   const yesterday = getYesterday(new Date());
 
   //   Check today's assignment
-  const { data: existing } = await supabase
+  const { data: existing } = await getSupabase()
     .from('assigned_strategies')
     .select('strategy, date')
     .eq('user_id', userId)
@@ -40,13 +42,13 @@ export async function getDailyStrategy() {
   }
 
   // Get all assignments
-  const { data: selectedStrategies } = await supabase
+  const { data: selectedStrategies } = await getSupabase()
     .from('user_strategies')
     .select('strategies')
     .eq('user_id', userId)
     .single();
 
-  const { data: assignedYesterday } = await supabase
+  const { data: assignedYesterday } = await getSupabase()
     .from('assigned_strategies')
     .select('strategy')
     .eq('user_id', userId)
@@ -64,7 +66,7 @@ export async function getDailyStrategy() {
 
   const chosen = available[Math.floor(Math.random() * available.length)];
 
-  const { error } = await supabase.from('assigned_strategies').insert([
+  const { error } = await getSupabase().from('assigned_strategies').insert([
     {
       user_id: userId,
       strategy: chosen,

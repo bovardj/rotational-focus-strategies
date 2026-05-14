@@ -3,15 +3,17 @@
 import { auth, clerkClient } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_PUBLISHABLE_KEY || '',
-  {
-    async accessToken() {
-      return (await auth()).getToken()
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_PUBLISHABLE_KEY || '',
+    {
+      async accessToken() {
+        return (await auth()).getToken()
+      }
     }
-  }
-)
+  )
+}
 
 export const initializeDaysExpected = async () => {
   const { userId } = await auth()
@@ -19,7 +21,7 @@ export const initializeDaysExpected = async () => {
     return { message: 'No Logged In User' }
   }
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('days_expected')
     .insert({
       user_id: userId,
@@ -38,7 +40,7 @@ export const initializeDaysCompleted = async () => {
     return { message: 'No Logged In User' }
   }
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('days_completed')
     .insert({ user_id: userId });
   if (error) {
@@ -56,7 +58,7 @@ export const completeOnboarding = async (formData: FormData) => {
 
   const selectedStrategies = formData.getAll('strategy') as string[]
 
-  const { error } = await supabase
+  const { error } = await getSupabase()
     .from('user_strategies')
     .insert({
       user_id: userId,
@@ -87,7 +89,7 @@ export const syncUserToSupabase = async () => {
   const { userId } = await auth()
   if (!userId) return
 
-  const { data: existingUser, error: selectError } = await supabase
+  const { data: existingUser, error: selectError } = await getSupabase()
     .from('users')
     .select('user_id')
     .eq('user_id', userId)

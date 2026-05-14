@@ -3,15 +3,17 @@
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_PUBLISHABLE_KEY || '',
-    {
-        async accessToken() {
-            return (await auth()).getToken()
+function getSupabase() {
+    return createClient(
+        process.env.SUPABASE_URL || '',
+        process.env.SUPABASE_PUBLISHABLE_KEY || '',
+        {
+            async accessToken() {
+                return (await auth()).getToken()
+            }
         }
-    }
-)
+    )
+}
 
 // Get the number of baseline days expected
 export const getBaselineSurveysExpected = async () => {
@@ -20,7 +22,7 @@ export const getBaselineSurveysExpected = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_expected')
         .select('baseline_days')
         .eq('user_id', userId)
@@ -40,7 +42,7 @@ export const getDailySurveysExpected = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_expected')
         .select('daily_days')
         .eq('user_id', userId)
@@ -60,7 +62,7 @@ export const getDaysCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('days_completed')
         .eq('user_id', userId)
@@ -80,7 +82,7 @@ export const getBaselineSurveysCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('baseline_surveys')
         .eq('user_id', userId)
@@ -100,7 +102,7 @@ export const getDailySurveysCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('daily_surveys')
         .eq('user_id', userId)
@@ -120,7 +122,7 @@ export const getEndSurveyCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('end_survey_completed')
         .eq('user_id', userId)
@@ -140,7 +142,7 @@ export const getBaselineCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('baseline_completed')
         .eq('user_id', userId)
@@ -160,7 +162,7 @@ export const getDailyCompleted = async () => {
         return { message: 'No Logged In User' }
     }
 
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
         .from('days_completed')
         .select('daily_completed')
         .eq('user_id', userId)
