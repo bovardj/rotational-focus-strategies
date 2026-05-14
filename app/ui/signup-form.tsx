@@ -64,7 +64,7 @@ export default function Page() {
       // Set 'verifying' true to display second form
       // and capture the OTP code
       setVerifying(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       // eslint-disable-line
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
@@ -94,7 +94,7 @@ export default function Page() {
         // complete further steps.
         console.error(JSON.stringify(signUpAttempt, null, 2));
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       // eslint-disable-line
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling

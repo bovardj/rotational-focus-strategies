@@ -61,7 +61,7 @@ export default function SignInForm() {
         // complete further steps.
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       // eslint-disable-line
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
