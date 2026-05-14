@@ -102,7 +102,7 @@ export const syncUserToSupabase = async () => {
     const clerkUser = await client.users.getUser(userId)
     const email = clerkUser.primaryEmailAddress?.emailAddress ?? null
 
-    const { error } = await supabase
+    const { error } = await getSupabase()
       .from('users')
       .insert({ user_id: userId, email })
     if (error) throw new Error('Error syncing user to Supabase: ' + error.message)
