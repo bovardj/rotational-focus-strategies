@@ -65,9 +65,6 @@ export default function Page() {
       // and capture the OTP code
       setVerifying(true);
     } catch (err: unknown) {
-      // eslint-disable-line
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };
@@ -95,9 +92,6 @@ export default function Page() {
         console.error(JSON.stringify(signUpAttempt, null, 2));
       }
     } catch (err: unknown) {
-      // eslint-disable-line
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error("Error:", JSON.stringify(err, null, 2));
     }
   };

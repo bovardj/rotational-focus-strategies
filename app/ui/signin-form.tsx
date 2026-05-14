@@ -62,9 +62,6 @@ export default function SignInForm() {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err: unknown) {
-      // eslint-disable-line
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2));
     }
   };

@@ -64,7 +64,6 @@ const ForgotPasswordForm: NextPage = () => {
         identifier: email,
       })
       .then(() => {
-        // eslint-disable-line
         setSuccessfulCreation(true);
         setError("");
       })
