@@ -6,6 +6,7 @@
     "start": "next start",
     "lint": "eslint ."
   },
+  "type": "module",
   "dependencies": {
     "@clerk/clerk-js": "^6.11.0",
     "@clerk/nextjs": "^7.3.4",
