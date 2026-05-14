@@ -31,7 +31,9 @@ export function PushNotificationManager() {
 
   useEffect(() => {
     if ("serviceWorker" in navigator && "PushManager" in window) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsSupported(true);
+      // eslint-disable-next-line react-hooks/immutability
       registerServiceWorker();
     }
   }, []);
@@ -105,8 +107,9 @@ export function InstallPrompt() {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsIOS(
-      // eslint-disable-next-line
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
     );
 
