@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@theme {
+  --color-blue-400: #2589FE;
+  --color-blue-500: #0070F3;
+  --color-blue-600: #2F6FEB;
+  --grid-template-columns-13: repeat(13, minmax(0, 1fr));
+  --animate-shimmer: shimmer 1s infinite;
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
 
 input[type='number'] {
   -moz-appearance: textfield;
