@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { useSignUp } from "@clerk/nextjs";
+import { useSignUp } from "@clerk/nextjs/legacy";
 import { useRouter, useSearchParams } from "next/navigation";
 import { lusitana } from "@/app/ui/fonts";
 import { Button } from "@/app/ui/button";

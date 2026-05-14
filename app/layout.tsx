@@ -1,4 +1,4 @@
-import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
+import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
 import "@/app/ui/global.css";
 import { inter, lusitana } from "@/app/ui/fonts";
 
@@ -15,9 +15,9 @@ export default function RootLayout({
             <h1 className={`${lusitana.className} text-2xl font-bold`}>
               Rotational Focus Strategies
             </h1>
-            <SignedIn>
+            <Show when="signed-in">
               <UserButton />
-            </SignedIn>
+            </Show>
           </header>
           {children}
         </body>
