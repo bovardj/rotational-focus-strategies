@@ -29,28 +29,24 @@ export default function CollapseProgress({
         <div className="list-disc pl-6 *:rounded-md">
           <ul className="list-disc pl-6">
             <li className="mb-2">
-              Baseline surveys: {baselineSurveysCompleted} /{" "}
-              {baselineSurveysExpected}{" "}
               <Link href="./dashboard/survey" className="underline">
-                surveys
+                Baseline Surveys
               </Link>
-              .
+              : {baselineSurveysCompleted} /{" "}
+              {baselineSurveysExpected}{" "}completed.
             </li>
             <li className="mb-2">
-              You have completed {dailySurveysCompleted} /{" "}
-              {dailySurveysExpected} daily (post-baseline){" "}
               <Link href="./dashboard/survey" className="underline">
-                surveys
-              </Link>
-              .
+                Daily Surveys
+              </Link> (after baseline)
+              :&nbsp;{dailySurveysCompleted} /{" "}
+              {dailySurveysExpected}&nbsp;completed.
             </li>
             <li className="mb-2">
-              You have completed{" "}
-              {endSurveyCompleted ? "the" : "not completed the"} exit{" "}
               <Link href="./dashboard/survey" className="underline">
-                survey
+                Exit Survey
               </Link>
-              .
+              : {endSurveyCompleted ? "Completed" : "Not Completed"}.
             </li>
           </ul>
         </div>
