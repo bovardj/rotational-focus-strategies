@@ -80,13 +80,13 @@ export default function OnboardingComponent() {
             </p>
           </div>
           {strategyDictionary.map((strategy, index) => (
-            <div key={index} className="flex items-center">
+            <div key={index} className="flex items-start">
               <input
                 type="checkbox"
                 id={`strategy-${index}`}
                 name="strategy"
                 value={strategy.href}
-                className="mr-4"
+                className="mr-4 mt-[14px] flex-shrink-0"
                 checked={selectedItems.includes(strategy.href)}
                 onChange={() => handleCheckboxChange(strategy.href)}
                 disabled={

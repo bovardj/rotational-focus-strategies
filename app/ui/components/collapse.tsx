@@ -18,7 +18,7 @@ export default function Collapse({
   return (
     <details
       open={initialVisible}
-      className={`group rounded-md border border-gray-200 ${shadow ? 'shadow-sm' : ''} ${className}`}
+      className={`group w-full rounded-md border border-gray-200 ${shadow ? 'shadow-sm' : ''} ${className}`}
     >
       <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3 text-sm font-medium">
         <span>{title}</span>
