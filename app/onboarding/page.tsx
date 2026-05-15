@@ -84,6 +84,7 @@ export default function OnboardingComponent() {
                   <summary className="flex cursor-pointer select-none list-none items-center gap-3 px-4 py-3">
                     <div
                       onClick={(e) => {
+                        e.preventDefault();
                         e.stopPropagation();
                         if (!isDisabled) handleCheckboxChange(strategy.href);
                       }}
