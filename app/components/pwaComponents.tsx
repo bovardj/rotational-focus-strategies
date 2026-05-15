@@ -6,17 +6,16 @@ import {
   unsubscribeUser,
 } from "@/app/lib/actions/notifications";
 
-// This function is used to convert a base64 string to a Uint8Array
-// This is necessary for the VAPID key used in the web push notifications
-// The VAPID key is a public key used to authenticate the push notifications
-// The VAPID key is generated using the web-push library
+interface BeforeInstallPromptEvent extends Event {
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
+
 function urlBase64ToUint8Array(base64String: string) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
-
   const rawData = window.atob(base64);
   const outputArray = new Uint8Array(rawData.length);
-
   for (let i = 0; i < rawData.length; ++i) {
     outputArray[i] = rawData.charCodeAt(i);
   }
@@ -25,15 +24,11 @@ function urlBase64ToUint8Array(base64String: string) {
 
 export function PushNotificationManager() {
   const [isSupported, setIsSupported] = useState(false);
-  const [subscription, setSubscription] = useState<PushSubscription | null>(
-    null
-  );
+  const [subscription, setSubscription] = useState<PushSubscription | null>(null);
 
   useEffect(() => {
     if ("serviceWorker" in navigator && "PushManager" in window) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsSupported(true);
-      // eslint-disable-next-line react-hooks/immutability
       registerServiceWorker();
     }
   }, []);
@@ -105,27 +100,42 @@ export function PushNotificationManager() {
 export function InstallPrompt() {
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsIOS(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
-    );
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream);
     setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
-  if (isStandalone) {
-    return null; // Don't show install button if already installed
+  async function handleInstall() {
+    if (!deferredPrompt) return;
+    await deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    setDeferredPrompt(null);
   }
+
+  if (isStandalone) return null;
 
   return (
     <div>
       <h3>Install App</h3>
-      <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Add to Home Screen
-      </button>
+      {deferredPrompt && (
+        <button
+          onClick={handleInstall}
+          className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Add to Home Screen
+        </button>
+      )}
       {isIOS && (
         <p>
           To install this app on your iOS device, tap the share button
