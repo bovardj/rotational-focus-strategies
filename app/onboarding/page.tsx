@@ -86,7 +86,7 @@ export default function OnboardingComponent() {
                 }
               />
               <div className="flex items-center sm:w-2/3 lg:w-1/2">
-                <Collapse title={strategy.name} className="mb-4">
+                <Collapse shadow title={strategy.name} className="bg-gray-50 mb-4">
                   <StrategyDescriptions strategy={strategy.href} />
                 </Collapse>
               </div>
