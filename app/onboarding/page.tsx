@@ -72,7 +72,7 @@ export default function OnboardingComponent() {
         <form action={handleSubmit}>
           <div className="flex items-baseline justify-between max-w-2xl mb-2">
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
-            <span className={`text-sm font-medium tabular-nums ${isValid ? "text-blue-600" : "text-gray-400"}`}>
+            <span className={`text-sm font-medium tabular-nums ${isValid ? "text-blue-600" : "text-gray-500"}`}>
               {selectedItems.length} of 3 selected
             </span>
           </div>
@@ -101,7 +101,7 @@ export default function OnboardingComponent() {
                       if (!isDisabled) handleCheckboxChange(strategy.href);
                     }}
                     className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors
-                      ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-400 bg-white"}
+                      ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-500 bg-white"}
                       ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
                     {isSelected && (
@@ -114,7 +114,7 @@ export default function OnboardingComponent() {
                     {strategy.name}
                   </span>
                   <svg
-                    className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${isSelected ? "text-blue-400" : "text-gray-400"}`}
+                    className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${isSelected ? "text-blue-500" : "text-gray-500"}`}
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
