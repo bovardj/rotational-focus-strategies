@@ -2,7 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server';
 import { createClient } from '@supabase/supabase-js';
-// import webpush from 'web-push'
+import webpush from 'web-push';
 
 function getSupabase() {
   return createClient(
@@ -16,25 +16,20 @@ function getSupabase() {
   )
 }
 
-// Notification actions:
-// webpush.setVapidDetails(
-//   'mailto:johnbovard.dev@gmail.com',
-//   process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-//   process.env.VAPID_PRIVATE_KEY!
-// )
-
-let subscription: PushSubscription | null = null
+webpush.setVapidDetails(
+  'mailto:johnbovard.dev@gmail.com',
+  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+  process.env.VAPID_PRIVATE_KEY!
+)
 
 export async function subscribeUser(sub: PushSubscription) {
-  subscription = sub
-
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
 
   const { error } = await getSupabase().from('subscriptions').upsert([
     {
       user_id: userId,
-      subscription: subscription,
+      subscription: sub,
     },
   ]);
 
@@ -46,8 +41,6 @@ export async function subscribeUser(sub: PushSubscription) {
 }
 
 export async function unsubscribeUser() {
-  subscription = null
-
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
 
@@ -91,43 +84,42 @@ export async function scheduleTimeNotification({
 }
 
 export async function sendDueNotifications() {
-  // Push notifications disabled — re-enable once web-push is compatible with Node 24
-  // const supabase = createClient(
-  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  //   process.env.SUPABASE_SECRET_KEY!
-  // );
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
 
-  // const now = new Date();
+  const now = new Date();
+  const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
+  const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);
 
-  // const oneMinuteAgo = new Date(now.getTime() - 1 * 60 * 1000).toISOString().slice(11, 16);
-  // const oneMinuteAhead = new Date(now.getTime() + 1 * 60 * 1000).toISOString().slice(11, 16);
-  // const { data: due } = await supabase
-  //   .from('scheduled_notifications')
-  //   .select('*')
-  //   .gte('scheduled_at', oneMinuteAgo)
-  //   .lte('scheduled_at', oneMinuteAhead);
+  const { data: due } = await supabase
+    .from('scheduled_notifications')
+    .select('*')
+    .gte('scheduled_at', oneMinuteAgo)
+    .lte('scheduled_at', oneMinuteAhead);
 
-  // for (const notif of due ?? []) {
-  //   const today = now.toISOString().slice(0, 10);
-  //   const sentToday = notif.sent_on?.includes(today);
-  //   if (sentToday) continue;
+  for (const notif of due ?? []) {
+    const today = now.toISOString().slice(0, 10);
+    const sentToday = notif.sent_on?.includes(today);
+    if (sentToday) continue;
 
-  //   const { data: sub } = await supabase
-  //     .from('subscriptions')
-  //     .select('subscription')
-  //     .eq('user_id', notif.user_id)
-  //     .single();
+    const { data: sub } = await supabase
+      .from('subscriptions')
+      .select('subscription')
+      .eq('user_id', notif.user_id)
+      .single();
 
-  //   if (sub) {
-  //     await webpush.sendNotification(
-  //       sub.subscription,
-  //       JSON.stringify({ title: '⏰ Daily Reminder', body: notif.message })
-  //     );
+    if (sub) {
+      await webpush.sendNotification(
+        sub.subscription,
+        JSON.stringify({ title: '⏰ Daily Reminder', body: notif.message })
+      );
 
-  //     await supabase
-  //       .from('scheduled_notifications')
-  //       .update({ sent_on: [...(notif.sent_on ?? []), today] })
-  //       .eq('id', notif.id);
-  //   }
-  // }
+      await supabase
+        .from('scheduled_notifications')
+        .update({ sent_on: [...(notif.sent_on ?? []), today] })
+        .eq('id', notif.id);
+    }
+  }
 }
