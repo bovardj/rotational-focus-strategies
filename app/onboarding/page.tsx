@@ -20,6 +20,15 @@ export default function OnboardingComponent() {
   const requiredStrategies = 3;
 
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set());
+
+  const toggleOpen = (index: number) => {
+    setOpenIndices((prev) => {
+      const next = new Set(prev);
+      next.has(index) ? next.delete(index) : next.add(index);
+      return next;
+    });
+  };
 
   const handleCheckboxChange = (item: string) => {
     setSelectedItems((prevSelected) =>
@@ -74,6 +83,7 @@ export default function OnboardingComponent() {
             const isSelected = selectedItems.includes(strategy.href);
             const isDisabled =
               selectedItems.length >= requiredStrategies && !isSelected;
+            const isOpen = openIndices.has(index);
             return (
               <div
                 key={index}
@@ -81,38 +91,42 @@ export default function OnboardingComponent() {
                   ${isSelected ? "border-blue-500 bg-blue-50" : "border-gray-200 bg-gray-50"}
                   ${isDisabled ? "opacity-50" : ""}`}
               >
-                <details className="group w-full">
-                  <summary className="flex cursor-pointer select-none list-none items-center gap-3 px-4 py-3">
-                    <div
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        if (!isDisabled) handleCheckboxChange(strategy.href);
-                      }}
-                      className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors
-                        ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-400 bg-white"}
-                        ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
-                    >
-                      {isSelected && (
-                        <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </div>
-                    <span className={`flex-1 text-sm font-medium ${isSelected ? "text-blue-900" : "text-gray-900"}`}>
-                      {strategy.name}
-                    </span>
-                    <svg
-                      className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 group-open:rotate-90 ${isSelected ? "text-blue-400" : "text-gray-400"}`}
-                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </summary>
-                  <div className={`border-t px-4 py-3 text-sm ${isSelected ? "border-blue-200" : "border-gray-200"}`}>
-                    <StrategyDescriptions strategy={strategy.href} />
+                <div
+                  className="flex cursor-pointer select-none items-center gap-3 px-4 py-3"
+                  onClick={() => toggleOpen(index)}
+                >
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!isDisabled) handleCheckboxChange(strategy.href);
+                    }}
+                    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors
+                      ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-400 bg-white"}
+                      ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+                  >
+                    {isSelected && (
+                      <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
                   </div>
-                </details>
+                  <span className={`flex-1 text-sm font-medium ${isSelected ? "text-blue-900" : "text-gray-900"}`}>
+                    {strategy.name}
+                  </span>
+                  <svg
+                    className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${isSelected ? "text-blue-400" : "text-gray-400"}`}
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <div className={`grid transition-[grid-template-rows] duration-200 ease-in-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                  <div className="overflow-hidden">
+                    <div className={`border-t px-4 py-3 text-sm ${isSelected ? "border-blue-200" : "border-gray-200"}`}>
+                      <StrategyDescriptions strategy={strategy.href} />
+                    </div>
+                  </div>
+                </div>
                 <input
                   type="checkbox"
                   name="strategy"

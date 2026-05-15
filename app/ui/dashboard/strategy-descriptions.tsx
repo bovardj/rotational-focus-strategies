@@ -27,6 +27,8 @@ function StrategyDetails({ strategy }: { strategy: string }) {
             <Link
               className="text-blue-600 hover:text-blue-800"
               href={"https://www.youtube.com/watch?v=dv2XyqC-EQ4&t=40s"}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               White noise
             </Link>
@@ -35,6 +37,8 @@ function StrategyDetails({ strategy }: { strategy: string }) {
             <Link
               className="text-blue-600 hover:text-blue-800"
               href={"https://www.youtube.com/watch?v=P48QELwruQs"}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Brown noise
             </Link>
@@ -43,6 +47,8 @@ function StrategyDetails({ strategy }: { strategy: string }) {
             <Link
               className="text-blue-600 hover:text-blue-800"
               href={"https://www.youtube.com/watch?v=ipf7ifVSeDU"}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Nature sounds
             </Link>
@@ -52,6 +58,8 @@ function StrategyDetails({ strategy }: { strategy: string }) {
             <Link
               className="text-blue-600 hover:text-blue-800"
               href={"https://www.youtube.com/watch?v=jfKfPfyJRdk"}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Lo-fi beats
             </Link>
