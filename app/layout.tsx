@@ -1,6 +1,7 @@
 import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
 import "@/app/ui/global.css";
 import { inter, lusitana } from "@/app/ui/fonts";
+import { InstallPrompt } from "@/app/components/pwaComponents";
 
 export default function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default function RootLayout({
               <UserButton />
             </Show>
           </header>
+          <InstallPrompt />
           {children}
         </body>
       </html>

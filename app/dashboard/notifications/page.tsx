@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { scheduleTimeNotification } from "@/app/lib/actions/notifications";
 import { useUser } from "@clerk/nextjs";
+import { PushNotificationManager } from "@/app/components/pwaComponents";
 
 export default function NotificationsPage() {
   const [message, setMessage] = useState("");
@@ -37,6 +38,7 @@ export default function NotificationsPage() {
   return (
     <main className="max-w-md mx-auto mt-12 p-4 border rounded shadow space-y-4">
       <h1 className="text-2xl font-bold">⏰ Daily Notification</h1>
+      <PushNotificationManager />
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
