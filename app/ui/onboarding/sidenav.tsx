@@ -1,4 +1,5 @@
 import RFSLogo from "@/app/ui/rfs-logo";
+import { UserButton } from "@clerk/nextjs";
 
 const steps = [
   { label: "Choose 3 focus strategies" },
@@ -10,9 +11,12 @@ const steps = [
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
-      <div className="mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40">
+      <div className="relative mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40">
         <div className="w-32 text-white md:w-40">
           <RFSLogo />
+        </div>
+        <div className="absolute top-3 right-3 md:hidden">
+          <UserButton />
         </div>
       </div>
       <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-50 px-4 py-4">

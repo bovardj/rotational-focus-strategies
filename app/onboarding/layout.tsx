@@ -21,7 +21,7 @@ export default async function RootLayout({
         <SideNav />
       </div>
       <div className="flex flex-col flex-grow md:overflow-y-auto">
-        <div className="flex justify-end items-center px-6 py-3 border-b border-gray-100">
+        <div className="hidden md:flex justify-end items-center px-6 py-3 border-b border-gray-100">
           <UserButton />
         </div>
         <div className="p-6 md:p-12">
