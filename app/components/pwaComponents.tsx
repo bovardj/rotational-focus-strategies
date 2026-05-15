@@ -123,7 +123,7 @@ export function InstallPrompt() {
     setDeferredPrompt(null);
   }
 
-  if (env.isStandalone) return null;
+  if (env.isStandalone || (!deferredPrompt && !env.isIOS)) return null;
 
   return (
     <div>
