@@ -15,6 +15,11 @@
   }
 }
 
+/* Prevent the Geist UI collapse chevron from shrinking when the title is long */
+.view .title svg {
+  flex-shrink: 0;
+}
+
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
