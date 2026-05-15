@@ -51,3 +51,14 @@ The middleware checks `sessionClaims.metadata.onboardingComplete` in Clerk to de
 **Symptoms:** `Error: Cannot coerce the result to a single JSON object` on dashboard load for a specific user.
 
 **Fix:** In the Clerk dashboard, find the user → edit Public Metadata → remove `onboardingComplete` (or set it to `false`). The middleware will redirect them to `/onboarding` on next load, which recreates all their Supabase rows.
+
+## RLS returning 0 rows → `.single()` crash
+
+Any query that uses `.single()` will throw `Cannot coerce the result to a single JSON object` if RLS blocks all rows (returning an empty result set instead of an error). This surfaces as a dashboard 500 even though the query itself is syntactically valid.
+
+Common triggers:
+- Supabase receiving the anon key instead of a user JWT (e.g. `accessToken` callback not firing — see version history above)
+- User exists in Clerk but has no rows in the relevant Supabase table (see onboarding state desync above)
+- JWKS misconfiguration causing token verification to fail silently, falling back to anon access
+
+When debugging a `.single()` crash, verify: (1) the JWT is actually being sent (`Authorization` header present), (2) the JWKS URL matches the Clerk instance the user belongs to, (3) the user has rows in the queried table.
