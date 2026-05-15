@@ -5,8 +5,8 @@ import { createClient } from '@supabase/supabase-js'
 
 function getSupabase() {
     return createClient(
-        process.env.SUPABASE_URL || '',
-        process.env.SUPABASE_PUBLISHABLE_KEY || '',
+        process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
         {
             async accessToken() {
                 return (await auth()).getToken()

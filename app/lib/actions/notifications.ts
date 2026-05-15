@@ -6,8 +6,8 @@ import { createClient } from '@supabase/supabase-js';
 
 function getSupabase() {
   return createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_PUBLISHABLE_KEY || '',
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '',
     {
       async accessToken() {
         return (await auth()).getToken()
@@ -93,7 +93,7 @@ export async function scheduleTimeNotification({
 export async function sendDueNotifications() {
   // Push notifications disabled — re-enable once web-push is compatible with Node 24
   // const supabase = createClient(
-  //   process.env.SUPABASE_URL!,
+  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   //   process.env.SUPABASE_SECRET_KEY!
   // );
 
