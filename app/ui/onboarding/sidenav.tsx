@@ -1,5 +1,4 @@
 import RFSLogo from "@/app/ui/rfs-logo";
-import { UserButton } from "@clerk/nextjs";
 
 const steps = [
   { label: "Choose 3 focus strategies" },
@@ -30,9 +29,6 @@ export default function SideNav() {
             </li>
           ))}
         </ol>
-        <div className="mt-auto pt-4">
-          <UserButton />
-        </div>
       </div>
     </div>
   );

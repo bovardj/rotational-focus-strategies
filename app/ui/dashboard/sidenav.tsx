@@ -1,7 +1,6 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import RFSLogo from "@/app/ui/rfs-logo";
-import { UserButton } from "@clerk/nextjs";
 
 export default function SideNav() {
   return (
@@ -17,9 +16,6 @@ export default function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-        <div className="hidden md:flex items-center justify-start px-2 py-2">
-          <UserButton />
-        </div>
       </div>
     </div>
   );
