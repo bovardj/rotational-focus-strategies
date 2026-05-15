@@ -52,7 +52,7 @@ export default function CollapseInstructions({
               If you forget to complete the survey at the end of the day, you
               can still complete it later.
             </b>
-            &nbps;You only need to select what day the survey is for in the survey.
+            &nbsp;You only need to select what day the survey is for in the survey.
             Please try to complete the survey as soon as possible after the end
             of each day, though.
           </p>
