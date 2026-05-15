@@ -11,7 +11,7 @@ import { lusitana } from "@/app/ui/fonts";
 import { strategyDictionary } from "../lib/utils";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import Collapse from "@geist-ui/react/esm/collapse/collapse";
+import Collapse from "@/app/ui/components/collapse";
 import StrategyDescriptions from "@/app/ui/dashboard/strategy-descriptions";
 
 export default function OnboardingComponent() {

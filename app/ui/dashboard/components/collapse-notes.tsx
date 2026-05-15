@@ -1,6 +1,4 @@
-"use client";
-
-import { Collapse } from "@geist-ui/react";
+import Collapse from "@/app/ui/components/collapse";
 import Link from "next/link";
 
 export default function CollapseNotes() {
@@ -51,29 +49,11 @@ export default function CollapseNotes() {
           </p>
           <p className="italic underline mb-4 text-md">Want notifications?</p>
           <p className="mb-4 text-md">
-            Unfortunately, notifications are not supported at this time.
-          </p>
-          <p className="italic underline mb-4 text-md">
-            Multiple strategies assigned in a single day?
-          </p>
-          <p className="mb-4 text-md">
-            I have seen a bug where sometimes when you refresh the dashboard
-            page, it assigns a new focus strategy every time. This is a bug that
-            I am working on fixing. If you see this, please let me know. I can
-            fix this on my end until I can get a more permanent fix in place.
-          </p>
-          <p className="hidden mb-4 text-md">
-            While completely optional, you may install this app onto your
-            device, such as a smartphone or computer, as a Progressive Web App
-            (PWA) if you would like. A useful guide to installing the app as a
-            PWA can be found&nbsp;
-            <Link
-              href="https://www.cdc.gov/niosh/mining/tools/installpwa.html"
-              className="text-blue-500 hover:underline"
-            >
-              here
-            </Link>
-            .
+            You can enable push notifications from the{" "}
+            <Link href="/dashboard/notifications" className="text-blue-500 hover:underline">
+              Notifications
+            </Link>{" "}
+            page.
           </p>
         </div>
       </Collapse>

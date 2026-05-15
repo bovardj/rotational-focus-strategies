@@ -10,8 +10,6 @@
   "dependencies": {
     "@clerk/clerk-js": "^6.11.0",
     "@clerk/nextjs": "^7.3.4",
-    "@geist-ui/core": "^2.3.8",
-    "@geist-ui/react": "^2.2.5",
     "@heroicons/react": "^2.2.0",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.105.4",

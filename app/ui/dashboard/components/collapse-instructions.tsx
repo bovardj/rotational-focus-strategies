@@ -1,6 +1,4 @@
-"use client";
-
-import { Collapse } from "@geist-ui/react";
+import Collapse from "@/app/ui/components/collapse";
 import Link from "next/link";
 
 interface CollapseInstructionsProps {
@@ -14,12 +12,7 @@ export default function CollapseInstructions({
 }: CollapseInstructionsProps) {
   return (
     <div>
-      <Collapse
-        shadow
-        title="Instructions"
-        initialVisible
-        className="bg-gray-50"
-      >
+      <Collapse shadow title="Instructions" initialVisible className="bg-gray-50">
         <Collapse shadow title="General" initialVisible className="bg-gray-50">
           <p className="mb-4">
             Please read the instructions carefully. If you have any questions,
@@ -71,20 +64,6 @@ export default function CollapseInstructions({
               EDT) each day.
             </li>
           </ul>
-          {/* NOTE: This is where the PWA installation instructions are. Remove "hidden" when PWA functionality is implemented. */}
-          <p className="hidden mb-4">
-            While completely optional, you may install this app onto your
-            device, such as a smartphone or computer, as a Progressive Web App
-            (PWA) if you would like. A useful guide to installing the app as a
-            PWA can be found&nbsp;
-            <Link
-              href="https://www.cdc.gov/niosh/mining/tools/installpwa.html"
-              className="text-blue-500 hover:underline"
-            >
-              here
-            </Link>
-            .
-          </p>
         </Collapse>
         <Collapse
           shadow

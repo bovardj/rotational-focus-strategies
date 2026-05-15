@@ -1,6 +1,4 @@
-"use client";
-
-import { Collapse } from "@geist-ui/react";
+import Collapse from "@/app/ui/components/collapse";
 import Link from "next/link";
 
 interface CollapseProgressProps {
@@ -20,12 +18,7 @@ export default function CollapseProgress({
 }: CollapseProgressProps) {
   return (
     <div>
-      <Collapse
-        shadow
-        title="Your Progress"
-        initialVisible
-        className="bg-gray-50"
-      >
+      <Collapse shadow title="Your Progress" initialVisible className="bg-gray-50">
         <div className="list-disc pl-6 *:rounded-md">
           <ul className="list-disc pl-6">
             <li className="mb-2">
