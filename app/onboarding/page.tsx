@@ -57,18 +57,19 @@ export default function OnboardingComponent() {
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Welcome
+        Welcome{user?.primaryEmailAddress?.emailAddress ? `, ${user.primaryEmailAddress.emailAddress}` : ""}
       </h1>
       <div className="grid gap-6 grid-cols-1">
         <form action={handleSubmit}>
-          <div className="flex items-center">
+          <div className="flex items-baseline justify-between sm:w-2/3 lg:w-1/2 mb-2">
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
+            <span className={`text-sm font-medium tabular-nums ${isValid ? "text-blue-600" : "text-gray-400"}`}>
+              {selectedItems.length} of 3 selected
+            </span>
           </div>
-          <div>
-            <p className="text-sm text-gray-600 mb-2">
-              Choose the strategies that you would like to use.
-            </p>
-          </div>
+          <p className="text-sm text-gray-600 mb-3">
+            Expand a card to learn more before selecting.
+          </p>
           {strategyDictionary.map((strategy, index) => {
             const isSelected = selectedItems.includes(strategy.href);
             const isDisabled =
@@ -102,7 +103,7 @@ export default function OnboardingComponent() {
                       {strategy.name}
                     </span>
                     <svg
-                      className="h-4 w-4 flex-shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-90"
+                      className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 group-open:rotate-90 ${isSelected ? "text-blue-400" : "text-gray-400"}`}
                       fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -123,13 +124,7 @@ export default function OnboardingComponent() {
               </div>
             );
           })}
-          <p
-            className="text-red-600"
-            id="strategy-error"
-            style={{ display: "none" }}
-          >
-            You must select exactly 3 strategies.
-          </p>
+
           <div className="flex justify-center sm:w-2/3 lg:w-1/2 mt-1">
             <Button
               id="form_submit_button"
@@ -144,7 +139,6 @@ export default function OnboardingComponent() {
           {error && <p className="text-red-600 mt-2">{error}</p>}
         </form>
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8"></div>
     </main>
   );
 }
