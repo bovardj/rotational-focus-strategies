@@ -33,7 +33,7 @@ export default function CollapseInstructions({
             .
           </p>
           <p className="mb-4">
-            <b>Timing:</b> Please start the study as soon as you can. I
+            <b>Timing:</b>&nbsp;Please start the study as soon as you can. I
             understand that some days, such as weekends, may not be normal
             &quot;productive&quot; times, but that&apos;s okay. If it is a day
             like that, you can make a note of it in that day&apos;s survey if
@@ -51,7 +51,7 @@ export default function CollapseInstructions({
             <b>
               If you forget to complete the survey at the end of the day, you
               can still complete it later.
-            </b>
+            </b>&nbps;
             You only need to select what day the survey is for in the survey.
             Please try to complete the survey as soon as possible after the end
             of each day, though.
@@ -94,9 +94,9 @@ export default function CollapseInstructions({
           <ul className="list-disc pl-6">
             <li className="mb-2">Go about your day as you normally would.</li>
             <li>
-              At the end of the day, complete a Baseline{" "}
+              At the end of the day, complete a{" "}
               <Link href="./dashboard/survey" className="underline">
-                Survey
+                Baseline Survey
               </Link>{" "}
               about your day.
               <span className="italic">
@@ -117,9 +117,9 @@ export default function CollapseInstructions({
               Use your assigned focus strategy for the day.
             </li>
             <li className="mb-2">
-              At the end of the day, complete the Daily{" "}
+              At the end of the day, complete the{" "}
               <Link href="./dashboard/survey" className="underline">
-                Survey
+                Daily Survey
               </Link>{" "}
               about your experience with that strategy.
               <span className="italic">
@@ -130,9 +130,9 @@ export default function CollapseInstructions({
             </li>
             <li>
               When you submit your last Daily (post-Basline) Survey, you will be
-              redirected to a brief Exit{" "}
+              redirected to a brief{" "}
               <Link href="./dashboard/survey" className="underline">
-                Survey
+                Exit Survey
               </Link>
               . If you return to this page, simply click on either the
               &apos;Surveys&apos; button to access it.
@@ -143,9 +143,9 @@ export default function CollapseInstructions({
           <ul className="list-disc pl-6">
             <li className="mb-2">
               When you submit your last Daily (post-Basline) Survey, you will be
-              redirected to a brief Exit{" "}
+              redirected to a brief{" "}
               <Link href="./dashboard/survey" className="underline">
-                Survey
+                Exit Survey
               </Link>
               . If you return to this page, simply click on either the
               &apos;Surveys&apos; button to access it.
