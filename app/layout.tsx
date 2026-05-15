@@ -1,6 +1,6 @@
-import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "@/app/ui/global.css";
-import { inter, lusitana } from "@/app/ui/fonts";
+import { inter } from "@/app/ui/fonts";
 import { InstallPrompt } from "@/app/components/pwaComponents";
 
 export default function RootLayout({
@@ -12,14 +12,6 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} antialiased`}>
-          <header className="sticky flex justify-end items-center p-4 gap-4 h-16">
-            <h1 className={`${lusitana.className} text-2xl font-bold`}>
-              Rotational Focus Strategies
-            </h1>
-            <Show when="signed-in">
-              <UserButton />
-            </Show>
-          </header>
           <InstallPrompt />
           {children}
         </body>
