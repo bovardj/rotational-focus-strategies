@@ -75,7 +75,7 @@ export default function OnboardingComponent() {
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
           </div>
           <div>
-            <p className="text-sm text-gray-500 mb-2">
+            <p className="text-sm text-gray-600 mb-2">
               Choose the strategies that you would like to use.
             </p>
           </div>
