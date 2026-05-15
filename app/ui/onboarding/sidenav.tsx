@@ -25,7 +25,7 @@ export default function SideNav() {
               <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
                 {i + 1}
               </span>
-              <span className="text-sm text-gray-600">{step.label}</span>
+              <span className="text-sm text-gray-700">{step.label}</span>
             </li>
           ))}
         </ol>
