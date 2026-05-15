@@ -1,14 +1,7 @@
 import { Card } from "@/app/ui/dashboard/components/cards";
 import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
-import {
-  getBaselineCompleted,
-  getBaselineSurveysExpected,
-  getBaselineSurveysCompleted,
-  getDailySurveysCompleted,
-  getDailySurveysExpected,
-  getEndSurveyCompleted,
-} from "@/app/dashboard/survey/_data";
+import { getDashboardCounts } from "@/app/dashboard/survey/_data";
 import CollapseInstructions from "@/app/ui/dashboard/components/collapse-instructions";
 import CollapseNotes from "@/app/ui/dashboard/components/collapse-notes";
 import Link from "next/link";
@@ -27,22 +20,26 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const baselineCompleted = await getBaselineCompleted();
-  const baselineSurveysExpected = await getBaselineSurveysExpected();
-  const baselineSurveysCompleted = await getBaselineSurveysCompleted();
-  const dailySurveysCompleted = await getDailySurveysCompleted();
-  const dailySurveysExpected = await getDailySurveysExpected();
-  const endSurveyCompleted = await getEndSurveyCompleted();
+  const [counts, user, userStrategies, userAssignedStrategies] = await Promise.all([
+    getDashboardCounts(),
+    currentUser(),
+    fetchUserStrategies(),
+    fetchAssignedStrategies(),
+  ]);
 
-  const user = await currentUser();
-  const userId = user?.id;
-  if (!userId) {
+  if (!counts || !user?.id) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }
-  const userStrategies = await fetchUserStrategies();
 
-  // Fetch the user's assigned strategies and filter them to only include those that are before today
-  const userAssignedStrategies = await fetchAssignedStrategies();
+  const {
+    baselineCompleted,
+    baselineSurveysCompleted,
+    baselineSurveysExpected,
+    dailySurveysCompleted,
+    dailySurveysExpected,
+    endSurveyCompleted,
+  } = counts;
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const filteredAssignedStrategies = userAssignedStrategies.filter(
