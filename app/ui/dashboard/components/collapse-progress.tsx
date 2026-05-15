@@ -1,6 +1,6 @@
 "use client";
 
-import Collapse from "@geist-ui/react/esm/collapse/collapse";
+import { Collapse } from "@geist-ui/react";
 import Link from "next/link";
 
 interface CollapseProgressProps {

@@ -13,11 +13,9 @@ export default function CollapseStrategy({
       <div>
         <Collapse shadow title="Your Focus Strategies" className="bg-gray-50">
           {strategyList.map((strategy, index) => (
-            <div key={index} className="flex items-center">
-              <Collapse shadow title={strategy.name} className="bg-gray-50">
-                <StrategyDescriptions strategy={strategy.href} />
-              </Collapse>
-            </div>
+            <Collapse key={index} shadow title={strategy.name} className="bg-gray-50">
+              <StrategyDescriptions strategy={strategy.href} />
+            </Collapse>
           ))}
         </Collapse>
       </div>
