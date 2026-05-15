@@ -92,6 +92,11 @@ export default function Page() {
         console.error(JSON.stringify(signUpAttempt, null, 2));
       }
     } catch (err: unknown) {
+      const clerkErr = err as { errors?: Array<{ code: string }> };
+      if (clerkErr?.errors?.[0]?.code === "session_exists") {
+        router.push("/dashboard");
+        return;
+      }
       console.error("Error:", JSON.stringify(err, null, 2));
     }
   };
