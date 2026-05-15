@@ -61,15 +61,6 @@ export default function OnboardingComponent() {
         Welcome
       </h1>
       <div className="grid gap-6 grid-cols-1">
-        <div>
-          <p className="italic underline mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            Looking for the log out button?
-          </p>
-          <p className="mb-4 text-lg md:text-lg sm:w-1/2 md:w-2/3 lg:w-1/2">
-            You can find it, along with account management, in the top right
-            corner of the page (you may need to scroll up).
-          </p>
-        </div>
         <form action={handleSubmit}>
           <div className="flex items-center">
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
