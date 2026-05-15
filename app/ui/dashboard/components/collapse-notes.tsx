@@ -17,16 +17,16 @@ export default function CollapseNotes() {
           </p>
           <ul className="list-disc list-inside mb-4 text-md">
             <li>
-              <b>iOS:</b> click the share button in Safari and select &quot;Add
+              <b>iOS:</b>&nbsp;click the share button in Safari and select &quot;Add
               to Home Screen&quot;
             </li>
             <li>
-              <b>Android:</b> click the three dots in the top right corner of
+              <b>Android:</b>&nbsp;click the three dots in the top right corner of
               Chrome and select &quot;Install App&quot; (I believe Firefox is
               the same)
             </li>
             <li>
-              <b>Further information:</b> A useful guide to installing the app
+              <b>Further information:</b>&nbsp;A useful guide to installing the app
               as a PWA can be found&nbsp;
               <Link
                 href="https://www.cdc.gov/niosh/mining/tools/installpwa.html"
