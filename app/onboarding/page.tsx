@@ -81,7 +81,7 @@ export default function OnboardingComponent() {
                   ${isSelected ? "border-blue-500 bg-blue-50" : "border-gray-200 bg-gray-50"}
                   ${isDisabled ? "opacity-50" : ""}`}
               >
-                <details className="group">
+                <details className="group w-full">
                   <summary className="flex cursor-pointer select-none list-none items-center gap-3 px-4 py-3">
                     <div
                       onClick={(e) => {
