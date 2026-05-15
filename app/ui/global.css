@@ -15,9 +15,11 @@
   }
 }
 
-/* Prevent the Geist UI collapse chevron from shrinking when the title is long */
+/* Prevent the Geist UI collapse chevron from shrinking when the title is long,
+   and keep a gap between the title text and the chevron */
 .view .title svg {
   flex-shrink: 0;
+  margin-left: 8px;
 }
 
 input[type='number'] {
