@@ -16,11 +16,11 @@ export default async function RootLayout({
   await syncUserToSupabase();
 
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full flex-none md:w-64">
+    <div className="flex min-h-screen flex-col md:flex-row">
+      <div className="w-full flex-none md:sticky md:top-0 md:h-screen md:w-64 md:overflow-y-auto">
         <SideNav />
       </div>
-      <div className="flex flex-col flex-grow md:overflow-y-auto">
+      <div className="flex flex-col flex-grow">
         <div className="hidden md:flex justify-end items-center px-6 py-3 border-b border-gray-100">
           <UserButton />
         </div>
