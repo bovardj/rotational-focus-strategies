@@ -19,20 +19,48 @@ export default function SideNav() {
           <UserButton />
         </div>
       </div>
-      <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-50 px-4 py-4">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
-          Study Overview
-        </p>
-        <ol className="space-y-3">
-          {steps.map((step, i) => (
-            <li key={i} className="flex items-start gap-3">
-              <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
-                {i + 1}
-              </span>
-              <span className="text-sm text-gray-700">{step.label}</span>
-            </li>
-          ))}
-        </ol>
+      <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-50">
+        {/* Mobile: collapsible */}
+        <details className="group md:hidden">
+          <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Study Overview
+            </p>
+            <svg
+              className="h-4 w-4 text-gray-400 transition-transform duration-200 group-open:rotate-90"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </summary>
+          <ol className="space-y-3 px-4 pb-4">
+            {steps.map((step, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
+                  {i + 1}
+                </span>
+                <span className="text-sm text-gray-700">{step.label}</span>
+              </li>
+            ))}
+          </ol>
+        </details>
+
+        {/* Desktop: always visible */}
+        <div className="hidden md:block px-4 py-3">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+            Study Overview
+          </p>
+          <ol className="space-y-3">
+            {steps.map((step, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
+                  {i + 1}
+                </span>
+                <span className="text-sm text-gray-700">{step.label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   );

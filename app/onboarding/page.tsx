@@ -61,7 +61,7 @@ export default function OnboardingComponent() {
       </h1>
       <div className="grid gap-6 grid-cols-1">
         <form action={handleSubmit}>
-          <div className="flex items-baseline justify-between sm:w-2/3 lg:w-1/2 mb-2">
+          <div className="flex items-baseline justify-between lg:w-1/2 mb-2">
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
             <span className={`text-sm font-medium tabular-nums ${isValid ? "text-blue-600" : "text-gray-400"}`}>
               {selectedItems.length} of 3 selected
@@ -77,7 +77,7 @@ export default function OnboardingComponent() {
             return (
               <div
                 key={index}
-                className={`mb-3 sm:w-2/3 lg:w-1/2 rounded-lg border-2 shadow-sm transition-colors duration-150
+                className={`mb-3 lg:w-1/2 rounded-lg border-2 shadow-sm transition-colors duration-150
                   ${isSelected ? "border-blue-500 bg-blue-50" : "border-gray-200 bg-gray-50"}
                   ${isDisabled ? "opacity-50" : ""}`}
               >
@@ -125,7 +125,7 @@ export default function OnboardingComponent() {
             );
           })}
 
-          <div className="flex justify-center sm:w-2/3 lg:w-1/2 mt-1">
+          <div className="flex justify-center lg:w-1/2 mt-1">
             <Button
               id="form_submit_button"
               className={`mt-4 ${
