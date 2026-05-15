@@ -9,6 +9,7 @@ interface CollapseProgressProps {
   dailySurveysCompleted: number;
   dailySurveysExpected: number;
   endSurveyCompleted: boolean;
+  previousStrategiesCount: number;
 }
 
 export default function CollapseProgress({
@@ -17,6 +18,7 @@ export default function CollapseProgress({
   dailySurveysCompleted,
   dailySurveysExpected,
   endSurveyCompleted,
+  previousStrategiesCount,
 }: CollapseProgressProps) {
   return (
     <div>
@@ -49,6 +51,11 @@ export default function CollapseProgress({
               : {endSurveyCompleted ? "Completed" : "Not Completed"}.
             </li>
           </ul>
+          {previousStrategiesCount === 0 && (
+            <p className="mt-2 text-sm text-gray-500">
+              <i>No strategies have been assigned yet.</i>
+            </p>
+          )}
         </div>
       </Collapse>
     </div>

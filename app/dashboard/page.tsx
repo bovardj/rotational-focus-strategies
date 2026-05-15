@@ -112,6 +112,7 @@ export default async function Page() {
             dailySurveysCompleted={dailySurveysCompleted}
             dailySurveysExpected={dailySurveysExpected}
             endSurveyCompleted={endSurveyCompleted}
+            previousStrategiesCount={filteredAssignedStrategies.length}
           />
         </div>
         <div className="grid gap-6 grid-cols-1 mt-6">
