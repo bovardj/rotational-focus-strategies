@@ -2,6 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
+import { unstable_cache } from 'next/cache'
 
 function getSupabase() {
     return createClient(
@@ -15,6 +16,30 @@ function getSupabase() {
     )
 }
 
+function getServiceSupabase() {
+    return createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SECRET_KEY!
+    )
+}
+
+// days_expected never changes after onboarding — cache it indefinitely per user.
+async function getDaysExpected(userId: string) {
+    return unstable_cache(
+        async () => {
+            const { data, error } = await getServiceSupabase()
+                .from('days_expected')
+                .select('baseline_days, daily_days')
+                .eq('user_id', userId)
+                .single()
+            if (error) throw new Error('Error fetching days_expected: ' + error.message)
+            return data
+        },
+        [userId, 'days-expected'],
+        { revalidate: false, tags: [`days-expected-${userId}`] }
+    )()
+}
+
 // Fetch all dashboard count data in 2 queries instead of 6 individual calls.
 // Use this in dashboard/page.tsx; the individual functions below remain for survey-form.tsx.
 export async function getDashboardCounts() {
@@ -23,29 +48,24 @@ export async function getDashboardCounts() {
 
     const supabase = getSupabase()
 
-    const [completedResult, expectedResult] = await Promise.all([
+    const [completedResult, daysExpected] = await Promise.all([
         supabase
             .from('days_completed')
             .select('baseline_completed, baseline_surveys, daily_surveys, end_survey_completed')
             .eq('user_id', userId)
             .single(),
-        supabase
-            .from('days_expected')
-            .select('baseline_days, daily_days')
-            .eq('user_id', userId)
-            .single(),
+        getDaysExpected(userId),
     ])
 
     if (completedResult.error) throw new Error('Error fetching days_completed: ' + completedResult.error.message)
-    if (expectedResult.error) throw new Error('Error fetching days_expected: ' + expectedResult.error.message)
 
     return {
         baselineCompleted: completedResult.data.baseline_completed as boolean,
         baselineSurveysCompleted: completedResult.data.baseline_surveys as number,
         dailySurveysCompleted: completedResult.data.daily_surveys as number,
         endSurveyCompleted: completedResult.data.end_survey_completed as boolean,
-        baselineSurveysExpected: expectedResult.data.baseline_days as number,
-        dailySurveysExpected: expectedResult.data.daily_days as number,
+        baselineSurveysExpected: daysExpected.baseline_days as number,
+        dailySurveysExpected: daysExpected.daily_days as number,
     }
 }
 

@@ -2,6 +2,7 @@
 
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
+import { unstable_cache } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -15,23 +16,36 @@ function getSupabase() {
   )
 }
 
+function getServiceSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  )
+}
+
 export async function fetchUserStrategies() {
   const { userId } = await auth()
   if (!userId) {
     throw new Error('No Logged In User')
   }
 
-  const { data, error } = await getSupabase()
-    .from('user_strategies')
-    .select('strategies')
-    .eq('user_id', userId)
-    .single()
+  return unstable_cache(
+    async () => {
+      const { data, error } = await getServiceSupabase()
+        .from('user_strategies')
+        .select('strategies')
+        .eq('user_id', userId)
+        .single()
 
-  if (error) {
-    throw new Error('Error fetching user strategies: ' + error.message)
-  }
+      if (error) {
+        throw new Error('Error fetching user strategies: ' + error.message)
+      }
 
-  return data?.strategies
+      return data?.strategies
+    },
+    [userId, 'user-strategies'],
+    { revalidate: false, tags: [`user-strategies-${userId}`] }
+  )()
 }
 
 export async function fetchLatestAssignedStrategy() {

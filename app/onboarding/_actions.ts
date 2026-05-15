@@ -2,6 +2,7 @@
 
 import { auth, clerkClient } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
+import { revalidateTag } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -31,6 +32,7 @@ export const initializeDaysExpected = async () => {
   if (error) {
     throw new Error('Error updating days_expected in Supabase: ' + error.message)
   }
+  revalidateTag(`days-expected-${userId}`, {})
   return { message: 'Days expected initialized to 0' }
 }
 
@@ -68,6 +70,7 @@ export const completeOnboarding = async (formData: FormData) => {
   if (error) {
     throw new Error('Error inserting strategies into Supabase: ' + error.message)
   }
+  revalidateTag(`user-strategies-${userId}`, {})
 
   const client = await clerkClient()
 
