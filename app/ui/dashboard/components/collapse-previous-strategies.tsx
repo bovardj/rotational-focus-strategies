@@ -4,14 +4,16 @@ import { Collapse } from "@geist-ui/react";
 import { strategyDictionary } from "@/app/lib/utils";
 import { parseDateString } from "@/app/lib/utils";
 
-export default function CollapsePreviousStrategy({
-  previousStrategyList: previousStrategyList,
-}: {
+interface CollapsePreviousStrategyProps {
   previousStrategyList: {
     strategy: string;
     date: string;
   }[];
-}) {
+}
+
+export default function CollapsePreviousStrategy({
+  previousStrategyList,
+}: CollapsePreviousStrategyProps) {
   return (
     <>
       <div>
@@ -36,6 +38,11 @@ export default function CollapsePreviousStrategy({
               ))}
             </tbody>
           </table>
+          {previousStrategyList.length === 0 && (
+            <p className="mt-2 text-sm text-gray-500">
+              <i>No strategies have been assigned yet.</i>
+            </p>
+          )}
         </Collapse>
       </div>
     </>
