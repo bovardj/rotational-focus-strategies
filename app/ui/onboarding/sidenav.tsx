@@ -21,7 +21,7 @@ export default function SideNav() {
       </div>
       <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-50 px-4 py-4">
         <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
-          How it works
+          Study Overview
         </p>
         <ol className="space-y-3">
           {steps.map((step, i) => (
