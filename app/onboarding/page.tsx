@@ -66,7 +66,7 @@ export default function OnboardingComponent() {
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Welcome{user?.primaryEmailAddress?.emailAddress ? `, ${user.primaryEmailAddress.emailAddress}` : ""}
+        Welcome to Rotational Focus Strategies{user?.primaryEmailAddress?.emailAddress ? `, ${user.primaryEmailAddress.emailAddress}` : ""}
       </h1>
       <div className="grid gap-6 grid-cols-1">
         <form action={handleSubmit}>
