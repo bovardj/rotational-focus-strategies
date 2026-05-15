@@ -38,8 +38,7 @@ export default function CollapseProgress({
             <li className="mb-2">
               <Link href="./dashboard/survey" className="underline">
                 Daily Surveys
-              </Link>&nbsp;(after baseline)
-              :&nbsp;{dailySurveysCompleted} /{" "}
+              </Link>&nbsp;(after baseline):&nbsp;{dailySurveysCompleted} /{" "}
               {dailySurveysExpected}&nbsp;completed.
             </li>
             <li className="mb-2">
