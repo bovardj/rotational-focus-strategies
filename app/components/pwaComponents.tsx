@@ -27,20 +27,18 @@ export function PushNotificationManager() {
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
 
   useEffect(() => {
-    if ("serviceWorker" in navigator && "PushManager" in window) {
-      setIsSupported(true);
-      registerServiceWorker();
-    }
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsSupported(true);
+    (async () => {
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+        updateViaCache: "none",
+      });
+      const sub = await registration.pushManager.getSubscription();
+      setSubscription(sub);
+    })();
   }, []);
-
-  async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register("/sw.js", {
-      scope: "/",
-      updateViaCache: "none",
-    });
-    const sub = await registration.pushManager.getSubscription();
-    setSubscription(sub);
-  }
 
   async function subscribeToPush() {
     const registration = await navigator.serviceWorker.ready;
@@ -98,15 +96,17 @@ export function PushNotificationManager() {
 }
 
 export function InstallPrompt() {
-  const [isIOS, setIsIOS] = useState(false);
-  const [isStandalone, setIsStandalone] = useState(false);
+  const [env, setEnv] = useState({ isIOS: false, isStandalone: false });
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream);
-    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEnv({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
+      isStandalone: window.matchMedia("(display-mode: standalone)").matches,
+    });
 
     const handler = (e: Event) => {
       e.preventDefault();
@@ -123,7 +123,7 @@ export function InstallPrompt() {
     setDeferredPrompt(null);
   }
 
-  if (isStandalone) return null;
+  if (env.isStandalone) return null;
 
   return (
     <div>
@@ -136,7 +136,7 @@ export function InstallPrompt() {
           Add to Home Screen
         </button>
       )}
-      {isIOS && (
+      {env.isIOS && (
         <p>
           To install this app on your iOS device, tap the share button
           <span role="img" aria-label="share icon">
