@@ -40,12 +40,16 @@ export default async function Page() {
     endSurveyCompleted,
   } = counts;
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // Use the same date format as getDailyStrategy() so we can match against stored entries
+  const todayStr = new Date().toLocaleDateString('en-us', { timeZone: 'America/Los_Angeles' });
+  const todayAssigned = userAssignedStrategies?.find(s => s.date === todayStr) ?? null;
+
+  const todayMidnight = new Date();
+  todayMidnight.setHours(0, 0, 0, 0);
   const filteredAssignedStrategies = userAssignedStrategies.filter(
     (strategy) => {
       const convertedDate = parseDateString(strategy.date);
-      return convertedDate < today;
+      return convertedDate < todayMidnight;
     }
   );
 
@@ -63,9 +67,11 @@ export default async function Page() {
     })
     .filter((name) => name !== null);
 
+  // todayAssigned is null on first visit of the day — getDailyStrategy() picks and stores one.
+  // On repeat visits it's already in the fetched list, so we skip the extra query.
   let latestStrategy = null;
   if (baselineCompleted) {
-    latestStrategy = await getDailyStrategy();
+    latestStrategy = todayAssigned ?? await getDailyStrategy();
   }
 
   return (
