@@ -23,6 +23,37 @@ Items to revisit for design, accessibility, and UX polish.
 
 ---
 
+## Design Language Review
+
+A cross-cutting audit to ensure the app has a coherent visual identity. Reference `STYLE_GUIDE.md` throughout.
+
+### Typography
+- Verify Lusitana is used consistently for all page `<h1>` headings and nowhere else
+- Check that body text, labels, and secondary text use the correct gray scale (`text-gray-700` body, `text-gray-500` secondary) — no stray `text-gray-400` on meaningful text
+- Audit for any remaining `text-md` (invalid in Tailwind v4), `<b>`, or `<i>` tags
+
+### Color
+- Confirm blue usage is consistent: `blue-600` for primary actions and links, `blue-700` for hover, `blue-50` for hover backgrounds — no `indigo`, `sky`, or other blue-adjacent colors leaking in
+- Check that the left-border accent treatment on the Today's Strategy card (`border-l-4 border-blue-600 bg-gray-200/60`) isn't competing with or being duplicated by other elements
+- Audit any remaining hardcoded colors or Tailwind classes that conflict with the palette in `STYLE_GUIDE.md`
+
+### Spacing and layout
+- Verify all dashboard pages use `max-w-2xl` (or `max-w-lg` for narrow forms) — no unconstrained full-width text blocks
+- Check that section spacing is consistent (`gap-6` / `space-y-6` between major blocks, `space-y-4` within)
+- Confirm the sidenav width and sticky behavior is consistent across all dashboard routes
+
+### Component consistency
+- Buttons: all primary actions use the `<Button>` component — no raw `<button>` elements with ad-hoc styling
+- Links: all inline links use `text-blue-600 hover:text-blue-800 underline`; external links have `target="_blank" rel="noopener noreferrer"`
+- Collapse blocks: all use `app/ui/components/collapse.tsx` — no one-off disclosure patterns
+- Form inputs: all text inputs and textareas use `border border-gray-200 rounded-md px-3 py-2 text-sm` — no `border-gray-300`, `shadow-sm`, or `sm:text-sm` remnants from earlier iterations
+
+### Icons
+- Confirm all icons come from `@heroicons/react/24/outline` — no mixing of `solid` and `outline` variants without intent
+- Check icon sizes are consistent (`w-6` for nav, `w-4`/`h-4` for inline)
+
+---
+
 ## Global
 
 ### Footer
