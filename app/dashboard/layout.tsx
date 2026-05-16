@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <SideNav />
       </div>
       <div className="flex flex-col flex-grow">
-        <div className="hidden md:flex sticky top-0 z-10 bg-white justify-end items-center px-6 py-3 border-b border-gray-100">
+        <div className="hidden md:flex sticky top-0 z-10 bg-gradient-to-r from-blue-700 to-blue-500 justify-end items-center px-6 py-3">
           <UserButton />
         </div>
         <div className="p-6 md:p-12">{children}</div>
