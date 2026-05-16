@@ -2,7 +2,6 @@ import { Card } from "@/app/ui/dashboard/components/cards";
 import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
 import { getDashboardCounts } from "@/app/dashboard/survey/_data";
-import CollapseInstructions from "@/app/ui/dashboard/components/collapse-instructions";
 import CollapseNotes from "@/app/ui/dashboard/components/collapse-notes";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
@@ -99,10 +98,6 @@ export default async function Page() {
           </>
         )}
         <div className="flex flex-col gap-6 mt-6">
-          <CollapseInstructions
-            baselineSurveysExpected={baselineSurveysExpected}
-            dailySurveysExpected={dailySurveysExpected}
-          />
           <CollapseProgress
             baselineSurveysCompleted={baselineSurveysCompleted}
             baselineSurveysExpected={baselineSurveysExpected}

@@ -56,7 +56,7 @@ export default function OnboardingComponent() {
       await user?.reload();
       await initializeDaysCompleted();
       await initializeDaysExpected();
-      router.push("/dashboard");
+      router.push("/dashboard/instructions");
     }
     if (res?.error) {
       setError(res?.error);
