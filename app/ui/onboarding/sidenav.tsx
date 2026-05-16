@@ -3,9 +3,9 @@ import { UserButton } from "@clerk/nextjs";
 
 const steps = [
   { label: "Choose 3 focus strategies" },
-  { label: "Complete 3 days of baseline surveys" },
-  { label: "Use a new strategy each day for 4 days" },
-  { label: "Complete a short exit survey" },
+  { label: "Complete 3 baseline surveys" },
+  { label: "Use a random strategy each day (4 days)" },
+  { label: "Complete the exit survey" },
 ];
 
 function StudyOverviewLabel() {
@@ -18,7 +18,7 @@ function StudyOverviewLabel() {
 
 function StudyOverviewSteps() {
   return (
-    <ol className="space-y-3">
+    <ol className="flex flex-col gap-3">
       {steps.map((step, i) => (
         <li key={i} className="flex items-start gap-3">
           <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
@@ -54,7 +54,7 @@ export default function SideNav() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </summary>
-          <div className="px-4 pb-4">
+          <div className="px-4 py-3">
             <StudyOverviewSteps />
           </div>
         </details>
