@@ -229,7 +229,7 @@ export default function SurveyForm({
                 </label>
               </div>
             </div>
-            <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="strategy_response"
                 className="block text-sm font-medium text-gray-700"

@@ -14,7 +14,7 @@ export default function LikertScaleForm({
   condition = null,
 }: LikertScaleFormProps) {
   return (
-    <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+    <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
       <label
         htmlFor={inputName}
         className="block text-sm font-medium text-gray-700"
@@ -28,7 +28,7 @@ export default function LikertScaleForm({
             type="radio"
             name={inputName}
             value="1"
-            className="form-radio text-indigo-600"
+            className="form-radio text-blue-600"
             required
           />
           <span className="ml-2 text-sm">1 - {likertScale[0]}</span>
@@ -38,7 +38,7 @@ export default function LikertScaleForm({
             type="radio"
             name={inputName}
             value="2"
-            className="form-radio text-indigo-600"
+            className="form-radio text-blue-600"
           />
           <span className="ml-2 text-sm">2 - {likertScale[1]}</span>
         </label>
@@ -47,7 +47,7 @@ export default function LikertScaleForm({
             type="radio"
             name={inputName}
             value="3"
-            className="form-radio text-indigo-600"
+            className="form-radio text-blue-600"
           />
           <span className="ml-2 text-sm">3 - {likertScale[2]}</span>
         </label>
@@ -56,7 +56,7 @@ export default function LikertScaleForm({
             type="radio"
             name={inputName}
             value="4"
-            className="form-radio text-indigo-600"
+            className="form-radio text-blue-600"
           />
           <span className="ml-2 text-sm">4 - {likertScale[3]}</span>
         </label>
@@ -65,7 +65,7 @@ export default function LikertScaleForm({
             type="radio"
             name={inputName}
             value="5"
-            className="form-radio text-indigo-600"
+            className="form-radio text-blue-600"
           />
           <span className="ml-2 text-sm">5 - {likertScale[4]}</span>
         </label>
