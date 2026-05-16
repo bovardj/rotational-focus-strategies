@@ -45,6 +45,16 @@ No test suite is configured.
 
 **UI:** Tailwind CSS + `@geist-ui/core` component library + `@heroicons/react`. Survey forms live in `app/ui/dashboard/survey/` with `likertScale-form.tsx` and `checkBox-form.tsx` question types.
 
+## UI Patterns
+
+**Animated accordion (onboarding page):** Strategy cards use a React-controlled disclosure pattern instead of native `<details>/<summary>`. State is `useState<Set<number>>` tracking open indices. The open/close animation uses the `grid-template-rows: 0fr → 1fr` CSS transition trick — the outer div transitions between these values while an inner `overflow-hidden` wrapper clips content during the transition. This approach animates height from 0 to auto without knowing content height in advance. See `app/onboarding/page.tsx`.
+
+**Onboarding layout:** Uses `min-h-screen` (not `h-screen`) on the outer wrapper so the content pane expands naturally as strategy cards open. The sidenav is `md:sticky md:top-0 md:h-screen md:overflow-y-auto` so it stays fixed on desktop while the page scrolls. Avoid adding `overflow-hidden` or `overflow-y-auto` to the content pane — this creates a nested scrollbar that narrows the card width when content overflows. See `app/onboarding/layout.tsx`.
+
+**WCAG AA contrast — onboarding:** The custom `--color-blue-600` (#2F6FEB) has a contrast ratio of ~4.17:1 against white, which is below the 4.5:1 AA threshold for normal text. Selected-state text uses `text-blue-900` (sufficient contrast). The "N of 3 selected" counter uses `text-blue-700` + a checkmark icon (non-color indicator) when valid. `text-gray-500` (~7:1) and `text-gray-600` (~5.7:1) are safe for body text; avoid `text-gray-400` (#9CA3AF, ~2.9:1) for meaningful text.
+
+**Tailwind v4 note:** This project uses Tailwind v4 (`@import "tailwindcss"` in `global.css`). Class names and theme customisation differ from v3 — theme values use CSS custom properties (`--color-*`, `--container-*`) and are set via `@theme` blocks, not `tailwind.config.js`.
+
 ## Known Issues / Gotchas
 
 **Supabase Performance Advisor — `auth_rls_initplan` false positive:** All RLS policies use `(SELECT auth.jwt() ->> 'sub')` which is the correct optimised form (evaluated once per query, not per row). The advisor still flags these because its pattern matcher looks for `auth.uid()`, not `auth.jwt()`. Do NOT switch to `auth.uid()` to fix the warning — `auth.uid()` returns a `uuid` type and will return `NULL` for Clerk users (whose IDs are strings like `user_abc123`, not UUIDs), breaking all data access. The advisor warning is a known false positive for Clerk + Supabase setups and can be ignored.
