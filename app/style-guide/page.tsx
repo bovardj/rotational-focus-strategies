@@ -2,7 +2,7 @@
 
 import { lusitana } from "@/app/ui/fonts";
 import { Button } from "@/app/ui/button";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -137,22 +137,6 @@ function WCAGBadge({ ratio }: { ratio: number }) {
   );
 }
 
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      onClick={() => {
-        navigator.clipboard.writeText(text);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      }}
-      className="rounded px-2 py-0.5 font-mono text-[10px] text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
-    >
-      {copied ? "copied!" : text}
-    </button>
-  );
-}
-
 function ColorSwatch({
   swatch,
   hex,
@@ -160,8 +144,7 @@ function ColorSwatch({
   cls,
   wcag,
   usage,
-  light,
-}: (typeof BRAND_COLORS)[0]) {
+}: Omit<(typeof BRAND_COLORS)[0], "light">) {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-100 shadow-sm">
       <div className={`${swatch} h-20 w-full`} />
@@ -242,7 +225,7 @@ function AccordionDemo() {
   const toggleOpen = (i: number) =>
     setOpenIdx((prev) => {
       const next = new Set(prev);
-      next.has(i) ? next.delete(i) : next.add(i);
+      if (next.has(i)) { next.delete(i); } else { next.add(i); }
       return next;
     });
 
@@ -335,7 +318,6 @@ function AccordionDemo() {
 
 export default function StyleGuidePage() {
   const [activeSection, setActiveSection] = useState("colors");
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -348,15 +330,12 @@ export default function StyleGuidePage() {
       },
       { rootMargin: "-40% 0px -55% 0px" }
     );
-    for (const el of Object.values(sectionRefs.current)) {
+    for (const s of SECTIONS) {
+      const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     }
     return () => observer.disconnect();
   }, []);
-
-  const setRef = (id: string) => (el: HTMLElement | null) => {
-    sectionRefs.current[id] = el;
-  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -409,7 +388,7 @@ export default function StyleGuidePage() {
         </div>
 
         {/* ── Colors ─────────────────────────────────────────────── */}
-        <section id="colors" ref={setRef("colors")} className="scroll-mt-6">
+        <section id="colors" className="scroll-mt-6">
           <SectionLabel index={1} label="Colors" />
           <SectionHeading>Color Palette</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
@@ -444,7 +423,7 @@ export default function StyleGuidePage() {
         <SectionDivider />
 
         {/* ── Typography ──────────────────────────────────────────── */}
-        <section id="typography" ref={setRef("typography")} className="scroll-mt-6">
+        <section id="typography" className="scroll-mt-6">
           <SectionLabel index={2} label="Typography" />
           <SectionHeading>Typography</SectionHeading>
           <p className="mb-8 text-sm text-gray-500">
@@ -510,7 +489,7 @@ export default function StyleGuidePage() {
         <SectionDivider />
 
         {/* ── Buttons ─────────────────────────────────────────────── */}
-        <section id="buttons" ref={setRef("buttons")} className="scroll-mt-6">
+        <section id="buttons" className="scroll-mt-6">
           <SectionLabel index={3} label="Buttons" />
           <SectionHeading>Buttons</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
@@ -553,7 +532,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
         <SectionDivider />
 
         {/* ── Accordion ───────────────────────────────────────────── */}
-        <section id="accordion" ref={setRef("accordion")} className="scroll-mt-6">
+        <section id="accordion" className="scroll-mt-6">
           <SectionLabel index={4} label="Accordion" />
           <SectionHeading>Strategy Accordion</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
@@ -604,7 +583,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
                 { label: "Default", border: "border-gray-200", bg: "bg-gray-50", text: "text-gray-900" },
                 { label: "Selected", border: "border-blue-500", bg: "bg-blue-50", text: "text-blue-900" },
                 { label: "Disabled (3 selected)", border: "border-gray-200 opacity-50", bg: "bg-gray-50", text: "text-gray-900" },
-              ].map(({ label, border, bg, text }) => (
+              ].map(({ label, border, bg }) => (
                 <div key={label} className="flex items-center gap-3">
                   <div className={`h-6 w-24 flex-none rounded border-2 ${border} ${bg}`} />
                   <span className="font-mono text-[11px] text-gray-500">{label}</span>
@@ -617,7 +596,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
         <SectionDivider />
 
         {/* ── Collapse ────────────────────────────────────────────── */}
-        <section id="collapse" ref={setRef("collapse")} className="scroll-mt-6">
+        <section id="collapse" className="scroll-mt-6">
           <SectionLabel index={5} label="Collapse" />
           <SectionHeading>Collapse</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
@@ -678,7 +657,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
         <SectionDivider />
 
         {/* ── Forms ───────────────────────────────────────────────── */}
-        <section id="forms" ref={setRef("forms")} className="scroll-mt-6">
+        <section id="forms" className="scroll-mt-6">
           <SectionLabel index={6} label="Form Elements" />
           <SectionHeading>Form Elements</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
@@ -756,11 +735,11 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
         <SectionDivider />
 
         {/* ── Spacing ─────────────────────────────────────────────── */}
-        <section id="spacing" ref={setRef("spacing")} className="scroll-mt-6">
+        <section id="spacing" className="scroll-mt-6">
           <SectionLabel index={7} label="Spacing" />
           <SectionHeading>Spacing Scale</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">
-            Tailwind's default 4px base scale. Common values used in this app.
+            Tailwind&apos;s default 4px base scale. Common values used in this app.
           </p>
 
           <div className="space-y-2">
@@ -783,7 +762,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
         <SectionDivider />
 
         {/* ── Motion ──────────────────────────────────────────────── */}
-        <section id="motion" ref={setRef("motion")} className="scroll-mt-6">
+        <section id="motion" className="scroll-mt-6">
           <SectionLabel index={8} label="Motion" />
           <SectionHeading>Motion</SectionHeading>
           <p className="mb-6 text-sm text-gray-500">

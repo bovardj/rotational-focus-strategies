@@ -25,7 +25,7 @@ export default function OnboardingComponent() {
   const toggleOpen = (index: number) => {
     setOpenIndices((prev) => {
       const next = new Set(prev);
-      next.has(index) ? next.delete(index) : next.add(index);
+      if (next.has(index)) { next.delete(index); } else { next.add(index); }
       return next;
     });
   };
