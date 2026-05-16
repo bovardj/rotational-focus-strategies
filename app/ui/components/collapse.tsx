@@ -8,6 +8,16 @@ interface CollapseProps {
   initialVisible?: boolean;
   shadow?: boolean;
   className?: string;
+  storageKey?: string;
+}
+
+function getInitialOpen(storageKey: string | undefined, initialVisible: boolean): boolean {
+  if (!storageKey) return initialVisible;
+  try {
+    const stored = localStorage.getItem(storageKey);
+    if (stored !== null) return stored === "true";
+  } catch {}
+  return initialVisible;
 }
 
 export default function Collapse({
@@ -16,8 +26,19 @@ export default function Collapse({
   initialVisible = false,
   shadow = false,
   className = "",
+  storageKey,
 }: CollapseProps) {
-  const [open, setOpen] = useState(initialVisible);
+  const [open, setOpen] = useState(() => getInitialOpen(storageKey, initialVisible));
+
+  const toggle = () => {
+    setOpen((prev) => {
+      const next = !prev;
+      if (storageKey) {
+        try { localStorage.setItem(storageKey, String(next)); } catch {}
+      }
+      return next;
+    });
+  };
 
   return (
     <div
@@ -25,7 +46,7 @@ export default function Collapse({
     >
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
         className="flex w-full cursor-pointer select-none items-center justify-between px-4 py-3 text-sm font-medium text-gray-900"
       >
         <span>{title}</span>

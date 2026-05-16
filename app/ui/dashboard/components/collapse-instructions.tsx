@@ -12,7 +12,7 @@ export default function CollapseInstructions({
 }: CollapseInstructionsProps) {
   return (
     <Collapse shadow title="Instructions" initialVisible className="bg-gray-50">
-      <Collapse shadow title="General" initialVisible className="bg-gray-50">
+      <Collapse shadow title="General" initialVisible storageKey="rfs-instructions-general-open" className="bg-gray-50">
         <p className="mb-4">
           Please read the instructions carefully. If you have any questions,
           please feel free to reach out to me at{" "}
