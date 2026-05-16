@@ -16,6 +16,12 @@ Items to revisit for design, accessibility, and UX polish.
 - Ensure value proposition is clear and copy is compelling
 - Check responsiveness and visual hierarchy
 
+### Notifications page (`/dashboard/notifications`)
+- Review the overall layout and UX of the notification scheduling form
+- Evaluate whether the `PushNotificationManager` component (subscription setup) and the scheduling form should be more clearly separated or explained
+- Consider adding confirmation feedback when a notification is successfully scheduled
+- Check that the page is consistent with the rest of the dashboard design
+
 ### Auth flow pages (`/sign-in`, `/sign-up`, `/forgot-password`)
 - Investigate custom Clerk auth pages (Clerk supports fully custom UI via `<SignIn>` component with `appearance` prop, or headless `useSignIn`/`useSignUp` hooks)
 - Current pages likely use Clerk's default hosted UI — evaluate whether custom pages are worth the effort
