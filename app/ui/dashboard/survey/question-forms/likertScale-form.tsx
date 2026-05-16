@@ -15,60 +15,31 @@ export default function LikertScaleForm({
 }: LikertScaleFormProps) {
   return (
     <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
-      <label
-        htmlFor={inputName}
-        className="block text-sm font-medium text-gray-700"
-      >
+      <p className="text-sm font-medium text-gray-700">
         {condition ? questionAlt : question}
         <span className="text-red-500">*</span>
-      </label>
-      <div className="mt-4 grid grid-cols-1 gap-4">
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name={inputName}
-            value="1"
-            className="form-radio text-blue-600"
-            required
-          />
-          <span className="ml-2 text-sm">1 - {likertScale[0]}</span>
-        </label>
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name={inputName}
-            value="2"
-            className="form-radio text-blue-600"
-          />
-          <span className="ml-2 text-sm">2 - {likertScale[1]}</span>
-        </label>
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name={inputName}
-            value="3"
-            className="form-radio text-blue-600"
-          />
-          <span className="ml-2 text-sm">3 - {likertScale[2]}</span>
-        </label>
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name={inputName}
-            value="4"
-            className="form-radio text-blue-600"
-          />
-          <span className="ml-2 text-sm">4 - {likertScale[3]}</span>
-        </label>
-        <label className="flex items-center">
-          <input
-            type="radio"
-            name={inputName}
-            value="5"
-            className="form-radio text-blue-600"
-          />
-          <span className="ml-2 text-sm">5 - {likertScale[4]}</span>
-        </label>
+      </p>
+      <div className="mt-3 flex gap-1.5">
+        {likertScale.map((label, i) => {
+          const value = String(i + 1);
+          const id = `${inputName}_${value}`;
+          return (
+            <label key={i} htmlFor={id} className="flex-1 cursor-pointer">
+              <input
+                type="radio"
+                id={id}
+                name={inputName}
+                value={value}
+                className="sr-only peer"
+                required={i === 0}
+              />
+              <div className="peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 border border-gray-200 rounded-md py-2 px-1 text-center hover:bg-gray-100 transition-colors select-none">
+                <div className="text-sm font-semibold">{value}</div>
+                <div className="text-xs leading-tight mt-0.5">{label}</div>
+              </div>
+            </label>
+          );
+        })}
       </div>
     </div>
   );

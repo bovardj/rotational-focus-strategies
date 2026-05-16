@@ -121,9 +121,9 @@ export default function SurveyForm({
 
   return (
     <form action={handleSubmit}>
-      <div className="max-w-sm mx-auto space-y-6 bg-white p-6 rounded-lg shadow-md">
+      <div className="max-w-lg mx-auto space-y-4">
         {(!baselineCompleted || !dailyCompleted) && (
-          <div className="mb-6">
+          <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
             <label
               htmlFor="submission_date"
               className="block text-sm font-medium text-gray-700"
@@ -140,7 +140,7 @@ export default function SurveyForm({
                   .toLocaleString("en-US", { timeZone: "America/New_York" })
                   .split(",")[0]
               }
-              className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
               required
             />
           </div>
@@ -242,7 +242,7 @@ export default function SurveyForm({
                 name="strategy_response"
                 rows={4}
                 maxLength={500}
-                className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
                 placeholder="Write your response here (max 500 characters)..."
               ></textarea>
             </div>
@@ -331,7 +331,7 @@ export default function SurveyForm({
             name="open_response"
             rows={4}
             maxLength={500}
-            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
             placeholder="Write your response here (max 500 characters)..."
           ></textarea>
         </div>
