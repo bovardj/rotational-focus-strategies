@@ -2,7 +2,6 @@ import { Card } from "@/app/ui/dashboard/components/cards";
 import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
 import { getDashboardCounts } from "@/app/dashboard/survey/_data";
-import CollapseNotes from "@/app/ui/dashboard/components/collapse-notes";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserStrategies, fetchAssignedStrategies } from "@/app//lib/data";
@@ -109,31 +108,6 @@ export default async function Page() {
           <CollapsePreviousStrategy
             previousStrategyList={filteredAssignedStrategies}
           />
-          <CollapseNotes />
-        </div>
-        <div className="mt-6 pt-6">
-          <h2 className={`${lusitana.className} text-lg font-bold mb-3`}>
-            Questions, Bug Reporting & Help
-          </h2>
-          <p className="text-sm text-gray-500">
-            Have questions? Find a bug? Need help? Send me an email at{" "}
-            <a href="mailto:john.bovard@utah.edu" className="text-blue-600 hover:text-blue-800 underline">
-              john.bovard@utah.edu
-            </a>
-            .
-          </p>
-          <p className="text-sm mt-4 text-gray-500">
-            For bug reporting, please include the following information if possible:
-          </p>
-          <ul className="list-disc pl-6 mt-2 text-sm text-gray-500 space-y-1">
-            <li>A screenshot of the error message or page when you experienced the unexpected behavior</li>
-            <li>What you were doing when the error occurred</li>
-            <li>The web browser and device you are using (e.g., Chrome on Windows, Safari on iPhone)</li>
-            <li>Any other relevant details that might help me understand the issue</li>
-          </ul>
-          <p className="text-sm mt-4 text-gray-500">
-            Thank you for your help in making this app better!
-          </p>
         </div>
       </div>
     </main>

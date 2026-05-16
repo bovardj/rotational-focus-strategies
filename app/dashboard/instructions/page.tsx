@@ -167,6 +167,77 @@ export default async function InstructionsPage() {
               </ul>
             </section>
 
+            <section id="notes">
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Notes and Known Issues</h2>
+              <div className="flex flex-col gap-4 text-sm text-gray-700">
+                <div>
+                  <p className="font-semibold mb-1">Install as a Progressive Web App</p>
+                  <p className="mb-2">
+                    If you would like to install this as a Progressive Web App (PWA), you can do so by:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-1">
+                    <li><span className="font-semibold">iOS:</span> click the share button in Safari and select &quot;Add to Home Screen&quot;</li>
+                    <li><span className="font-semibold">Android:</span> click the three dots in the top right corner of Chrome and select &quot;Install App&quot;</li>
+                    <li>
+                      <span className="font-semibold">Further information:</span> a useful guide can be found{" "}
+                      <Link
+                        href="https://www.cdc.gov/niosh/mining/tools/installpwa.html"
+                        className="text-blue-600 hover:text-blue-800 underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        here
+                      </Link>
+                      .
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">Looking for the log out button?</p>
+                  <p>You can find it, along with account management, in the top right corner of the page.</p>
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">Slow loading times?</p>
+                  <p>This app may be a little slow — I apologize for that. I am working on improving the performance of the app.</p>
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">Want notifications?</p>
+                  <p>
+                    You can enable push notifications from the{" "}
+                    <Link
+                      href="/dashboard/notifications"
+                      className="text-blue-600 hover:text-blue-800 underline"
+                    >
+                      Notifications
+                    </Link>{" "}
+                    page.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section id="help">
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Questions, Bug Reporting &amp; Help</h2>
+              <p className="mb-3 text-sm text-gray-700">
+                Have questions? Found a bug? Need help? Send me an email at{" "}
+                <a
+                  href="mailto:john.bovard@utah.edu"
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
+                  john.bovard@utah.edu
+                </a>
+                .
+              </p>
+              <p className="mb-2 text-sm text-gray-700">For bug reports, please include the following if possible:</p>
+              <ul className="list-disc pl-6 text-sm text-gray-700 space-y-1">
+                <li>A screenshot of the error or unexpected behavior</li>
+                <li>What you were doing when the issue occurred</li>
+                <li>Your browser and device (e.g., Chrome on Windows, Safari on iPhone)</li>
+                <li>Any other relevant details</li>
+              </ul>
+              <p className="mt-3 text-sm text-gray-700">Thank you for your help in making this app better!</p>
+            </section>
+
           </div>
 
           <div className="mt-10 flex items-center gap-4">
