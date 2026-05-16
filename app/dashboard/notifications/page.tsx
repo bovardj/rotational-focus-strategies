@@ -4,6 +4,8 @@ import { useState } from "react";
 import { scheduleTimeNotification } from "@/app/lib/actions/notifications";
 import { useUser } from "@clerk/nextjs";
 import { PushNotificationManager } from "@/app/components/pwaComponents";
+import { lusitana } from "@/app/ui/fonts";
+import { Button } from "@/app/ui/button";
 
 export default function NotificationsPage() {
   const [message, setMessage] = useState("");
@@ -17,7 +19,7 @@ export default function NotificationsPage() {
 
     try {
       if (!userId) {
-        setStatus("❌ User ID is missing");
+        setStatus("User ID is missing");
         return;
       }
 
@@ -27,39 +29,41 @@ export default function NotificationsPage() {
         scheduled_at: time,
       });
 
-      setStatus("✅ Scheduled!");
+      setStatus("Scheduled!");
       setMessage("");
       setTime("");
     } catch {
-      setStatus("❌ Failed to schedule");
+      setStatus("Failed to schedule");
     }
   };
 
   return (
-    <main className="max-w-md mx-auto mt-12 p-4 border rounded shadow space-y-4">
-      <h1 className="text-2xl font-bold">⏰ Daily Notification</h1>
-      <PushNotificationManager />
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Notification message"
-          className="w-full p-2 border rounded"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-        />
-        <input
-          type="time"
-          className="w-full p-2 border rounded"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-        />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded">
-          Schedule
-        </button>
-      </form>
-      {status && <p>{status}</p>}
+    <main>
+      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
+        Daily Notification
+      </h1>
+      <div className="max-w-sm space-y-4">
+        <PushNotificationManager />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Notification message"
+            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
+          <input
+            type="time"
+            className="w-full rounded-md border border-gray-200 p-2 text-sm"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            required
+          />
+          <Button type="submit">Schedule</Button>
+        </form>
+        {status && <p className="text-sm text-gray-500">{status}</p>}
+      </div>
     </main>
   );
 }

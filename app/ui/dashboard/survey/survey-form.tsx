@@ -21,6 +21,7 @@ import {
 } from "@/app/dashboard/survey/_actions";
 import LikertScaleForm from "@/app/ui/dashboard/survey/question-forms/likertScale-form";
 import CheckboxForm from "@/app/ui/dashboard/survey/question-forms/checkBox-form";
+import { Button } from "@/app/ui/button";
 
 interface SurveyFormProps {
   dailyCompleted: boolean;
@@ -120,10 +121,7 @@ export default function SurveyForm({
 
   return (
     <form action={handleSubmit}>
-      <div
-        className="space-y-6 bg-white p-6 rounded-lg shadow-md"
-        style={{ maxWidth: "400px" }}
-      >
+      <div className="max-w-sm space-y-6 bg-white p-6 rounded-lg shadow-md">
         {(!baselineCompleted || !dailyCompleted) && (
           <div className="mb-6">
             <label
@@ -192,7 +190,7 @@ export default function SurveyForm({
         )}
         {baselineCompleted && !dailyCompleted && (
           <>
-            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="used_strategy"
                 className="block text-sm font-medium text-gray-700"
@@ -207,7 +205,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="yes"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                     required
                   />
                   <span className="ml-2 text-sm">Yes</span>
@@ -218,7 +216,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="no"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                     onChange={(e) =>
                       handleNoRadioChange(
                         e,
@@ -266,7 +264,7 @@ export default function SurveyForm({
               question="What is your gender identity? (Select all that apply)"
             />
 
-            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="ethnicity"
                 className="block text-sm font-medium text-gray-700"
@@ -279,7 +277,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="hispanic_or_latino"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                     required
                   />
                   <span className="ml-2 text-sm">Hispanic or Latino</span>
@@ -289,7 +287,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="not_hispanic_or_latino"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                   />
                   <span className="ml-2 text-sm">Not Hispanic or Latino</span>
                 </label>
@@ -298,7 +296,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="prefer_not_to_say"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-600"
                   />
                   <span className="ml-2 text-sm">Prefer not to say</span>
                 </label>
@@ -321,7 +319,7 @@ export default function SurveyForm({
             />
           </>
         )}
-        <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+        <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
           <label
             htmlFor="open_response"
             className="block text-sm font-medium text-gray-700"
@@ -342,13 +340,13 @@ export default function SurveyForm({
           or navigate away after clicking submit. Your responses will be saved
           and you will be redirected when submission is complete.
         </p>
-        <button
+        <Button
           type="submit"
           id="form_submit_button"
-          className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full justify-center"
         >
           Submit
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -18,7 +18,7 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-2xl`}>
+      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
         {endSurveyCompleted
           ? "You've completed all surveys! Thank you!"
           : `${
@@ -30,21 +30,17 @@ export default async function Page() {
             }`}
       </h1>
       {endSurveyCompleted ? (
-        <p className="mb-4 ml-4">
+        <p className="mb-4 text-sm text-gray-500">
           Thank you for helping me with my project. You have completed all
           surveys.
         </p>
       ) : (
         <>
-          <p className="mb-4 ml-4">Please complete the survey below.</p>
-          <div className="flex justify-center">
-            <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
-              <SurveyForm
-                dailyCompleted={dailyCompleted}
-                baselineCompleted={baselineCompleted}
-              />
-            </div>
-          </div>
+          <p className="mb-4 text-sm text-gray-500">Please complete the survey below.</p>
+          <SurveyForm
+            dailyCompleted={dailyCompleted}
+            baselineCompleted={baselineCompleted}
+          />
         </>
       )}
     </main>
