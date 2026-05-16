@@ -79,15 +79,11 @@ export default async function Page() {
       <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>Dashboard</h1>
       <div className="max-w-2xl">
         {baselineCompleted ? (
-          <div>
-            <div className="justify-center">
-              <Card
-                title="Today's Focus Strategy"
-                value={latestStrategy?.strategy}
-                date={latestStrategy?.date}
-              />
-            </div>
-          </div>
+          <Card
+            title="Today's Focus Strategy"
+            value={latestStrategy?.strategy}
+            date={latestStrategy?.date}
+          />
         ) : (
           <>
             <div>
