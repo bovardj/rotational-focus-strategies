@@ -17,32 +17,27 @@ export default function CollapseProgress({
   endSurveyCompleted,
 }: CollapseProgressProps) {
   return (
-    <div>
-      <Collapse shadow title="Your Progress" initialVisible className="bg-gray-50">
-        <div className="list-disc pl-6 *:rounded-md">
-          <ul className="list-disc pl-6">
-            <li className="mb-2">
-              <Link href="./dashboard/survey" className="underline">
-                Baseline Surveys
-              </Link>
-              : {baselineSurveysCompleted} /{" "}
-              {baselineSurveysExpected}{" "}completed.
-            </li>
-            <li className="mb-2">
-              <Link href="./dashboard/survey" className="underline">
-                Daily Surveys
-              </Link>&nbsp;(after baseline):&nbsp;{dailySurveysCompleted} /{" "}
-              {dailySurveysExpected}&nbsp;completed.
-            </li>
-            <li className="mb-2">
-              <Link href="./dashboard/survey" className="underline">
-                Exit Survey
-              </Link>
-              : {endSurveyCompleted ? "Completed" : "Not Completed"}.
-            </li>
-          </ul>
-        </div>
-      </Collapse>
-    </div>
+    <Collapse shadow title="Your Progress" initialVisible className="bg-gray-50">
+      <ul className="list-disc pl-6">
+        <li className="mb-2">
+          <Link href="./dashboard/survey" className="text-blue-600 hover:text-blue-800 underline">
+            Baseline Surveys
+          </Link>
+          : {baselineSurveysCompleted} / {baselineSurveysExpected} completed.
+        </li>
+        <li className="mb-2">
+          <Link href="./dashboard/survey" className="text-blue-600 hover:text-blue-800 underline">
+            Daily Surveys
+          </Link>
+          &nbsp;(after baseline):&nbsp;{dailySurveysCompleted} / {dailySurveysExpected}&nbsp;completed.
+        </li>
+        <li className="mb-2">
+          <Link href="./dashboard/survey" className="text-blue-600 hover:text-blue-800 underline">
+            Exit Survey
+          </Link>
+          : {endSurveyCompleted ? "Completed" : "Not completed"}.
+        </li>
+      </ul>
+    </Collapse>
   );
 }

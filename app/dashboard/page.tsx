@@ -76,8 +76,8 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-2xl`}>Dashboard</h1>
-      <div className="grid gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
+      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>Dashboard</h1>
+      <div className="max-w-2xl">
         {baselineCompleted ? (
           <div>
             <div className="justify-center">
@@ -91,10 +91,10 @@ export default async function Page() {
         ) : (
           <>
             <div>
-              <p className="mb-4 ml-4">
+              <p className="mb-4">
                 Focus Strategy assignments will begin once you have completed
                 all{" "}
-                <Link href={"/dashboard/survey"} className="underline">
+                <Link href={"/dashboard/survey"} className="text-blue-600 hover:text-blue-800 underline">
                   Baseline Surveys
                 </Link>
                 .
@@ -102,13 +102,11 @@ export default async function Page() {
             </div>
           </>
         )}
-        <div className="grid gap-6 grid-cols-1 mt-6">
+        <div className="flex flex-col gap-6 mt-6">
           <CollapseInstructions
             baselineSurveysExpected={baselineSurveysExpected}
             dailySurveysExpected={dailySurveysExpected}
           />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
           <CollapseProgress
             baselineSurveysCompleted={baselineSurveysCompleted}
             baselineSurveysExpected={baselineSurveysExpected}
@@ -116,51 +114,36 @@ export default async function Page() {
             dailySurveysExpected={dailySurveysExpected}
             endSurveyCompleted={endSurveyCompleted}
           />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
           <CollapseStrategy strategyList={strategyList} />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
           <CollapsePreviousStrategy
             previousStrategyList={filteredAssignedStrategies}
           />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
           <CollapseNotes />
         </div>
-        <div className="mt-6 pt-6 flex w-full items-center justify-between">
-          <h2 className={`${lusitana.className} text-lg`}>
+        <div className="mt-6 pt-6">
+          <h2 className={`${lusitana.className} text-lg font-bold mb-3`}>
             Questions, Bug Reporting & Help
           </h2>
-        </div>
-        <div>
           <p className="text-sm text-gray-500">
-            Have questions? Find a bug? Need help? Send me an email at
-            john.bovard@utah.edu.
+            Have questions? Find a bug? Need help? Send me an email at{" "}
+            <a href="mailto:john.bovard@utah.edu" className="text-blue-600 hover:text-blue-800 underline">
+              john.bovard@utah.edu
+            </a>
+            .
           </p>
           <p className="text-sm mt-4 text-gray-500">
-            For bug reporting, please include the following information if
-            possible:
+            For bug reporting, please include the following information if possible:
           </p>
-          <p className="text-sm text-gray-500">
-            - A screenshot of the error message or page when you experienced the
-            unexpected behavior
-          </p>
-          <p className="text-sm text-gray-500">
-            - What you were doing when the error occurred
-          </p>
-          <p className="text-sm text-gray-500">
-            - The web browser and device you are using (e.g., Chrome on Windows,
-            Safari on iPhone)
-          </p>
-          <p className="text-sm text-gray-500">
-            - Any other relevant details that might help me understand the issue
-          </p>
-          <p className="text-sm mt-2 text-gray-500">
+          <ul className="list-disc pl-6 mt-2 text-sm text-gray-500 space-y-1">
+            <li>A screenshot of the error message or page when you experienced the unexpected behavior</li>
+            <li>What you were doing when the error occurred</li>
+            <li>The web browser and device you are using (e.g., Chrome on Windows, Safari on iPhone)</li>
+            <li>Any other relevant details that might help me understand the issue</li>
+          </ul>
+          <p className="text-sm mt-4 text-gray-500">
             Thank you for your help in making this app better!
           </p>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8"></div>
       </div>
     </main>
   );

@@ -25,7 +25,7 @@ export function Card({
       <Link key={formatted_value} href={`dashboard/strategies/${value}`}>
         <p
           className={clsx(
-            `${lusitana.className} truncate text-center gap-2 rounded-xl bg-white px-4 py-8 text-2xl hover:bg-sky-100 hover:text-blue-600`
+            `${lusitana.className} truncate text-center gap-2 rounded-xl bg-white px-4 py-8 text-2xl hover:bg-blue-50 hover:text-blue-700`
           )}
         >
           {formatted_value}
