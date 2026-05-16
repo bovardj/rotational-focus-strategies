@@ -121,7 +121,7 @@ export default function SurveyForm({
 
   return (
     <form action={handleSubmit}>
-      <div className="max-w-sm space-y-6 bg-white p-6 rounded-lg shadow-md">
+      <div className="max-w-sm mx-auto space-y-6 bg-white p-6 rounded-lg shadow-md">
         {(!baselineCompleted || !dailyCompleted) && (
           <div className="mb-6">
             <label
