@@ -23,12 +23,14 @@ function urlBase64ToUint8Array(base64String: string) {
 }
 
 export function PushNotificationManager() {
+  const [mounted, setMounted] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
 
   useEffect(() => {
-    if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
     setIsSupported(true);
     (async () => {
       const registration = await navigator.serviceWorker.register("/sw.js", {
@@ -59,6 +61,7 @@ export function PushNotificationManager() {
     await unsubscribeUser();
   }
 
+  if (!mounted) return null;
   if (!isSupported) {
     return <p>Push notifications are not supported in this browser.</p>;
   }
@@ -96,12 +99,14 @@ export function PushNotificationManager() {
 }
 
 export function InstallPrompt() {
+  const [mounted, setMounted] = useState(false);
   const [env, setEnv] = useState({ isIOS: false, isStandalone: false });
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
     setEnv({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
@@ -123,7 +128,7 @@ export function InstallPrompt() {
     setDeferredPrompt(null);
   }
 
-  if (env.isStandalone || (!deferredPrompt && !env.isIOS)) return null;
+  if (!mounted || env.isStandalone || (!deferredPrompt && !env.isIOS)) return null;
 
   return (
     <div>

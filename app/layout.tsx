@@ -1,7 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import "@/app/ui/global.css";
 import { inter } from "@/app/ui/fonts";
-import { InstallPrompt } from "@/app/components/pwaComponents";
+import InstallPrompt from "@/app/components/InstallPromptClient";
 
 export default function RootLayout({
   children,
