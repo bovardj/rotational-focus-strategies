@@ -131,7 +131,7 @@ export function InstallPrompt() {
     setDeferredPrompt(null);
   }
 
-  if (isStandalone) return null;
+  if (isStandalone || (!deferredPrompt && !isIOS)) return null;
 
   return (
     <div>
