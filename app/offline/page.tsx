@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function OfflinePage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
@@ -5,12 +7,12 @@ export default function OfflinePage() {
       <p className="text-gray-500 mb-6">
         Check your connection and try again.
       </p>
-      <a
+      <Link
         href="/"
         className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
       >
         Try again
-      </a>
+      </Link>
     </main>
   );
 }
