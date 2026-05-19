@@ -13,6 +13,7 @@ import {
 import { Button } from "@/app/ui/button";
 import { useState } from "react";
 import Link from "next/link";
+import { lusitana } from "@/app/ui/fonts";
 
 export default function SignInForm() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -57,7 +58,7 @@ export default function SignInForm() {
 
   return (
     <form className="space-y-3" onSubmit={(e) => handleSubmit(e)}>
-      <h1 className="mb-4 text-xl font-bold text-gray-900">Sign in</h1>
+      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold text-gray-900`}>Sign in</h1>
       <div className="w-full">
         <div>
           <label
