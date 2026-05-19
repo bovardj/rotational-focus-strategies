@@ -1,4 +1,4 @@
-import Table from "@/app/ui/strategies/table";
+import StrategyCards from "@/app/ui/strategies/table";
 import { lusitana } from "@/app/ui/fonts";
 
 export const metadata = {
@@ -8,13 +8,11 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
+    <main>
+      <div className="max-w-2xl">
         <h1 className={`${lusitana.className} text-2xl font-bold`}>Focus Strategies</h1>
+        <StrategyCards />
       </div>
-      <div className="mt-4 w-full">
-        <Table />
-      </div>
-    </div>
+    </main>
   );
 }

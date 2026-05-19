@@ -3,28 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { strategyDictionary } from "@/app/lib/utils";
 
-export default function TableData({ strategy }: { strategy: string }) {
+interface StrategyCardProps {
+  name: string;
+  href: string;
+  description: string;
+}
+
+export default function StrategyCard({ name, href, description }: StrategyCardProps) {
   const pathname = usePathname();
-  const link = `/dashboard/strategies/${
-    strategyDictionary.find((link) => link.name === strategy)?.href || ""
-  }`;
+  const link = `/dashboard/strategies/${href}`;
 
   return (
-    <>
-      <Link
-        href={link}
-        className={clsx(
-          "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-md font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
-          {
-            "bg-sky-100 text-blue-600": pathname === link,
-          }
-        )}
-      >
-        <div className="w-2 h-2 rounded-full bg-black"></div>
-        <p className="text-md md:block">{strategy}</p>
-      </Link>
-    </>
+    <Link
+      href={link}
+      className={clsx(
+        "block rounded-lg border border-gray-200 bg-gray-50 p-4 transition-colors hover:bg-gray-100",
+        { "bg-sky-50 border-blue-200": pathname === link }
+      )}
+    >
+      <p className="text-sm font-medium text-gray-900">{name}</p>
+      <p className="mt-1 text-sm text-gray-500">{description}</p>
+    </Link>
   );
 }

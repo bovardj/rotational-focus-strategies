@@ -1,29 +1,28 @@
-import TableData from "@/app/ui/strategies/table-data";
+import StrategyCard from "@/app/ui/strategies/table-data";
 import { strategyDictionary } from "@/app/lib/utils";
 
-export default async function StrategiesTable() {
+const descriptions: Record<string, string> = {
+  bg_sound: "Use ambient or instrumental audio in the background to create a productive sound environment.",
+  check_list: "Break your work into a written list of tasks you can check off as you go.",
+  chunking: "Divide large tasks into smaller, manageable pieces to reduce overwhelm.",
+  environmental_shift: "Change your physical workspace or setting to reset your focus.",
+  pomodoro: "Work in focused 25-minute sprints separated by short breaks.",
+  small_rewards: "Motivate yourself with small treats or breaks tied to completing tasks.",
+  task_switching: "Alternate between tasks to keep your mind fresh and sustain momentum.",
+  work_partners: "Work near others — independently or collaboratively — to stay accountable.",
+};
+
+export default function StrategyCards() {
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-gray-900">
-              <tbody className="whitespace-nowrap px-3 py-3">
-                {strategyDictionary?.map((strat) => (
-                  <tr
-                    key={strat.name}
-                    className="flex items-center justify-between"
-                  >
-                    <td className="flex items-center justify-start gap-2">
-                      <TableData strategy={strat.name} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+    <div className="mt-4 space-y-3">
+      {strategyDictionary.map((strat) => (
+        <StrategyCard
+          key={strat.href}
+          name={strat.name}
+          href={strat.href}
+          description={descriptions[strat.href] ?? ""}
+        />
+      ))}
     </div>
   );
 }
