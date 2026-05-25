@@ -35,7 +35,7 @@ No test suite is configured.
 
 **Strategy rotation logic** (`app/lib/actions/actions.ts:getDailyStrategy`): Checks if today already has an assignment; if not, picks randomly from the user's selected strategies excluding yesterday's assignment.
 
-**Push notifications:** Service worker at `public/sw.js`, subscription saved via `POST /api/save-subscription`, notifications sent via `app/api/send-due.ts/route.ts` using the `web-push` package.
+**Push notifications:** Service worker at `public/sw.js`, subscription saved via `POST /api/save-subscription`, notifications sent via `app/api/send-due/route.ts` using the `web-push` package.
 
 **Route structure:**
 - `/` — public landing page
@@ -43,7 +43,7 @@ No test suite is configured.
 - `/onboarding/**` — strategy selection flow (8 strategy detail pages + final selection)
 - `/dashboard` — main app (today's strategy, history table, survey, notifications, individual strategy pages)
 
-**UI:** Tailwind CSS + `@geist-ui/core` component library + `@heroicons/react`. Survey forms live in `app/ui/dashboard/survey/` with `likertScale-form.tsx` and `checkBox-form.tsx` question types.
+**UI:** Tailwind CSS + `@heroicons/react`. Survey forms live in `app/ui/dashboard/survey/` with `likertScale-form.tsx` and `checkBox-form.tsx` question types.
 
 ## UI Patterns
 
@@ -65,6 +65,8 @@ No test suite is configured.
 
 ## Known Issues / Gotchas
 
+**Timezone hardcoding:** All date logic in `getDailyStrategy()` and related functions uses `America/Los_Angeles` via `toLocaleDateString('en-us', { timeZone: 'America/Los_Angeles' })`. "Today" is always Pacific time. If you add server-side date logic outside these helpers, use the same locale string or dates will be off by one for non-Pacific deployments.
+
 **Supabase Performance Advisor — `auth_rls_initplan` false positive:** All RLS policies use `(SELECT auth.jwt() ->> 'sub')` which is the correct optimised form (evaluated once per query, not per row). The advisor still flags these because its pattern matcher looks for `auth.uid()`, not `auth.jwt()`. Do NOT switch to `auth.uid()` to fix the warning — `auth.uid()` returns a `uuid` type and will return `NULL` for Clerk users (whose IDs are strings like `user_abc123`, not UUIDs), breaking all data access. The advisor warning is a known false positive for Clerk + Supabase setups and can be ignored.
 
 ## Environment Variables
@@ -73,3 +75,5 @@ Required in `.env`:
 - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — used in all server actions and SSR client. The `NEXT_PUBLIC_` prefix is required; non-prefixed `SUPABASE_URL` / `SUPABASE_ANON_KEY` are not present and will cause a `supabaseUrl is required` error at runtime.
 - Clerk keys (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, etc.)
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` — for web push notifications
+- `SUPABASE_SECRET_KEY` — service role key (bypasses RLS); used in `getServiceSupabase()` in `data.ts` and all API routes
+- `CRON_SECRET` — bearer token checked by `GET /api/keep-alive` to authenticate cron caller
