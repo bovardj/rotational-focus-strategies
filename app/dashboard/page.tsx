@@ -100,10 +100,12 @@ export default async function Page() {
           dailySurveysExpected={dailySurveysExpected}
           endSurveyCompleted={endSurveyCompleted}
         />
-        <CollapseStrategy strategyList={strategyList} />
-        <CollapsePreviousStrategy
-          previousStrategyList={filteredAssignedStrategies}
-        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <CollapseStrategy strategyList={strategyList} />
+          <CollapsePreviousStrategy
+            previousStrategyList={filteredAssignedStrategies}
+          />
+        </div>
       </div>
     </main>
   );
