@@ -180,7 +180,7 @@ export default function LikertComparePage() {
       </p> */}
 
       <div className="space-y-3">
-        {OPTIONS.map(({ id, label, note }) => (
+        {OPTIONS.map(({ id, label }) => (//, note }) => (
           <div key={id} className="rounded-xl border border-gray-200 overflow-hidden">
             <button
               onClick={() => setOpen(open === id ? null : id)}
@@ -205,7 +205,7 @@ export default function LikertComparePage() {
             >
               <div className="overflow-hidden">
                 <div className="px-4 pb-4 bg-white border-t border-gray-100">
-                  <p className="text-xs text-gray-500 mt-3 mb-4 leading-relaxed">{note}</p>
+                  {/* <p className="text-xs text-gray-500 mt-3 mb-4 leading-relaxed">{note}</p> */}
 
                   <div className="rounded-lg bg-gray-50 border border-gray-200 px-4 py-4">
                     <p className="text-sm font-medium text-gray-700 mb-3">
