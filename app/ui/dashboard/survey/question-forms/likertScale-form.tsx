@@ -24,7 +24,7 @@ export default function LikertScaleForm({
           const value = String(i + 1);
           const id = `${inputName}_${value}`;
           return (
-            <label key={i} htmlFor={id} className="flex-1 cursor-pointer">
+            <label key={i} htmlFor={id} className="flex-1 min-w-0 cursor-pointer">
               <input
                 type="radio"
                 id={id}
@@ -35,7 +35,7 @@ export default function LikertScaleForm({
               />
               <div className="peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 border border-gray-200 rounded-md p-2 text-center hover:bg-blue-50 hover:border-blue-300 transition-colors select-none h-full flex flex-col items-center gap-1">
                 <span className="text-base font-semibold leading-none">{value}</span>
-                <span className="text-[11px] leading-tight">{label}</span>
+                <span className="text-[11px] leading-tight break-words w-full text-center">{label}</span>
               </div>
             </label>
           );
