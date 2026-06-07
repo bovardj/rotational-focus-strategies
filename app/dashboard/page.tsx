@@ -74,8 +74,8 @@ export default async function Page() {
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>Dashboard</h1>
-      <div className="max-w-2xl">
+      <h1 className={`${lusitana.className} mb-6 text-2xl font-bold`}>Dashboard</h1>
+      <div className="flex flex-col gap-6">
         {baselineCompleted ? (
           <Card
             title="Today's Focus Strategy"
@@ -83,32 +83,27 @@ export default async function Page() {
             date={latestStrategy?.date}
           />
         ) : (
-          <>
-            <div>
-              <p className="mb-4">
-                Focus Strategy assignments will begin once you have completed
-                all{" "}
-                <Link href={"/dashboard/survey"} className="text-blue-600 hover:text-blue-800 underline">
-                  Baseline Surveys
-                </Link>
-                .
-              </p>
-            </div>
-          </>
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm text-gray-700">
+              Focus strategy assignments will begin once you have completed all{" "}
+              <Link href="/dashboard/survey" className="text-blue-600 underline hover:text-blue-800">
+                Baseline Surveys
+              </Link>
+              .
+            </p>
+          </div>
         )}
-        <div className="flex flex-col gap-6 mt-6">
-          <CollapseProgress
-            baselineSurveysCompleted={baselineSurveysCompleted}
-            baselineSurveysExpected={baselineSurveysExpected}
-            dailySurveysCompleted={dailySurveysCompleted}
-            dailySurveysExpected={dailySurveysExpected}
-            endSurveyCompleted={endSurveyCompleted}
-          />
-          <CollapseStrategy strategyList={strategyList} />
-          <CollapsePreviousStrategy
-            previousStrategyList={filteredAssignedStrategies}
-          />
-        </div>
+        <CollapseProgress
+          baselineSurveysCompleted={baselineSurveysCompleted}
+          baselineSurveysExpected={baselineSurveysExpected}
+          dailySurveysCompleted={dailySurveysCompleted}
+          dailySurveysExpected={dailySurveysExpected}
+          endSurveyCompleted={endSurveyCompleted}
+        />
+        <CollapseStrategy strategyList={strategyList} />
+        <CollapsePreviousStrategy
+          previousStrategyList={filteredAssignedStrategies}
+        />
       </div>
     </main>
   );
