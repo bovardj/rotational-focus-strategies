@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-Rotational Focus Strategies (RFS) is a Next.js 15 web app for people with ADHD. It assigns users a rotating daily focus strategy (Pomodoro, chunking, background sound, etc.), collects survey data across three study phases (baseline → daily → exit), and analyzes effectiveness. Deployed at [focusapp.dev](https://www.focusapp.dev).
+Rotational Focus Strategies (RFS) is a Next.js 16 web app for people with ADHD. It assigns users a rotating daily focus strategy (Pomodoro, chunking, background sound, etc.), collects survey data across three study phases (baseline → daily → exit), and analyzes effectiveness. Deployed at [focusapp.dev](https://www.focusapp.dev).
 
 ## Commands
 
@@ -25,7 +25,7 @@ No test suite is configured.
 - `app/lib/data.ts` and `app/lib/actions/` — direct `createClient` from `@supabase/supabase-js` with Clerk token injection (used for most server actions)
 - `app/lib/supabase/server.ts` — SSR-aware client via `@supabase/ssr` with cookie handling (used for session-sensitive contexts)
 
-**Key Supabase tables:** `user_strategies`, `assigned_strategies`, `days_expected`, `days_completed`, `baseline_survey_responses`, `daily_survey_responses`, `end_survey_responses`, `subscriptions`
+**Key Supabase tables:** `user_strategies`, `assigned_strategies`, `days_expected`, `days_completed`, `baseline_survey_responses`, `daily_survey_responses`, `end_survey_responses`, `subscriptions`, `scheduled_notifications`
 
 **User flow:**
 1. Sign up → onboarding (select strategies, stored in `user_strategies`, sets `onboardingComplete` in Clerk metadata)
@@ -35,15 +35,20 @@ No test suite is configured.
 
 **Strategy rotation logic** (`app/lib/actions/actions.ts:getDailyStrategy`): Checks if today already has an assignment; if not, picks randomly from the user's selected strategies excluding yesterday's assignment.
 
-**Push notifications:** Service worker at `public/sw.js`, subscription saved via `POST /api/save-subscription`, notifications sent via `app/api/send-due/route.ts` using the `web-push` package.
+**Push notifications:** Service worker at `public/sw.js`. Subscriptions managed via server actions in `app/lib/actions/notifications.ts` (`subscribeUser`, `unsubscribeUser`, `scheduleTimeNotification`), stored in `subscriptions` and `scheduled_notifications` Supabase tables. Notifications sent via `app/api/send-due/route.ts` using `web-push`. The app is a PWA: manifest at `app/manifest.ts`, install prompt at `app/components/InstallPromptClient.tsx`, offline fallback at `/offline`.
 
 **Route structure:**
 - `/` — public landing page
 - `/sign-in`, `/sign-up`, `/forgot-password` — public auth pages
 - `/onboarding/**` — strategy selection flow (8 strategy detail pages + final selection)
 - `/dashboard` — main app (today's strategy, history table, survey, notifications, individual strategy pages)
+- `/dashboard/survey` — daily/baseline/exit survey
+- `/dashboard/notifications` — notification scheduling
+- `/dashboard/strategies/**` — 8 individual strategy detail pages
+- `/offline` — PWA offline fallback
+- `/style-guide` — internal design reference (see also `STYLE_GUIDE.md` at repo root)
 
-**UI:** Tailwind CSS + `@heroicons/react`. Survey forms live in `app/ui/dashboard/survey/` with `likertScale-form.tsx` and `checkBox-form.tsx` question types.
+**UI:** Tailwind CSS + `@heroicons/react`. Survey forms live in `app/ui/dashboard/survey/question-forms/` with `likertScale-form.tsx` and `checkBox-form.tsx` question types.
 
 ## UI Patterns
 
