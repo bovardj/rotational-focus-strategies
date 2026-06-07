@@ -12,7 +12,7 @@ export default function CollapseStrategy({
       {strategyList.length === 0 ? (
         <p className="text-sm text-gray-500 italic">No strategies selected yet.</p>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {strategyList.map((strategy) => (
             <Link
               key={strategy.href}
