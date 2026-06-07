@@ -41,7 +41,7 @@ export default function UserNav() {
           }
           setOpen((o) => !o);
         }}
-        className="flex w-full items-center gap-2 rounded-md bg-gray-100 p-2 px-3 transition-colors hover:bg-blue-50 hover:text-blue-700"
+        className="flex h-[48px] w-full items-center gap-2 rounded-md bg-gray-100 px-3 font-medium transition-colors hover:bg-blue-50 hover:text-blue-700"
       >
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
           {initials}
