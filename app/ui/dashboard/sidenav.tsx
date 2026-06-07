@@ -1,7 +1,7 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/dashboard/nav-links";
 import RFSLogo from "@/app/ui/rfs-logo";
-import { UserButton } from "@clerk/nextjs";
+import UserNav from "@/app/ui/dashboard/user-nav";
 
 export default function SideNav() {
   return (
@@ -12,13 +12,11 @@ export default function SideNav() {
             <RFSLogo />
           </div>
         </Link>
-        <div className="absolute top-3 right-3 md:hidden">
-          <UserButton />
-        </div>
       </div>
       <div className="hidden md:flex md:flex-col md:space-y-2">
         <NavLinks />
         <div className="h-auto w-full grow rounded-md bg-gray-100"></div>
+        <UserNav />
       </div>
     </div>
   );
