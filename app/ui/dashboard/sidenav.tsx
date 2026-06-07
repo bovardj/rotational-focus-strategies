@@ -16,7 +16,7 @@ export default function SideNav() {
           <UserButton />
         </div>
       </div>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+      <div className="flex w-full flex-row gap-2 md:flex-col md:gap-0 md:space-y-2">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-100 md:block"></div>
       </div>
