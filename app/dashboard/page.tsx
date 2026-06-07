@@ -75,7 +75,7 @@ export default async function Page() {
   return (
     <main>
       <h1 className={`${lusitana.className} mb-6 text-2xl font-bold`}>Dashboard</h1>
-      <div className="flex flex-col gap-6">
+      <div className="flex max-w-3xl flex-col gap-6">
         {baselineCompleted ? (
           <Card
             title="Today's Focus Strategy"
