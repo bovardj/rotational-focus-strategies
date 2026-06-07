@@ -10,7 +10,7 @@ export default function LikertScaleForm({
   inputName,
   likertScale,
   question,
-  questionAlt: questionAlt = null,
+  questionAlt = null,
   condition = null,
 }: LikertScaleFormProps) {
   return (
@@ -19,28 +19,34 @@ export default function LikertScaleForm({
         {condition ? questionAlt : question}
         <span className="text-red-500">*</span>
       </p>
-      <div className="flex gap-2">
-        {likertScale.map((label, i) => {
-          const value = String(i + 1);
-          const id = `${inputName}_${value}`;
-          return (
-            <label key={i} htmlFor={id} className="flex-1 min-w-0 cursor-pointer">
-              <input
-                type="radio"
-                id={id}
-                name={inputName}
-                value={value}
-                className="sr-only peer"
-                required={i === 0}
-              />
-              <div className="peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 border border-gray-200 rounded-md p-2 text-center hover:bg-blue-50 hover:border-blue-300 transition-colors select-none h-full flex flex-col items-center gap-1">
-                <span className="text-base font-semibold leading-none">{value}</span>
-                <span className="text-[11px] leading-tight break-words w-full text-center">{label}</span>
-              </div>
-            </label>
-          );
-        })}
-      </div>
+      <fieldset>
+        <legend className="sr-only">{condition ? questionAlt : question}</legend>
+        <div className="space-y-2">
+          {likertScale.map((label, i) => {
+            const value = String(i + 1);
+            const id = `${inputName}_${value}`;
+            return (
+              <label
+                key={i}
+                htmlFor={id}
+                className="flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition-colors bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-300 has-[:checked]:bg-blue-50 has-[:checked]:border-blue-600"
+              >
+                <input
+                  type="radio"
+                  id={id}
+                  name={inputName}
+                  value={value}
+                  className="peer w-4 h-4 accent-blue-600 shrink-0"
+                  required={i === 0}
+                />
+                <span className="text-sm text-gray-700 peer-checked:text-blue-700 peer-checked:font-medium">
+                  {value} — {label}
+                </span>
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
     </div>
   );
 }
