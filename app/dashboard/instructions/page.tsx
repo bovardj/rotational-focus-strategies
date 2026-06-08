@@ -135,7 +135,7 @@ export default async function InstructionsPage() {
               </ul>
             </section>
 
-            <section id="notes">
+            <section id="optional-feats">
               <h2 className="text-lg font-semibold text-gray-900 mb-3">Optional Features</h2>
               <div className="flex flex-col gap-4 text-sm text-gray-700">
                 <div>

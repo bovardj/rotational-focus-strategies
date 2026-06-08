@@ -7,7 +7,7 @@ const sections = [
   { id: "baseline", label: "Baseline Days" },
   { id: "focus-strategy-days", label: "Focus Strategy Days" },
   { id: "last-day", label: "Last Day" },
-  { id: "notes", label: "Notes & Known Issues" },
+  { id: "optional-feats", label: "Optional Features" },
   { id: "help", label: "Questions & Help" },
 ];
 
