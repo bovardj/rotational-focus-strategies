@@ -63,6 +63,21 @@ export default function NotificationsPage() {
           <Button type="submit">Schedule</Button>
         </form>
         {status && <p className="text-sm text-gray-500">{status}</p>}
+
+        <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+          <p className="text-sm font-semibold text-gray-700 mb-2">Notifications not working?</p>
+          <ul className="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>Make sure you&apos;ve subscribed using the button above.</li>
+            <li>Check that notifications are enabled for this site in your browser settings.</li>
+            <li>On iOS, the app must be installed to your home screen as a PWA — notifications do not work in Safari directly.</li>
+            <li>Try unsubscribing and resubscribing, then send a test notification to confirm it&apos;s working.</li>
+            <li>If issues persist, reach out at{" "}
+              <a href="mailto:john.bovard@utah.edu" className="text-blue-600 hover:text-blue-800 underline">
+                john.bovard@utah.edu
+              </a>.
+            </li>
+          </ul>
+        </div>
       </div>
     </main>
   );
