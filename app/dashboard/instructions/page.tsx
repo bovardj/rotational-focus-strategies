@@ -85,7 +85,7 @@ export default async function InstructionsPage() {
                   At the end of the day, complete a Baseline Survey about your day.
                   <span className="italic">
                     {" "}
-                    (Accessible from the &apos;Surveys&apos; button on the dashboard.)
+                    (Accessible from the &quot;Surveys&quot; button.)
                   </span>
                 </li>
               </ul>
@@ -96,17 +96,17 @@ export default async function InstructionsPage() {
                 Assigned Focus Strategy Days (for {dailySurveysExpected} days after baseline)
               </h2>
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
-                <li>Use your assigned focus strategy for the day.</li>
+                <li>Try to use your assigned focus strategy for the day.</li>
                 <li>
-                  At the end of the day, complete the Daily Survey about your experience with that strategy.
+                  At the end of the day, complete the Daily Survey about your experience.
                   <span className="italic">
                     {" "}
-                    (Accessible from the &apos;Surveys&apos; button on the dashboard.)
+                    (Accessible from the &quot;Surveys&quot; button.)
                   </span>
                 </li>
                 <li>
                   When you submit your last Daily Survey, you will be redirected to a brief Exit Survey.
-                  If you navigate away, simply click the &apos;Surveys&apos; button to access it.
+                  If you navigate away, simply click the &quot;Surveys&quot; button to access it.
                 </li>
               </ul>
             </section>
@@ -116,7 +116,7 @@ export default async function InstructionsPage() {
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
                 <li>
                   When you submit your last Daily Survey, you will be redirected to a brief Exit Survey.
-                  If you navigate away, simply click the &apos;Surveys&apos; button to access it.
+                  If you navigate away, simply click the &quot;Surveys&quot; button to access it.
                 </li>
                 <li>
                   <p className="mb-2">
