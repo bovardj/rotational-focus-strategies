@@ -70,6 +70,7 @@ export default function SideNav() {
       <div className="hidden md:block pt-2">
         <UserNav />
       </div>
+      <div className="hidden md:flex flex-grow mt-2 rounded-md bg-gray-100" />
     </div>
   );
 }
