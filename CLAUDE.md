@@ -19,7 +19,7 @@ No test suite is configured.
 
 ## Architecture
 
-**Auth:** Clerk handles authentication. `middleware.ts` enforces route protection and redirects unauthenticated users to `/sign-in`, and authenticated users without `onboardingComplete: true` in Clerk `publicMetadata` to `/onboarding`.
+**Auth:** Clerk handles authentication. `middleware.ts` enforces route protection and redirects unauthenticated users to `/sign-in`, and authenticated users without `onboardingComplete: true` in Clerk `publicMetadata` to `/onboarding`. **Client-side onboarding gate:** To disable/hide features until onboarding is complete, read `user?.publicMetadata?.onboardingComplete === true` from Clerk's `useUser()` hook. Example: `const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;`
 
 **Database:** Supabase. The Clerk JWT is passed as the Supabase `accessToken` so Supabase RLS policies can enforce per-user data access. There are two Supabase client patterns in use:
 - `app/lib/data.ts` and `app/lib/actions/` — direct `createClient` from `@supabase/supabase-js` with Clerk token injection (used for most server actions)
@@ -86,7 +86,7 @@ No test suite is configured.
 
 **Scheduled notifications timezone:** Times in `scheduled_notifications.scheduled_at` are stored and compared in UTC in `sendDueNotifications()`. Convert user-entered local times to UTC before storing — use `Intl.DateTimeFormat` with the user's timezone to calculate the offset accurately (handles half-hour offsets).
 
-**Vercel cron plan limits:** Per-minute crons (`* * * * *`) require Pro plan. Free plan is limited to once-daily crons. The `/api/send-due` route requires a `CRON_SECRET` bearer token for auth.
+**Vercel cron plan limits:** Per-minute crons (`* * * * *`) require Pro plan. Free plan is limited to once-daily crons (`0 12 * * *`). Violating this causes Vercel to silently reject *all* subsequent builds on the branch — not just the cron route. The `/api/send-due` route requires a `CRON_SECRET` bearer token for auth.
 
 **Supabase Performance Advisor — `auth_rls_initplan` false positive:** All RLS policies use `(SELECT auth.jwt() ->> 'sub')` which is the correct optimised form (evaluated once per query, not per row). The advisor still flags these because its pattern matcher looks for `auth.uid()`, not `auth.jwt()`. Do NOT switch to `auth.uid()` to fix the warning — `auth.uid()` returns a `uuid` type and will return `NULL` for Clerk users (whose IDs are strings like `user_abc123`, not UUIDs), breaking all data access. The advisor warning is a known false positive for Clerk + Supabase setups and can be ignored.
 
