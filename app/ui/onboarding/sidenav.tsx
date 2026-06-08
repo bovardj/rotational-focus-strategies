@@ -42,7 +42,7 @@ export default function SideNav() {
           <UserNav compact />
         </div>
       </div>
-      <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-100">
+      <div className="mt-2 flex flex-col rounded-md bg-gray-100">
         {/* Mobile: collapsible */}
         <details className="group md:hidden">
           <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3">
@@ -66,6 +66,9 @@ export default function SideNav() {
           </div>
           <StudyOverviewSteps />
         </div>
+      </div>
+      <div className="hidden md:block pt-2">
+        <UserNav />
       </div>
     </div>
   );
