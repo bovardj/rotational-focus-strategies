@@ -82,18 +82,10 @@ export default async function InstructionsPage() {
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
                 <li>Go about your day as you normally would.</li>
                 <li>
-                  At the end of the day, complete a{" "}
-                  <Link
-                    href="/dashboard/survey"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Baseline Survey
-                  </Link>{" "}
-                  about your day.
+                  At the end of the day, complete a Baseline Survey about your day.
                   <span className="italic">
                     {" "}
-                    (Also accessible from the &apos;Surveys&apos; button on the
-                    dashboard.)
+                    (Accessible from the &apos;Surveys&apos; button on the dashboard.)
                   </span>
                 </li>
               </ul>
@@ -106,31 +98,15 @@ export default async function InstructionsPage() {
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
                 <li>Use your assigned focus strategy for the day.</li>
                 <li>
-                  At the end of the day, complete the{" "}
-                  <Link
-                    href="/dashboard/survey"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Daily Survey
-                  </Link>{" "}
-                  about your experience with that strategy.
+                  At the end of the day, complete the Daily Survey about your experience with that strategy.
                   <span className="italic">
                     {" "}
-                    (Also accessible from the &apos;Surveys&apos; button on the
-                    dashboard.)
+                    (Accessible from the &apos;Surveys&apos; button on the dashboard.)
                   </span>
                 </li>
                 <li>
-                  When you submit your last Daily (post-Baseline) Survey, you will be
-                  redirected to a brief{" "}
-                  <Link
-                    href="/dashboard/survey"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Exit Survey
-                  </Link>
-                  . If you return to this page, simply click on the
-                  &apos;Surveys&apos; button to access it.
+                  When you submit your last Daily Survey, you will be redirected to a brief Exit Survey.
+                  If you navigate away, simply click the &apos;Surveys&apos; button to access it.
                 </li>
               </ul>
             </section>
@@ -139,16 +115,8 @@ export default async function InstructionsPage() {
               <h2 className="text-lg font-semibold text-gray-900 mb-3">Last Day</h2>
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
                 <li>
-                  When you submit your last Daily (post-Baseline) Survey, you will be
-                  redirected to a brief{" "}
-                  <Link
-                    href="/dashboard/survey"
-                    className="text-blue-600 hover:text-blue-800 underline"
-                  >
-                    Exit Survey
-                  </Link>
-                  . If you return to this page, simply click on the
-                  &apos;Surveys&apos; button to access it.
+                  When you submit your last Daily Survey, you will be redirected to a brief Exit Survey.
+                  If you navigate away, simply click the &apos;Surveys&apos; button to access it.
                 </li>
                 <li>
                   <p className="mb-2">
