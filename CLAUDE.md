@@ -90,6 +90,8 @@ No test suite is configured.
 
 **Supabase Performance Advisor — `auth_rls_initplan` false positive:** All RLS policies use `(SELECT auth.jwt() ->> 'sub')` which is the correct optimised form (evaluated once per query, not per row). The advisor still flags these because its pattern matcher looks for `auth.uid()`, not `auth.jwt()`. Do NOT switch to `auth.uid()` to fix the warning — `auth.uid()` returns a `uuid` type and will return `NULL` for Clerk users (whose IDs are strings like `user_abc123`, not UUIDs), breaking all data access. The advisor warning is a known false positive for Clerk + Supabase setups and can be ignored.
 
+**ESLint — custom rules in use:** `react-hooks/static-components` flags component definitions inside render functions — always hoist helper components to module scope. `react-hooks/set-state-in-effect` flags synchronous `setState` in `useEffect` bodies; add `// eslint-disable-next-line react-hooks/set-state-in-effect` for intentional SSR hydration guards like `setMounted(true)`.
+
 ## Environment Variables
 
 Required in `.env`:
