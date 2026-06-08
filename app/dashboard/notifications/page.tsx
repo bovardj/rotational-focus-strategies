@@ -165,7 +165,11 @@ export default function NotificationsPage() {
               )}
             </div>
           )}
-          <Button type="submit">Schedule</Button>
+          <div className="flex justify-center">
+            <Button type="submit" className="px-6">
+              Schedule
+            </Button>
+          </div>
         </form>
         {status && <p className="text-sm text-gray-500">{status}</p>}
 
