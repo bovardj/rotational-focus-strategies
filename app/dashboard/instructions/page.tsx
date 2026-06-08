@@ -57,8 +57,8 @@ export default async function InstructionsPage() {
                   still complete it later.
                 </span>
                 &nbsp;You only need to select what day the survey is for in the
-                survey. Please try to complete the survey as soon as possible after
-                the end of each day, though.
+                survey. However, I would greatly appreciate it if you could try to complete the survey as soon as possible after
+                the end of each day. This will help ensure that your experience is fresh in your mind and that the data collected is as accurate as possible.
               </p>
               <p className="text-sm font-semibold italic underline mb-2">Two Important Notes:</p>
               <ul className="list-disc pl-6 text-sm text-gray-700 space-y-2">
