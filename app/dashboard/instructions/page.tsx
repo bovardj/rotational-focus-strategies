@@ -211,7 +211,7 @@ export default async function InstructionsPage() {
 
           </div>
 
-          <div className="mt-10 flex items-center gap-4">
+          <div className="mt-10 flex items-center gap-4 justify-center">
             <Link href="/dashboard">
               <Button>Got it — go to Dashboard</Button>
             </Link>
