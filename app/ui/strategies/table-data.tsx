@@ -8,9 +8,10 @@ interface StrategyCardProps {
   name: string;
   href: string;
   description: string;
+  isOwned?: boolean;
 }
 
-export default function StrategyCard({ name, href, description }: StrategyCardProps) {
+export default function StrategyCard({ name, href, description, isOwned = false }: StrategyCardProps) {
   const pathname = usePathname();
   const link = `/dashboard/strategies/${href}`;
 
@@ -18,8 +19,12 @@ export default function StrategyCard({ name, href, description }: StrategyCardPr
     <Link
       href={link}
       className={clsx(
-        "block rounded-lg border border-gray-200 bg-gray-50 p-4 transition-colors hover:bg-gray-100",
-        { "bg-sky-50 border-blue-200": pathname === link }
+        "block rounded-lg border p-4 transition-colors",
+        pathname === link
+          ? "border-blue-300 bg-blue-100"
+          : isOwned
+          ? "border-gray-200 bg-gray-50 hover:bg-gray-100 border-l-4 border-l-blue-400"
+          : "border-gray-200 bg-gray-50 hover:bg-gray-100"
       )}
     >
       <p className="text-sm font-medium text-gray-900">{name}</p>
