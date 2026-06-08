@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
+import RFSLogo from "@/app/ui/rfs-logo";
 
 export default function Page() {
   const router = useRouter();
@@ -26,17 +27,17 @@ export default function Page() {
       </div>
 
       <div className="relative w-full max-w-sm">
+        {/* Logo above card */}
+        <div className="mb-6 flex justify-center">
+          <RFSLogo className="text-blue-600" />
+        </div>
+
         {/* Card */}
-        <div className="rounded-2xl border border-gray-100 bg-white px-8 py-10 shadow-xl shadow-blue-100/60">
-          <div className="mb-8 flex items-center gap-4">
-            <span className={`${lusitana.className} shrink-0 text-3xl font-bold text-blue-600`}>RFS</span>
-            <div className="border-l border-gray-200 pl-4">
-              <h1 className={`${lusitana.className} text-lg font-bold leading-tight text-gray-900`}>
-                Rotational Focus Strategies
-              </h1>
-              <p className="text-xs text-gray-400">A focus strategy study for ADHD</p>
-            </div>
-          </div>
+        <div className="rounded-2xl border border-gray-100 bg-white px-8 py-8 shadow-xl shadow-blue-100/60">
+          <h1 className={`${lusitana.className} mb-1 text-xl font-bold text-gray-900`}>
+            Rotational Focus Strategies
+          </h1>
+          <p className="mb-8 text-sm text-gray-400">A focus strategy study for ADHD</p>
 
           <div className="flex flex-col gap-3">
             <Link
@@ -57,6 +58,7 @@ export default function Page() {
             Thank you for participating and exploring the app.
           </p>
         </div>
+
       </div>
     </main>
   );
