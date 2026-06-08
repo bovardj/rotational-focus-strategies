@@ -61,7 +61,7 @@ function VerticalRadio() {
 function SliderScale() {
   const [value, setValue] = useState(3);
   const label = SCALE[value - 1];
-  const pct = ((value - 1) / 4) * 100;
+  // const pct = ((value - 1) / 4) * 100;
 
   return (
     <div>
