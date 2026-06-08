@@ -2,7 +2,6 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import SideNav from "@/app/ui/onboarding/sidenav";
 import { syncUserToSupabase } from "@/app/onboarding/_actions";
-import { UserButton } from "@clerk/nextjs";
 
 export default async function RootLayout({
   children,
@@ -21,10 +20,7 @@ export default async function RootLayout({
         <SideNav />
       </div>
       <div className="flex flex-col flex-grow">
-        <div className="hidden md:flex justify-end items-center px-6 py-3 border-b border-gray-100">
-          <UserButton />
-        </div>
-        <div className="p-6 md:p-12">
+<div className="p-6 md:p-12">
           {children}
         </div>
       </div>
