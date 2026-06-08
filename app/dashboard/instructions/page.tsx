@@ -69,8 +69,8 @@ export default async function InstructionsPage() {
                   assigned the same Focus Strategy two days in a row.
                 </li>
                 <li>
-                  Please note that new focus strategies are assigned at 1am MDT (3am
-                  EDT) each day.
+                  Please note that new focus strategies are assigned at 1am MT (3am
+                  ET) each day.
                 </li>
               </ul>
             </section>
