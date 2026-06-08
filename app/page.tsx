@@ -2,10 +2,10 @@
 
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
-import { SignUpButton, SignInButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Page() {
   const router = useRouter();
@@ -30,16 +30,12 @@ export default function Page() {
           >
             Thank you for participating in my class project!
           </p>
-          <SignInButton>
-            <button className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
-              <span>Sign in</span> <ArrowRightIcon className="w-5 md:w-6" />
-            </button>
-          </SignInButton>
-          <SignUpButton>
-            <button className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
-              <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
-            </button>
-          </SignUpButton>
+          <Link href="/sign-in" className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
+            <span>Sign in</span> <ArrowRightIcon className="w-5 md:w-6" />
+          </Link>
+          <Link href="/sign-up" className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
+            <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
+          </Link>
         </div>
       </div>
     </main>
