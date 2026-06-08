@@ -2,10 +2,10 @@ import RFSLogo from "@/app/ui/rfs-logo";
 import { UserButton } from "@clerk/nextjs";
 
 const steps = [
-  { label: "Choose 3 focus strategies" },
-  { label: "Complete 3 baseline surveys" },
-  { label: "Use a random strategy each day (4 days)" },
-  { label: "Complete the exit survey" },
+  { label: "Choose 3 focus strategies you would like to use during the study" },
+  { label: "Complete 3 baseline surveys—do what you would normally do during this time" },
+  { label: "Try your assigned strategy each day—the app assigns it to you each day (4 days)" },
+  { label: "Complete the exit survey to finish the study" },
 ];
 
 function StudyOverviewLabel() {
