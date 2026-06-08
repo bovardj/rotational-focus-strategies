@@ -1,18 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { scheduleTimeNotification } from "@/app/lib/actions/notifications";
+import { useState, useEffect, useCallback } from "react";
+import { scheduleTimeNotification, getScheduledNotifications, deleteScheduledNotification } from "@/app/lib/actions/notifications";
 import { useUser } from "@clerk/nextjs";
 import { PushNotificationManager } from "@/app/components/pwaComponents";
 import { lusitana } from "@/app/ui/fonts";
 import { Button } from "@/app/ui/button";
 
 export default function NotificationsPage() {
+  const [mounted, setMounted] = useState(false);
   const [message, setMessage] = useState("");
   const [time, setTime] = useState("");
   const [status, setStatus] = useState("");
+  const [scheduled, setScheduled] = useState<{ id: string; message: string; scheduled_at: string }[]>([]);
   const { user } = useUser();
   const userId = user?.id;
+
+  const loadScheduled = useCallback(async () => {
+    try {
+      const data = await getScheduledNotifications();
+      setScheduled(data);
+    } catch (e) {
+      console.error("Failed to load scheduled notifications:", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+    loadScheduled();
+  }, [loadScheduled]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,8 +48,18 @@ export default function NotificationsPage() {
       setStatus("Scheduled!");
       setMessage("");
       setTime("");
+      await loadScheduled();
     } catch {
       setStatus("Failed to schedule");
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteScheduledNotification(id);
+      setScheduled((prev) => prev.filter((n) => n.id !== id));
+    } catch {
+      // silently fail
     }
   };
 
@@ -63,6 +89,33 @@ export default function NotificationsPage() {
           <Button type="submit">Schedule</Button>
         </form>
         {status && <p className="text-sm text-gray-500">{status}</p>}
+
+        {mounted && <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
+          <p className="text-sm font-semibold text-gray-700 mb-2">Scheduled Notifications</p>
+          {scheduled.length === 0 ? (
+            <p className="text-sm text-gray-400 italic">No notifications scheduled.</p>
+          ) : (
+            <ul className="space-y-2">
+              {scheduled.map((n) => (
+                <li key={n.id} className="flex items-center justify-between gap-3 rounded-md bg-white border border-gray-200 px-3 py-2">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-800 truncate">{n.message}</p>
+                    <p className="text-xs text-gray-400">{n.scheduled_at}</p>
+                  </div>
+                  <button
+                    onClick={() => handleDelete(n.id)}
+                    aria-label="Delete notification"
+                    className="shrink-0 text-gray-300 hover:text-red-400 transition-colors"
+                  >
+                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>}
 
         <div className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
           <p className="text-sm font-semibold text-gray-700 mb-2">Notifications not working?</p>

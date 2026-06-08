@@ -83,6 +83,44 @@ export async function scheduleTimeNotification({
   return { success: true }
 }
 
+export async function getScheduledNotifications() {
+  const { userId } = await auth();
+  if (!userId) throw new Error('Not authenticated');
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+
+  const { data, error } = await supabase
+    .from('scheduled_notifications')
+    .select('id, message, scheduled_at')
+    .eq('user_id', userId)
+    .order('scheduled_at', { ascending: true });
+
+  if (error) throw new Error(`Failed to fetch notifications: ${error.message}`);
+  return data ?? [];
+}
+
+export async function deleteScheduledNotification(id: string) {
+  const { userId } = await auth();
+  if (!userId) throw new Error('Not authenticated');
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+
+  const { error } = await supabase
+    .from('scheduled_notifications')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', userId);
+
+  if (error) throw new Error(`Failed to delete notification: ${error.message}`);
+  return { success: true };
+}
+
 export async function sendTestNotification() {
   const { userId } = await auth();
   if (!userId) throw new Error('Not authenticated');
