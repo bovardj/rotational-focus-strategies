@@ -16,9 +16,10 @@ export default function SideNav() {
           <UserNav compact />
         </div>
       </div>
-      <div className="hidden md:flex md:flex-col md:space-y-2">
+      <div className="hidden md:flex md:flex-col md:flex-grow md:space-y-2">
         <NavLinks />
         <UserNav />
+        <div className="flex-grow rounded-md bg-gray-100" />
       </div>
     </div>
   );
