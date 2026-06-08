@@ -27,6 +27,8 @@ No test suite is configured.
 
 **Key Supabase tables:** `user_strategies`, `assigned_strategies`, `days_expected`, `days_completed`, `baseline_survey_responses`, `daily_survey_responses`, `end_survey_responses`, `subscriptions`, `scheduled_notifications`
 
+**RFS logo (`app/ui/rfs-logo.tsx`):** Uses the custom SVG from `app/ui/rfs-logo.svg` inlined with `currentColor` so it inherits text color. Accepts an optional `className` prop (defaults to `text-white` for use on blue sidenav backgrounds). The landing page passes `className="text-blue-600"`. The orbit path uses a `<mask id="orbitMask">` with an ellipse to create a gap between the orbit and arrowhead — adjust the ellipse `cx`/`cy`/`r` if logo sizing changes cause them to overlap again.
+
 **User flow:**
 1. Sign up → onboarding (select strategies, stored in `user_strategies`, sets `onboardingComplete` in Clerk metadata)
 2. Baseline phase: 3 days of surveys without strategy assignment
