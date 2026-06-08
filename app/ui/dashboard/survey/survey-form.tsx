@@ -324,7 +324,8 @@ export default function SurveyForm({
             htmlFor="open_response"
             className="block text-sm font-medium text-gray-700"
           >
-            Is there anything else you would like to add?
+            Is there anything else you would like to add?{" "}
+            <span className="font-normal text-gray-400">(optional)</span>
           </label>
           <textarea
             id="open_response"
