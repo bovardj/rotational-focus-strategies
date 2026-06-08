@@ -17,25 +17,45 @@ export default function Page() {
     }
   }, [isSignedIn, router]);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6">
-      <div className="flex flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:px-20">
-          <p
-            className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
-            <strong>Welcome to Rotational Focus Strategies.</strong>
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-blue-50 p-6">
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
+        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
+      </div>
+
+      <div className="relative w-full max-w-sm">
+        {/* Card */}
+        <div className="rounded-2xl border border-gray-100 bg-white px-8 py-10 shadow-xl shadow-blue-100/60">
+          <div className="mb-8 flex items-center gap-4">
+            <span className={`${lusitana.className} shrink-0 text-3xl font-bold text-blue-600`}>RFS</span>
+            <div>
+              <h1 className={`${lusitana.className} text-lg font-bold leading-tight text-gray-900`}>
+                Rotational Focus Strategies
+              </h1>
+              <p className="text-xs text-gray-400">A focus strategy study for ADHD</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/sign-up"
+              className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            >
+              Create account <ArrowRightIcon className="w-4" />
+            </Link>
+            <Link
+              href="/sign-in"
+              className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-50"
+            >
+              Sign in
+            </Link>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-gray-400">
+            Thank you for participating and exploring the app.
           </p>
-          <p
-            className={`${lusitana.className} text-gray-500 text-lg md:text-2xl md:leading-normal`}
-          >
-            Thank you for participating in my class project!
-          </p>
-          <Link href="/sign-in" className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
-            <span>Sign in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-          <Link href="/sign-up" className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
-            <span>Sign up</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
         </div>
       </div>
     </main>
