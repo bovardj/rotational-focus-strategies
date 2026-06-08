@@ -83,6 +83,31 @@ export async function scheduleTimeNotification({
   return { success: true }
 }
 
+export async function sendTestNotification() {
+  const { userId } = await auth();
+  if (!userId) throw new Error('Not authenticated');
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+
+  const { data: sub } = await supabase
+    .from('subscriptions')
+    .select('subscription')
+    .eq('user_id', userId)
+    .single();
+
+  if (!sub) throw new Error('No subscription found');
+
+  await webpush.sendNotification(
+    sub.subscription,
+    JSON.stringify({ title: '🔔 Test Notification', body: 'Your notifications are working!' })
+  );
+
+  return { success: true };
+}
+
 export async function sendDueNotifications() {
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { subscribeUser, unsubscribeUser } from "@/app/lib/actions/notifications";
+import { subscribeUser, unsubscribeUser, sendTestNotification } from "@/app/lib/actions/notifications";
 import { Button } from "@/app/ui/button";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -26,6 +26,7 @@ export function PushNotificationManager() {
   const [mounted, setMounted] = useState(false);
   const [isSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(null);
+  const [testStatus, setTestStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -61,6 +62,18 @@ export function PushNotificationManager() {
     await unsubscribeUser();
   }
 
+  async function handleTestNotification() {
+    setTestStatus("sending");
+    try {
+      await sendTestNotification();
+      setTestStatus("sent");
+      setTimeout(() => setTestStatus("idle"), 3000);
+    } catch {
+      setTestStatus("error");
+      setTimeout(() => setTestStatus("idle"), 3000);
+    }
+  }
+
   if (!mounted) return null;
 
   if (!isSupported) {
@@ -84,12 +97,21 @@ export function PushNotificationManager() {
         </p>
       </div>
       {subscription ? (
-        <button
-          onClick={unsubscribeFromPush}
-          className="flex h-10 w-full items-center justify-center rounded-lg bg-gray-200 px-4 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-300 active:bg-gray-400"
-        >
-          Unsubscribe
-        </button>
+        <div className="flex flex-col gap-2">
+          <button
+            onClick={handleTestNotification}
+            disabled={testStatus === "sending"}
+            className="flex h-10 w-full items-center justify-center rounded-lg bg-blue-50 border border-blue-200 px-4 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 active:bg-blue-200 disabled:opacity-50"
+          >
+            {testStatus === "sending" ? "Sending…" : testStatus === "sent" ? "Notification sent!" : testStatus === "error" ? "Failed — try again" : "Send test notification"}
+          </button>
+          <button
+            onClick={unsubscribeFromPush}
+            className="flex h-10 w-full items-center justify-center rounded-lg bg-gray-200 px-4 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-300 active:bg-gray-400"
+          >
+            Unsubscribe
+          </button>
+        </div>
       ) : (
         <Button onClick={subscribeToPush} className="w-full justify-center">
           Subscribe to notifications
