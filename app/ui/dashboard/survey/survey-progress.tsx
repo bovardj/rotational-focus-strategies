@@ -38,7 +38,10 @@ export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCom
   const exitDate = extrapolateDate(7);
 
   function Blob({ blob, dayNumber }: { blob: DayBlob; dayNumber: number }) {
-    const label = blob.date
+    const shortLabel = blob.date
+      ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "numeric", day: "numeric" })
+      : `D${dayNumber}`;
+    const longLabel = blob.date
       ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })
       : `Day ${dayNumber}`;
 
@@ -57,7 +60,8 @@ export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCom
             <span className="text-xs font-semibold">{dayNumber}</span>
           )}
         </div>
-        <span className="hidden sm:block text-xs text-gray-500">{label}</span>
+        <span className="sm:hidden text-[10px] text-gray-500">{shortLabel}</span>
+        <span className="hidden sm:block text-xs text-gray-500">{longLabel}</span>
       </div>
     );
   }
