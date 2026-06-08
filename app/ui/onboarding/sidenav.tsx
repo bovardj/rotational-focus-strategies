@@ -1,5 +1,5 @@
 import RFSLogo from "@/app/ui/rfs-logo";
-import { UserButton } from "@clerk/nextjs";
+import UserNav from "@/app/ui/dashboard/user-nav";
 
 const steps = [
   { label: "Choose 3 focus strategies you would like to use during the study" },
@@ -38,8 +38,8 @@ export default function SideNav() {
         <div className="w-32 text-white md:w-40">
           <RFSLogo />
         </div>
-        <div className="absolute top-3 right-3 md:hidden">
-          <UserButton />
+        <div className="absolute top-1/2 right-4 -translate-y-1/2 md:hidden">
+          <UserNav compact />
         </div>
       </div>
       <div className="mt-2 flex flex-col flex-grow rounded-md bg-gray-100">
