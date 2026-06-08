@@ -209,6 +209,22 @@ export const getBaselineCompleted = async () => {
     return data.baseline_completed
 }
 
+// Get submission dates for baseline and daily surveys
+export const getSurveySubmissionDates = async () => {
+    const { userId } = await auth()
+    if (!userId) return { baseline: [], daily: [] }
+
+    const supabase = getSupabase()
+    const [baselineResult, dailyResult] = await Promise.all([
+        supabase.from('baseline_survey_responses').select('submission_date').eq('user_id', userId),
+        supabase.from('daily_survey_responses').select('submission_date').eq('user_id', userId),
+    ])
+
+    const baseline = (baselineResult.data ?? []).map((r) => r.submission_date as string)
+    const daily = (dailyResult.data ?? []).map((r) => r.submission_date as string)
+    return { baseline, daily }
+}
+
 // Get daily_completed
 export const getDailyCompleted = async () => {
     const { userId } = await auth()

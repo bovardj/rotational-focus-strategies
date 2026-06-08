@@ -1,9 +1,11 @@
 import { lusitana } from "@/app/ui/fonts";
 import SurveyForm from "@/app/ui/dashboard/survey/survey-form";
+import SurveyProgress from "@/app/ui/dashboard/survey/survey-progress";
 import {
   getBaselineCompleted,
   getDailyCompleted,
   getEndSurveyCompleted,
+  getSurveySubmissionDates,
 } from "@/app/dashboard/survey/_data";
 
 export const metadata = {
@@ -15,6 +17,7 @@ export default async function Page() {
   const baselineCompleted = await getBaselineCompleted();
   const dailyCompleted = await getDailyCompleted();
   const endSurveyCompleted = await getEndSurveyCompleted();
+  const submissionDates = await getSurveySubmissionDates();
 
   return (
     <main>
@@ -37,6 +40,10 @@ export default async function Page() {
       ) : (
         <>
           <p className="mb-4 text-sm text-gray-500">Please complete the survey below.</p>
+          <SurveyProgress
+            baselineDates={submissionDates.baseline}
+            dailyDates={submissionDates.daily}
+          />
           <SurveyForm
             dailyCompleted={dailyCompleted}
             baselineCompleted={baselineCompleted}
