@@ -17,6 +17,7 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
   const [dropUp, setDropUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;
   const name = user?.fullName ?? user?.primaryEmailAddress?.emailAddress ?? "Account";
   const initials = user?.fullName
     ? user.fullName.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
@@ -83,7 +84,8 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
           </button>
           <button
             onClick={() => { setOpen(false); router.push("/dashboard/notifications"); }}
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
+            disabled={!onboardingComplete}
+            className="flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-gray-700 hover:bg-gray-50 disabled:hover:bg-transparent"
           >
             <BellIcon className="h-4 w-4 text-gray-400" />
             Notifications
