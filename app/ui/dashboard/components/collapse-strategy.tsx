@@ -8,7 +8,7 @@ export default function CollapseStrategy({
 }) {
   return (
     <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-      <h2 className="mb-3 text-sm font-semibold text-gray-700">Your Focus Strategies</h2>
+      <h2 className="mb-3 text-sm font-semibold text-gray-700">Your Selected Focus Strategies</h2>
       {strategyList.length === 0 ? (
         <p className="text-sm text-gray-500 italic">No strategies selected yet.</p>
       ) : (

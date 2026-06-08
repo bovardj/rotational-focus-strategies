@@ -12,7 +12,7 @@ export default function CollapsePreviousStrategy({
 }: CollapsePreviousStrategyProps) {
   return (
     <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-      <h2 className="mb-3 text-sm font-semibold text-gray-700">Previously Assigned Strategies</h2>
+      <h2 className="mb-3 text-sm font-semibold text-gray-700">Previously Assigned Focus Strategies</h2>
       {previousStrategyList.length === 0 ? (
         <p className="text-sm text-gray-500 italic">No strategies have been assigned yet.</p>
       ) : (
