@@ -53,10 +53,6 @@ export default function Page() {
               Sign in
             </Link>
           </div>
-
-          <p className="mt-6 text-center text-xs text-gray-400">
-            Thank you for participating and exploring the app.
-          </p>
         </div>
 
       </div>
