@@ -121,7 +121,7 @@ export default function SurveyForm({
 
   return (
     <form action={handleSubmit}>
-      <div className="max-w-lg mx-auto space-y-4">
+      <div className="max-w-2xl space-y-4">
         {(!baselineCompleted || !dailyCompleted) && (
           <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
             <label
