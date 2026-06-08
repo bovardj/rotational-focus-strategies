@@ -105,7 +105,7 @@ export default function SignInForm() {
             <button
               type="button"
               onClick={handleClickShowPassword}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1"
             >
               {showPassword ? (
                 <EyeSlashIcon className="h-[18px] w-[18px]" />
@@ -122,12 +122,12 @@ export default function SignInForm() {
         </div>
       </div>
       <Button className="mt-7 w-full">
-        Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="font-medium text-blue-600 hover:underline">
+          <Link href="/sign-up" className="font-medium text-blue-800 hover:underline">
             Sign up
           </Link>
         </p>
@@ -135,7 +135,7 @@ export default function SignInForm() {
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Forgot your password?{" "}
-          <Link href="/forgot-password" className="font-medium text-blue-600 hover:underline">
+          <Link href="/forgot-password" className="font-medium text-blue-800 hover:underline">
             Reset password
           </Link>
         </p>

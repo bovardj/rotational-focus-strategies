@@ -82,7 +82,7 @@ export default function Page() {
         <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
           Verify your email
         </h1>
-        <p className="mb-4 text-sm text-gray-500">
+        <p className="mb-4 text-sm text-gray-700">
           Enter the verification code sent to your email address.
         </p>
         <form onSubmit={handleVerify}>
@@ -104,7 +104,7 @@ export default function Page() {
             <ChevronDoubleRightIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
           <Button className="mt-4 w-full">
-            Verify <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+            Verify <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
           </Button>
         </form>
       </div>
@@ -161,7 +161,7 @@ export default function Page() {
             <button
               type="button"
               onClick={handleClickShowPassword}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1"
             >
               {showPassword ? (
                 <EyeSlashIcon className="h-[18px] w-[18px]" />
@@ -179,12 +179,12 @@ export default function Page() {
       </div>
       <input type="hidden" name="redirectTo" value={callbackUrl} />
       <Button className="mt-7 w-full">
-        Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Already have an account?{" "}
-          <Link href="/sign-in" className="font-medium text-blue-600 hover:underline">
+          <Link href="/sign-in" className="font-medium text-blue-800 hover:underline">
             Sign in
           </Link>
         </p>

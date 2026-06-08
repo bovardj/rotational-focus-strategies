@@ -124,7 +124,7 @@ const ForgotPasswordForm: NextPage = () => {
             </div>
             <Button className="mt-7 w-full">
               Send password reset code{" "}
-              <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+              <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
             </Button>
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
           </>
@@ -155,7 +155,7 @@ const ForgotPasswordForm: NextPage = () => {
               <button
                 type="button"
                 onClick={handleClickShowPassword}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1"
               >
                 {showPassword ? (
                   <EyeSlashIcon className="h-[18px] w-[18px]" />
@@ -188,7 +188,7 @@ const ForgotPasswordForm: NextPage = () => {
             </div>
             <Button className="mt-7 w-full">
               Reset{" "}
-              <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+              <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
             </Button>
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
           </>
