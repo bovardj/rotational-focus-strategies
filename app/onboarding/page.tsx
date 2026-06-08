@@ -129,6 +129,16 @@ export default function OnboardingComponent() {
                   <div className="overflow-hidden">
                     <div className={`border-t px-4 py-3 text-sm ${isSelected ? "border-blue-200" : "border-gray-200"}`}>
                       <StrategyDescriptions strategy={strategy.href} />
+                      <button
+                        type="button"
+                        onClick={() => toggleOpen(index)}
+                        className={`mt-3 ml-auto flex items-center gap-1 text-xs font-medium transition-colors ${isSelected ? "text-blue-600 hover:text-blue-800" : "text-gray-400 hover:text-gray-600"}`}
+                      >
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                        </svg>
+                        Collapse
+                      </button>
                     </div>
                   </div>
                 </div>
