@@ -92,6 +92,8 @@ No test suite is configured.
 
 **ESLint — custom rules in use:** `react-hooks/static-components` flags component definitions inside render functions — always hoist helper components to module scope. `react-hooks/set-state-in-effect` flags synchronous `setState` in `useEffect` bodies; add `// eslint-disable-next-line react-hooks/set-state-in-effect` for intentional SSR hydration guards like `setMounted(true)`.
 
+**pnpm build script approvals:** If Vercel warns about "ignored build scripts" for a package, add it to `pnpm.onlyBuiltDependencies` in `package.json` (e.g. `"pnpm": { "onlyBuiltDependencies": ["bufferutil", "utf-8-validate"] }`). Do not run `pnpm approve-builds` interactively — it won't persist to CI.
+
 ## Environment Variables
 
 Required in `.env`:
