@@ -136,12 +136,14 @@ export default async function InstructionsPage() {
             </section>
 
             <section id="notes">
-              <h2 className="text-lg font-semibold text-gray-900 mb-3">Notes and Known Issues</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Optional Features</h2>
               <div className="flex flex-col gap-4 text-sm text-gray-700">
                 <div>
                   <p className="font-semibold mb-1">Install as a Progressive Web App</p>
                   <p className="mb-2">
-                    If you would like to install this as a Progressive Web App (PWA), you can do so by:
+                    You can install this as a Progressive Web App (PWA), which is similar to installing a native app.
+                    This allows you to open it from your home screen or app drawer, and can also enable push notifications
+                    (see below). Here are instructions for installing the PWA on different platforms:
                   </p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li><span className="font-semibold">iOS:</span> click the share button in Safari and select &quot;Add to Home Screen&quot;</li>
@@ -162,6 +164,11 @@ export default async function InstructionsPage() {
                 </div>
                 <div>
                   <p className="font-semibold mb-1">Want notifications?</p>
+                  <p className="italic mb-2">
+                    This is currently limited since I am running this site on a free-tier hosting service.
+                    You can still demo the notification scheduling feature and send a test notification to yourself,
+                    but beyond this, notifications will not actually be sent.
+                  </p>
                   <p>
                     You can enable push notifications from the{" "}
                     <Link
@@ -170,7 +177,11 @@ export default async function InstructionsPage() {
                     >
                       Notifications
                     </Link>{" "}
-                    page.
+                    page (also available from the account menu on the left (desktop) or top right (mobile)).
+                    Please note that on mobile devices, notifications only work if you have the app installed as a PWA,
+                    and on iOS, the app must be installed to your home screen as a PWA&mdash;notifications do not work 
+                    in Safari directly. On desktop, notifications should work as long as you have allowed notifications
+                    for this site in your browser settings.
                   </p>
                 </div>
               </div>
