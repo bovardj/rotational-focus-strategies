@@ -5,7 +5,10 @@ import InstallPrompt from "@/app/components/InstallPromptClient";
 import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "Rotational Focus Strategies",
+  title: {
+    default: "Rotational Focus Strategies",
+    template: "%s — Rotational Focus Strategies",
+  },
   description: "A focus strategy study for people with ADHD.",
 };
 

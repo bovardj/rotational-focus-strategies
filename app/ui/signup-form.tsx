@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSignUp } from "@clerk/nextjs/legacy";
 import { useRouter, useSearchParams } from "next/navigation";
 import { lusitana } from "@/app/ui/fonts";
@@ -29,6 +29,14 @@ export default function Page() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockOnMessage, setCapsLockOnMessage] = useState("");
+
+  const verifyHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (verifying && verifyHeadingRef.current) {
+      verifyHeadingRef.current.focus();
+    }
+  }, [verifying]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -79,7 +87,11 @@ export default function Page() {
   if (verifying) {
     return (
       <div>
-        <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
+        <h1
+          ref={verifyHeadingRef}
+          tabIndex={-1}
+          className={`${lusitana.className} mb-4 text-2xl font-bold text-gray-900`}
+        >
           Verify your email
         </h1>
         <p className="mb-4 text-sm text-gray-700">
@@ -98,10 +110,11 @@ export default function Page() {
               name="code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+              autoComplete="one-time-code"
+              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-600"
               placeholder="Enter verification code"
             />
-            <ChevronDoubleRightIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            <ChevronDoubleRightIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
           <Button className="mt-4 w-full">
             Verify <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
@@ -113,7 +126,7 @@ export default function Page() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
-      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>Sign up</h1>
+      <h1 className={`${lusitana.className} mb-4 text-2xl font-bold text-gray-900`}>Sign up</h1>
       <div className="w-full">
         <div>
           <label
@@ -124,16 +137,17 @@ export default function Page() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-600"
               id="email"
               type="email"
               name="email"
+              autoComplete="email"
               placeholder="Enter your email address"
               value={emailAddress}
               required
               onChange={(e) => setEmailAddress(e.target.value)}
             />
-            <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            <AtSymbolIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
         </div>
         <div className="mt-4">
@@ -142,14 +156,15 @@ export default function Page() {
             htmlFor="password"
           >
             Password{" "}
-            <span className="text-xs text-gray-500">(min 8 characters)</span>
+            <span className="text-xs text-gray-700">(min 8 characters)</span>
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-600"
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
+              autoComplete="new-password"
               value={password}
               required
               minLength={8}
@@ -157,23 +172,22 @@ export default function Page() {
               onChange={(e) => setPassword(e.target.value)}
               onKeyUp={handleKeyUp}
             />
-            <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            <KeyIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             <button
               type="button"
               onClick={handleClickShowPassword}
+              aria-label={showPassword ? "Hide password" : "Show password"}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1"
             >
               {showPassword ? (
-                <EyeSlashIcon className="h-[18px] w-[18px]" />
+                <EyeSlashIcon aria-hidden="true" className="h-[18px] w-[18px]" />
               ) : (
-                <EyeIcon className="h-[18px] w-[18px]" />
+                <EyeIcon aria-hidden="true" className="h-[18px] w-[18px]" />
               )}
             </button>
-            {capsLockOnMessage && (
-              <div className="absolute bottom-[-20px] left-0 text-xs text-red-500">
-                {capsLockOnMessage}
-              </div>
-            )}
+            <div aria-live="polite" className="absolute bottom-[-20px] left-0 text-xs text-red-800">
+              {capsLockOnMessage}
+            </div>
           </div>
         </div>
       </div>
