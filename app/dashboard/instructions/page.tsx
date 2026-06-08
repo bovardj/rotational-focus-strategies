@@ -29,10 +29,10 @@ export default async function InstructionsPage() {
                 Please read the instructions carefully. If you have any questions,
                 please feel free to reach out at{" "}
                 <a
-                  href="mailto:john.bovard@utah.edu"
+                  href="mailto:john@johnbovard.dev"
                   className="text-blue-600 hover:text-blue-800 underline"
                 >
-                  john.bovard@utah.edu
+                  john@johnbovard.dev
                 </a>
                 .
               </p>
@@ -189,10 +189,10 @@ export default async function InstructionsPage() {
               <p className="mb-3 text-sm text-gray-700">
                 Have questions? Found a bug? Need help? Send me an email at{" "}
                 <a
-                  href="mailto:john.bovard@utah.edu"
+                  href="mailto:john@johnbovard.dev"
                   className="text-blue-600 hover:text-blue-800 underline"
                 >
-                  john.bovard@utah.edu
+                  john@johnbovard.dev
                 </a>
                 .
               </p>
