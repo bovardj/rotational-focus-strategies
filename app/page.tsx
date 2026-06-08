@@ -30,7 +30,7 @@ export default function Page() {
         <div className="rounded-2xl border border-gray-100 bg-white px-8 py-10 shadow-xl shadow-blue-100/60">
           <div className="mb-8 flex items-center gap-4">
             <span className={`${lusitana.className} shrink-0 text-3xl font-bold text-blue-600`}>RFS</span>
-            <div>
+            <div className="border-l border-gray-200 pl-4">
               <h1 className={`${lusitana.className} text-lg font-bold leading-tight text-gray-900`}>
                 Rotational Focus Strategies
               </h1>
