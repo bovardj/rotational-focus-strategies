@@ -43,6 +43,7 @@ export default async function Page() {
           <SurveyProgress
             baselineDates={submissionDates.baseline}
             dailyDates={submissionDates.daily}
+            endSurveyCompleted={endSurveyCompleted}
           />
           <SurveyForm
             dailyCompleted={dailyCompleted}
