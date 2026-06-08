@@ -12,6 +12,9 @@ export default function SideNav() {
             <RFSLogo />
           </div>
         </Link>
+        <div className="absolute top-1/2 right-4 -translate-y-1/2 md:hidden">
+          <UserNav compact />
+        </div>
       </div>
       <div className="hidden md:flex md:flex-col md:space-y-2">
         <NavLinks />

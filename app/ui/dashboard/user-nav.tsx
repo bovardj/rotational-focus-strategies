@@ -8,7 +8,7 @@ import {
   ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 
-export default function UserNav() {
+export default function UserNav({ compact = false }: { compact?: boolean }) {
   const { user } = useUser();
   const { signOut, openUserProfile } = useClerk();
   const router = useRouter();
@@ -31,28 +31,40 @@ export default function UserNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  function handleOpen() {
+    if (ref.current) {
+      const { bottom } = ref.current.getBoundingClientRect();
+      setDropUp(window.innerHeight - bottom < 150);
+    }
+    setOpen((o) => !o);
+  }
+
   return (
     <div ref={ref} className="relative">
-      <button
-        onClick={() => {
-          if (ref.current) {
-            const { bottom } = ref.current.getBoundingClientRect();
-            setDropUp(window.innerHeight - bottom < 150);
-          }
-          setOpen((o) => !o);
-        }}
-        className="flex h-[48px] w-full items-center gap-2 rounded-md bg-gray-100 px-3 font-medium transition-colors hover:bg-blue-50 hover:text-blue-700"
-      >
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
+      {compact ? (
+        <button
+          onClick={handleOpen}
+          aria-label="Account"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-sm font-semibold text-white transition-colors hover:bg-white/30"
+        >
           {initials}
-        </div>
-        <span className="flex-1 truncate text-left text-sm font-medium text-gray-700">
-          {name}
-        </span>
-      </button>
+        </button>
+      ) : (
+        <button
+          onClick={handleOpen}
+          className="flex h-[48px] w-full items-center gap-2 rounded-md bg-gray-100 px-3 font-medium transition-colors hover:bg-blue-50 hover:text-blue-700"
+        >
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
+            {initials}
+          </div>
+          <span className="flex-1 truncate text-left text-sm font-medium text-gray-700">
+            {name}
+          </span>
+        </button>
+      )}
 
       {open && (
-        <div className={`absolute left-0 right-0 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg ${dropUp ? "bottom-full mb-1" : "top-full mt-1"}`}>
+        <div className={`absolute z-50 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg ${compact ? "right-0 w-56" : "left-0 right-0"} ${dropUp ? "bottom-full mb-1" : "top-full mt-1"}`}>
           <div className="border-b border-gray-100 px-3 py-2">
             <p className="truncate text-xs font-medium text-gray-800">{name}</p>
             {user?.primaryEmailAddress && (
