@@ -11,6 +11,43 @@ interface DayBlob {
   done: boolean;
 }
 
+function Blob({ blob, dayNumber }: { blob: DayBlob; dayNumber: number }) {
+  const shortLabel = blob.date
+    ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "numeric", day: "numeric" })
+    : `D${dayNumber}`;
+  const longLabel = blob.date
+    ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    : `Day ${dayNumber}`;
+
+  return (
+    <div className="flex flex-col items-center gap-1.5">
+      <div
+        className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-colors ${
+          blob.done
+            ? "border-blue-500 bg-blue-500 text-white"
+            : "border-gray-300 bg-white text-gray-400"
+        }`}
+      >
+        {blob.done ? (
+          <CheckIcon className="h-4 w-4" />
+        ) : (
+          <span className="text-xs font-semibold">{dayNumber}</span>
+        )}
+      </div>
+      <span className="sm:hidden text-[10px] text-gray-500">{shortLabel}</span>
+      <span className="hidden sm:block text-xs text-gray-500">{longLabel}</span>
+    </div>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="flex items-start pt-1 px-1">
+      <div className="w-px h-9 bg-gray-300" />
+    </div>
+  );
+}
+
 export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCompleted }: SurveyProgressProps) {
   const allCompleted = [...baselineDates, ...dailyDates].sort();
   const startDate = allCompleted[0] ? new Date(allCompleted[0] + "T12:00:00") : null;
@@ -36,41 +73,6 @@ export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCom
   });
 
   const exitDate = extrapolateDate(7);
-
-  function Blob({ blob, dayNumber }: { blob: DayBlob; dayNumber: number }) {
-    const shortLabel = blob.date
-      ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "numeric", day: "numeric" })
-      : `D${dayNumber}`;
-    const longLabel = blob.date
-      ? new Date(blob.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })
-      : `Day ${dayNumber}`;
-
-    return (
-      <div className="flex flex-col items-center gap-1.5">
-        <div
-          className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-colors ${
-            blob.done
-              ? "border-blue-500 bg-blue-500 text-white"
-              : "border-gray-300 bg-white text-gray-400"
-          }`}
-        >
-          {blob.done ? (
-            <CheckIcon className="h-4 w-4" />
-          ) : (
-            <span className="text-xs font-semibold">{dayNumber}</span>
-          )}
-        </div>
-        <span className="sm:hidden text-[10px] text-gray-500">{shortLabel}</span>
-        <span className="hidden sm:block text-xs text-gray-500">{longLabel}</span>
-      </div>
-    );
-  }
-
-  const Divider = () => (
-    <div className="flex items-start pt-1 px-1">
-      <div className="w-px h-9 bg-gray-300" />
-    </div>
-  );
 
   return (
     <div className="mb-6 max-w-2xl">
