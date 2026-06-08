@@ -343,7 +343,7 @@ export default function SurveyForm({
         <Button
           type="submit"
           id="form_submit_button"
-          className="w-full justify-center"
+          className="flex mx-auto px-12"
         >
           Submit
         </Button>
