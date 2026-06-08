@@ -210,8 +210,8 @@ export default function NotificationsPage() {
             <li>On iOS, the app must be installed to your home screen as a PWA — notifications do not work in Safari directly.</li>
             <li>Try unsubscribing and resubscribing, then send a test notification to confirm it&apos;s working.</li>
             <li>If issues persist, reach out at{" "}
-              <a href="mailto:john.bovard@utah.edu" className="text-blue-600 hover:text-blue-800 underline">
-                john.bovard@utah.edu
+              <a href="mailto:john@johnbovard.dev" className="text-blue-600 hover:text-blue-800 underline">
+                john@johnbovard.dev
               </a>.
             </li>
           </ul>
