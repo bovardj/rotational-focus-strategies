@@ -7,6 +7,8 @@ export default function RFSLogo({ className = "text-white" }: { className?: stri
         className="h-12 w-12"
         viewBox="0 0 1024 1024"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
         style={{ fillRule: "nonzero", clipRule: "evenodd", strokeLinecap: "round", strokeLinejoin: "round" }}
       >
         <defs>
@@ -45,7 +47,7 @@ export default function RFSLogo({ className = "text-white" }: { className?: stri
           strokeMiterlimit="10"
         />
       </svg>
-      <p className="text-[44px]">RFS</p>
+      <span className="text-[44px]">RFS</span>
     </div>
   );
 }
