@@ -19,7 +19,7 @@ No test suite is configured.
 
 ## Architecture
 
-**Auth:** Clerk handles authentication. `proxy.ts` enforces route protection and redirects unauthenticated users to `/sign-in`, and authenticated users without `onboardingComplete: true` in Clerk `publicMetadata` to `/onboarding`. **Client-side onboarding gate:** To disable/hide features until onboarding is complete, read `user?.publicMetadata?.onboardingComplete === true` from Clerk's `useUser()` hook. Example: `const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;`
+**Auth:** Clerk handles authentication. `proxy.ts` enforces route protection and redirects unauthenticated users to `/sign-in`, and authenticated users without `onboardingComplete: true` in Clerk `publicMetadata` to `/onboarding`. **Client-side onboarding gate:** To disable/hide features until onboarding is complete, read `user?.publicMetadata?.onboardingComplete === true` from Clerk's `useUser()` hook. Example: `const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;` **Clerk sign-in/sign-up buttons:** Do NOT use `<SignInButton>` or `<SignUpButton>` from `@clerk/nextjs` — they open Clerk's hosted modal/page and bypass the custom `/sign-in` and `/sign-up` pages even when `NEXT_PUBLIC_CLERK_SIGN_IN_URL` is set. Use `<Link href="/sign-in">` and `<Link href="/sign-up">` instead.
 
 **Database:** Supabase. The Clerk JWT is passed as the Supabase `accessToken` so Supabase RLS policies can enforce per-user data access. There are two Supabase client patterns in use:
 - `app/lib/data.ts` and `app/lib/actions/` — direct `createClient` from `@supabase/supabase-js` with Clerk token injection (used for most server actions)
