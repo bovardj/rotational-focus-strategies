@@ -161,14 +161,6 @@ export default async function InstructionsPage() {
                   </ul>
                 </div>
                 <div>
-                  <p className="font-semibold mb-1">Looking for the log out button?</p>
-                  <p>You can find it, along with account management, in the top right corner of the page.</p>
-                </div>
-                <div>
-                  <p className="font-semibold mb-1">Slow loading times?</p>
-                  <p>This app may be a little slow — I apologize for that. I am working on improving the performance of the app.</p>
-                </div>
-                <div>
                   <p className="font-semibold mb-1">Want notifications?</p>
                   <p>
                     You can enable push notifications from the{" "}
