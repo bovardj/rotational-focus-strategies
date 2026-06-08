@@ -85,7 +85,7 @@ function SliderScale() {
       />
       <div
         className="mt-3 rounded-lg px-4 py-2 text-center transition-colors"
-        style={{ backgroundColor: `hsl(${(value - 1) * 30 + 190}, 70%, ${value >= 3 ? 92 : 95}%)` }}
+        style={{ backgroundColor: `hsl(${(5 - value) * 30 + 190}, 70%, ${value >= 3 ? 92 : 95}%)` }}
       >
         <span className="text-2xl font-bold text-blue-700">{value}</span>
         <p className="text-sm font-medium text-blue-800 mt-0.5">{label}</p>
