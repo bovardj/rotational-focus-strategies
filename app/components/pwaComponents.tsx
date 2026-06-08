@@ -84,12 +84,12 @@ export function PushNotificationManager() {
         </p>
       </div>
       {subscription ? (
-        <Button
+        <button
           onClick={unsubscribeFromPush}
-          className="w-full justify-center bg-gray-200 text-gray-700 hover:bg-gray-300 focus-visible:outline-gray-400 active:bg-gray-400"
+          className="flex h-10 w-full items-center justify-center rounded-lg bg-gray-200 px-4 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-300 active:bg-gray-400"
         >
           Unsubscribe
-        </Button>
+        </button>
       ) : (
         <Button onClick={subscribeToPush} className="w-full justify-center">
           Subscribe to notifications
