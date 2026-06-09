@@ -21,9 +21,9 @@ export default function StrategyCard({ name, href, description, isOwned = false 
       className={clsx(
         "block rounded-lg border p-4 transition-colors",
         pathname === link
-          ? "border-blue-300 bg-blue-100"
+          ? "border-blue-800 bg-blue-50"
           : isOwned
-          ? "border-gray-200 bg-gray-50 hover:bg-gray-100 border-l-4 border-l-blue-400"
+          ? "border-gray-200 bg-gray-50 hover:bg-gray-100 border-l-4 border-l-blue-800"
           : "border-gray-200 bg-gray-50 hover:bg-gray-100"
       )}
     >
