@@ -36,7 +36,7 @@ export default async function RootLayout({
 
       {/* Content panel */}
       <div className="relative flex flex-grow flex-col">
-        <div className="flex-grow rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
+        <div className="flex-grow max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
           {children}
         </div>
       </div>
