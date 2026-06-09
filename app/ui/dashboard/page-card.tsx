@@ -7,7 +7,7 @@ export default function PageCard({
 }) {
   return (
     <div
-      className={`max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 pb-24 shadow-xl shadow-blue-100/60 md:p-12 md:pb-12 ${className ?? ""}`}
+      className={`flex-grow max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 pb-24 shadow-xl shadow-blue-100/60 md:p-12 md:pb-12 ${className ?? ""}`}
     >
       {children}
     </div>
