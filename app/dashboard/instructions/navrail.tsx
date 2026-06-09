@@ -52,7 +52,7 @@ export default function InstructionsNavrail() {
                 onClick={() => scrollTo(id)}
                 className={`w-full text-left text-sm transition-colors ${
                   active === id
-                    ? "font-semibold text-blue-600"
+                    ? "font-semibold text-blue-800"
                     : "text-gray-500 hover:text-gray-900"
                 }`}
               >

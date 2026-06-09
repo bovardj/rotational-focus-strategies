@@ -32,14 +32,14 @@ function Phase({
         <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">
           Phase {number}
         </span>
-        {isComplete && <CheckCircleIcon className="h-4 w-4 text-blue-600" />}
+        {isComplete && <CheckCircleIcon className="h-4 w-4 text-blue-800" />}
       </div>
       <p className="text-sm font-semibold text-gray-800 leading-tight">{label}</p>
       {total !== null ? (
         <>
           <div className="h-1.5 w-full rounded-full bg-gray-100">
             <div
-              className={`h-1.5 rounded-full transition-all ${isComplete ? "bg-blue-600" : "bg-blue-400"}`}
+              className={`h-1.5 rounded-full transition-all ${isComplete ? "bg-blue-800" : "bg-blue-300"}`}
               style={{ width: `${pct}%` }}
             />
           </div>

@@ -205,7 +205,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="yes"
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-800"
                     required
                   />
                   <span className="ml-2 text-sm">Yes</span>
@@ -216,7 +216,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="no"
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-800"
                     onChange={(e) =>
                       handleNoRadioChange(
                         e,
@@ -277,7 +277,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="hispanic_or_latino"
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-800"
                     required
                   />
                   <span className="ml-2 text-sm">Hispanic or Latino</span>
@@ -287,7 +287,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="not_hispanic_or_latino"
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-800"
                   />
                   <span className="ml-2 text-sm">Not Hispanic or Latino</span>
                 </label>
@@ -296,7 +296,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="prefer_not_to_say"
-                    className="form-radio text-blue-600"
+                    className="form-radio text-blue-800"
                   />
                   <span className="ml-2 text-sm">Prefer not to say</span>
                 </label>

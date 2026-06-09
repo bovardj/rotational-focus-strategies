@@ -160,7 +160,7 @@ export default function NotificationsPage() {
                   <button
                     type="button"
                     onClick={() => setShowTzPicker(true)}
-                    className="text-blue-600 hover:text-blue-800 underline"
+                    className="text-blue-800 hover:text-blue-900 underline"
                   >
                     Change
                   </button>
@@ -213,7 +213,7 @@ export default function NotificationsPage() {
             <li>On iOS, the app must be installed to your home screen as a PWA — notifications do not work in Safari directly.</li>
             <li>Try unsubscribing and resubscribing, then send a test notification to confirm it&apos;s working.</li>
             <li>If issues persist, reach out at{" "}
-              <a href="mailto:john@johnbovard.dev" className="text-blue-600 hover:text-blue-800 underline">
+              <a href="mailto:john@johnbovard.dev" className="text-blue-800 hover:text-blue-900 underline">
                 john@johnbovard.dev
               </a>.
             </li>

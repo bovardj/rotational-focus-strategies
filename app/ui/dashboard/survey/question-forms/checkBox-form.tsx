@@ -56,7 +56,7 @@ export default function CheckboxForm({
               type="checkbox"
               name={inputName}
               value={option}
-              className="form-checkbox text-blue-600"
+              className="form-checkbox text-blue-800"
             />
             <span className="ml-2 text-sm">{option}</span>
           </label>
@@ -68,7 +68,7 @@ export default function CheckboxForm({
               id={`${inputName}_other_checkbox`}
               name={inputName}
               value="other"
-              className="form-checkbox text-blue-600"
+              className="form-checkbox text-blue-800"
               onChange={(e) =>
                 handleOtherCheckboxChange(
                   e,

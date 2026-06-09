@@ -88,7 +88,7 @@ export default async function Page() {
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
             <p className="text-sm text-gray-700">
               Focus strategy assignments will begin once you have completed all{" "}
-              <Link href="/dashboard/survey" className="text-blue-600 underline hover:text-blue-800">
+              <Link href="/dashboard/survey" className="text-blue-800 underline hover:text-blue-900">
                 Baseline Surveys
               </Link>
               .

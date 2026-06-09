@@ -27,7 +27,7 @@ export default async function InstructionsPage() {
                 please feel free to reach out at{" "}
                 <a
                   href="mailto:john@johnbovard.dev"
-                  className="text-blue-600 hover:text-blue-800 underline"
+                  className="text-blue-800 hover:text-blue-900 underline"
                 >
                   john@johnbovard.dev
                 </a>
@@ -149,7 +149,7 @@ export default async function InstructionsPage() {
                       <span className="font-semibold">Further information:</span> a useful guide can be found{" "}
                       <Link
                         href="https://www.cdc.gov/niosh/mining/tools/installpwa.html"
-                        className="text-blue-600 hover:text-blue-800 underline"
+                        className="text-blue-800 hover:text-blue-900 underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -170,7 +170,7 @@ export default async function InstructionsPage() {
                     You can enable push notifications from the{" "}
                     <Link
                       href="/dashboard/notifications"
-                      className="text-blue-600 hover:text-blue-800 underline"
+                      className="text-blue-800 hover:text-blue-900 underline"
                     >
                       Notifications
                     </Link>{" "}
@@ -190,7 +190,7 @@ export default async function InstructionsPage() {
                 Have questions? Found a bug? Need help? Send me an email at{" "}
                 <a
                   href="mailto:john@johnbovard.dev"
-                  className="text-blue-600 hover:text-blue-800 underline"
+                  className="text-blue-800 hover:text-blue-900 underline"
                 >
                   john@johnbovard.dev
                 </a>
