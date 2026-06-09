@@ -82,6 +82,8 @@ No test suite is configured.
 
 ## Known Issues / Gotchas
 
+**Dropdown menus inside the sidenav card:** The sidenav wrapper has `overflow-hidden` (required for `rounded-2xl` + logo bleed). Absolute-positioned dropdowns inside it are clipped, and `position: fixed` is unreliable if any ancestor has `transform`, `filter`, or `will-change`. Use `createPortal(menu, document.body)` with `position: fixed` coordinates from `getBoundingClientRect()` — see `UserNav` compact mode for the established pattern.
+
 **`position: fixed` and horizontal overflow:** If any content causes horizontal overflow, `position: fixed` elements anchor to the wider layout viewport instead of the visual viewport and will scroll away horizontally. The fix is always to eliminate the overflow — most commonly by adding `min-w-0` to flex children (flex items default to `min-width: auto`, preventing them from shrinking below content width). This was the root cause of the mobile bottom nav not being sticky on the survey page (Likert scale tiles overflowed).
 
 **`flex items-start` breaks `position: sticky`:** `items-start` collapses each flex child to its content height — a `sticky` element inside has no extra height to scroll within. Remove `items-start` so the default `align-items: stretch` lets all columns grow to the row's full height. Affected: `app/dashboard/instructions/layout.tsx` (navrail sibling to white card).
