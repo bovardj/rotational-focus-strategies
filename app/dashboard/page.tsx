@@ -1,3 +1,4 @@
+import PageCard from "@/app/ui/dashboard/page-card";
 import { Card } from "@/app/ui/dashboard/components/cards";
 import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
@@ -73,7 +74,8 @@ export default async function Page() {
   }
 
   return (
-    <main>
+    <PageCard>
+      <main>
       <h1 className={`${lusitana.className} mb-6 text-2xl font-bold`}>Dashboard</h1>
       <div className="flex max-w-3xl flex-col gap-6">
         {baselineCompleted ? (
@@ -108,5 +110,6 @@ export default async function Page() {
         </div>
       </div>
     </main>
+    </PageCard>
   );
 }

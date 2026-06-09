@@ -1,5 +1,6 @@
 "use client";
 
+import PageCard from "@/app/ui/dashboard/page-card";
 import { useState } from "react";
 import { lusitana } from "@/app/ui/fonts";
 
@@ -171,7 +172,8 @@ export default function LikertComparePage() {
   const [open, setOpen] = useState<Option | null>("vertical");
 
   return (
-    <main className="max-w-lg mx-auto">
+    <PageCard>
+      <main className="max-w-lg mx-auto">
       <h1 className={`${lusitana.className} text-2xl font-bold mb-1`}>
         Likert Scale Options
       </h1>
@@ -222,6 +224,7 @@ export default function LikertComparePage() {
           </div>
         ))}
       </div>
-    </main>
+      </main>
+    </PageCard>
   );
 }

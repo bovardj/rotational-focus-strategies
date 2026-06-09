@@ -1,5 +1,6 @@
 "use client";
 
+import PageCard from "@/app/ui/dashboard/page-card";
 import { useState, useEffect, useCallback } from "react";
 import { scheduleTimeNotification, getScheduledNotifications, deleteScheduledNotification } from "@/app/lib/actions/notifications";
 import { useUser } from "@clerk/nextjs";
@@ -114,7 +115,8 @@ export default function NotificationsPage() {
   };
 
   return (
-    <main>
+    <PageCard>
+      <main>
       <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
         Daily Notifications
       </h1>
@@ -218,6 +220,7 @@ export default function NotificationsPage() {
           </ul>
         </div>
       </div>
-    </main>
+      </main>
+    </PageCard>
   );
 }

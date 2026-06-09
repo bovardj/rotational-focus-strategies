@@ -2,7 +2,6 @@ import { getDashboardCounts } from "@/app/dashboard/survey/_data";
 import { lusitana } from "@/app/ui/fonts";
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
-import InstructionsNavrail from "./navrail";
 
 export const metadata = {
   title: "RFS | Instructions",
@@ -15,13 +14,11 @@ export default async function InstructionsPage() {
   const dailySurveysExpected = counts?.dailySurveysExpected ?? 4;
 
   return (
-    <main className="relative">
+    <main>
       <h1 className={`${lusitana.className} mb-6 text-2xl font-bold`}>
         Instructions
       </h1>
-      <div className="flex gap-12">
-        <div className="min-w-0 flex-1 max-w-2xl">
-          <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-10">
 
             <section id="general">
               <h2 className="text-lg font-semibold text-gray-900 mb-3">General</h2>
@@ -209,16 +206,12 @@ export default async function InstructionsPage() {
               <p className="mt-3 text-sm text-gray-700">Thank you for your help in making this app better!</p>
             </section>
 
-          </div>
+      </div>
 
-          <div className="mt-10 flex items-center gap-4 justify-center">
-            <Link href="/dashboard">
-              <Button>Got it — go to Dashboard</Button>
-            </Link>
-          </div>
-        </div>
-
-        <InstructionsNavrail />
+      <div className="mt-10 flex items-center gap-4 justify-center">
+        <Link href="/dashboard">
+          <Button>Got it — go to Dashboard</Button>
+        </Link>
       </div>
     </main>
   );
