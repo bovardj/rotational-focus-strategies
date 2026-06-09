@@ -25,22 +25,27 @@ const links = [
   },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ dark = false }: { dark?: boolean }) {
   const pathname = usePathname();
 
   return (
     <>
       {links.map((link) => {
         const LinkIcon = link.icon;
+        const isActive = pathname === link.href;
         return (
           <Link
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-16 basis-0 grow flex-col items-center justify-center gap-1 rounded-md bg-gray-100 p-2 font-medium hover:bg-blue-50 hover:text-blue-700 md:h-[48px] md:flex-none md:flex-row md:justify-start md:gap-2 md:p-2 md:px-3",
-              {
-                "bg-blue-50 text-blue-700": pathname === link.href,
-              }
+              "flex h-16 basis-0 grow flex-col items-center justify-center gap-1 rounded-md p-2 font-medium transition-colors md:h-[48px] md:flex-none md:flex-row md:justify-start md:gap-2 md:px-3",
+              dark
+                ? isActive
+                  ? "bg-white/20 text-white"
+                  : "bg-white/10 text-white hover:bg-white/20"
+                : isActive
+                  ? "bg-blue-50 text-blue-700"
+                  : "bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-700"
             )}
           >
             <LinkIcon className="w-6" />
