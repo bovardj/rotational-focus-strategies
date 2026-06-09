@@ -15,12 +15,22 @@ export default async function RootLayout({
   await syncUserToSupabase();
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
-      <div className="w-full flex-none md:sticky md:top-0 md:h-screen md:w-64 md:overflow-y-auto">
+    <div className="relative flex min-h-screen flex-col gap-4 bg-blue-50 p-4 md:flex-row md:gap-6 md:p-6">
+      {/* Background glows — identical to auth-shell.tsx */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
+        <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
+      </div>
+
+      {/* Sidenav panel */}
+      <div className="relative w-full flex-none overflow-hidden rounded-2xl border border-gray-100 shadow-xl shadow-blue-100/60 md:sticky md:top-6 md:h-[calc(100vh-3rem)] md:w-64">
         <SideNav />
       </div>
-      <div className="flex flex-col flex-grow">
-<div className="p-6 md:p-12">
+
+      {/* Content panel */}
+      <div className="relative flex flex-grow flex-col">
+        <div className="flex-grow rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
           {children}
         </div>
       </div>
