@@ -48,6 +48,7 @@ export default function SideNav() {
           <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3">
             <StudyOverviewLabel />
             <svg
+              aria-hidden="true"
               className="h-4 w-4 text-gray-500 transition-transform duration-200 group-open:rotate-90"
               fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
             >

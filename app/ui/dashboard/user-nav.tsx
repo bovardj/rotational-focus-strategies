@@ -47,6 +47,8 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
         <button
           onClick={handleOpen}
           aria-label="Account"
+          aria-expanded={open}
+          aria-haspopup="true"
           className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-sm font-semibold text-white transition-colors hover:bg-white/30"
         >
           {initials}
@@ -54,9 +56,11 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
       ) : (
         <button
           onClick={handleOpen}
+          aria-expanded={open}
+          aria-haspopup="true"
           className="flex h-[48px] w-full items-center gap-2 rounded-md bg-gray-100 px-3 font-medium transition-colors hover:bg-blue-50 hover:text-blue-700"
         >
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
+          <div aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-800 text-xs font-semibold text-white">
             {initials}
           </div>
           <span className="flex-1 truncate text-left text-sm font-medium text-gray-700">
@@ -70,7 +74,7 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
           <div className="border-b border-gray-100 px-3 py-2">
             <p className="truncate text-xs font-medium text-gray-800">{name}</p>
             {user?.primaryEmailAddress && (
-              <p className="truncate text-xs text-gray-400">
+              <p className="truncate text-xs text-gray-600">
                 {user.primaryEmailAddress.emailAddress}
               </p>
             )}
@@ -79,7 +83,7 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
             onClick={() => { setOpen(false); openUserProfile(); }}
             className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
           >
-            <UserCircleIcon className="h-4 w-4 text-gray-400" />
+            <UserCircleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
             Manage account
           </button>
           <button
@@ -87,14 +91,14 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
             disabled={!onboardingComplete}
             className="flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-gray-700 hover:bg-gray-50 disabled:hover:bg-transparent"
           >
-            <BellIcon className="h-4 w-4 text-gray-400" />
+            <BellIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
             Notifications
           </button>
           <button
             onClick={() => signOut(() => router.push("/sign-in"))}
             className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
           >
-            <ArrowRightStartOnRectangleIcon className="h-4 w-4 text-gray-400" />
+            <ArrowRightStartOnRectangleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
             Sign out
           </button>
         </div>

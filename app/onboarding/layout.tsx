@@ -16,6 +16,12 @@ export default async function RootLayout({
 
   return (
     <div className="relative flex min-h-screen flex-col gap-4 bg-blue-50 p-4 md:flex-row md:gap-6 md:p-6">
+      <a
+        href="#main-content"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-lg focus-visible:bg-white focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800"
+      >
+        Skip to main content
+      </a>
       {/* Background glows — identical to auth-shell.tsx */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />

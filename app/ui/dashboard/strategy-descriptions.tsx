@@ -25,43 +25,43 @@ function StrategyDetails({ strategy }: { strategy: string }) {
           <li>Ambient sounds</li>
           <li>
             <Link
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-800 underline hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 rounded"
               href={"https://www.youtube.com/watch?v=dv2XyqC-EQ4&t=40s"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              White noise
+              White noise<span className="sr-only"> (opens in new tab)</span>
             </Link>
           </li>
           <li>
             <Link
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-800 underline hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 rounded"
               href={"https://www.youtube.com/watch?v=P48QELwruQs"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Brown noise
+              Brown noise<span className="sr-only"> (opens in new tab)</span>
             </Link>
           </li>
           <li>
             <Link
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-800 underline hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 rounded"
               href={"https://www.youtube.com/watch?v=ipf7ifVSeDU"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Nature sounds
+              Nature sounds<span className="sr-only"> (opens in new tab)</span>
             </Link>
           </li>
           <li>Instrumental music</li>
           <li>
             <Link
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-800 underline hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 rounded"
               href={"https://www.youtube.com/watch?v=jfKfPfyJRdk"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Lo-fi beats
+              Lo-fi beats<span className="sr-only"> (opens in new tab)</span>
             </Link>
           </li>
           <li>Classical music</li>
