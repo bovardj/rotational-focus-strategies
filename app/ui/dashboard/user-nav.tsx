@@ -3,6 +3,7 @@
 import { useClerk, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   UserCircleIcon,
   ArrowRightStartOnRectangleIcon,
@@ -15,6 +16,7 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
+  const [dropRect, setDropRect] = useState<DOMRect | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
   const [mounted, setMounted] = useState(false);
@@ -52,8 +54,9 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
 
   function handleOpen() {
     if (ref.current) {
-      const { bottom } = ref.current.getBoundingClientRect();
-      setDropUp(window.innerHeight - bottom < 150);
+      const rect = ref.current.getBoundingClientRect();
+      setDropUp(window.innerHeight - rect.bottom < 150);
+      if (compact) setDropRect(rect);
     }
     setOpen((o) => !o);
   }
@@ -88,48 +91,73 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
         </button>
       )}
 
-      {open && (
-        <div
-          id="user-nav-menu"
-          role="menu"
-          className={`absolute z-50 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg ${compact ? "right-0 w-56" : "left-0 right-0"} ${dropUp ? "bottom-full mb-1" : "top-full mt-1"}`}
-        >
-          <div className="border-b border-gray-100 px-3 py-2" aria-hidden="true">
-            <p className="truncate text-xs font-medium text-gray-800">{mounted ? name : ""}</p>
-            {mounted && user?.primaryEmailAddress && (
-              <p className="truncate text-xs text-gray-600">
-                {user.primaryEmailAddress.emailAddress}
-              </p>
-            )}
+      {open && (() => {
+        const menuContent = (
+          <>
+            <div className="border-b border-gray-100 px-3 py-2" aria-hidden="true">
+              <p className="truncate text-xs font-medium text-gray-800">{mounted ? name : ""}</p>
+              {mounted && user?.primaryEmailAddress && (
+                <p className="truncate text-xs text-gray-600">
+                  {user.primaryEmailAddress.emailAddress}
+                </p>
+              )}
+            </div>
+            <button
+              ref={firstItemRef}
+              role="menuitem"
+              onClick={() => { setOpen(false); openUserProfile(); }}
+              className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
+            >
+              <UserCircleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
+              Manage account
+            </button>
+            <button
+              role="menuitem"
+              onClick={() => { setOpen(false); router.push("/dashboard/notifications"); }}
+              disabled={!onboardingComplete}
+              className="flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-gray-700 hover:bg-gray-50 disabled:hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
+            >
+              <BellIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
+              Notifications
+            </button>
+            <button
+              role="menuitem"
+              onClick={() => signOut(() => router.push("/sign-in"))}
+              className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
+            >
+              <ArrowRightStartOnRectangleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
+              Sign out
+            </button>
+          </>
+        );
+
+        if (compact && dropRect) {
+          return createPortal(
+            <div
+              id="user-nav-menu"
+              role="menu"
+              className="fixed z-[9999] w-56 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg"
+              style={dropUp
+                ? { bottom: window.innerHeight - dropRect.top + 4, right: window.innerWidth - dropRect.right }
+                : { top: dropRect.bottom + 4, right: window.innerWidth - dropRect.right }
+              }
+            >
+              {menuContent}
+            </div>,
+            document.body
+          );
+        }
+
+        return (
+          <div
+            id="user-nav-menu"
+            role="menu"
+            className={`absolute left-0 right-0 z-50 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg ${dropUp ? "bottom-full mb-1" : "top-full mt-1"}`}
+          >
+            {menuContent}
           </div>
-          <button
-            ref={firstItemRef}
-            role="menuitem"
-            onClick={() => { setOpen(false); openUserProfile(); }}
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
-          >
-            <UserCircleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
-            Manage account
-          </button>
-          <button
-            role="menuitem"
-            onClick={() => { setOpen(false); router.push("/dashboard/notifications"); }}
-            disabled={!onboardingComplete}
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 text-gray-700 hover:bg-gray-50 disabled:hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
-          >
-            <BellIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
-            Notifications
-          </button>
-          <button
-            role="menuitem"
-            onClick={() => signOut(() => router.push("/sign-in"))}
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
-          >
-            <ArrowRightStartOnRectangleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
-            Sign out
-          </button>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
