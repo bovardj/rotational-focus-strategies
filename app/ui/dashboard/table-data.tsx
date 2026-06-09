@@ -16,9 +16,9 @@ export default function TableData({ strategy }: { strategy: string }) {
       <Link
         href={link}
         className={clsx(
-          "flex h-[40px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+          "flex h-[40px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-blue-50 hover:text-blue-800 md:flex-none md:justify-start md:p-2 md:px-3",
           {
-            "bg-sky-100 text-blue-600": pathname === link,
+            "bg-blue-50 text-blue-800": pathname === link,
           }
         )}
       >

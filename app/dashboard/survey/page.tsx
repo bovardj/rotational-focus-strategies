@@ -1,3 +1,4 @@
+import PageCard from "@/app/ui/dashboard/page-card";
 import { lusitana } from "@/app/ui/fonts";
 import SurveyForm from "@/app/ui/dashboard/survey/survey-form";
 import SurveyProgress from "@/app/ui/dashboard/survey/survey-progress";
@@ -20,7 +21,8 @@ export default async function Page() {
   const submissionDates = await getSurveySubmissionDates();
 
   return (
-    <main>
+    <PageCard>
+      <main>
       <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
         {endSurveyCompleted
           ? "You've completed all surveys! Thank you!"
@@ -51,6 +53,7 @@ export default async function Page() {
           />
         </>
       )}
-    </main>
+      </main>
+    </PageCard>
   );
 }

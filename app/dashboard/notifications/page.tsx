@@ -1,5 +1,6 @@
 "use client";
 
+import PageCard from "@/app/ui/dashboard/page-card";
 import { useState, useEffect, useCallback } from "react";
 import { scheduleTimeNotification, getScheduledNotifications, deleteScheduledNotification } from "@/app/lib/actions/notifications";
 import { useUser } from "@clerk/nextjs";
@@ -114,28 +115,39 @@ export default function NotificationsPage() {
   };
 
   return (
-    <main>
+    <PageCard>
+      <main>
       <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
         Daily Notifications
       </h1>
       <div className="max-w-sm space-y-4">
         <PushNotificationManager />
         <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            type="text"
-            placeholder="Notification message"
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-          <input
-            type="time"
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="notif-message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <input
+              id="notif-message"
+              type="text"
+              placeholder="e.g. Time to complete your survey!"
+              autoComplete="off"
+              className="w-full rounded-md border border-gray-200 p-2 text-sm"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="notif-time" className="block text-sm font-medium text-gray-700 mb-1">Reminder time</label>
+            <input
+              id="notif-time"
+              type="time"
+              autoComplete="off"
+              className="w-full rounded-md border border-gray-200 p-2 text-sm"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </div>
           {mounted && (
             <div className="text-xs text-gray-500">
               {showTzPicker ? (
@@ -158,7 +170,7 @@ export default function NotificationsPage() {
                   <button
                     type="button"
                     onClick={() => setShowTzPicker(true)}
-                    className="text-blue-600 hover:text-blue-800 underline"
+                    className="text-blue-800 hover:text-blue-900 underline"
                   >
                     Change
                   </button>
@@ -211,13 +223,14 @@ export default function NotificationsPage() {
             <li>On iOS, the app must be installed to your home screen as a PWA — notifications do not work in Safari directly.</li>
             <li>Try unsubscribing and resubscribing, then send a test notification to confirm it&apos;s working.</li>
             <li>If issues persist, reach out at{" "}
-              <a href="mailto:john@johnbovard.dev" className="text-blue-600 hover:text-blue-800 underline">
+              <a href="mailto:john@johnbovard.dev" className="text-blue-800 hover:text-blue-900 underline">
                 john@johnbovard.dev
               </a>.
             </li>
           </ul>
         </div>
       </div>
-    </main>
+      </main>
+    </PageCard>
   );
 }

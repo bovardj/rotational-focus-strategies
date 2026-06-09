@@ -1,5 +1,6 @@
 "use client";
 
+import PageCard from "@/app/ui/dashboard/page-card";
 import { useState } from "react";
 import { lusitana } from "@/app/ui/fonts";
 
@@ -38,7 +39,7 @@ function VerticalRadio() {
                 value={v}
                 checked={checked}
                 onChange={() => setValue(v)}
-                className="w-4 h-4 accent-blue-600 shrink-0"
+                className="w-4 h-4 accent-blue-800 shrink-0"
               />
               <span className={`text-sm ${checked ? "text-blue-700 font-medium" : "text-gray-700"}`}>
                 {v} — {label}
@@ -81,7 +82,7 @@ function SliderScale() {
         onChange={(e) => setValue(Number(e.target.value))}
         aria-label={QUESTION}
         aria-valuetext={`${value} — ${label}`}
-        className="w-full h-2 rounded-full appearance-none cursor-pointer accent-blue-600 bg-gray-200"
+        className="w-full h-2 rounded-full appearance-none cursor-pointer accent-blue-800 bg-gray-200"
       />
       <div
         className="mt-3 rounded-lg px-4 py-2 text-center transition-colors"
@@ -122,7 +123,7 @@ function NumberButtons() {
               <div
                 className={`rounded-md border text-center py-3 text-lg font-bold transition-colors select-none ${
                   checked
-                    ? "bg-blue-600 text-white border-blue-600"
+                    ? "bg-blue-800 text-white border-blue-800"
                     : "bg-gray-50 text-gray-700 border-gray-200 hover:bg-blue-50 hover:border-blue-300"
                 }`}
               >
@@ -171,7 +172,8 @@ export default function LikertComparePage() {
   const [open, setOpen] = useState<Option | null>("vertical");
 
   return (
-    <main className="max-w-lg mx-auto">
+    <PageCard>
+      <main className="max-w-lg mx-auto">
       <h1 className={`${lusitana.className} text-2xl font-bold mb-1`}>
         Likert Scale Options
       </h1>
@@ -222,6 +224,7 @@ export default function LikertComparePage() {
           </div>
         ))}
       </div>
-    </main>
+      </main>
+    </PageCard>
   );
 }

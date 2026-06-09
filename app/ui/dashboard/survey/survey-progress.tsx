@@ -22,16 +22,17 @@ function Blob({ blob, dayNumber }: { blob: DayBlob; dayNumber: number }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
       <div
+        aria-label={blob.done ? `Day ${dayNumber}, completed` : `Day ${dayNumber}, not yet completed`}
         className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-colors ${
           blob.done
-            ? "border-blue-500 bg-blue-500 text-white"
+            ? "border-blue-800 bg-blue-800 text-white"
             : "border-gray-300 bg-white text-gray-400"
         }`}
       >
         {blob.done ? (
-          <CheckIcon className="h-4 w-4" />
+          <CheckIcon aria-hidden="true" className="h-4 w-4" />
         ) : (
-          <span className="text-xs font-semibold">{dayNumber}</span>
+          <span aria-hidden="true" className="text-xs font-semibold">{dayNumber}</span>
         )}
       </div>
       <span className="sm:hidden text-[10px] text-gray-500">{shortLabel}</span>
@@ -100,7 +101,7 @@ export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCom
             <Blob blob={{ date: exitDate, done: endSurveyCompleted }} dayNumber={8} />
           </div>
         </div>
-        <div className="flex w-full text-xs text-gray-400">
+        <div className="flex w-full text-xs text-gray-600">
           <div className="flex flex-[3] justify-center">Baseline</div>
           <div className="px-1 invisible">|</div>
           <div className="flex flex-[4] justify-center">Daily</div>
