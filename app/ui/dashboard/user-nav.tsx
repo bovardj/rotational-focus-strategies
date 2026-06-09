@@ -17,6 +17,8 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
   const [dropUp, setDropUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  const [mounted, setMounted] = useState(false);
+
   const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;
   const name = user?.fullName ?? user?.primaryEmailAddress?.emailAddress ?? "Account";
   const initials = user?.fullName
@@ -32,6 +34,9 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
 
   function handleOpen() {
     if (ref.current) {
@@ -51,7 +56,7 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
           aria-haspopup="true"
           className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-sm font-semibold text-white transition-colors hover:bg-white/30"
         >
-          {initials}
+          {mounted ? initials : ""}
         </button>
       ) : (
         <button
@@ -61,10 +66,10 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
           className={`flex h-[48px] w-full items-center gap-2 rounded-md px-3 font-medium transition-colors ${dark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-gray-100 hover:bg-blue-50 hover:text-blue-700"}`}
         >
           <div aria-hidden="true" className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${dark ? "bg-white/20 text-white" : "bg-blue-800 text-white"}`}>
-            {initials}
+            {mounted ? initials : ""}
           </div>
           <span className={`flex-1 truncate text-left text-sm font-medium ${dark ? "text-white" : "text-gray-700"}`}>
-            {name}
+            {mounted ? name : ""}
           </span>
         </button>
       )}
@@ -72,8 +77,8 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
       {open && (
         <div className={`absolute z-50 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg ${compact ? "right-0 w-56" : "left-0 right-0"} ${dropUp ? "bottom-full mb-1" : "top-full mt-1"}`}>
           <div className="border-b border-gray-100 px-3 py-2">
-            <p className="truncate text-xs font-medium text-gray-800">{name}</p>
-            {user?.primaryEmailAddress && (
+            <p className="truncate text-xs font-medium text-gray-800">{mounted ? name : ""}</p>
+            {mounted && user?.primaryEmailAddress && (
               <p className="truncate text-xs text-gray-600">
                 {user.primaryEmailAddress.emailAddress}
               </p>
