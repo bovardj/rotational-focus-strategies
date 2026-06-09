@@ -15,6 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { lusitana } from "./fonts";
+import Link from "next/link";
 
 const ForgotPasswordForm: NextPage = () => {
   const [email, setEmail] = useState("");
@@ -211,6 +212,18 @@ const ForgotPasswordForm: NextPage = () => {
             2FA is required, but this UI does not handle that
           </p>
         )}
+
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Remember your password?{" "}
+            <Link
+              href="/sign-in"
+              className="font-medium text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1 rounded-sm"
+            >
+              Sign in instead
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
