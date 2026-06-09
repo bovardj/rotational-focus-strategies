@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="relative min-w-0 flex flex-grow flex-col">
         <div
           id="main-content"
-          className="flex-grow rounded-2xl border border-gray-100 bg-white p-6 pb-24 shadow-xl shadow-blue-100/60 md:p-12 md:pb-12"
+          className="flex-grow max-w-5xl rounded-2xl border border-gray-100 bg-white p-6 pb-24 shadow-xl shadow-blue-100/60 md:p-12 md:pb-12"
         >
           {children}
         </div>
