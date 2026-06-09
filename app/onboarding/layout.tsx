@@ -30,7 +30,7 @@ export default async function RootLayout({
       </div>
 
       {/* Sidenav panel */}
-      <div className="relative w-full flex-none overflow-hidden rounded-2xl border border-gray-100 shadow-xl shadow-blue-100/60 md:sticky md:top-6 md:h-[calc(100vh-3rem)] md:w-64">
+      <div className="relative w-full flex-none overflow-hidden rounded-2xl bg-blue-900 shadow-xl shadow-blue-900/30 md:sticky md:top-6 md:h-[calc(100vh-3rem)] md:w-64">
         <SideNav />
       </div>
 

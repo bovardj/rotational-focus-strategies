@@ -10,7 +10,7 @@ const steps = [
 
 function StudyOverviewLabel() {
   return (
-    <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">
+    <p className="text-xs font-semibold uppercase tracking-wider text-blue-200">
       Study Overview
     </p>
   );
@@ -21,10 +21,10 @@ function StudyOverviewSteps() {
     <ol className="flex flex-col gap-3">
       {steps.map((step, i) => (
         <li key={i} className="flex items-start gap-3">
-          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-800 text-[10px] font-bold text-white">
+          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px] font-bold text-white">
             {i + 1}
           </span>
-          <span className="text-sm text-gray-800">{step.label}</span>
+          <span className="text-sm text-white">{step.label}</span>
         </li>
       ))}
     </ol>
@@ -34,7 +34,7 @@ function StudyOverviewSteps() {
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
-      <div className="relative mb-2 flex h-20 items-end justify-start bg-blue-800 p-4 -mx-3 -mt-4 md:-mx-2 md:h-40">
+      <div className="relative mb-2 flex h-20 items-end justify-start bg-white/10 p-4 -mx-3 -mt-4 md:-mx-2 md:h-40">
         <div className="w-32 text-white md:w-40">
           <RFSLogo />
         </div>
@@ -42,7 +42,7 @@ export default function SideNav() {
           <UserNav compact />
         </div>
       </div>
-      <div className="mt-2 flex flex-col rounded-md bg-gray-100">
+      <div className="mt-2 flex flex-col">
         {/* Mobile: collapsible */}
         <details className="group md:hidden">
           <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3">
@@ -69,9 +69,8 @@ export default function SideNav() {
         </div>
       </div>
       <div className="hidden md:block pt-2">
-        <UserNav />
+        <UserNav dark />
       </div>
-      <div className="hidden md:flex flex-grow mt-2 rounded-md bg-gray-100" />
     </div>
   );
 }

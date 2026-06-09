@@ -9,7 +9,7 @@ import {
   BellIcon,
 } from "@heroicons/react/24/outline";
 
-export default function UserNav({ compact = false }: { compact?: boolean }) {
+export default function UserNav({ compact = false, dark = false }: { compact?: boolean; dark?: boolean }) {
   const { user } = useUser();
   const { signOut, openUserProfile } = useClerk();
   const router = useRouter();
@@ -58,12 +58,12 @@ export default function UserNav({ compact = false }: { compact?: boolean }) {
           onClick={handleOpen}
           aria-expanded={open}
           aria-haspopup="true"
-          className="flex h-[48px] w-full items-center gap-2 rounded-md bg-gray-100 px-3 font-medium transition-colors hover:bg-blue-50 hover:text-blue-700"
+          className={`flex h-[48px] w-full items-center gap-2 rounded-md px-3 font-medium transition-colors ${dark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-gray-100 hover:bg-blue-50 hover:text-blue-700"}`}
         >
-          <div aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-800 text-xs font-semibold text-white">
+          <div aria-hidden="true" className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${dark ? "bg-white/20 text-white" : "bg-blue-800 text-white"}`}>
             {initials}
           </div>
-          <span className="flex-1 truncate text-left text-sm font-medium text-gray-700">
+          <span className={`flex-1 truncate text-left text-sm font-medium ${dark ? "text-white" : "text-gray-700"}`}>
             {name}
           </span>
         </button>
