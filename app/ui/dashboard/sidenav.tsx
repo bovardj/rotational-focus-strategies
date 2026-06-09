@@ -5,10 +5,10 @@ import UserNav from "@/app/ui/dashboard/user-nav";
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col px-3 py-4 md:px-2">
+    <nav aria-label="Main navigation" className="flex h-full flex-col px-3 py-4 md:px-2">
       {/* Logo bar — full-bleed flush to card edges */}
       <div className="relative mb-2 flex h-20 items-end justify-start bg-white/10 p-4 -mx-3 -mt-4 md:-mx-2 md:h-40">
-        <Link href="/dashboard">
+        <Link href="/dashboard" aria-label="RFS – go to dashboard">
           <div className="w-32 text-white md:w-40">
             <RFSLogo />
           </div>
@@ -23,6 +23,6 @@ export default function SideNav() {
         <NavLinks dark />
         <UserNav dark />
       </div>
-    </div>
+    </nav>
   );
 }

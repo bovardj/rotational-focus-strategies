@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   getBaselineSurveysExpected,
@@ -33,6 +34,7 @@ export default function SurveyForm({
   baselineCompleted,
 }: SurveyFormProps) {
   const router = useRouter();
+  const [validationError, setValidationError] = useState("");
 
   const handleNoRadioChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -49,6 +51,7 @@ export default function SurveyForm({
   };
 
   const handleSubmit = async (formData: FormData) => {
+    setValidationError("");
     const submitButton = document.getElementById(
       "form_submit_button"
     ) as HTMLButtonElement;
@@ -58,15 +61,25 @@ export default function SurveyForm({
       submitButton.classList.add("opacity-50");
     }
 
+    const resetSubmit = () => {
+      if (submitButton) {
+        submitButton.innerText = "Submit";
+        submitButton.disabled = false;
+        submitButton.classList.remove("opacity-50");
+      }
+    };
+
     if (dailyCompleted) {
       const checkedGenders = formData.getAll("gender_identity");
       if (checkedGenders.length === 0) {
-        alert("Please select at least one gender identity.");
+        setValidationError("Please select at least one gender identity.");
+        resetSubmit();
         return;
       }
       const checkedRaces = formData.getAll("racial_identity");
       if (checkedRaces.length === 0) {
-        alert("Please select at least one racial identity.");
+        setValidationError("Please select at least one racial identity.");
+        resetSubmit();
         return;
       }
     }
@@ -135,11 +148,7 @@ export default function SurveyForm({
               type="date"
               id="submission_date"
               name="submission_date"
-              defaultValue={
-                new Date()
-                  .toLocaleString("en-US", { timeZone: "America/New_York" })
-                  .split(",")[0]
-              }
+              defaultValue={new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" })}
               className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
               required
             />
@@ -341,6 +350,9 @@ export default function SurveyForm({
           or navigate away after clicking submit. Your responses will be saved
           and you will be redirected when submission is complete.
         </p>
+        <div role="alert" aria-live="assertive" className="text-sm text-red-800 min-h-[1.25rem] text-center">
+          {validationError}
+        </div>
         <Button
           type="submit"
           id="form_submit_button"

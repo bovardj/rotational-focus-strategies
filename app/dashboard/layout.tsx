@@ -30,6 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Mobile bottom nav */}
       <nav
+        aria-label="Main navigation"
         className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white md:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >

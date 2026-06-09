@@ -35,21 +35,19 @@ export default function CheckboxForm({
 
   return (
     <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
-      <label
-        htmlFor={inputName}
-        className="block text-sm font-medium text-gray-700"
-      >
-        {condition ? questionAlt : question}
-        <span className="text-red-500">*</span>
-      </label>
-      <div
-        className="text-red-500 text-sm"
-        id={`${inputName}_error`}
-        style={{ display: "none" }}
-      >
-        Please select at least one option.
-      </div>
-      <div className="mt-4 grid grid-cols-1 gap-4">
+      <fieldset className="m-0 border-0 p-0">
+        <legend className="text-sm font-medium text-gray-700">
+          {condition ? questionAlt : question}
+          <span className="text-red-500">*</span>
+        </legend>
+        <div
+          className="text-red-500 text-sm"
+          id={`${inputName}_error`}
+          style={{ display: "none" }}
+        >
+          Please select at least one option.
+        </div>
+        <div className="mt-4 grid grid-cols-1 gap-4">
         {options.map((option, i) => (
           <label key={i} className="flex items-center">
             <input
@@ -95,7 +93,8 @@ export default function CheckboxForm({
             </div>
           </label>
         )}
-      </div>
+        </div>
+      </fieldset>
     </div>
   );
 }

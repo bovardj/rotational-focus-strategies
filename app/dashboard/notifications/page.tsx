@@ -123,21 +123,31 @@ export default function NotificationsPage() {
       <div className="max-w-sm space-y-4">
         <PushNotificationManager />
         <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            type="text"
-            placeholder="Notification message"
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
-          <input
-            type="time"
-            className="w-full rounded-md border border-gray-200 p-2 text-sm"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="notif-message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <input
+              id="notif-message"
+              type="text"
+              placeholder="e.g. Time to complete your survey!"
+              autoComplete="off"
+              className="w-full rounded-md border border-gray-200 p-2 text-sm"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="notif-time" className="block text-sm font-medium text-gray-700 mb-1">Reminder time</label>
+            <input
+              id="notif-time"
+              type="time"
+              autoComplete="off"
+              className="w-full rounded-md border border-gray-200 p-2 text-sm"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </div>
           {mounted && (
             <div className="text-xs text-gray-500">
               {showTzPicker ? (

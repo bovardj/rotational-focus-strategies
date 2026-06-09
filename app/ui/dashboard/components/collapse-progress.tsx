@@ -39,6 +39,11 @@ function Phase({
         <>
           <div className="h-1.5 w-full rounded-full bg-gray-100">
             <div
+              role="progressbar"
+              aria-valuenow={pct}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={`${label}: ${completed} of ${total} completed`}
               className={`h-1.5 rounded-full transition-all ${isComplete ? "bg-blue-800" : "bg-blue-300"}`}
               style={{ width: `${pct}%` }}
             />
