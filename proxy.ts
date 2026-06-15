@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 
 const isOnboardingRoute = createRouteMatcher(['/onboarding(.*)'])
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', '/forgot-password(.*)', '/api/keep-alive'])
+const isAuthPageRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/forgot-password(.*)'])
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId, sessionClaims, redirectToSignIn } = await auth()
@@ -15,6 +16,9 @@ export default clerkMiddleware(async (auth, req) => {
   if (userId && isOnboardingRoute(req)) {
     return NextResponse.next()
   }
+
+  // Redirect logged-in users away from auth pages to prevent a flash of the sign-in page
+  if (userId && isAuthPageRoute(req)) return NextResponse.redirect(new URL('/dashboard', req.url))
 
   // If the user isn't signed in and the route is private, redirect to sign-in
   if (!userId && !isPublicRoute(req)) return redirectToSignIn({ returnBackUrl: req.url })

@@ -1,24 +1,32 @@
-"use client";
-
-import { Collapse } from "@geist-ui/react";
-import StrategyDescriptions from "@/app/ui/dashboard/strategy-descriptions";
+import Link from "next/link";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 export default function CollapseStrategy({
-  strategyList: strategyList,
+  strategyList,
 }: {
   strategyList: { name: string; href: string }[];
 }) {
   return (
-    <>
-      <div>
-        <Collapse shadow title="Your Focus Strategies" className="bg-gray-50">
-          {strategyList.map((strategy, index) => (
-            <Collapse key={index} shadow title={strategy.name} className="bg-gray-50">
-              <StrategyDescriptions strategy={strategy.href} />
-            </Collapse>
+    <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+      <h2 className="mb-3 text-sm font-semibold text-gray-700">Your Selected Focus Strategies</h2>
+      {strategyList.length === 0 ? (
+        <p className="text-sm text-gray-500 italic">No strategies selected yet.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-3">
+          {strategyList.map((strategy) => (
+            <Link
+              key={strategy.href}
+              href={`/dashboard/strategies/${strategy.href}`}
+              className="group flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors hover:border-blue-800 hover:bg-blue-50"
+            >
+              <span className="text-sm font-medium text-gray-800 group-hover:text-blue-800 leading-tight">
+                {strategy.name}
+              </span>
+              <ArrowRightIcon className="h-4 w-4 shrink-0 text-gray-300 transition-colors group-hover:text-blue-800 ml-2" />
+            </Link>
           ))}
-        </Collapse>
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }

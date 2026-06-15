@@ -1,4 +1,5 @@
 import SignupForm from "@/app/ui/signup-form";
+import AuthShell from "@/app/ui/auth-shell";
 import { Suspense } from "react";
 import { Metadata } from "next";
 
@@ -9,12 +10,10 @@ export const metadata: Metadata = {
 
 export default function SignupPage() {
   return (
-    <main className="flex items-center justify-center md:h-screen">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 md:-mt-32 border-2 border-blue-400 rounded-lg bg-white shadow-md">
-        <Suspense>
-          <SignupForm />
-        </Suspense>
-      </div>
-    </main>
+    <AuthShell>
+      <Suspense>
+        <SignupForm />
+      </Suspense>
+    </AuthShell>
   );
 }

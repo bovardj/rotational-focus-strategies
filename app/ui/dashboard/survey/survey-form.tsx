@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   getBaselineSurveysExpected,
@@ -21,6 +22,7 @@ import {
 } from "@/app/dashboard/survey/_actions";
 import LikertScaleForm from "@/app/ui/dashboard/survey/question-forms/likertScale-form";
 import CheckboxForm from "@/app/ui/dashboard/survey/question-forms/checkBox-form";
+import { Button } from "@/app/ui/button";
 
 interface SurveyFormProps {
   dailyCompleted: boolean;
@@ -32,6 +34,7 @@ export default function SurveyForm({
   baselineCompleted,
 }: SurveyFormProps) {
   const router = useRouter();
+  const [validationError, setValidationError] = useState("");
 
   const handleNoRadioChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -48,6 +51,7 @@ export default function SurveyForm({
   };
 
   const handleSubmit = async (formData: FormData) => {
+    setValidationError("");
     const submitButton = document.getElementById(
       "form_submit_button"
     ) as HTMLButtonElement;
@@ -57,15 +61,25 @@ export default function SurveyForm({
       submitButton.classList.add("opacity-50");
     }
 
+    const resetSubmit = () => {
+      if (submitButton) {
+        submitButton.innerText = "Submit";
+        submitButton.disabled = false;
+        submitButton.classList.remove("opacity-50");
+      }
+    };
+
     if (dailyCompleted) {
       const checkedGenders = formData.getAll("gender_identity");
       if (checkedGenders.length === 0) {
-        alert("Please select at least one gender identity.");
+        setValidationError("Please select at least one gender identity.");
+        resetSubmit();
         return;
       }
       const checkedRaces = formData.getAll("racial_identity");
       if (checkedRaces.length === 0) {
-        alert("Please select at least one racial identity.");
+        setValidationError("Please select at least one racial identity.");
+        resetSubmit();
         return;
       }
     }
@@ -120,12 +134,9 @@ export default function SurveyForm({
 
   return (
     <form action={handleSubmit}>
-      <div
-        className="space-y-6 bg-white p-6 rounded-lg shadow-md"
-        style={{ maxWidth: "400px" }}
-      >
+      <div className="max-w-2xl space-y-4">
         {(!baselineCompleted || !dailyCompleted) && (
-          <div className="mb-6">
+          <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
             <label
               htmlFor="submission_date"
               className="block text-sm font-medium text-gray-700"
@@ -137,12 +148,8 @@ export default function SurveyForm({
               type="date"
               id="submission_date"
               name="submission_date"
-              defaultValue={
-                new Date()
-                  .toLocaleString("en-US", { timeZone: "America/New_York" })
-                  .split(",")[0]
-              }
-              className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              defaultValue={new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" })}
+              className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
               required
             />
           </div>
@@ -192,7 +199,7 @@ export default function SurveyForm({
         )}
         {baselineCompleted && !dailyCompleted && (
           <>
-            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="used_strategy"
                 className="block text-sm font-medium text-gray-700"
@@ -207,7 +214,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="yes"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-800"
                     required
                   />
                   <span className="ml-2 text-sm">Yes</span>
@@ -218,7 +225,7 @@ export default function SurveyForm({
                     type="radio"
                     name="used_strategy"
                     value="no"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-800"
                     onChange={(e) =>
                       handleNoRadioChange(
                         e,
@@ -231,7 +238,7 @@ export default function SurveyForm({
                 </label>
               </div>
             </div>
-            <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="strategy_response"
                 className="block text-sm font-medium text-gray-700"
@@ -244,7 +251,7 @@ export default function SurveyForm({
                 name="strategy_response"
                 rows={4}
                 maxLength={500}
-                className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
                 placeholder="Write your response here (max 500 characters)..."
               ></textarea>
             </div>
@@ -266,7 +273,7 @@ export default function SurveyForm({
               question="What is your gender identity? (Select all that apply)"
             />
 
-            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+            <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
               <label
                 htmlFor="ethnicity"
                 className="block text-sm font-medium text-gray-700"
@@ -279,7 +286,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="hispanic_or_latino"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-800"
                     required
                   />
                   <span className="ml-2 text-sm">Hispanic or Latino</span>
@@ -289,7 +296,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="not_hispanic_or_latino"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-800"
                   />
                   <span className="ml-2 text-sm">Not Hispanic or Latino</span>
                 </label>
@@ -298,7 +305,7 @@ export default function SurveyForm({
                     type="radio"
                     name="ethnicity"
                     value="prefer_not_to_say"
-                    className="form-radio text-indigo-600"
+                    className="form-radio text-blue-800"
                   />
                   <span className="ml-2 text-sm">Prefer not to say</span>
                 </label>
@@ -321,19 +328,20 @@ export default function SurveyForm({
             />
           </>
         )}
-        <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-150">
+        <div className="rounded-lg bg-gray-50 px-4 py-3 border border-gray-200">
           <label
             htmlFor="open_response"
             className="block text-sm font-medium text-gray-700"
           >
-            Is there anything else you would like to add?
+            Is there anything else you would like to add?{" "}
+            <span className="font-normal text-gray-400">(optional)</span>
           </label>
           <textarea
             id="open_response"
             name="open_response"
             rows={4}
             maxLength={500}
-            className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            className="mt-2 block w-full text-sm border border-gray-200 rounded-md px-3 py-2"
             placeholder="Write your response here (max 500 characters)..."
           ></textarea>
         </div>
@@ -342,13 +350,16 @@ export default function SurveyForm({
           or navigate away after clicking submit. Your responses will be saved
           and you will be redirected when submission is complete.
         </p>
-        <button
+        <div role="alert" aria-live="assertive" className="text-sm text-red-800 min-h-[1.25rem] text-center">
+          {validationError}
+        </div>
+        <Button
           type="submit"
           id="form_submit_button"
-          className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="flex mx-auto px-12"
         >
           Submit
-        </button>
+        </Button>
       </div>
     </form>
   );

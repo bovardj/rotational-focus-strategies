@@ -1,16 +1,8 @@
+import PageCard from "@/app/ui/dashboard/page-card";
 import { Card } from "@/app/ui/dashboard/components/cards";
 import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
-import {
-  getBaselineCompleted,
-  getBaselineSurveysExpected,
-  getBaselineSurveysCompleted,
-  getDailySurveysCompleted,
-  getDailySurveysExpected,
-  getEndSurveyCompleted,
-} from "@/app/dashboard/survey/_data";
-import CollapseInstructions from "@/app/ui/dashboard/components/collapse-instructions";
-import CollapseNotes from "@/app/ui/dashboard/components/collapse-notes";
+import { getDashboardCounts } from "@/app/dashboard/survey/_data";
 import Link from "next/link";
 import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserStrategies, fetchAssignedStrategies } from "@/app//lib/data";
@@ -27,28 +19,36 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const baselineCompleted = await getBaselineCompleted();
-  const baselineSurveysExpected = await getBaselineSurveysExpected();
-  const baselineSurveysCompleted = await getBaselineSurveysCompleted();
-  const dailySurveysCompleted = await getDailySurveysCompleted();
-  const dailySurveysExpected = await getDailySurveysExpected();
-  const endSurveyCompleted = await getEndSurveyCompleted();
+  const [counts, user, userStrategies, userAssignedStrategies] = await Promise.all([
+    getDashboardCounts(),
+    currentUser(),
+    fetchUserStrategies(),
+    fetchAssignedStrategies(),
+  ]);
 
-  const user = await currentUser();
-  const userId = user?.id;
-  if (!userId) {
+  if (!counts || !user?.id) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }
-  const userStrategies = await fetchUserStrategies();
 
-  // Fetch the user's assigned strategies and filter them to only include those that are before today
-  const userAssignedStrategies = await fetchAssignedStrategies();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const {
+    baselineCompleted,
+    baselineSurveysCompleted,
+    baselineSurveysExpected,
+    dailySurveysCompleted,
+    dailySurveysExpected,
+    endSurveyCompleted,
+  } = counts;
+
+  // Use the same date format as getDailyStrategy() so we can match against stored entries
+  const todayStr = new Date().toLocaleDateString('en-us', { timeZone: 'America/Los_Angeles' });
+  const todayAssigned = userAssignedStrategies?.find(s => s.date === todayStr) ?? null;
+
+  const todayMidnight = new Date();
+  todayMidnight.setHours(0, 0, 0, 0);
   const filteredAssignedStrategies = userAssignedStrategies.filter(
     (strategy) => {
       const convertedDate = parseDateString(strategy.date);
-      return convertedDate < today;
+      return convertedDate < todayMidnight;
     }
   );
 
@@ -66,99 +66,50 @@ export default async function Page() {
     })
     .filter((name) => name !== null);
 
+  // todayAssigned is null on first visit of the day — getDailyStrategy() picks and stores one.
+  // On repeat visits it's already in the fetched list, so we skip the extra query.
   let latestStrategy = null;
   if (baselineCompleted) {
-    latestStrategy = await getDailyStrategy();
+    latestStrategy = todayAssigned ?? await getDailyStrategy();
   }
 
   return (
-    <main>
-      <h1 className={`${lusitana.className} mb-4 text-2xl`}>Dashboard</h1>
-      <div className="grid gap-6 md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <PageCard>
+      <main>
+      <h1 className={`${lusitana.className} mb-6 text-2xl font-bold`}>Dashboard</h1>
+      <div className="flex max-w-3xl flex-col gap-6">
         {baselineCompleted ? (
-          <div>
-            <div className="justify-center">
-              <Card
-                title="Today's Focus Strategy"
-                value={latestStrategy?.strategy}
-                date={latestStrategy?.date}
-              />
-            </div>
-          </div>
+          <Card
+            title="Today's Focus Strategy"
+            value={latestStrategy?.strategy}
+            date={latestStrategy?.date}
+          />
         ) : (
-          <>
-            <div>
-              <p className="mb-4 ml-4">
-                Focus Strategy assignments will begin once you have completed
-                all{" "}
-                <Link href={"/dashboard/survey"} className="underline">
-                  Baseline Surveys
-                </Link>
-                .
-              </p>
-            </div>
-          </>
+          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
+            <p className="text-sm text-gray-700">
+              Focus strategy assignments will begin once you have completed all{" "}
+              <Link href="/dashboard/survey" className="text-blue-800 underline hover:text-blue-900">
+                Baseline Surveys
+              </Link>
+              .
+            </p>
+          </div>
         )}
-        <div className="grid gap-6 grid-cols-1 mt-6">
-          <CollapseInstructions
-            baselineSurveysExpected={baselineSurveysExpected}
-            dailySurveysExpected={dailySurveysExpected}
-          />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
-          <CollapseProgress
-            baselineSurveysCompleted={baselineSurveysCompleted}
-            baselineSurveysExpected={baselineSurveysExpected}
-            dailySurveysCompleted={dailySurveysCompleted}
-            dailySurveysExpected={dailySurveysExpected}
-            endSurveyCompleted={endSurveyCompleted}
-          />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
+        <CollapseProgress
+          baselineSurveysCompleted={baselineSurveysCompleted}
+          baselineSurveysExpected={baselineSurveysExpected}
+          dailySurveysCompleted={dailySurveysCompleted}
+          dailySurveysExpected={dailySurveysExpected}
+          endSurveyCompleted={endSurveyCompleted}
+        />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <CollapseStrategy strategyList={strategyList} />
-        </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
           <CollapsePreviousStrategy
             previousStrategyList={filteredAssignedStrategies}
           />
         </div>
-        <div className="grid gap-6 grid-cols-1 mt-6">
-          <CollapseNotes />
-        </div>
-        <div className="mt-6 pt-6 flex w-full items-center justify-between">
-          <h2 className={`${lusitana.className} text-lg`}>
-            Questions, Bug Reporting & Help
-          </h2>
-        </div>
-        <div>
-          <p className="text-sm text-gray-500">
-            Have questions? Find a bug? Need help? Send me an email at
-            john.bovard@utah.edu.
-          </p>
-          <p className="text-sm mt-4 text-gray-500">
-            For bug reporting, please include the following information if
-            possible:
-          </p>
-          <p className="text-sm text-gray-500">
-            - A screenshot of the error message or page when you experienced the
-            unexpected behavior
-          </p>
-          <p className="text-sm text-gray-500">
-            - What you were doing when the error occurred
-          </p>
-          <p className="text-sm text-gray-500">
-            - The web browser and device you are using (e.g., Chrome on Windows,
-            Safari on iPhone)
-          </p>
-          <p className="text-sm text-gray-500">
-            - Any other relevant details that might help me understand the issue
-          </p>
-          <p className="text-sm mt-2 text-gray-500">
-            Thank you for your help in making this app better!
-          </p>
-        </div>
-        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8"></div>
       </div>
     </main>
+    </PageCard>
   );
 }

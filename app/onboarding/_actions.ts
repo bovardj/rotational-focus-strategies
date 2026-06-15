@@ -2,6 +2,7 @@
 
 import { auth, clerkClient } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
+import { revalidateTag } from 'next/cache'
 
 function getSupabase() {
   return createClient(
@@ -23,15 +24,12 @@ export const initializeDaysExpected = async () => {
 
   const { error } = await getSupabase()
     .from('days_expected')
-    .insert({
-      user_id: userId,
-      baseline_days: 3,
-      daily_days: 4
-    });
+    .upsert({ user_id: userId, baseline_days: 3, daily_days: 4 }, { onConflict: 'user_id', ignoreDuplicates: true })
   if (error) {
     throw new Error('Error updating days_expected in Supabase: ' + error.message)
   }
-  return { message: 'Days expected initialized to 0' }
+  revalidateTag(`days-expected-${userId}`, {})
+  return { message: 'Days expected initialized' }
 }
 
 export const initializeDaysCompleted = async () => {
@@ -42,11 +40,11 @@ export const initializeDaysCompleted = async () => {
 
   const { error } = await getSupabase()
     .from('days_completed')
-    .insert({ user_id: userId });
+    .upsert({ user_id: userId }, { onConflict: 'user_id', ignoreDuplicates: true })
   if (error) {
     throw new Error('Error updating days_completed in Supabase: ' + error.message)
   }
-  return { message: 'Days completed initialized to 0' }
+  return { message: 'Days completed initialized' }
 }
 
 export const completeOnboarding = async (formData: FormData) => {
@@ -60,14 +58,12 @@ export const completeOnboarding = async (formData: FormData) => {
 
   const { error } = await getSupabase()
     .from('user_strategies')
-    .insert({
-      user_id: userId,
-      strategies: selectedStrategies,
-    })
+    .upsert({ user_id: userId, strategies: selectedStrategies }, { onConflict: 'user_id' })
 
   if (error) {
     throw new Error('Error inserting strategies into Supabase: ' + error.message)
   }
+  revalidateTag(`user-strategies-${userId}`, {})
 
   const client = await clerkClient()
 
@@ -89,22 +85,12 @@ export const syncUserToSupabase = async () => {
   const { userId } = await auth()
   if (!userId) return
 
-  const { data: existingUser, error: selectError } = await getSupabase()
+  const client = await clerkClient()
+  const clerkUser = await client.users.getUser(userId)
+  const email = clerkUser.primaryEmailAddress?.emailAddress ?? null
+
+  const { error } = await getSupabase()
     .from('users')
-    .select('user_id')
-    .eq('user_id', userId)
-    .maybeSingle()
-
-  if (selectError) throw new Error('Error checking for existing user in Supabase: ' + selectError.message)
-
-  if (!existingUser) {
-    const client = await clerkClient()
-    const clerkUser = await client.users.getUser(userId)
-    const email = clerkUser.primaryEmailAddress?.emailAddress ?? null
-
-    const { error } = await getSupabase()
-      .from('users')
-      .insert({ user_id: userId, email })
-    if (error) throw new Error('Error syncing user to Supabase: ' + error.message)
-  }
+    .upsert({ user_id: userId, email }, { onConflict: 'user_id', ignoreDuplicates: true })
+  if (error) throw new Error('Error syncing user to Supabase: ' + error.message)
 }

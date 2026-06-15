@@ -1,37 +1,75 @@
-"use client";
-
-import Link from "next/link";
 import RFSLogo from "@/app/ui/rfs-logo";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import UserNav from "@/app/ui/dashboard/user-nav";
+
+const steps = [
+  { label: "Choose 3 focus strategies you would like to use during the study" },
+  { label: "Complete 3 baseline surveys—do what you would normally do during this time" },
+  { label: "Try your assigned strategy each day—the app assigns it to you each day (4 days)" },
+  { label: "Complete the exit survey to finish the study" },
+];
+
+function StudyOverviewLabel() {
+  return (
+    <p className="text-xs font-semibold uppercase tracking-wider text-blue-200">
+      Study Overview
+    </p>
+  );
+}
+
+function StudyOverviewSteps() {
+  return (
+    <ol className="flex flex-col gap-3">
+      {steps.map((step, i) => (
+        <li key={i} className="flex items-start gap-3">
+          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px] font-bold text-white">
+            {i + 1}
+          </span>
+          <span className="text-sm text-white">{step.label}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 export default function SideNav() {
-  const pathname = usePathname();
-
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
-      <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40"
-        href="/"
-      >
+      <div className="relative mb-2 flex h-20 items-end justify-start bg-white/10 p-4 -mx-3 -mt-4 md:-mx-2 md:h-40">
         <div className="w-32 text-white md:w-40">
           <RFSLogo />
         </div>
-      </Link>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        <Link
-          key={"Onboarding"}
-          href={"./onboarding"}
-          className={clsx(
-            "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
-            {
-              "bg-sky-100 text-blue-600": pathname === "./onboarding",
-            }
-          )}
-        >
-          <p className="block md:block">{"Onboarding"}</p>
-        </Link>
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
+        <div className="absolute top-1/2 right-4 -translate-y-1/2 md:hidden">
+          <UserNav compact />
+        </div>
+      </div>
+      <div className="mt-2 flex flex-col">
+        {/* Mobile: collapsible */}
+        <details className="group md:hidden">
+          <summary className="flex cursor-pointer select-none list-none items-center justify-between px-4 py-3">
+            <StudyOverviewLabel />
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4 text-gray-500 transition-transform duration-200 group-open:rotate-90"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </summary>
+          <div className="px-4 py-3">
+            <StudyOverviewSteps />
+          </div>
+        </details>
+
+        {/* Desktop: always visible */}
+        <div className="hidden md:block px-4 py-3">
+          <div className="mb-3">
+            <StudyOverviewLabel />
+          </div>
+          <StudyOverviewSteps />
+        </div>
+      </div>
+      <div className="hidden md:block pt-2">
+        <UserNav dark />
       </div>
     </div>
   );
