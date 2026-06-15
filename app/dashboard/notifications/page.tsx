@@ -7,6 +7,7 @@ import { useUser } from "@clerk/nextjs";
 import { PushNotificationManager } from "@/app/components/pwaComponents";
 import { lusitana } from "@/app/ui/fonts";
 import { Button } from "@/app/ui/button";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 const COMMON_TIMEZONES = [
   "America/New_York",
@@ -120,6 +121,10 @@ export default function NotificationsPage() {
       <h1 className={`${lusitana.className} mb-4 text-2xl font-bold`}>
         Daily Notifications
       </h1>
+      <div role="note" className="mb-4 flex gap-2 rounded-lg border border-yellow-200 bg-yellow-50 p-3 text-sm text-yellow-800">
+        <ExclamationTriangleIcon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <p><strong>Note:</strong> Scheduled notifications are not fully supported at this time due to Vercel free plan limitations. Though, test notifications do work if you&apos;d like to try them out.</p>
+      </div>
       <div className="max-w-sm space-y-4">
         <PushNotificationManager />
         <form onSubmit={handleSubmit} className="space-y-3">
