@@ -20,21 +20,21 @@ function WelcomeStep() {
       </p>
       <div className="rounded-lg bg-blue-50 border border-blue-200 p-4 space-y-3">
         <div className="flex items-start gap-3">
-          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">1</span>
+          <span aria-hidden="true" className="mt-0.5 shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">1</span>
           <p className="text-sm text-gray-700">
-            <span className="font-semibold">Days 1–3 — Baseline:</span> Go about your day normally and complete a short survey at the end of each day.
+            <span className="font-semibold">Days 1&ndash;3 &mdash; Baseline:</span> Go about your day normally and complete a short survey at the end of each day.
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">2</span>
+          <span aria-hidden="true" className="mt-0.5 shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">2</span>
           <p className="text-sm text-gray-700">
-            <span className="font-semibold">Days 4–7 — Strategies:</span> Use your assigned focus strategy for the day, then complete the daily survey.
+            <span className="font-semibold">Days 4&ndash;7 &mdash; Strategies:</span> Use your assigned focus strategy for the day, then complete the daily survey.
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">✓</span>
+          <span aria-hidden="true" className="mt-0.5 shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">✓</span>
           <p className="text-sm text-gray-700">
-            <span className="font-semibold">Day 7 — Exit Survey:</span> A short final survey, then you&apos;re done!
+            <span className="font-semibold">Day 7 &mdash; Exit Survey:</span>{" "}A short final survey, then you&apos;re done!
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
       <div className="absolute left-5 top-5 bottom-5 w-px bg-blue-200" aria-hidden="true" />
       <div>
         <div className="flex gap-4 pb-7">
-          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold shrink-0 relative z-10">
             1
           </div>
           <div className="pt-1">
@@ -96,7 +96,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
         </div>
 
         <div className="flex gap-4 pb-7">
-          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold shrink-0 relative z-10">
             2
           </div>
           <div className="pt-1">
@@ -114,7 +114,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
         </div>
 
         <div className="flex gap-4">
-          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-green-700 text-white flex items-center justify-center text-base flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-green-700 text-white flex items-center justify-center text-base shrink-0 relative z-10">
             ✓
           </div>
           <div className="pt-1">
