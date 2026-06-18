@@ -20,19 +20,19 @@ function WelcomeStep() {
       </p>
       <div className="rounded-lg bg-blue-50 border border-blue-200 p-4 space-y-3">
         <div className="flex items-start gap-3">
-          <span className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">1</span>
+          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">1</span>
           <p className="text-sm text-gray-700">
             <span className="font-semibold">Days 1–3 — Baseline:</span> Go about your day normally and complete a short survey at the end of each day.
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <span className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">2</span>
+          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">2</span>
           <p className="text-sm text-gray-700">
             <span className="font-semibold">Days 4–7 — Strategies:</span> Use your assigned focus strategy for the day, then complete the daily survey.
           </p>
         </div>
         <div className="flex items-start gap-3">
-          <span className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">✓</span>
+          <span aria-hidden="true" className="mt-0.5 flex-shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">✓</span>
           <p className="text-sm text-gray-700">
             <span className="font-semibold">Day 7 — Exit Survey:</span> A short final survey, then you&apos;re done!
           </p>
@@ -60,11 +60,13 @@ function GeneralStep() {
         <span className="font-semibold">Missed a survey?</span> You can still submit it — just select
         the correct date. Completing it soon after each day keeps your responses accurate.
       </p>
-      <div className="rounded-lg bg-blue-50 border border-blue-200 p-4 space-y-1.5">
+      <div className="rounded-lg bg-blue-50 border border-blue-200 p-4">
         <p className="text-xs font-semibold text-blue-900 mb-2">Keep in mind:</p>
-        <p className="text-sm text-gray-700">· You may not receive every strategy you selected.</p>
-        <p className="text-sm text-gray-700">· The same strategy can repeat on back-to-back days.</p>
-        <p className="text-sm text-gray-700">· New strategies are assigned at 1am MT (3am ET).</p>
+        <ul className="space-y-1.5 list-disc list-inside text-sm text-gray-700">
+          <li>You may not receive every strategy you selected.</li>
+          <li>The same strategy can repeat on back-to-back days.</li>
+          <li>New strategies are assigned at 1am MT (3am ET).</li>
+        </ul>
       </div>
     </div>
   );
@@ -76,7 +78,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
       <div className="absolute left-5 top-5 bottom-5 w-px bg-blue-200" aria-hidden="true" />
       <div>
         <div className="flex gap-4 pb-7">
-          <div className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
             1
           </div>
           <div className="pt-1">
@@ -94,7 +96,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
         </div>
 
         <div className="flex gap-4 pb-7">
-          <div className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 relative z-10">
             2
           </div>
           <div className="pt-1">
@@ -112,7 +114,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
         </div>
 
         <div className="flex gap-4">
-          <div className="h-10 w-10 rounded-full bg-green-700 text-white flex items-center justify-center text-base flex-shrink-0 relative z-10">
+          <div aria-hidden="true" className="h-10 w-10 rounded-full bg-green-700 text-white flex items-center justify-center text-base flex-shrink-0 relative z-10">
             ✓
           </div>
           <div className="pt-1">
@@ -197,9 +199,13 @@ export default function InstructionsWizard({ baselineSurveysExpected, dailySurve
   const [step, setStep] = useState(0);
   const total = STEP_TITLES.length;
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     headingRef.current?.focus();
   }, [step]);
 
@@ -258,27 +264,29 @@ export default function InstructionsWizard({ baselineSurveysExpected, dailySurve
         <button
           onClick={() => setStep((s) => s - 1)}
           disabled={step === 0}
+          aria-label="Go to previous step"
           className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
             step === 0
               ? "text-gray-300 cursor-not-allowed"
               : "text-gray-600 hover:text-gray-900 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
           }`}
         >
-          ← Back
+          <span aria-hidden="true">←</span> Back
         </button>
         {step < total - 1 ? (
           <button
             onClick={() => setStep((s) => s + 1)}
+            aria-label="Go to next step"
             className="text-sm font-medium px-5 py-2 rounded-lg bg-blue-800 text-white hover:bg-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
           >
-            Next →
+            Next <span aria-hidden="true">→</span>
           </button>
         ) : (
           <Link
             href="/dashboard"
             className="text-sm font-medium px-5 py-2 rounded-lg bg-blue-800 text-white hover:bg-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
           >
-            Done →
+            Done <span aria-hidden="true">→</span>
           </Link>
         )}
       </div>
