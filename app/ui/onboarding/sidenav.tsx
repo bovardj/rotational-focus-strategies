@@ -21,7 +21,7 @@ function StudyOverviewSteps() {
     <ol className="flex flex-col gap-3">
       {steps.map((step, i) => (
         <li key={i} className="flex items-start gap-3">
-          <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px] font-bold text-white">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px] font-bold text-white">
             {i + 1}
           </span>
           <span className="text-sm text-white">{step.label}</span>
