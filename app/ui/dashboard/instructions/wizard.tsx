@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { lusitana } from "@/app/ui/fonts";
 
@@ -138,7 +138,7 @@ function OptionalStep() {
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm font-semibold text-gray-900 mb-2">Install as a Progressive Web App</p>
+        <h3 className="text-sm font-semibold text-gray-900 mb-2">Install as a Progressive Web App</h3>
         <p className="text-sm text-gray-600 mb-3">
           Installing the app lets you open it from your home screen and enables push notifications on mobile.
         </p>
@@ -158,13 +158,14 @@ function OptionalStep() {
               rel="noopener noreferrer"
             >
               a useful installation guide
+              <span className="sr-only"> (opens in new tab)</span>
             </Link>
           </li>
         </ul>
       </div>
 
       <div>
-        <p className="text-sm font-semibold text-gray-900 mb-2">Push Notifications</p>
+        <h3 className="text-sm font-semibold text-gray-900 mb-2">Push Notifications</h3>
         <p className="text-sm text-gray-600 mb-2 italic">
           Currently limited — you can demo the feature and send a test notification, but scheduled
           notifications are not active on the free-tier hosting plan.
@@ -179,7 +180,7 @@ function OptionalStep() {
       </div>
 
       <div>
-        <p className="text-sm font-semibold text-gray-900 mb-2">Questions, Bugs &amp; Help</p>
+        <h3 className="text-sm font-semibold text-gray-900 mb-2">Questions, Bugs &amp; Help</h3>
         <p className="text-sm text-gray-600">
           Email{" "}
           <a href="mailto:john@johnbovard.dev" className="text-blue-800 underline hover:text-blue-900">
@@ -195,32 +196,44 @@ function OptionalStep() {
 export default function InstructionsWizard({ baselineSurveysExpected, dailySurveysExpected }: WizardProps) {
   const [step, setStep] = useState(0);
   const total = STEP_TITLES.length;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    headingRef.current?.focus();
+  }, [step]);
 
   return (
     <div>
       {/* Progress dots */}
-      <div className="flex items-center gap-2 mb-8" role="tablist" aria-label="Step progress">
-        {STEP_TITLES.map((title, i) => (
-          <div
-            key={i}
-            role="tab"
-            aria-selected={i === step}
-            aria-label={title}
-            className={`h-2 rounded-full transition-all duration-200 ${
-              i === step
-                ? "w-6 bg-blue-800"
-                : i < step
-                ? "w-2 bg-blue-400"
-                : "w-2 bg-gray-200"
-            }`}
-          />
-        ))}
-        <span className="ml-auto text-xs text-gray-600">{step + 1} of {total}</span>
+      <div className="flex items-center gap-2 mb-8">
+        <div className="flex items-center gap-2" aria-hidden="true">
+          {STEP_TITLES.map((title, i) => (
+            <div
+              key={i}
+              className={`h-2 rounded-full transition-all duration-200 ${
+                i === step
+                  ? "w-6 bg-blue-800"
+                  : i < step
+                  ? "w-2 bg-blue-400"
+                  : "w-2 bg-gray-200"
+              }`}
+            />
+          ))}
+        </div>
+        <span className="ml-auto text-xs text-gray-600">
+          <span className="sr-only">Step </span>
+          {step + 1} of {total}
+        </span>
       </div>
 
       {/* Step content */}
       <div className="min-h-52">
-        <h2 className={`${lusitana.className} text-xl font-bold text-gray-900 mb-5`}>
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className={`${lusitana.className} text-xl font-bold text-gray-900 mb-5 focus-visible:outline-none`}
+        >
           {STEP_TITLES[step]}
         </h2>
         {step === 0 && <WelcomeStep />}
