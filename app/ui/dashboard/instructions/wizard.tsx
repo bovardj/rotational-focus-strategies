@@ -208,7 +208,7 @@ export default function InstructionsWizard({ baselineSurveysExpected, dailySurve
       {/* Progress dots */}
       <div className="flex items-center gap-2 mb-8">
         <div className="flex items-center gap-2" aria-hidden="true">
-          {STEP_TITLES.map((title, i) => (
+          {STEP_TITLES.map((_, i) => (
             <div
               key={i}
               className={`h-2 rounded-full transition-all duration-200 ${
@@ -272,7 +272,7 @@ export default function InstructionsWizard({ baselineSurveysExpected, dailySurve
             href="/dashboard"
             className="text-sm font-medium px-5 py-2 rounded-lg bg-blue-800 text-white hover:bg-blue-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
           >
-            Got it — go to Dashboard
+            Done →
           </Link>
         )}
       </div>
