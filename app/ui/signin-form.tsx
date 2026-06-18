@@ -69,7 +69,7 @@ export default function SignInForm() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
               id="email"
               type="email"
               name="email"
@@ -79,7 +79,7 @@ export default function SignInForm() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
-            <AtSymbolIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            <AtSymbolIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
         </div>
         <div className="mt-4">
@@ -91,7 +91,7 @@ export default function SignInForm() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
@@ -103,7 +103,7 @@ export default function SignInForm() {
               onChange={(e) => setPassword(e.target.value)}
               onKeyUp={handleKeyUp}
             />
-            <KeyIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            <KeyIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             <button
               type="button"
               onClick={handleClickShowPassword}
@@ -111,12 +111,12 @@ export default function SignInForm() {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-1"
             >
               {showPassword ? (
-                <EyeSlashIcon aria-hidden="true" className="h-[18px] w-[18px]" />
+                <EyeSlashIcon aria-hidden="true" className="h-4.5 w-4.5" />
               ) : (
-                <EyeIcon aria-hidden="true" className="h-[18px] w-[18px]" />
+                <EyeIcon aria-hidden="true" className="h-4.5 w-4.5" />
               )}
             </button>
-            <div aria-live="polite" className="absolute bottom-[-20px] left-0 text-xs text-red-800">
+            <div aria-live="polite" className="absolute -bottom-5 left-0 text-xs text-red-800">
               {capsLockOnMessage}
             </div>
           </div>

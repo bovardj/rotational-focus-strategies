@@ -102,11 +102,11 @@ export default function SurveyProgress({ baselineDates, dailyDates, endSurveyCom
           </div>
         </div>
         <div className="flex w-full text-xs text-gray-600">
-          <div className="flex flex-[3] justify-center">Baseline</div>
+          <div className="flex flex-3 justify-center">Baseline</div>
           <div className="px-1 invisible">|</div>
-          <div className="flex flex-[4] justify-center">Daily</div>
+          <div className="flex flex-4 justify-center">Daily</div>
           <div className="px-1 invisible">|</div>
-          <div className="flex flex-[1] justify-center">Exit</div>
+          <div className="flex flex-1 justify-center">Exit</div>
         </div>
       </div>
     </div>

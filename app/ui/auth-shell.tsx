@@ -11,7 +11,7 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
       </a>
       <main id="main-content" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-blue-50 p-6">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
         <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
         <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
       </div>

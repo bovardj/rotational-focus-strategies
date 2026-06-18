@@ -80,7 +80,7 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
           aria-expanded={open}
           aria-haspopup="menu"
           aria-controls="user-nav-menu"
-          className={`flex h-[48px] w-full items-center gap-2 rounded-md px-3 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 ${dark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-gray-100 hover:bg-blue-50 hover:text-blue-800"}`}
+          className={`flex h-12 w-full items-center gap-2 rounded-md px-3 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 ${dark ? "bg-white/10 hover:bg-white/20 text-white" : "bg-gray-100 hover:bg-blue-50 hover:text-blue-800"}`}
         >
           <div aria-hidden="true" className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${dark ? "bg-white/20 text-white" : "bg-blue-800 text-white"}`}>
             {mounted ? initials : ""}
@@ -136,7 +136,7 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
             <div
               id="user-nav-menu"
               role="menu"
-              className="fixed z-[9999] w-56 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg"
+              className="fixed z-9999 w-56 overflow-hidden rounded-md border border-gray-700 bg-white shadow-lg"
               style={dropUp
                 ? { bottom: window.innerHeight - dropRect.top + 4, right: window.innerWidth - dropRect.right }
                 : { top: dropRect.bottom + 4, right: window.innerWidth - dropRect.right }

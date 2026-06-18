@@ -204,7 +204,7 @@ const steps = [
 
 **Numbered circle:**
 ```tsx
-<span className="flex h-5 w-5 flex-shrink-0 items-center justify-center
+<span className="flex h-5 w-5 shrink-0 items-center justify-center
   rounded-full bg-blue-600 text-[10px] font-bold text-white">
   {i + 1}
 </span>
@@ -222,7 +222,7 @@ Styled via the `@tailwindcss/forms` plugin.
 {/* Visual indicator */}
 <div
   onClick={(e) => { e.stopPropagation(); if (!isDisabled) handleCheckboxChange(id); }}
-  className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2
+  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2
     transition-colors cursor-pointer
     ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-500 bg-white"}
     ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
@@ -256,7 +256,7 @@ Styled via the `@tailwindcss/forms` plugin.
     <SideNav />
   </div>
   {/* Content pane — expands with content, no overflow constraints */}
-  <div className="flex flex-col flex-grow">
+  <div className="flex flex-col grow">
     <div className="p-6 md:p-12">{children}</div>
   </div>
 </div>

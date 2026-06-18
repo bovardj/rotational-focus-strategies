@@ -51,7 +51,7 @@ export default function Collapse({
       >
         <span>{title}</span>
         <svg
-          className={`ml-2 h-4 w-4 flex-shrink-0 text-gray-500 transition-transform duration-200 ${open ? "rotate-90" : ""}`}
+          className={`ml-2 h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 ${open ? "rotate-90" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

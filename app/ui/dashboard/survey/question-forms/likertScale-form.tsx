@@ -29,7 +29,7 @@ export default function LikertScaleForm({
               <label
                 key={i}
                 htmlFor={id}
-                className="flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition-colors bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-800 has-[:checked]:bg-blue-50 has-[:checked]:border-blue-800"
+                className="flex items-center gap-3 rounded-lg border px-4 py-3 cursor-pointer transition-colors bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-800 has-checked:bg-blue-50 has-checked:border-blue-800"
               >
                 <input
                   type="radio"

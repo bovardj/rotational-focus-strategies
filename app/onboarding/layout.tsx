@@ -24,7 +24,7 @@ export default async function RootLayout({
       </a>
       {/* Background glows — identical to auth-shell.tsx */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
         <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
         <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
       </div>
@@ -35,8 +35,8 @@ export default async function RootLayout({
       </div>
 
       {/* Content panel */}
-      <div className="relative flex flex-grow flex-col">
-        <div className="flex-grow max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
+      <div className="relative flex grow flex-col">
+        <div className="grow max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
           {children}
         </div>
       </div>

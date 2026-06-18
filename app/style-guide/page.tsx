@@ -181,7 +181,7 @@ function CollapseDemo({
       >
         <span>{title}</span>
         <svg
-          className={`ml-2 h-4 w-4 flex-shrink-0 text-gray-500 transition-transform duration-200 ${open ? "rotate-90" : ""}`}
+          className={`ml-2 h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 ${open ? "rotate-90" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -255,7 +255,7 @@ function AccordionDemo() {
                   e.stopPropagation();
                   toggleSelect(i);
                 }}
-                className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
                   isSelected
                     ? "border-blue-500 bg-blue-500"
                     : "cursor-pointer border-gray-500 bg-white"
@@ -281,7 +281,7 @@ function AccordionDemo() {
                 {s.name}
               </span>
               <svg
-                className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${
+                className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
                   isOpen ? "rotate-90" : ""
                 } ${isSelected ? "text-blue-500" : "text-gray-500"}`}
                 fill="none"
@@ -699,7 +699,7 @@ aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
                   return (
                     <div key={label} className="flex items-center gap-3">
                       <div
-                        className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 ${
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
                           sel
                             ? "border-blue-500 bg-blue-500"
                             : "border-gray-500 bg-white"

@@ -350,7 +350,7 @@ export default function SurveyForm({
           or navigate away after clicking submit. Your responses will be saved
           and you will be redirected when submission is complete.
         </p>
-        <div role="alert" aria-live="assertive" className="text-sm text-red-800 min-h-[1.25rem] text-center">
+        <div role="alert" aria-live="assertive" className="text-sm text-red-800 min-h-5 text-center">
           {validationError}
         </div>
         <Button

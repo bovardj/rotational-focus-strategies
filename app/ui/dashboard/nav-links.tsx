@@ -39,7 +39,7 @@ export default function NavLinks({ dark = false }: { dark?: boolean }) {
             href={link.href}
             aria-current={isActive ? "page" : undefined}
             className={clsx(
-              "flex h-16 basis-0 grow flex-col items-center justify-center gap-1 rounded-md p-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 md:h-[48px] md:flex-none md:flex-row md:justify-start md:gap-2 md:px-3",
+              "flex h-16 basis-0 grow flex-col items-center justify-center gap-1 rounded-md p-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 md:h-12 md:flex-none md:flex-row md:justify-start md:gap-2 md:px-3",
               dark
                 ? isActive
                   ? "bg-white/20 text-white"

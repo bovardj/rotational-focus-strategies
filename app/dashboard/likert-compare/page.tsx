@@ -134,8 +134,8 @@ function NumberButtons() {
         })}
       </div>
       <div className="flex justify-between mt-2 text-xs text-gray-500 leading-tight px-0.5">
-        <span className="max-w-[5rem]">1 = {SCALE[0]}</span>
-        <span className="max-w-[5rem] text-right">5 = {SCALE[4]}</span>
+        <span className="max-w-20">1 = {SCALE[0]}</span>
+        <span className="max-w-20 text-right">5 = {SCALE[4]}</span>
       </div>
       {value && (
         <p className="mt-2 text-xs text-blue-700 text-center font-medium">

@@ -74,7 +74,7 @@ export default function OnboardingComponent() {
             <h2 className="text-lg font-semibold">Select 3 focus strategies</h2>
             <span aria-live="polite" className={`flex items-center gap-1 text-sm font-medium tabular-nums ${isValid ? "text-blue-700" : "text-gray-500"}`}>
               {isValid && (
-                <svg className="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               )}
@@ -105,7 +105,7 @@ export default function OnboardingComponent() {
                     aria-label={`Select ${strategy.name}`}
                     disabled={isDisabled}
                     onClick={() => { if (!isDisabled) handleCheckboxChange(strategy.href); }}
-                    className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2
+                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2
                       ${isSelected ? "border-blue-500 bg-blue-500" : "border-gray-500 bg-white"}
                       ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
@@ -128,7 +128,7 @@ export default function OnboardingComponent() {
                     </span>
                     <svg
                       aria-hidden="true"
-                      className={`h-4 w-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${isSelected ? "text-blue-800" : "text-gray-500"}`}
+                      className={`h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${isSelected ? "text-blue-800" : "text-gray-500"}`}
                       fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

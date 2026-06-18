@@ -166,7 +166,7 @@ export function InstallPrompt() {
 
   return (
     <div
-      className="fixed inset-x-0 z-[60] bg-white border-t border-gray-200 shadow-lg md:bottom-0"
+      className="fixed inset-x-0 z-60 bg-white border-t border-gray-200 shadow-lg md:bottom-0"
       style={{
         bottom: "calc(5rem + env(safe-area-inset-bottom, 0px))",
       }}
