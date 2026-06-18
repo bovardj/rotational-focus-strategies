@@ -227,24 +227,30 @@ export default function InstructionsWizard({ baselineSurveysExpected, dailySurve
         </span>
       </div>
 
-      {/* Step content */}
-      <div className="min-h-52">
-        <h2
-          ref={headingRef}
-          tabIndex={-1}
-          className={`${lusitana.className} text-xl font-bold text-gray-900 mb-5 focus-visible:outline-none`}
-        >
-          {STEP_TITLES[step]}
-        </h2>
-        {step === 0 && <WelcomeStep />}
-        {step === 1 && <GeneralStep />}
-        {step === 2 && (
-          <PhasesStep
-            baseline={baselineSurveysExpected}
-            daily={dailySurveysExpected}
-          />
-        )}
-        {step === 3 && <OptionalStep />}
+      {/* Step content — all steps share one grid cell so the container is always
+          sized to the tallest step, preventing vertical button shift */}
+      <div className="grid mb-8">
+        {([
+          <WelcomeStep key="welcome" />,
+          <GeneralStep key="general" />,
+          <PhasesStep key="phases" baseline={baselineSurveysExpected} daily={dailySurveysExpected} />,
+          <OptionalStep key="optional" />,
+        ] as React.ReactNode[]).map((content, i) => (
+          <div
+            key={i}
+            aria-hidden={i !== step}
+            className={`[grid-area:1/1] ${i === step ? "visible" : "invisible"}`}
+          >
+            <h2
+              ref={i === step ? headingRef : undefined}
+              tabIndex={i === step ? -1 : undefined}
+              className={`${lusitana.className} text-xl font-bold text-gray-900 mb-5 focus-visible:outline-none`}
+            >
+              {STEP_TITLES[i]}
+            </h2>
+            {content}
+          </div>
+        ))}
       </div>
 
       {/* Navigation */}
