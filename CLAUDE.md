@@ -82,7 +82,7 @@ No test suite is configured.
 
 **CSS grid stacking for multi-step UIs:** To prevent layout shift when step content varies in height, render all steps simultaneously in a CSS grid with `[grid-area:1/1]` so they share the same cell. Use `invisible` / `visible` (not `display:none`) on inactive steps — `visibility:hidden` keeps them in layout flow (fixing the height) while removing them from tab order. Pair with `aria-hidden` on inactive panels. See `app/ui/dashboard/instructions/wizard.tsx`.
 
-**Tailwind v4 note:** This project uses Tailwind v4 (`@import "tailwindcss"` in `global.css`). Class names and theme customisation differ from v3 — theme values use CSS custom properties (`--color-*`, `--container-*`) and are set via `@theme` blocks, not `tailwind.config.js`.
+**Tailwind v4 note:** This project uses Tailwind v4 (`@import "tailwindcss"` in `global.css`). Class names and theme customisation differ from v3 — theme values use CSS custom properties (`--color-*`, `--container-*`) and are set via `@theme` blocks, not `tailwind.config.js`. v4-specific canonical forms: `shrink-0` (not `flex-shrink-0`), `grow` (not `flex-grow`), `has-checked:` (not `has-[:checked]:`), `z-{n}` and `flex-{n}` work for any integer (no need for arbitrary brackets), fractional spacing like `h-4.5` / `py-2.25` is valid. Do not pair `focus-visible:outline` with `focus-visible:outline-2` — `outline-2` alone is sufficient and the bare `outline` triggers a lint warning.
 
 ## Known Issues / Gotchas
 
