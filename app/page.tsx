@@ -53,9 +53,9 @@ export default function Page() {
 
       <main id="main-content" className="min-h-screen bg-blue-50">
         {/* Hero */}
-        <section className="relative overflow-hidden px-6 py-24 text-center">
+        <section aria-labelledby="hero-heading" className="relative overflow-hidden px-6 py-24 text-center">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
+            <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
             <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
           </div>
@@ -63,7 +63,7 @@ export default function Page() {
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-800">
               CS 6968 · ADHD Research Study
             </p>
-            <h1 className={`${lusitana.className} mb-6 text-5xl font-bold text-gray-900`}>
+            <h1 id="hero-heading" className={`${lusitana.className} mb-6 text-5xl font-bold text-gray-900`}>
               Rotational Focus<br />Strategies
             </h1>
             <p className="mb-8 text-lg leading-relaxed text-gray-700">
@@ -72,9 +72,11 @@ export default function Page() {
               improve productivity — deployed at{" "}
               <a
                 href="https://focusapp.dev"
-                className="text-blue-800 underline underline-offset-2 hover:text-blue-900"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded text-blue-800 underline underline-offset-2 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
               >
-                focusapp.dev
+                focusapp.dev<span className="sr-only"> (opens in new tab)</span>
               </a>
               .
             </p>
