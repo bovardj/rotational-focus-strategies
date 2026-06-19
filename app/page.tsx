@@ -37,7 +37,7 @@ export default function Page() {
               href="https://github.com/bovardj/rotational-focus-strategies"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-blue-200 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900 rounded"
+              className="rounded text-sm font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               GitHub<span className="sr-only"> (opens in new tab)</span>
             </a>
@@ -51,7 +51,7 @@ export default function Page() {
         </div>
       </header>
 
-      <main id="main-content" className="bg-blue-50">
+      <main id="main-content" className="min-h-screen bg-blue-50">
         {/* sections go here */}
       </main>
     </>
