@@ -170,6 +170,42 @@ export default function Page() {
             </div>
           </div>
         </section>
+
+        {/* Stack + CTA */}
+        <section aria-labelledby="stack-heading" className="px-6 pb-16">
+          <div className="mx-auto max-w-3xl rounded-2xl bg-blue-900 px-8 py-8">
+            <p id="stack-heading" className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-200">
+              Built with
+            </p>
+            <div className="mb-6 flex flex-wrap gap-2">
+              {[
+                "Next.js 16 App Router",
+                "Tailwind v4",
+                "Clerk Auth",
+                "Supabase + RLS",
+                "Web Push API",
+                "PWA",
+                "Vercel",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-md bg-white/10 px-3 py-1 text-xs font-semibold text-white"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-blue-200">Want to explore the app?</p>
+              <Link
+                href="/sign-up"
+                className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              >
+                Create account <ArrowRightIcon className="w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
