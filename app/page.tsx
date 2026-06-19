@@ -98,9 +98,9 @@ export default function Page() {
         </section>
 
         {/* Overview */}
-        <section className="px-6 pb-16">
+        <section aria-labelledby="overview-heading" className="px-6 pb-16">
           <div className="mx-auto max-w-3xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl shadow-blue-100/60">
-            <h2 className={`${lusitana.className} mb-1 text-2xl font-bold text-gray-900`}>
+            <h2 id="overview-heading" className={`${lusitana.className} mb-1 text-2xl font-bold text-gray-900`}>
               How the study works
             </h2>
             <p className="mb-6 text-gray-600">
@@ -134,7 +134,7 @@ export default function Page() {
             </div>
 
             {/* Screenshot placeholder */}
-            <div className="flex h-56 items-center justify-center rounded-xl border border-gray-100 bg-gray-50">
+            <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-100 bg-gray-50">
               <p className="text-sm text-gray-400">Dashboard screenshot</p>
             </div>
           </div>
