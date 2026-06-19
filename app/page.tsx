@@ -32,7 +32,7 @@ export default function Page() {
           <div className="w-28">
             <RFSLogo className="text-white" />
           </div>
-          <div className="flex items-center gap-4">
+          <nav aria-label="Main navigation" className="flex items-center gap-4">
             <a
               href="https://github.com/bovardj/rotational-focus-strategies"
               target="_blank"
@@ -43,11 +43,11 @@ export default function Page() {
             </a>
             <Link
               href="/sign-in"
-              className="rounded-lg border border-blue-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              className="rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               Sign in
             </Link>
-          </div>
+          </nav>
         </div>
       </header>
 
@@ -89,6 +89,7 @@ export default function Page() {
               </Link>
               <Link
                 href="/sign-in"
+                aria-label="Sign in to your account"
                 className="rounded-lg border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2"
               >
                 Sign in
