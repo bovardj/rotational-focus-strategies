@@ -199,9 +199,9 @@ export default function Page() {
               <p className="text-sm text-blue-200">Want to explore the app?</p>
               <Link
                 href="/sign-up"
-                className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+                className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
               >
-                Create account <ArrowRightIcon className="w-4" aria-hidden="true" />
+                Get started <ArrowRightIcon className="w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
