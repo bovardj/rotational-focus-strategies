@@ -146,7 +146,7 @@ export default function Page() {
           <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60">
               <div className="mb-3 text-2xl" aria-hidden="true">🔄</div>
-              <h3 className="mb-2 text-sm font-bold text-gray-900">Rotation algorithm</h3>
+              <h3 className="mb-2 text-base font-bold text-gray-900">Rotation algorithm</h3>
               <p className="text-sm text-gray-600">
                 Randomly assigns a new strategy each day, always excluding yesterday&apos;s — designed
                 to avoid fatigue bias in the study data.
@@ -154,7 +154,7 @@ export default function Page() {
             </div>
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60">
               <div className="mb-3 text-2xl" aria-hidden="true">🔔</div>
-              <h3 className="mb-2 text-sm font-bold text-gray-900">Push notifications + PWA</h3>
+              <h3 className="mb-2 text-base font-bold text-gray-900">Push notifications + PWA</h3>
               <p className="text-sm text-gray-600">
                 Service worker, installable on mobile, with scheduled Web Push reminders to
                 complete daily surveys.
@@ -162,7 +162,7 @@ export default function Page() {
             </div>
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60">
               <div className="mb-3 text-2xl" aria-hidden="true">🔐</div>
-              <h3 className="mb-2 text-sm font-bold text-gray-900">Clerk + Supabase RLS</h3>
+              <h3 className="mb-2 text-base font-bold text-gray-900">Clerk + Supabase RLS</h3>
               <p className="text-sm text-gray-600">
                 Clerk JWTs injected as Supabase access tokens — row-level security enforces
                 per-user data isolation without custom middleware.
