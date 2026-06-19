@@ -96,6 +96,49 @@ export default function Page() {
             </div>
           </div>
         </section>
+
+        {/* Overview */}
+        <section className="px-6 pb-16">
+          <div className="mx-auto max-w-3xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl shadow-blue-100/60">
+            <h2 className={`${lusitana.className} mb-1 text-2xl font-bold text-gray-900`}>
+              How the study works
+            </h2>
+            <p className="mb-6 text-gray-600">
+              Seven days. Three phases. One question: which focus strategy works best for you?
+            </p>
+
+            {/* Phase timeline */}
+            <div className="mb-6 flex overflow-hidden rounded-xl border border-gray-100">
+              <div className="flex-[3] border-r border-gray-100 bg-blue-50 px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
+                  Baseline · 3 days
+                </p>
+                <p className="text-sm text-gray-600">
+                  Daily surveys with no assigned strategy — establishes your focus baseline.
+                </p>
+              </div>
+              <div className="flex-[4] border-r border-gray-100 bg-blue-100 px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
+                  Daily Focus · 4 days
+                </p>
+                <p className="text-sm text-gray-700">
+                  A different strategy every day, never repeating yesterday&apos;s. Survey after each session.
+                </p>
+              </div>
+              <div className="flex-[1] bg-blue-900 px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-200">
+                  Exit
+                </p>
+                <p className="text-sm text-blue-200">Final reflections.</p>
+              </div>
+            </div>
+
+            {/* Screenshot placeholder */}
+            <div className="flex h-56 items-center justify-center rounded-xl border border-gray-100 bg-gray-50">
+              <p className="text-sm text-gray-400">Dashboard screenshot</p>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
