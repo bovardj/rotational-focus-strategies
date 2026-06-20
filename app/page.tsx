@@ -59,7 +59,7 @@ export default function Page() {
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
             <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
           </div>
-          <div className="relative mx-auto max-w-2xl">
+          <div className="relative mx-auto max-w-3xl">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-800">
               Designing Digital Health Systems · Course Project
             </p>
@@ -91,8 +91,8 @@ export default function Page() {
 
         {/* Overview */}
         <section aria-labelledby="overview-heading" className="px-6 pb-16">
-          <div className="mx-auto max-w-3xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl shadow-blue-100/60">
-            <h2 id="overview-heading" className={`${lusitana.className} mb-1 text-2xl font-bold text-gray-900`}>
+          <div className="mx-auto max-w-4xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl shadow-blue-100/60">
+            <h2 id="overview-heading" className={`${lusitana.className} mb-6 text-2xl font-bold text-gray-900`}>
               How the study works
             </h2>
             {/* <p className="mb-6 text-gray-600">
@@ -157,7 +157,7 @@ export default function Page() {
         {/* Feature highlights */}
         <section aria-labelledby="features-heading" className="px-6 pb-16">
           <h2 id="features-heading" className="sr-only">Key features</h2>
-          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60">
               <div className="mb-3 text-2xl" aria-hidden="true">🔄</div>
               <h3 className="mb-2 text-base font-bold text-gray-900">Rotation algorithm</h3>
@@ -187,7 +187,7 @@ export default function Page() {
 
         {/* Stack + CTA */}
         <section aria-labelledby="stack-heading" className="px-6 pb-16">
-          <div className="mx-auto max-w-3xl rounded-2xl bg-blue-900 px-8 py-8">
+          <div className="mx-auto max-w-4xl rounded-2xl bg-blue-900 px-8 py-8">
             <p id="stack-heading" className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-200">
               Built with
             </p>
