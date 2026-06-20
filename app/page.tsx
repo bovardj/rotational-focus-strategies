@@ -61,24 +61,15 @@ export default function Page() {
           </div>
           <div className="relative mx-auto max-w-2xl">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-800">
-              CS 6968 · ADHD Research Study
+              Designing Digital Health Systems · Course Project
             </p>
             <h1 id="hero-heading" className={`${lusitana.className} mb-6 text-5xl font-bold text-gray-900`}>
               Rotational Focus<br />Strategies
             </h1>
             <p className="mb-8 text-lg leading-relaxed text-gray-700">
-              A full-stack research web app that ran a 4-week study assigning rotating daily focus
-              strategies to participants with ADHD. Built to measure which strategies actually
-              improve productivity — deployed at{" "}
-              <a
-                href="https://focusapp.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded text-blue-800 underline underline-offset-2 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
-              >
-                focusapp.dev<span className="sr-only"> (opens in new tab)</span>
-              </a>
-              .
+              A full-stack research web app testing whether randomly rotating focus strategies 
+              improves daily productivity and satisfaction for people with ADHD. Preceded by a 
+              3-day pilot using rapid iterative prototyping to refine the study design. 
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
@@ -104,35 +95,57 @@ export default function Page() {
             <h2 id="overview-heading" className={`${lusitana.className} mb-1 text-2xl font-bold text-gray-900`}>
               How the study works
             </h2>
-            <p className="mb-6 text-gray-600">
-              Seven days. Three phases. One question: which focus strategy works best for you?
-            </p>
+            {/* <p className="mb-6 text-gray-600">
+              Seven days. Two phases. 
+            </p> */}
 
             {/* Phase timeline */}
             <div className="mb-6 flex overflow-hidden rounded-xl border border-gray-100">
-              <div className="flex-[3] border-r border-gray-100 bg-blue-50 px-4 py-4">
+              {/* <div className="flex-3 border-r border-gray-100 bg-blue-50 px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
+                  Pilot · 3 days
+                </p>
+                <p className="text-sm text-gray-600">
+                  Rapid iterative prototyping with real users to refine the study design before launch.
+                </p>
+              </div> */}
+
+              <div className="flex-3 border-r border-gray-100 bg-blue-50 px-4 py-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Baseline · 3 days
                 </p>
                 <p className="text-sm text-gray-600">
-                  Daily surveys with no assigned strategy — establishes your focus baseline.
+                  Daily surveys with no assigned strategy &mdash; establishes each participant&apos;s baseline.
                 </p>
               </div>
-              <div className="flex-[4] border-r border-gray-100 bg-blue-100 px-4 py-4">
+              <div className="flex-4 border-r border-gray-100 bg-blue-100 px-4 py-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Daily Focus · 4 days
                 </p>
                 <p className="text-sm text-gray-700">
-                  A different strategy every day, never repeating yesterday&apos;s. Survey after each session.
+                  A randomly assigned strategy each day (repeats allowed) &mdash; testing whether rotation itself improves outcomes.
                 </p>
               </div>
-              <div className="flex-[1] bg-blue-900 px-4 py-4">
-                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-200">
+              <div className="flex-2 bg-blue-900 px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-100">
                   Exit
                 </p>
-                <p className="text-sm text-blue-200">Final reflections.</p>
+                <p className="text-sm text-blue-200">
+                  A reflection survey along with demographic data collection.
+                </p>
               </div>
             </div>
+
+            {/* <div className="mb-2 flex overflow-hidden border-gray-700">
+              <div className="mx-auto max-w-3xl px-4 py-4">
+                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-600">
+                  Exit
+                </p>
+                <p className="text-sm text-gray-600">
+                  A final survey combines reflection with demographic data collection.
+                </p>
+              </div>
+            </div> */}
 
             {/* Screenshot placeholder */}
             <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-100 bg-gray-50">
@@ -149,8 +162,8 @@ export default function Page() {
               <div className="mb-3 text-2xl" aria-hidden="true">🔄</div>
               <h3 className="mb-2 text-base font-bold text-gray-900">Rotation algorithm</h3>
               <p className="text-sm text-gray-600">
-                Randomly assigns a new strategy each day, always excluding yesterday&apos;s — designed
-                to avoid fatigue bias in the study data.
+                Randomly assigns a focus strategy each day &mdash; designed to test whether 
+                rotating strategies drives changes in productivity and satisfaction.
               </p>
             </div>
             <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60">
