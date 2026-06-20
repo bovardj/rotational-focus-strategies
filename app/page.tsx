@@ -28,7 +28,7 @@ export default function Page() {
       </a>
 
       <header className="sticky top-0 z-10 bg-blue-900">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="w-28">
             <RFSLogo className="text-white" />
           </div>
