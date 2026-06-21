@@ -100,7 +100,7 @@ export default function Page() {
             </p> */}
 
             {/* Phase timeline */}
-            <div className="mb-6 flex overflow-hidden rounded-xl border border-gray-100">
+            <div className="mb-6 flex flex-col overflow-hidden rounded-xl border border-gray-100 sm:flex-row">
               {/* <div className="flex-3 border-r border-gray-100 bg-blue-50 px-4 py-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Pilot · 3 days
@@ -110,7 +110,7 @@ export default function Page() {
                 </p>
               </div> */}
 
-              <div className="flex-3 border-r border-gray-100 bg-blue-50 px-4 py-4">
+              <div className="border-b border-gray-100 bg-blue-50 px-4 py-4 sm:flex-3 sm:border-b-0 sm:border-r">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Baseline · 3 days
                 </p>
@@ -118,7 +118,7 @@ export default function Page() {
                   Daily surveys with no assigned strategy &mdash; establishes each participant&apos;s baseline.
                 </p>
               </div>
-              <div className="flex-4 border-r border-gray-100 bg-blue-100 px-4 py-4">
+              <div className="border-b border-gray-100 bg-blue-100 px-4 py-4 sm:flex-4 sm:border-b-0 sm:border-r">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Daily Focus · 4 days
                 </p>
@@ -126,7 +126,7 @@ export default function Page() {
                   A randomly assigned strategy each day (repeats allowed) &mdash; testing whether rotation itself improves outcomes.
                 </p>
               </div>
-              <div className="flex-2 bg-blue-900 px-4 py-4">
+              <div className="bg-blue-900 px-4 py-4 sm:flex-2">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-100">
                   Exit
                 </p>
