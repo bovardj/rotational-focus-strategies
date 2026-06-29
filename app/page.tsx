@@ -5,6 +5,7 @@ import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
 import RFSLogo from "@/app/ui/rfs-logo";
 
@@ -124,9 +125,34 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Screenshot placeholder */}
-            <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-300 bg-gray-50">
-              <p className="text-sm text-gray-400">Dashboard screenshot</p>
+            {/* Screenshots */}
+            <div className="flex flex-col gap-3">
+              <div className="relative aspect-video overflow-hidden rounded-lg">
+                <Image
+                  src="/images/landing/rfs-dashboard-start.jpeg"
+                  alt="RFS dashboard home screen"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative aspect-video overflow-hidden rounded-lg">
+                  <Image
+                    src="/images/landing/rfs-dashboard-daily-1of4.jpeg"
+                    alt="Dashboard during day 1 of the focus strategy phase"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="relative aspect-video overflow-hidden rounded-lg">
+                  <Image
+                    src="/images/landing/rfs-survey-daily.jpeg"
+                    alt="Daily survey form"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
