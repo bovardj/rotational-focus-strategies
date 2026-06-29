@@ -1,23 +1,48 @@
 "use client";
 
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import RFSLogo from "@/app/ui/rfs-logo";
 
+const screenshots = [
+  { src: "/images/landing/rfs-dashboard-start.jpeg", alt: "RFS dashboard home screen" },
+  { src: "/images/landing/rfs-dashboard-daily-1of4.jpeg", alt: "Dashboard during day 1 of the focus strategy phase" },
+  { src: "/images/landing/rfs-survey-daily.jpeg", alt: "Daily survey form" },
+];
+
 export default function Page() {
   const router = useRouter();
   const { isSignedIn } = useAuth();
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isSignedIn) {
       router.push("/dashboard");
     }
   }, [isSignedIn, router]);
+
+  useEffect(() => {
+    if (activeIndex !== null) {
+      closeButtonRef.current?.focus();
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (activeIndex === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveIndex(null);
+      if (e.key === "ArrowRight") setActiveIndex(i => i !== null ? (i + 1) % screenshots.length : null);
+      if (e.key === "ArrowLeft") setActiveIndex(i => i !== null ? (i - 1 + screenshots.length) % screenshots.length : null);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [activeIndex]);
 
   return (
     <>
@@ -68,9 +93,9 @@ export default function Page() {
               Rotational Focus<br />Strategies
             </h1>
             <p className="mb-8 text-lg leading-relaxed text-gray-700">
-              A full-stack research web app designed to test whether randomly rotating focus strategies 
-              improves daily productivity and satisfaction for people with ADHD. Preceded by a 
-              3-day pilot using rapid iterative prototyping to refine the study design. 
+              A full-stack research web app designed to test whether randomly rotating focus strategies
+              improves daily productivity and satisfaction for people with ADHD. Preceded by a
+              3-day pilot using rapid iterative prototyping to refine the study design.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
@@ -127,31 +152,24 @@ export default function Page() {
 
             {/* Screenshots */}
             <div className="flex flex-col gap-3">
-              <div className="relative aspect-video overflow-hidden rounded-lg">
-                <Image
-                  src="/images/landing/rfs-dashboard-start.jpeg"
-                  alt="RFS dashboard home screen"
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
+              <button
+                onClick={() => setActiveIndex(0)}
+                className="relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                aria-label={`View full screenshot: ${screenshots[0].alt}`}
+              >
+                <Image src={screenshots[0].src} alt="" fill className="object-cover object-top" />
+              </button>
               <div className="grid grid-cols-2 gap-3">
-                <div className="relative aspect-video overflow-hidden rounded-lg">
-                  <Image
-                    src="/images/landing/rfs-dashboard-daily-1of4.jpeg"
-                    alt="Dashboard during day 1 of the focus strategy phase"
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="relative aspect-video overflow-hidden rounded-lg">
-                  <Image
-                    src="/images/landing/rfs-survey-daily.jpeg"
-                    alt="Daily survey form"
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
+                {screenshots.slice(1).map((s, i) => (
+                  <button
+                    key={s.src}
+                    onClick={() => setActiveIndex(i + 1)}
+                    className="relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                    aria-label={`View full screenshot: ${s.alt}`}
+                  >
+                    <Image src={s.src} alt="" fill className="object-cover object-top" />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -165,7 +183,7 @@ export default function Page() {
               <div className="mb-3 text-2xl" aria-hidden="true">🔄</div>
               <h3 className="mb-2 text-base font-bold text-gray-900">Rotation algorithm</h3>
               <p className="text-sm text-gray-600">
-                Randomly assigns a focus strategy each day &mdash; designed to test whether 
+                Randomly assigns a focus strategy each day &mdash; designed to test whether
                 rotating strategies drives changes in productivity and satisfaction.
               </p>
             </div>
@@ -224,6 +242,54 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      {/* Screenshot lightbox */}
+      {activeIndex !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Screenshot viewer"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setActiveIndex(null)}
+        >
+          <button
+            onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i - 1 + screenshots.length) % screenshots.length : null); }}
+            className="rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            aria-label="Previous screenshot"
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+          </button>
+
+          <div className="relative mx-4 w-[80vw] aspect-video overflow-hidden rounded-xl" onClick={e => e.stopPropagation()}>
+            <Image
+              src={screenshots[activeIndex].src}
+              alt={screenshots[activeIndex].alt}
+              fill
+              className="object-contain"
+              sizes="80vw"
+            />
+            <button
+              ref={closeButtonRef}
+              onClick={() => setActiveIndex(null)}
+              className="absolute right-3 top-3 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Close screenshot viewer"
+            >
+              <XMarkIcon className="h-5 w-5" />
+            </button>
+            <p className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs text-white">
+              {activeIndex + 1} / {screenshots.length}
+            </p>
+          </div>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i + 1) % screenshots.length : null); }}
+            className="rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            aria-label="Next screenshot"
+          >
+            <ChevronRightIcon className="h-6 w-6" />
+          </button>
+        </div>
+      )}
     </>
   );
 }
