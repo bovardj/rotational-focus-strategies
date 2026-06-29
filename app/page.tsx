@@ -28,6 +28,7 @@ export default function Page() {
   const [isDragging, setIsDragging] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dragStartRef = useRef<{ mouseX: number; mouseY: number; panX: number; panY: number } | null>(null);
+  const backdropPressedRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -316,7 +317,8 @@ export default function Page() {
           aria-modal="true"
           aria-label="Screenshot viewer"
           className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-4"
-          onClick={() => setActiveIndex(null)}
+          onPointerDown={(e) => { backdropPressedRef.current = e.target === e.currentTarget; }}
+          onPointerUp={(e) => { if (e.target === e.currentTarget && backdropPressedRef.current) setActiveIndex(null); backdropPressedRef.current = false; }}
         >
           <button
             onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i - 1 + screenshots.length) % screenshots.length : null); }}
