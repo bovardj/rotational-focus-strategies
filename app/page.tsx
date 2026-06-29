@@ -29,12 +29,22 @@ export default function Page() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dragStartRef = useRef<{ mouseX: number; mouseY: number; panX: number; panY: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const clampPan = (px: number, py: number, currentZoom: number) => {
     if (!containerRef.current) return { x: px, y: py };
-    const { width, height } = containerRef.current.getBoundingClientRect();
-    const maxX = width * (currentZoom - 1) / (2 * currentZoom);
-    const maxY = height * (currentZoom - 1) / (2 * currentZoom);
+    const { width: elW, height: elH } = containerRef.current.getBoundingClientRect();
+    // Default to full container size; narrow to actual image content if natural dims are available
+    let contentW = elW;
+    let contentH = elH;
+    const img = imgRef.current;
+    if (img && img.naturalWidth > 0 && img.naturalHeight > 0) {
+      const scale = Math.min(elW / img.naturalWidth, elH / img.naturalHeight);
+      contentW = img.naturalWidth * scale;
+      contentH = img.naturalHeight * scale;
+    }
+    const maxX = contentW * (currentZoom - 1) / (2 * currentZoom);
+    const maxY = contentH * (currentZoom - 1) / (2 * currentZoom);
     return { x: Math.max(-maxX, Math.min(maxX, px)), y: Math.max(-maxY, Math.min(maxY, py)) };
   };
 
@@ -328,6 +338,7 @@ export default function Page() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
+              ref={imgRef}
               src={screenshots[activeIndex].src}
               alt={screenshots[activeIndex].alt}
               width={1920}
