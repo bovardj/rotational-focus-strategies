@@ -28,6 +28,15 @@ export default function Page() {
   const [isDragging, setIsDragging] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dragStartRef = useRef<{ mouseX: number; mouseY: number; panX: number; panY: number } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const clampPan = (px: number, py: number, currentZoom: number) => {
+    if (!containerRef.current) return { x: px, y: py };
+    const { width, height } = containerRef.current.getBoundingClientRect();
+    const maxX = width * (currentZoom - 1) / (2 * currentZoom);
+    const maxY = height * (currentZoom - 1) / (2 * currentZoom);
+    return { x: Math.max(-maxX, Math.min(maxX, px)), y: Math.max(-maxY, Math.min(maxY, py)) };
+  };
 
   useEffect(() => {
     if (isSignedIn) {
@@ -63,6 +72,7 @@ export default function Page() {
   const handleZoomOut = () => setZoom(z => {
     const next = Math.max(z - ZOOM_STEP, MIN_ZOOM);
     if (next === MIN_ZOOM) setPan({ x: 0, y: 0 });
+    else setPan(prev => clampPan(prev.x, prev.y, next));
     return next;
   });
 
@@ -76,7 +86,7 @@ export default function Page() {
     if (!isDragging || !dragStartRef.current) return;
     const dx = e.clientX - dragStartRef.current.mouseX;
     const dy = e.clientY - dragStartRef.current.mouseY;
-    setPan({ x: dragStartRef.current.panX + dx / zoom, y: dragStartRef.current.panY + dy / zoom });
+    setPan(clampPan(dragStartRef.current.panX + dx / zoom, dragStartRef.current.panY + dy / zoom, zoom));
   };
 
   const handleMouseUp = () => {
@@ -307,6 +317,7 @@ export default function Page() {
           </button>
 
           <div
+            ref={containerRef}
             className="relative mx-4 w-[80vw] animate-scale-in overflow-hidden rounded-xl"
             style={{ cursor: zoom > MIN_ZOOM ? (isDragging ? "grabbing" : "grab") : "default" }}
             onMouseDown={handleMouseDown}
