@@ -7,11 +7,23 @@
   --color-blue-600: #2F6FEB;
   --grid-template-columns-13: repeat(13, minmax(0, 1fr));
   --animate-shimmer: shimmer 1s infinite;
+  --animate-fade-in: fade-in 0.15s ease-out;
+  --animate-scale-in: scale-in 0.2s ease-out;
 
   @keyframes shimmer {
     100% {
       transform: translateX(100%);
     }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
 }
 

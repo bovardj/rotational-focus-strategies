@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ArrowsPointingOutIcon, ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -154,20 +154,26 @@ export default function Page() {
             <div className="flex flex-col gap-3">
               <button
                 onClick={() => setActiveIndex(0)}
-                className="relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                className="group relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
                 aria-label={`View full screenshot: ${screenshots[0].alt}`}
               >
-                <Image src={screenshots[0].src} alt="" fill className="object-cover object-top" />
+                <Image src={screenshots[0].src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                  <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
+                </div>
               </button>
               <div className="grid grid-cols-2 gap-3">
                 {screenshots.slice(1).map((s, i) => (
                   <button
                     key={s.src}
                     onClick={() => setActiveIndex(i + 1)}
-                    className="relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                    className="group relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
                     aria-label={`View full screenshot: ${s.alt}`}
                   >
-                    <Image src={s.src} alt="" fill className="object-cover object-top" />
+                    <Image src={s.src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                      <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
+                    </div>
                   </button>
                 ))}
               </div>
@@ -249,7 +255,7 @@ export default function Page() {
           role="dialog"
           aria-modal="true"
           aria-label="Screenshot viewer"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-4"
           onClick={() => setActiveIndex(null)}
         >
           <button
@@ -260,7 +266,7 @@ export default function Page() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
 
-          <div className="relative mx-4 w-[80vw] aspect-video overflow-hidden rounded-xl" onClick={e => e.stopPropagation()}>
+          <div className="relative mx-4 aspect-video w-[80vw] animate-scale-in overflow-hidden rounded-xl" onClick={e => e.stopPropagation()}>
             <Image
               src={screenshots[activeIndex].src}
               alt={screenshots[activeIndex].alt}
