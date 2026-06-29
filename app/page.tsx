@@ -262,7 +262,7 @@ export default function Page() {
                     <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                   </div>
                 </button>
-                <figcaption className="text-xs text-gray-500">{screenshots[0].caption}</figcaption>
+                <figcaption className="px-2 text-xs italic text-gray-500">{screenshots[0].caption}</figcaption>
               </figure>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {screenshots.slice(1).map((s, i) => (
@@ -277,7 +277,7 @@ export default function Page() {
                         <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                       </div>
                     </button>
-                    <figcaption className="text-xs text-gray-500">{s.caption}</figcaption>
+                    <figcaption className="px-2 text-xs italic text-gray-500">{s.caption}</figcaption>
                   </figure>
                 ))}
               </div>
@@ -436,7 +436,7 @@ export default function Page() {
 
           </div>
           {/* Caption */}
-          <div className="bg-white px-4 py-2.5 text-center text-sm text-gray-600">
+          <div className="bg-white px-4 py-2.5 text-center text-sm italic text-gray-600">
             {screenshots[activeIndex].caption}
           </div>
           </div>
