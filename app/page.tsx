@@ -261,7 +261,7 @@ export default function Page() {
                   <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                 </div>
               </button>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {screenshots.slice(1).map((s, i) => (
                   <button
                     key={s.src}
