@@ -18,6 +18,11 @@
 
 html {
   scrollbar-gutter: stable;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: clip;
 }
 
 input[type='number'] {

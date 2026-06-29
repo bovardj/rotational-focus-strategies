@@ -51,9 +51,9 @@ export default function Page() {
         </div>
       </header>
 
-      <main id="main-content" className="min-h-screen bg-blue-50">
+      <main id="main-content" className="min-h-screen overflow-x-hidden bg-blue-50">
         {/* Hero */}
-        <section aria-labelledby="hero-heading" className="relative overflow-hidden px-6 py-24 text-center">
+        <section aria-labelledby="hero-heading" className="relative overflow-clip px-6 py-24 text-center">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-100/80 blur-3xl" />
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-indigo-100/50 blur-3xl" />
@@ -91,7 +91,7 @@ export default function Page() {
 
         {/* Overview */}
         <section aria-labelledby="overview-heading" className="px-6 pb-16">
-          <div className="mx-auto max-w-4xl rounded-2xl border border-gray-100 bg-white p-8 shadow-xl shadow-blue-100/60">
+          <div className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow-xl shadow-blue-100/60">
             <h2 id="overview-heading" className={`${lusitana.className} mb-6 text-2xl font-bold text-gray-900`}>
               How the study works
             </h2>
@@ -100,8 +100,8 @@ export default function Page() {
             </p> */}
 
             {/* Phase timeline */}
-            <div className="mb-6 flex flex-col overflow-hidden rounded-xl border border-gray-100 sm:flex-row">
-              {/* <div className="flex-3 border-r border-gray-100 bg-blue-50 px-4 py-4">
+            <div className="mb-6 flex flex-col overflow-hidden rounded-xl sm:flex-row">
+              {/* <div className="flex-3 bg-blue-50 px-4 py-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Pilot · 3 days
                 </p>
@@ -110,7 +110,7 @@ export default function Page() {
                 </p>
               </div> */}
 
-              <div className="border-b border-gray-100 bg-blue-50 px-4 py-4 sm:flex-3 sm:border-b-0 sm:border-r">
+              <div className="bg-blue-50 px-4 py-4 sm:flex-3">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Baseline · 3 days
                 </p>
@@ -118,7 +118,7 @@ export default function Page() {
                   Daily surveys with no assigned strategy &mdash; establishes each participant&apos;s baseline.
                 </p>
               </div>
-              <div className="border-b border-gray-100 bg-blue-100 px-4 py-4 sm:flex-4 sm:border-b-0 sm:border-r">
+              <div className="bg-blue-100 px-4 py-4 sm:flex-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Daily Focus · 4 days
                 </p>
@@ -136,7 +136,7 @@ export default function Page() {
               </div>
             </div>
 
-            {/* <div className="mb-2 flex overflow-hidden border-gray-700">
+            {/* <div className="mb-2 flex overflow-hidden">
               <div className="mx-auto max-w-3xl px-4 py-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-600">
                   Exit
@@ -148,7 +148,7 @@ export default function Page() {
             </div> */}
 
             {/* Screenshot placeholder */}
-            <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-100 bg-gray-50">
+            <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-300 bg-gray-50">
               <p className="text-sm text-gray-400">Dashboard screenshot</p>
             </div>
           </div>
