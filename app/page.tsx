@@ -374,7 +374,7 @@ export default function Page() {
           <div className="flex w-full flex-col animate-scale-in overflow-hidden rounded-xl border border-slate-700 md:mx-4 md:w-[80vw]">
           <div
             ref={containerRef}
-            className="relative w-full touch-none bg-slate-700"
+            className="relative w-full touch-none overflow-hidden bg-slate-700"
             style={{ cursor: zoom > MIN_ZOOM ? (isDragging ? "grabbing" : "grab") : "default" }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
@@ -407,7 +407,7 @@ export default function Page() {
             </button>
 
             {/* Bottom bar: zoom controls + counter */}
-            <div className="absolute inset-x-3 bottom-14 flex items-center justify-between">
+            <div className="absolute inset-x-3 bottom-3 flex items-center justify-between">
               <div className="flex items-center gap-1 rounded-full bg-black/50 px-2 py-1">
                 <button
                   onPointerDown={(e) => e.stopPropagation()}
@@ -434,10 +434,10 @@ export default function Page() {
               </p>
             </div>
 
-            {/* Caption */}
-            <div className="absolute inset-x-0 bottom-0 bg-white/90 px-4 py-2.5 text-center text-sm text-gray-700 backdrop-blur-sm">
-              {screenshots[activeIndex].caption}
-            </div>
+          </div>
+          {/* Caption */}
+          <div className="bg-white px-4 py-2.5 text-center text-sm text-gray-600">
+            {screenshots[activeIndex].caption}
           </div>
           </div>
 
