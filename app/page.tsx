@@ -38,10 +38,14 @@ export default function Page() {
   useEffect(() => {
     if (activeIndex !== null) {
       closeButtonRef.current?.focus();
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setZoom(MIN_ZOOM);
     setPan({ x: 0, y: 0 });
+    return () => { document.documentElement.style.overflow = ""; };
   }, [activeIndex]);
 
   useEffect(() => {
