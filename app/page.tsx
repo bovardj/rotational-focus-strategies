@@ -67,7 +67,7 @@ export default function Page() {
               Rotational Focus<br />Strategies
             </h1>
             <p className="mb-8 text-lg leading-relaxed text-gray-700">
-              A full-stack research web app testing whether randomly rotating focus strategies 
+              A full-stack research web app designed to test whether randomly rotating focus strategies 
               improves daily productivity and satisfaction for people with ADHD. Preceded by a 
               3-day pilot using rapid iterative prototyping to refine the study design. 
             </p>
@@ -93,40 +93,28 @@ export default function Page() {
         <section aria-labelledby="overview-heading" className="px-6 pb-16">
           <div className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow-xl shadow-blue-100/60">
             <h2 id="overview-heading" className={`${lusitana.className} mb-6 text-2xl font-bold text-gray-900`}>
-              How the study works
+              How the study worked
             </h2>
-            {/* <p className="mb-6 text-gray-600">
-              Seven days. Two phases. 
-            </p> */}
 
             {/* Phase timeline */}
             <div className="mb-6 flex flex-col overflow-hidden rounded-xl sm:flex-row">
-              {/* <div className="flex-3 bg-blue-50 px-4 py-4">
-                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
-                  Pilot · 3 days
-                </p>
-                <p className="text-sm text-gray-600">
-                  Rapid iterative prototyping with real users to refine the study design before launch.
-                </p>
-              </div> */}
-
-              <div className="bg-blue-50 px-4 py-4 sm:flex-3">
+              <div className="bg-blue-100/50 px-4 py-4 sm:flex-5">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Baseline · 3 days
                 </p>
                 <p className="text-sm text-gray-600">
-                  Daily surveys with no assigned strategy &mdash; establishes each participant&apos;s baseline.
+                  Daily surveys with no assigned strategy. This established each participant&apos;s baseline.
                 </p>
               </div>
-              <div className="bg-blue-100 px-4 py-4 sm:flex-4">
+              <div className="bg-blue-200/60 px-4 py-4 sm:flex-9">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-800">
                   Daily Focus · 4 days
                 </p>
                 <p className="text-sm text-gray-700">
-                  A randomly assigned strategy each day (repeats allowed) &mdash; testing whether rotation itself improves outcomes.
+                  Use a randomly assigned strategy each day (repeats allowed), then fill out end of day surveys. This tested whether strategy rotation improves outcomes.
                 </p>
               </div>
-              <div className="bg-blue-900 px-4 py-4 sm:flex-2">
+              <div className="bg-blue-900 px-4 py-4 sm:flex-4">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wider text-blue-100">
                   Exit
                 </p>
@@ -135,17 +123,6 @@ export default function Page() {
                 </p>
               </div>
             </div>
-
-            {/* <div className="mb-2 flex overflow-hidden">
-              <div className="mx-auto max-w-3xl px-4 py-4">
-                <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-600">
-                  Exit
-                </p>
-                <p className="text-sm text-gray-600">
-                  A final survey combines reflection with demographic data collection.
-                </p>
-              </div>
-            </div> */}
 
             {/* Screenshot placeholder */}
             <div aria-hidden="true" className="flex h-56 items-center justify-center rounded-xl border border-gray-300 bg-gray-50">
@@ -178,7 +155,7 @@ export default function Page() {
               <div className="mb-3 text-2xl" aria-hidden="true">🔐</div>
               <h3 className="mb-2 text-base font-bold text-gray-900">Clerk + Supabase RLS</h3>
               <p className="text-sm text-gray-600">
-                Clerk JWTs injected as Supabase access tokens — row-level security enforces
+                Clerk JWTs injected as Supabase access tokens &mdash; row-level security enforces
                 per-user data isolation without custom middleware.
               </p>
             </div>
