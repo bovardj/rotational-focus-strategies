@@ -31,6 +31,9 @@ export default function Page() {
   const backdropPressedRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const activePointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const pinchStartRef = useRef<{ distance: number; zoom: number } | null>(null);
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
 
   const clampPan = (px: number, py: number, currentZoom: number) => {
     if (!containerRef.current) return { x: px, y: py };
@@ -87,22 +90,57 @@ export default function Page() {
     return next;
   });
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (zoom <= MIN_ZOOM) return;
-    setIsDragging(true);
-    dragStartRef.current = { mouseX: e.clientX, mouseY: e.clientY, panX: pan.x, panY: pan.y };
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    activePointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const count = activePointersRef.current.size;
+    if (count === 1) {
+      if (zoom > MIN_ZOOM) {
+        setIsDragging(true);
+        dragStartRef.current = { mouseX: e.clientX, mouseY: e.clientY, panX: pan.x, panY: pan.y };
+      } else {
+        swipeStartRef.current = { x: e.clientX, y: e.clientY };
+      }
+    } else if (count === 2) {
+      setIsDragging(false);
+      dragStartRef.current = null;
+      swipeStartRef.current = null;
+      const pts = Array.from(activePointersRef.current.values());
+      pinchStartRef.current = { distance: Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y), zoom };
+    }
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !dragStartRef.current) return;
+  const handlePointerMove = (e: React.PointerEvent) => {
+    activePointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (activePointersRef.current.size === 2 && pinchStartRef.current) {
+      const pts = Array.from(activePointersRef.current.values());
+      const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+      const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, pinchStartRef.current.zoom * (dist / pinchStartRef.current.distance)));
+      setZoom(newZoom);
+      setPan(prev => clampPan(prev.x, prev.y, newZoom));
+      return;
+    }
+    if (!dragStartRef.current) return;
     const dx = e.clientX - dragStartRef.current.mouseX;
     const dy = e.clientY - dragStartRef.current.mouseY;
     setPan(clampPan(dragStartRef.current.panX + dx / zoom, dragStartRef.current.panY + dy / zoom, zoom));
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    dragStartRef.current = null;
+  const handlePointerUp = (e: React.PointerEvent) => {
+    activePointersRef.current.delete(e.pointerId);
+    if (activePointersRef.current.size < 2) pinchStartRef.current = null;
+    if (activePointersRef.current.size === 0) {
+      if (swipeStartRef.current) {
+        const dx = e.clientX - swipeStartRef.current.x;
+        const dy = e.clientY - swipeStartRef.current.y;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          setActiveIndex(i => i !== null ? dx < 0 ? (i + 1) % screenshots.length : (i - 1 + screenshots.length) % screenshots.length : null);
+        }
+        swipeStartRef.current = null;
+      }
+      setIsDragging(false);
+      dragStartRef.current = null;
+    }
   };
 
   return (
@@ -322,7 +360,7 @@ export default function Page() {
         >
           <button
             onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i - 1 + screenshots.length) % screenshots.length : null); }}
-            className="shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="hidden shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:block"
             aria-label="Previous screenshot"
           >
             <ChevronLeftIcon className="h-6 w-6" />
@@ -330,12 +368,12 @@ export default function Page() {
 
           <div
             ref={containerRef}
-            className="relative mx-4 w-[80vw] animate-scale-in overflow-hidden rounded-xl"
+            className="relative w-full animate-scale-in overflow-hidden rounded-xl touch-none md:mx-4 md:w-[80vw]"
             style={{ cursor: zoom > MIN_ZOOM ? (isDragging ? "grabbing" : "grab") : "default" }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
             onWheel={(e) => { if (e.deltaY < 0) handleZoomIn(); else handleZoomOut(); }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -354,7 +392,7 @@ export default function Page() {
             {/* Close */}
             <button
               ref={closeButtonRef}
-              onMouseDown={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()}
               onClick={() => setActiveIndex(null)}
               className="absolute right-3 top-3 rounded-full bg-black/50 p-1.5 text-white transition-colors hover:bg-black/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               aria-label="Close screenshot viewer"
@@ -366,7 +404,7 @@ export default function Page() {
             <div className="absolute inset-x-3 bottom-3 flex items-center justify-between">
               <div className="flex items-center gap-1 rounded-full bg-black/50 px-2 py-1">
                 <button
-                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
                   onClick={handleZoomOut}
                   disabled={zoom <= MIN_ZOOM}
                   className="rounded-full p-1 text-white transition-colors hover:bg-white/20 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
@@ -376,7 +414,7 @@ export default function Page() {
                 </button>
                 <span className="w-10 text-center text-xs text-white">{Math.round(zoom * 100)}%</span>
                 <button
-                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
                   onClick={handleZoomIn}
                   disabled={zoom >= MAX_ZOOM}
                   className="rounded-full p-1 text-white transition-colors hover:bg-white/20 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
@@ -393,7 +431,7 @@ export default function Page() {
 
           <button
             onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i + 1) % screenshots.length : null); }}
-            className="shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            className="hidden shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:block"
             aria-label="Next screenshot"
           >
             <ChevronRightIcon className="h-6 w-6" />
