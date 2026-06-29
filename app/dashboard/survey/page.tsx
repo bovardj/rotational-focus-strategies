@@ -29,8 +29,8 @@ export default async function Page() {
           : `${
               dailyCompleted
                 ? "Exit Survey"
-                : `End of Day Survey ${
-                    baselineCompleted ? " - Daily" : " - Baseline"
+                : `End-of-Day Survey ${
+                    baselineCompleted ? " - Focus Strategy Use" : " - Baseline"
                   }`
             }`}
       </h1>
