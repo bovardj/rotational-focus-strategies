@@ -10,9 +10,9 @@ import Link from "next/link";
 import RFSLogo from "@/app/ui/rfs-logo";
 
 const screenshots = [
-  { src: "/images/landing/rfs-dashboard-start.jpeg", alt: "RFS dashboard home screen" },
-  { src: "/images/landing/rfs-dashboard-daily-1of4.jpeg", alt: "Dashboard during day 1 of the focus strategy phase" },
-  { src: "/images/landing/rfs-survey-daily.jpeg", alt: "Daily survey form" },
+  { src: "/images/landing/rfs-dashboard-start.jpeg", alt: "RFS dashboard home screen", caption: "Dashboard home — today's assigned strategy and study progress" },
+  { src: "/images/landing/rfs-dashboard-daily-1of4.jpeg", alt: "Dashboard during day 1 of the focus strategy phase", caption: "Day 1 of 4 in the focus strategy phase" },
+  { src: "/images/landing/rfs-survey-daily.jpeg", alt: "Daily survey form", caption: "End-of-day survey — completed after each focus session" },
 ];
 
 const MIN_ZOOM = 1;
@@ -250,30 +250,35 @@ export default function Page() {
             </div>
 
             {/* Screenshots */}
-            <div className="flex flex-col gap-3">
-              <button
-                onClick={() => setActiveIndex(0)}
-                className="group relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
-                aria-label={`View full screenshot: ${screenshots[0].alt}`}
-              >
-                <Image src={screenshots[0].src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
-                  <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
-                </div>
-              </button>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <figure className="flex flex-col gap-1.5">
+                <button
+                  onClick={() => setActiveIndex(0)}
+                  className="group relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                  aria-label={`View full screenshot: ${screenshots[0].alt}`}
+                >
+                  <Image src={screenshots[0].src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                    <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
+                  </div>
+                </button>
+                <figcaption className="text-xs text-gray-500">{screenshots[0].caption}</figcaption>
+              </figure>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {screenshots.slice(1).map((s, i) => (
-                  <button
-                    key={s.src}
-                    onClick={() => setActiveIndex(i + 1)}
-                    className="group relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
-                    aria-label={`View full screenshot: ${s.alt}`}
-                  >
-                    <Image src={s.src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
-                      <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
-                    </div>
-                  </button>
+                  <figure key={s.src} className="flex flex-col gap-1.5">
+                    <button
+                      onClick={() => setActiveIndex(i + 1)}
+                      className="group relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                      aria-label={`View full screenshot: ${s.alt}`}
+                    >
+                      <Image src={s.src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-200 group-hover:bg-black/20">
+                        <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
+                      </div>
+                    </button>
+                    <figcaption className="text-xs text-gray-500">{s.caption}</figcaption>
+                  </figure>
                 ))}
               </div>
             </div>
@@ -366,9 +371,10 @@ export default function Page() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
 
+          <div className="flex w-full flex-col gap-2 md:mx-4 md:w-[80vw]">
           <div
             ref={containerRef}
-            className="relative w-full animate-scale-in overflow-hidden rounded-xl touch-none md:mx-4 md:w-[80vw]"
+            className="relative w-full animate-scale-in overflow-hidden rounded-xl touch-none"
             style={{ cursor: zoom > MIN_ZOOM ? (isDragging ? "grabbing" : "grab") : "default" }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
@@ -427,6 +433,8 @@ export default function Page() {
                 {activeIndex + 1} / {screenshots.length}
               </p>
             </div>
+          </div>
+          <p className="text-center text-sm text-white/70">{screenshots[activeIndex].caption}</p>
           </div>
 
           <button
