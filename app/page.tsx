@@ -266,12 +266,13 @@ export default function Page() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
 
-          <div className="relative mx-4 aspect-video w-[80vw] animate-scale-in overflow-hidden rounded-xl" onClick={e => e.stopPropagation()}>
+          <div className="relative mx-4 w-[80vw] animate-scale-in" onClick={e => e.stopPropagation()}>
             <Image
               src={screenshots[activeIndex].src}
               alt={screenshots[activeIndex].alt}
-              fill
-              className="object-contain"
+              width={1920}
+              height={1080}
+              className="h-auto max-h-[85vh] w-full rounded-xl object-contain"
               sizes="80vw"
             />
             <button
