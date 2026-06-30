@@ -251,10 +251,10 @@ export default function Page() {
 
             {/* Screenshots */}
             <div className="flex flex-col gap-4">
-              <figure className="flex flex-col gap-1.5">
+              <figure className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm shadow-blue-100/40">
                 <button
                   onClick={() => setActiveIndex(0)}
-                  className="group relative aspect-video w-full overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                  className="group relative block aspect-video w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-inset"
                   aria-label={`View full screenshot: ${screenshots[0].alt}`}
                 >
                   <Image src={screenshots[0].src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
@@ -262,14 +262,14 @@ export default function Page() {
                     <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                   </div>
                 </button>
-                <figcaption className="px-2 text-xs italic text-gray-500">{screenshots[0].caption}</figcaption>
+                <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-500 border-t border-gray-200/80">{screenshots[0].caption}</figcaption>
               </figure>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {screenshots.slice(1).map((s, i) => (
-                  <figure key={s.src} className="flex flex-col gap-1.5">
+                  <figure key={s.src} className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm shadow-blue-100/40">
                     <button
                       onClick={() => setActiveIndex(i + 1)}
-                      className="group relative aspect-video overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2"
+                      className="group relative block aspect-video w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-inset"
                       aria-label={`View full screenshot: ${s.alt}`}
                     >
                       <Image src={s.src} alt="" fill className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.01]" />
@@ -277,7 +277,7 @@ export default function Page() {
                         <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                       </div>
                     </button>
-                    <figcaption className="px-2 text-xs italic text-gray-500">{s.caption}</figcaption>
+                    <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-500 border-t border-gray-200/80">{s.caption}</figcaption>
                   </figure>
                 ))}
               </div>
@@ -436,7 +436,7 @@ export default function Page() {
 
           </div>
           {/* Caption */}
-          <div className="bg-white px-4 py-2.5 text-center text-sm italic text-gray-600">
+          <div className="bg-gray-50 px-4 py-2.5 text-center text-sm italic text-gray-600 border-t border-gray-200">
             {screenshots[activeIndex].caption}
           </div>
           </div>
