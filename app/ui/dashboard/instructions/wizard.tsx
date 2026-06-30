@@ -28,7 +28,7 @@ function WelcomeStep() {
         <div className="flex items-start gap-3">
           <span aria-hidden="true" className="mt-0.5 shrink-0 h-5 w-5 rounded-full bg-blue-800 text-white text-xs flex items-center justify-center font-bold">2</span>
           <p className="text-sm text-gray-700">
-            <span className="font-semibold">Days 4&ndash;7 &mdash; Strategies:</span> Use your assigned focus strategy for the day, then complete the daily survey.
+            <span className="font-semibold">Days 4&ndash;7 &mdash; Strategy Use:</span> Use your assigned focus strategy for the day, then complete the daily survey.
           </p>
         </div>
         <div className="flex items-start gap-3">
@@ -101,14 +101,14 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
           </div>
           <div className="pt-1">
             <div className="flex items-center gap-2 mb-1.5">
-              <p className="font-semibold text-gray-900 text-sm">Assigned Strategy Days</p>
+              <p className="font-semibold text-gray-900 text-sm">Strategy Use Days</p>
               <span className="text-xs bg-blue-50 text-blue-800 border border-blue-200 rounded-full px-2 py-0.5 font-medium">
                 {daily} days
               </span>
             </div>
             <p className="text-sm text-gray-600">
               Use your assigned focus strategy for the day. Complete the{" "}
-              <span className="font-medium text-gray-800">Daily Survey</span> in the evening.
+              <span className="font-medium text-gray-800">Strategy Use Survey</span> in the evening.
             </p>
           </div>
         </div>
@@ -125,7 +125,7 @@ function PhasesStep({ baseline, daily }: { baseline: number; daily: number }) {
               </span>
             </div>
             <p className="text-sm text-gray-600">
-              After your final daily survey, complete the short{" "}
+              After your final Strategy Use Survey, complete the short{" "}
               <span className="font-medium text-gray-800">Exit Survey</span>. Your data will be
               anonymized within one week.
             </p>
