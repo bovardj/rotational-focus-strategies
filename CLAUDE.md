@@ -72,6 +72,8 @@ No test suite is configured.
 
 **Survey progress indicator** (`app/ui/dashboard/survey/survey-progress.tsx`): Shows all 7 study days (3 baseline + 4 daily) plus the exit survey as blobs. Completion is determined by count (Nth blob done if N surveys submitted), not by date matching — this handles non-consecutive submissions correctly. Phase labels use `flex-[3]`, `flex-[4]`, `flex-[1]` to mirror blob widths. Container is `w-full` on mobile with `flex-1` cells, capped at `sm:w-auto sm:max-w-lg` on desktop.
 
+**Dashboard card grid breakpoints:** Use `lg:grid-cols-*` (1024px) for any multi-column card grid on the dashboard — `md` (768px) and `sm` (640px) are too narrow and cause awkward content wrapping within cards.
+
 **Dashboard visual language (`app/dashboard/`):** Uses `bg-blue-50` outer background with decorative glow divs (matching auth/landing), a dark `bg-blue-900` sidenav card, and white `PageCard` content cards. The `PageCard` shared component (`app/ui/dashboard/page-card.tsx`) provides the white card with shadow, capped at `max-w-3xl` by default. Pages needing a different width (e.g. instructions with an external navrail) create a nested `layout.tsx` with a custom max-width instead.
 
 **Instructions page (`app/dashboard/instructions/`):** Standalone page with prose sections (General, Baseline Days, Focus Strategy Days, Last Day) and a right-side sticky navrail (`navrail.tsx`) visible on `lg+` screens. The navrail uses `IntersectionObserver` with `document.getElementById` (not refs) to avoid the `react-hooks/rules-of-hooks` lint error from accessing refs in effects. New users are redirected here after onboarding (`router.push("/dashboard/instructions")`); the page is always accessible from the sidenav.
