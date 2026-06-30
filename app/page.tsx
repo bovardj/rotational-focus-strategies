@@ -234,7 +234,7 @@ export default function Page() {
                   Daily Focus · 4 days
                 </p>
                 <p className="text-sm text-gray-700">
-                  Use a randomly assigned strategy each day (repeats allowed), then fill out end of day surveys. This tested whether strategy rotation improves outcomes.
+                  Use a randomly assigned strategy each day (repeats allowed), then fill out end-of-day surveys. This tested whether strategy rotation improves outcomes.
                 </p>
               </div>
               <div className="bg-blue-900 px-4 py-4 sm:flex-4">
