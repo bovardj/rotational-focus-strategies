@@ -12,7 +12,7 @@ import RFSLogo from "@/app/ui/rfs-logo";
 const screenshots = [
   { src: "/images/landing/rfs-dashboard-start.jpeg", alt: "RFS dashboard showing today's assigned focus strategy, study progress tracker, and history of previously assigned strategies", caption: "The dashboard shows today's strategy, tracks progress through the study, and reveals previous strategies." },
   { src: "/images/landing/rfs-dashboard-daily-1of4.jpeg", alt: "RFS dashboard on day 1 of the daily focus phase, showing a newly assigned strategy", caption: "Day 1 of the focus strategy assignment phase. A new strategy is randomly assigned each morning." },
-  { src: "/images/landing/rfs-survey-daily.jpeg", alt: "End-of-day survey form asking participants to rate their productivity and satisfaction", caption: "At the end of each day during the focus strategy phase, users complete a survey to rate their productivity and satisfaction." },
+  { src: "/images/landing/rfs-survey-focus-strategy-use.jpeg", alt: "End-of-day survey form asking participants to rate their productivity and satisfaction", caption: "At the end of each day during the focus strategy phase, users complete a survey to rate their productivity and satisfaction." },
 ];
 
 const MIN_ZOOM = 1;
