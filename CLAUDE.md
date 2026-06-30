@@ -19,6 +19,8 @@ No test suite is configured.
 
 ## Architecture
 
+**Clerk API version:** `2026-05-12`. To update `onboardingComplete` or other `publicMetadata` in server actions, use `client.users.updateUserMetadata(userId, { publicMetadata: {...} })` — NOT `client.users.updateUser()` with metadata params (removed in this API version). See `app/onboarding/_actions.ts:completeOnboarding`.
+
 **Auth:** Clerk handles authentication. `proxy.ts` enforces route protection and redirects unauthenticated users to `/sign-in`, and authenticated users without `onboardingComplete: true` in Clerk `publicMetadata` to `/onboarding`. **Client-side onboarding gate:** To disable/hide features until onboarding is complete, read `user?.publicMetadata?.onboardingComplete === true` from Clerk's `useUser()` hook. Example: `const onboardingComplete = user?.publicMetadata?.onboardingComplete === true;` **Clerk sign-in/sign-up buttons:** Do NOT use `<SignInButton>` or `<SignUpButton>` from `@clerk/nextjs` — they open Clerk's hosted modal/page and bypass the custom `/sign-in` and `/sign-up` pages even when `NEXT_PUBLIC_CLERK_SIGN_IN_URL` is set. Use `<Link href="/sign-in">` and `<Link href="/sign-up">` instead.
 
 **Database:** Supabase. The Clerk JWT is passed as the Supabase `accessToken` so Supabase RLS policies can enforce per-user data access. There are two Supabase client patterns in use:
@@ -36,6 +38,8 @@ No test suite is configured.
 4. Exit survey → study complete
 
 **Strategy rotation logic** (`app/lib/actions/actions.ts:getDailyStrategy`): Checks if today already has an assignment; if not, picks randomly from the user's selected strategies excluding yesterday's assignment.
+
+**`send-due` scheduled notification window:** `sendDueNotifications()` matches only notifications within ±1 minute of the current time — designed for per-minute crons but the cron now runs once daily at noon UTC. Notifications scheduled for any time other than ~12:00 UTC will never fire. The feature is intentionally left intact but non-functional pending a future fix (widen the window or add a time-of-day column).
 
 **Push notifications:** Service worker at `public/sw.js`. Subscriptions managed via server actions in `app/lib/actions/notifications.ts` (`subscribeUser`, `unsubscribeUser`, `scheduleTimeNotification`), stored in `subscriptions` and `scheduled_notifications` Supabase tables. Notifications sent via `app/api/send-due/route.ts` using `web-push`. The app is a PWA: manifest at `app/manifest.ts`, install prompt at `app/components/InstallPromptClient.tsx`, offline fallback at `/offline`.
 
