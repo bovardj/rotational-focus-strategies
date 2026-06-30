@@ -178,6 +178,8 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **Supabase client refactored** from module-level instantiation to a `getSupabase()` factory function — prevents stale auth tokens between requests.
 - **`getServiceSupabase()`** added (service role key, bypasses RLS) for tables with INSERT-only RLS policies.
 - **Dependency upgrades:** Next.js 15 → 16, React 19.1 → 19.2, Clerk 6 → 7, Supabase JS 2.49 → 2.105, TypeScript 5 → 6, ESLint 9 → 10, Tailwind 3 → 4, Zod 3 → 4.
+- **Clerk API version updated** from `2024-10-01` to `2026-05-12`. Code change: `updateUser()` with `publicMetadata` replaced by `updateUserMetadata()` in `completeOnboarding()` (the old parameter is removed in the new API version). `ClerkProvider` moved inside `<body>` per Core 3 requirements. Clerk Backend API version updated in the Clerk Dashboard.
+- **Resend integrated** for transactional email (`resend` package). Domain `focusapp.dev` verified in Resend. Used in `app/api/keep-alive/route.ts` to send failure alerts.
 - **Tailwind v4 migration:** `tailwind.config.ts` removed; configuration moved to `@theme` blocks in `global.css`.
 - **`middleware.ts` renamed to `proxy.ts`** per Next.js 16 convention.
 
@@ -204,5 +206,6 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **Date input format fixed** — `toLocaleString("en-US")` produces `M/D/YYYY` (invalid for `<input type="date">`); replaced with `toLocaleDateString("en-CA")` which outputs `YYYY-MM-DD`.
 - **React CVE patched** — Next.js upgraded to 15.2.6 to address the React Server Components (React2Shell) vulnerability.
 - **Per-minute cron removed** — `* * * * *` cron on the Vercel Hobby plan silently blocked all subsequent builds on the branch; changed to `0 12 * * *`.
+- **Supabase keep-alive improved** — schedule changed from weekly (Mondays only) to twice weekly (Monday + Thursday, `0 8 * * 1,4`) to provide buffer before Supabase's 7-day inactivity pause. Route now returns a proper 500 on failure and sends an email alert via Resend instead of silently returning 200.
 - **`focus-visible:outline` lint warning fixed** in `Button` component — `outline-2` alone is sufficient; the bare `outline` was redundant.
 - **Dashboard card grid breakpoints corrected** — "Your Strategies"/"Previously Assigned Strategies" and "Your Progress" phase cards used `md:` / `sm:` breakpoints (768px / 640px), which caused awkward wrapping at medium widths. Both changed to `lg:` (1024px) to give cards enough room before switching to multi-column.
