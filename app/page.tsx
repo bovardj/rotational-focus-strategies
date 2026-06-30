@@ -154,9 +154,7 @@ export default function Page() {
 
       <header className="sticky top-0 z-10 bg-blue-900">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="w-28">
-            <RFSLogo className="text-white" />
-          </div>
+          <RFSLogo className="text-white" />
           <nav aria-label="Main navigation" className="flex items-center gap-4">
             <a
               href="https://github.com/bovardj/rotational-focus-strategies"
