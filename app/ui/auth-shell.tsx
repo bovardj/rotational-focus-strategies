@@ -1,3 +1,4 @@
+import Link from "next/link";
 import RFSLogo from "@/app/ui/rfs-logo";
 
 export default function AuthShell({ children }: { children: React.ReactNode }) {
@@ -18,7 +19,9 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 
       <div className="relative w-full max-w-sm">
         <div className="mb-6 flex justify-center">
-          <RFSLogo className="text-blue-800" />
+          <Link href="/" aria-label="Rotational Focus Strategies home" className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2">
+            <RFSLogo className="text-blue-800" />
+          </Link>
         </div>
 
         <div className="rounded-2xl border border-gray-100 bg-white px-8 py-8 shadow-xl shadow-blue-100/60">
