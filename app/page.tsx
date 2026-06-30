@@ -337,7 +337,7 @@ export default function Page() {
                   {tech}
                 </li>
               ))}
-            </div>
+            </ul>
             <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-blue-200">Want to explore the app?</p>
               <Link
