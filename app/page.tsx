@@ -160,7 +160,8 @@ export default function Page() {
               href="https://github.com/bovardj/rotational-focus-strategies"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded text-sm font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              aria-label="RFS GitHub repository (opens in new tab)"
+              className="rounded text-sm font-medium text-white transition-colors hover:text-blue-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               GitHub<span className="sr-only"> (opens in new tab)</span>
             </a>
@@ -203,7 +204,6 @@ export default function Page() {
               </Link>
               <Link
                 href="/sign-in"
-                aria-label="Sign in to your account"
                 className="rounded-lg border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-700 focus-visible:ring-offset-2"
               >
                 Sign in
@@ -260,7 +260,7 @@ export default function Page() {
                     <ArrowsPointingOutIcon className="h-8 w-8 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                   </div>
                 </button>
-                <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-500 border-t border-gray-200/80">{screenshots[0].caption}</figcaption>
+                <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-600 border-t border-gray-200/80">{screenshots[0].caption}</figcaption>
               </figure>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {screenshots.slice(1).map((s, i) => (
@@ -275,7 +275,7 @@ export default function Page() {
                         <ArrowsPointingOutIcon className="h-6 w-6 text-white opacity-0 drop-shadow transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true" />
                       </div>
                     </button>
-                    <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-500 border-t border-gray-200/80">{s.caption}</figcaption>
+                    <figcaption className="bg-gray-50 px-3 py-2 text-xs italic text-gray-600 border-t border-gray-200/80">{s.caption}</figcaption>
                   </figure>
                 ))}
               </div>
@@ -317,10 +317,10 @@ export default function Page() {
         {/* Stack + CTA */}
         <section aria-labelledby="stack-heading" className="px-6 pb-16">
           <div className="mx-auto max-w-4xl rounded-2xl bg-blue-900 px-8 py-8">
-            <p id="stack-heading" className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-200">
+            <h2 id="stack-heading" className="mb-3 text-xs font-bold uppercase tracking-widest text-blue-200">
               Built with
-            </p>
-            <div className="mb-6 flex flex-wrap gap-2">
+            </h2>
+            <ul className="mb-6 flex flex-wrap gap-2" aria-label="Technologies used">
               {[
                 "Next.js 16 App Router",
                 "Tailwind v4",
@@ -330,12 +330,12 @@ export default function Page() {
                 "PWA",
                 "Vercel",
               ].map((tech) => (
-                <span
+                <li
                   key={tech}
                   className="rounded-md bg-white/10 px-3 py-1 text-xs font-semibold text-white"
                 >
                   {tech}
-                </span>
+                </li>
               ))}
             </div>
             <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
@@ -357,10 +357,14 @@ export default function Page() {
           role="dialog"
           aria-modal="true"
           aria-label="Screenshot viewer"
+          aria-describedby="lightbox-instructions"
           className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-4"
           onPointerDown={(e) => { backdropPressedRef.current = e.target === e.currentTarget; }}
           onPointerUp={(e) => { if (e.target === e.currentTarget && backdropPressedRef.current) setActiveIndex(null); backdropPressedRef.current = false; }}
         >
+          <p id="lightbox-instructions" className="sr-only">
+            Use the left and right arrow keys to navigate between screenshots. Press Escape to close.
+          </p>
           <button
             onClick={(e) => { e.stopPropagation(); setActiveIndex(i => i !== null ? (i - 1 + screenshots.length) % screenshots.length : null); }}
             className="hidden shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:block"
@@ -427,7 +431,7 @@ export default function Page() {
                   <MagnifyingGlassPlusIcon className="h-4 w-4" />
                 </button>
               </div>
-              <p className="rounded-full bg-black/50 px-3 py-1 text-xs text-white">
+              <p aria-live="polite" aria-atomic="true" className="rounded-full bg-black/50 px-3 py-1 text-xs text-white">
                 {activeIndex + 1} / {screenshots.length}
               </p>
             </div>
