@@ -95,7 +95,8 @@ export default function Page() {
           Verify your email
         </h1>
         <p className="mb-4 text-sm text-gray-700">
-          Enter the verification code sent to your email address.
+          Enter the verification code sent to{" "}
+          <span className="font-medium text-gray-900">{emailAddress}</span>.
         </p>
         <form onSubmit={handleVerify}>
           <label
