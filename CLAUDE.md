@@ -54,6 +54,10 @@ No test suite is configured.
 
 ## UI Patterns
 
+**Inline button baseline gap:** A `<button>` used as an image container leaves a small white gap below the image because buttons are `inline-block` by default (the browser reserves space for text descenders). Fix: add `block` to the button's className.
+
+**Focus rings inside `overflow-hidden`:** When a focusable element sits inside an `overflow-hidden` parent, `focus-visible:ring-offset-2` gets clipped. Use `focus-visible:ring-inset` instead — it draws the ring inside the element boundary.
+
 **Animated accordion (onboarding page):** Strategy cards use a React-controlled disclosure pattern instead of native `<details>/<summary>`. State is `useState<Set<number>>` tracking open indices. The open/close animation uses the `grid-template-rows: 0fr → 1fr` CSS transition trick — the outer div transitions between these values while an inner `overflow-hidden` wrapper clips content during the transition. This approach animates height from 0 to auto without knowing content height in advance. See `app/onboarding/page.tsx`.
 
 **Onboarding layout (`app/onboarding/layout.tsx`):** Uses the same visual language as the auth shell — `bg-blue-50` outer background with three decorative glow divs. Sidenav: `bg-blue-900 rounded-2xl overflow-hidden shadow-xl md:sticky md:top-6 md:h-[calc(100vh-3rem)] md:w-64` (dark card, sticky offset to match outer `md:p-6` padding). Content card: `rounded-2xl bg-white border border-gray-100 p-6 md:p-10 max-w-3xl` — capped at `max-w-3xl` to prevent white expanse on wide screens. Logo bar uses negative margins (`-mx-3 -mt-4 md:-mx-2`) to bleed flush to the sidenav card edges while the root padding governs other content. Do NOT add `overflow-y-auto` to the content pane. The onboarding sidenav passes `<UserNav dark />` for white-on-dark styling.
