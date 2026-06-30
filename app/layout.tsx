@@ -24,13 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} antialiased`}>
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        <ClerkProvider>
           <InstallPrompt />
           {children}
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
