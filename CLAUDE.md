@@ -116,7 +116,7 @@ No test suite is configured.
 
 **Scheduled notifications timezone:** Times in `scheduled_notifications.scheduled_at` are stored and compared in UTC in `sendDueNotifications()`. Convert user-entered local times to UTC before storing — use `Intl.DateTimeFormat` with the user's timezone to calculate the offset accurately (handles half-hour offsets).
 
-**Vercel cron plan limits:** Per-minute crons (`* * * * *`) require Pro plan. Free plan is limited to once-daily crons (`0 12 * * *`). Violating this causes Vercel to silently reject *all* subsequent builds on the branch — not just the cron route. The `/api/send-due` route requires a `CRON_SECRET` bearer token for auth.
+**Vercel cron plan limits:** Per-minute crons (`* * * * *`) require Pro plan. Free plan is limited to once-daily crons (`0 12 * * *`). Violating this causes Vercel to silently reject *all* subsequent builds on the branch — not just the cron route. `/api/send-due` runs daily (`0 12 * * *`); `/api/keep-alive` runs Monday + Thursday (`0 8 * * 1,4`). Both require a `CRON_SECRET` bearer token.
 
 **Supabase Performance Advisor — `auth_rls_initplan` false positive:** All RLS policies use `(SELECT auth.jwt() ->> 'sub')` which is the correct optimised form (evaluated once per query, not per row). The advisor still flags these because its pattern matcher looks for `auth.uid()`, not `auth.jwt()`. Do NOT switch to `auth.uid()` to fix the warning — `auth.uid()` returns a `uuid` type and will return `NULL` for Clerk users (whose IDs are strings like `user_abc123`, not UUIDs), breaking all data access. The advisor warning is a known false positive for Clerk + Supabase setups and can be ignored.
 
@@ -133,4 +133,5 @@ Required in `.env`:
 - Clerk keys (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, etc.)
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` — for web push notifications
 - `SUPABASE_SECRET_KEY` — service role key (bypasses RLS); used in `getServiceSupabase()` in `data.ts` and all API routes
-- `CRON_SECRET` — bearer token checked by `GET /api/keep-alive` to authenticate cron caller
+- `CRON_SECRET` — bearer token for cron route auth. **Production-only — not in local `.env`.** To test cron routes locally, temporarily add `CRON_SECRET=test` to `.env`.
+- `RESEND_API_KEY` — Resend API key for transactional email. Domain `focusapp.dev` is verified in Resend; send from `alerts@focusapp.dev`. Used in `app/api/keep-alive/route.ts` to email `john@johnbovard.dev` on Supabase failure.
