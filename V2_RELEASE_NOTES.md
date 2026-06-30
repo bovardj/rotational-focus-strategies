@@ -44,6 +44,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
   - Links to `/sign-up` and `/forgot-password` updated from `text-blue-600` to `text-blue-800`.
 - **Sign-up form:**
   - When the email verification step appears, focus is programmatically shifted to the verification heading via `useRef` + `useEffect`, preventing the user's focus from being stranded on the now-hidden email/password inputs.
+  - The verification code prompt now shows the specific email address the code was sent to (e.g. "Enter the verification code sent to **user@example.com**") rather than a generic "your email address" — making it easier to verify the correct inbox was used.
 - **Forgot-password form:**
   - Focus shifts programmatically to the new-password field after successful email verification.
   - "Sign in instead" link added at the bottom.
@@ -85,7 +86,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **Dashboard home page:**
   - "Today's Focus Strategy" is now a clickable `<Link>` banner with a blue left border, strategy name in large `lusitana` font, clock icon with date, and a "View details →" affordance. Previously it was a small centered `bg-gray-50` card.
   - Progress cards redesigned from a single `<Collapse>` accordion into three inline `Phase` cards — Baseline, Daily, Exit — each with a `role="progressbar"` progress bar and completion count.
-  - "Your Strategies" and "Previously Assigned Strategies" shown in `md:grid-cols-2` side-by-side layout.
+  - "Your Strategies" and "Previously Assigned Strategies" shown in `lg:grid-cols-2` side-by-side layout.
   - `CollapseInstructions`, `CollapseNotes`, and "Questions, Bug Reporting & Help" removed from the dashboard; content moved to the new Instructions page.
 - **`UserNav` component introduced** (`app/ui/dashboard/user-nav.tsx`). Fully custom dropdown replacing Clerk's `UserButton`. Features: initials avatar, full name display, `openUserProfile()` for Clerk account modal, notifications link (disabled until onboarding is complete), sign-out. Supports `compact` (mobile) and full-width (desktop sidenav) modes, plus `dark` prop. Dropdown uses `createPortal` to escape the `overflow-hidden` sidenav container.
 
@@ -204,3 +205,4 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **React CVE patched** — Next.js upgraded to 15.2.6 to address the React Server Components (React2Shell) vulnerability.
 - **Per-minute cron removed** — `* * * * *` cron on the Vercel Hobby plan silently blocked all subsequent builds on the branch; changed to `0 12 * * *`.
 - **`focus-visible:outline` lint warning fixed** in `Button` component — `outline-2` alone is sufficient; the bare `outline` was redundant.
+- **Dashboard card grid breakpoints corrected** — "Your Strategies"/"Previously Assigned Strategies" and "Your Progress" phase cards used `md:` / `sm:` breakpoints (768px / 640px), which caused awkward wrapping at medium widths. Both changed to `lg:` (1024px) to give cards enough room before switching to multi-column.
