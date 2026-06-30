@@ -67,7 +67,7 @@ export default function CollapseProgress({
   return (
     <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
       <h2 className="mb-3 text-sm font-semibold text-gray-700">Your Progress</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
         <Phase
           number={1}
           label="Baseline Surveys"
