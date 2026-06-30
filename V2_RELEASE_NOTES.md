@@ -16,11 +16,21 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ## Landing Page
 
-- **Fully redesigned.** The previous gray card with left-aligned text and Clerk modal buttons was replaced with a centered layout matching the auth shell: `bg-blue-50` background, three glow divs, RFS logo above card, white `rounded-2xl` card.
-- **CTA hierarchy clarified.** "Create account" is a filled `bg-blue-800` primary button; "Sign in" is a white border button — stacked vertically with consistent spacing.
-- **Clerk modal buttons replaced.** `<SignInButton>` and `<SignUpButton>` from `@clerk/nextjs` (which opened a modal and bypassed the custom auth pages) replaced with `<Link href="/sign-in">` and `<Link href="/sign-up">`.
-- **Skip link added** (`sr-only focus-visible:not-sr-only`) targeting `#main-content` for keyboard navigation.
-- **Study participation thank-you note removed** from the page copy.
+- **Rebuilt as a full portfolio showcase.** The page was redesigned from a minimal sign-in portal into a multi-section portfolio page for recruiters: sticky `bg-blue-900` nav, hero section with glow orbs and CTAs, "How the study worked" overview card with phase timeline, feature highlights grid, and a "Built with" tech stack footer. Clerk modal buttons replaced with `<Link>` tags; skip link added; study participation copy removed.
+- **Sticky nav bar** with RFS logo (links to `/`), GitHub repository link (with `sr-only` new-tab announcement), and Sign in button. Nav uses `aria-label="Main navigation"`.
+- **Hero section** with three decorative radial glow divs (matching the auth shell), Lusitana heading, project description, and two CTAs: "Create account" (primary `bg-blue-800`) and "Sign in" (white border).
+- **Overview card** (`rounded-2xl bg-white`) containing a three-phase timeline (Baseline · 3 days / Daily Focus · 4 days / Exit) with proportional flex cells and a screenshot gallery. The timeline stacks vertically on mobile and displays as a horizontal row on `sm+`.
+- **Screenshot gallery with lightbox modal:**
+  - Three screenshots displayed as unified thumbnail cards: `overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm`, image flush at top, caption in a `bg-gray-50 border-t` card body below.
+  - Thumbnails use `<figure>`/`<figcaption>` markup; hover overlay reveals an expand icon.
+  - Clicking a thumbnail opens a full-screen lightbox (`role="dialog" aria-modal="true"`) with the image at full resolution.
+  - **Lightbox features:** scroll-wheel zoom, click-and-drag pan with clamped bounds, pinch-to-zoom (two-finger), swipe-to-navigate (single-finger horizontal swipe), left/right arrow buttons (desktop), keyboard navigation (Arrow keys, Escape), zoom in/out buttons with percentage display, image counter live region, caption bar below image.
+  - Page scroll is locked (`document.documentElement.style.overflow = "hidden"`) while the lightbox is open.
+  - Modal closes only when the pointer is both pressed and released on the backdrop (prevents accidental close on drag-release).
+  - `animate-scale-in` CSS keyframe animation on open.
+- **Feature highlights grid:** Three white `rounded-2xl` cards (Rotation algorithm, Push notifications + PWA, Clerk + Supabase RLS) in a `grid-cols-1 sm:grid-cols-3` responsive layout.
+- **Stack + CTA footer:** Dark `bg-blue-900` card with tech chips (`<ul>`/`<li>` list) and a "Get started" CTA linking to `/sign-up`.
+- **RFS logo on auth pages links to `/`** — the logo in `AuthShell` is wrapped in `<Link href="/">` so users can return to the landing page from sign-in/sign-up.
 
 ---
 
@@ -125,8 +135,22 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ---
 
+## Instructions Page (`/dashboard/instructions`)
+
+- **Content corrected for consistency** — the wizard step copy was audited and updated to match the actual study flow and terminology used elsewhere in the app.
+
+---
+
 ## Accessibility (WCAG)
 
+- **Landing page WCAG AAA audit completed:**
+  - `text-gray-500` (5.7:1, AA only) replaced with `text-gray-600` (7.4:1) in thumbnail figcaptions.
+  - `text-white/80` (borderline) on the nav GitHub link replaced with `text-white`.
+  - `<p>` used as "Built with" section heading replaced with `<h2>` (2.4.10 Section Headings).
+  - Tech stack chips converted from `<span>` in a `<div>` to `<ul>`/`<li>` list elements.
+  - GitHub nav link given a descriptive `aria-label="RFS GitHub repository (opens in new tab)"` (2.4.9 Link Purpose).
+  - Lightbox dialog given `aria-describedby` referencing a visually hidden element explaining keyboard controls.
+  - Screenshot counter given `aria-live="polite" aria-atomic="true"` so navigation is announced to screen readers.
 - **Skip links** added to landing, auth, onboarding, and dashboard layouts.
 - **`aria-current="page"`** on all active nav links.
 - **`aria-hidden="true"`** on all decorative icons across auth, dashboard, and survey forms.
@@ -160,6 +184,12 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ## Bug Fixes
 
+- **Lightbox image/caption layering fixed** — the caption overlaid the bottom of the image at minimum zoom; restructured so the caption renders in normal flow below the image container, with `overflow-hidden` on the container to clip the image when zoomed.
+- **Lightbox pan clamping fixed** — pan bounds now use `naturalWidth`/`naturalHeight` to compute the actual rendered content size within the `object-contain` letterbox, preventing over-panning into empty background space.
+- **Lightbox backdrop close fixed** — previously the modal could close when the user dragged from inside and released outside (or vice versa). Fixed with a `backdropPressedRef` that tracks whether the pointer was pressed on the backdrop; close only fires when both press and release are on the backdrop.
+- **Blur bleed on landing page hero fixed** — `overflow: hidden` does not reliably clip `filter: blur()` paint in all browsers. Changed to `overflow: clip` (Tailwind `overflow-clip`) which cuts paint at the exact border edge including filter effects.
+- **RFS logo sizing on landing page fixed** — wrapping `<RFSLogo>` in a `w-28` container constrained the internal flex row and distorted the SVG-to-text proportion. Wrapper removed; logo now renders at natural size matching auth and dashboard pages.
+- **Survey page title edited** for clarity.
 - **Clerk modal buttons replaced** — `<SignInButton>`/`<SignUpButton>` were opening a modal and bypassing custom auth pages despite `NEXT_PUBLIC_CLERK_SIGN_IN_URL` being set.
 - **`UserNav` hydration mismatch fixed** — `useUser()` returns `null` on first client render but has data during SSR; initials/name are now gated behind a `mounted` state.
 - **`InstallPrompt` hydration mismatch fixed** — moved to `InstallPromptClient.tsx` with a mounted guard.
