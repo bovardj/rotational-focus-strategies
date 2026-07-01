@@ -189,6 +189,7 @@ export default function Page() {
             </p>
             <h1 id="hero-heading" className={`${lusitana.className} mb-6 text-5xl font-bold text-gray-900`}>
               Rotational Focus<br />Strategies
+              <span className="mt-2 block text-lg font-normal italic text-gray-600">by John Bovard</span>
             </h1>
             <p className="mb-8 text-lg leading-relaxed text-gray-700">
               A full-stack research web app designed to test whether randomly rotating focus strategies
