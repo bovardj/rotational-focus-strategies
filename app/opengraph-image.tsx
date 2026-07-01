@@ -15,13 +15,18 @@ async function fetchLusitanaBold(): Promise<ArrayBuffer> {
     'https://fonts.googleapis.com/css2?family=Lusitana:wght@700',
     { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' } }
   ).then(r => r.text())
-  const url = css.match(/src: url\(([^)]+)\)/)?.[1]
+  const url = css.match(/url\((https:\/\/fonts\.gstatic\.com[^)]+)\)/)?.[1]
   if (!url) throw new Error('Could not parse Lusitana font URL from Google Fonts CSS')
   return fetch(url).then(r => r.arrayBuffer())
 }
 
 export default async function Image() {
-  const lusitanaFont = await fetchLusitanaBold()
+  let lusitanaFont: ArrayBuffer | null = null
+  try {
+    lusitanaFont = await fetchLusitanaBold()
+  } catch {
+    // render without custom font rather than returning a 500
+  }
   const orbitSrc = `data:image/svg+xml;base64,${Buffer.from(ORBIT_SVG).toString('base64')}`
 
   return new ImageResponse(
@@ -63,9 +68,9 @@ export default async function Image() {
     ),
     {
       ...size,
-      fonts: [
-        { name: 'Lusitana', data: lusitanaFont, style: 'normal', weight: 700 },
-      ],
+      fonts: lusitanaFont
+        ? [{ name: 'Lusitana', data: lusitanaFont, style: 'normal', weight: 700 }]
+        : [],
     }
   )
 }
