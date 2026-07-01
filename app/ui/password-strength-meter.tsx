@@ -90,7 +90,11 @@ export default function PasswordStrengthMeter({
           />
         ))}
       </div>
-      {level && <p className={`mt-1 text-xs ${level.textColor}`}>{level.label}</p>}
+      {level && (
+        <p className={`mt-1 text-xs ${level.textColor}`}>
+          Password strength: {level.label}
+        </p>
+      )}
     </div>
   );
 }
