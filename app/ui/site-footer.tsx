@@ -11,7 +11,7 @@ export default function SiteFooter() {
             Feel free to send me an email.
           </a>
         </p>
-        <p className="mt-2 text-xs text-gray-700">© 2026 John Bovard</p>
+        <p className="mt-2 text-xs text-gray-700">© {new Date().getFullYear()} John Bovard</p>
       </div>
     </footer>
   );
