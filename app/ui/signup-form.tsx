@@ -29,6 +29,10 @@ export default function Page() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockOnMessage, setCapsLockOnMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [formError, setFormError] = useState("");
+  const [verifyError, setVerifyError] = useState("");
 
   const verifyHeadingRef = useRef<HTMLHeadingElement>(null);
 
@@ -51,36 +55,60 @@ export default function Page() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoaded) return;
+    setEmailError("");
+    setPasswordError("");
+    setFormError("");
     try {
       await signUp.create({ emailAddress, password });
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setVerifying(true);
     } catch (err: unknown) {
-      console.error(JSON.stringify(err, null, 2));
+      const clerkError = err as { errors?: Array<{ message: string; code: string }> };
+      const code = clerkError.errors?.[0]?.code;
+      const message = clerkError.errors?.[0]?.message ?? "Something went wrong. Please try again.";
+      if (code === "form_identifier_exists") {
+        setEmailError("An account with this email already exists.");
+      } else if (code === "form_param_format_invalid") {
+        setEmailError("Please enter a valid email address.");
+      } else if (code === "form_password_pwned") {
+        setPasswordError("This password has appeared in a data breach. Please choose a different one.");
+      } else if (code === "form_password_too_short" || code === "form_password_size_too_small") {
+        setPasswordError("Password must be at least 8 characters.");
+      } else {
+        setFormError(message);
+      }
     }
   };
 
-  const handleVerify = async (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoaded) return;
+    setVerifyError("");
     try {
       const signUpAttempt = await signUp.attemptEmailAddressVerification({ code });
       if (signUpAttempt.status === "complete") {
         await setActive({ session: signUpAttempt.createdSessionId });
         router.push("/dashboard");
       } else {
-        console.error(JSON.stringify(signUpAttempt, null, 2));
+        setVerifyError("Verification could not be completed. Please try again.");
       }
     } catch (err: unknown) {
-      const clerkErr = err as { errors?: Array<{ code: string }> };
+      const clerkErr = err as { errors?: Array<{ code: string; message: string }> };
       if (clerkErr?.errors?.[0]?.code === "session_exists") {
         router.push("/dashboard");
         return;
       }
-      console.error("Error:", JSON.stringify(err, null, 2));
+      const code = clerkErr.errors?.[0]?.code;
+      if (code === "form_code_incorrect") {
+        setVerifyError("Incorrect code. Please check your email and try again.");
+      } else if (code === "verification_expired") {
+        setVerifyError("The verification code has expired. Please go back and try again.");
+      } else {
+        setVerifyError(clerkErr.errors?.[0]?.message ?? "Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -117,6 +145,9 @@ export default function Page() {
             />
             <ChevronDoubleRightIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
+          <div role="alert" aria-live="assertive" className="mt-1 text-sm text-red-800">
+            {verifyError}
+          </div>
           <Button className="mt-4 w-full">
             Verify <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
           </Button>
@@ -150,6 +181,9 @@ export default function Page() {
             />
             <AtSymbolIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
           </div>
+          <div role="alert" aria-live="assertive" className="mt-1 text-sm text-red-800">
+            {emailError}
+          </div>
         </div>
         <div className="mt-4">
           <label
@@ -168,7 +202,6 @@ export default function Page() {
               autoComplete="new-password"
               value={password}
               required
-              minLength={8}
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
               onKeyUp={handleKeyUp}
@@ -190,10 +223,16 @@ export default function Page() {
               {capsLockOnMessage}
             </div>
           </div>
+          <div role="alert" aria-live="assertive" className="mt-6 text-sm text-red-800">
+            {passwordError}
+          </div>
         </div>
       </div>
       <input type="hidden" name="redirectTo" value={callbackUrl} />
-      <Button className="mt-7 w-full">
+      <div role="alert" aria-live="assertive" className="text-sm text-red-800">
+        {formError}
+      </div>
+      <Button className="mt-4 w-full">
         Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
