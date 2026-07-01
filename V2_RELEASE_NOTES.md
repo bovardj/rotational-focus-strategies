@@ -41,6 +41,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ## Authentication Pages (`/sign-in`, `/sign-up`, `/forgot-password`)
 
+- **Sign-out redirects to landing page.** Previously redirected to `/sign-in`; now sends users to `/` so they land on the portfolio page rather than immediately back at the login prompt.
 - **`AuthShell` component created** (`app/ui/auth-shell.tsx`). A shared wrapper providing the `bg-blue-50` background, three glow divs, RFS logo, and white `rounded-2xl` card. All three auth pages use it — no duplicated layout markup.
 - **Sign-in form:**
   - `autoComplete="email"` and `autoComplete="current-password"` attributes added.
