@@ -58,6 +58,11 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
   - Focus shifts programmatically to the new-password field after successful email verification.
   - "Sign in instead" link added at the bottom.
   - CapsLock warning uses `aria-live="polite"`.
+  - **Inline error handling added** (matching sign-in/sign-up pattern). Email-step errors (`form_identifier_not_found`, `form_param_format_invalid`) appear below the email field; password errors (`form_password_too_short`, `form_password_pwned`) appear below the password field; code errors (`form_code_incorrect`, `verification_expired`) appear below the code input; unexpected errors appear near the submit button. All errors use `role="alert" aria-live="assertive"`. Raw Clerk `longMessage` replaced with mapped friendly messages.
+  - `type="email"` on email input changed to `type="text" inputMode="email"` and `minLength={8}` removed from password input — consistent with sign-in/sign-up.
+  - `router.push("/dashboard")` added after a successful reset (was previously missing).
+  - Email address shown in reset step ("Enter the reset code sent to **user@example.com**") — matching the sign-up verification step.
+  - Heading capitalisation fixed: "Forgot Password?" → "Forgot password?". Button label changed from "Reset" to "Reset password".
 
 ---
 
@@ -174,6 +179,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **Multi-step form focus management:** verification step in sign-up shifts focus to the step heading; forgot-password shifts focus to the new-password input after the code step. A `isFirstRender` ref guard prevents focus from being yanked on initial page load.
 - **Multiple `<nav>` landmarks** given distinct `aria-label` values (`"Main navigation"`, `"Page sections"`).
 - **`autocomplete` attributes** added to all auth form inputs.
+- **Auth form focus rings standardised.** All form inputs across sign-in, sign-up, and forgot-password changed from `outline-2` (defers ring color to the browser default — not WCAG AAA-guaranteed) to explicit `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2`. Inline `<Link>` elements inside auth forms (`"Sign up"`, `"Reset password"`, `"Sign in"`) given `rounded-sm` plus the same ring classes — they were previously missing focus indicators entirely.
 
 ---
 
