@@ -32,7 +32,7 @@ export function Card({
       </p>
       <div className="mt-5 flex items-center justify-between">
         <p className="flex items-center gap-1.5 text-sm text-gray-600">
-          <ClockIcon aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
+          <ClockIcon aria-hidden="true" className="h-4 w-4 shrink-0" />
           {dateStr ?? "No date available"}
         </p>
         <span className="flex items-center gap-1 text-sm text-gray-600 transition-colors group-hover:text-blue-800">

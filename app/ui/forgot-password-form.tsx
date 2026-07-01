@@ -68,7 +68,7 @@ const ForgotPasswordForm: NextPage = () => {
     return null;
   }
 
-  async function create(e: React.FormEvent<HTMLFormElement>) {
+  async function create(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!signIn) return;
     setEmailError("");
@@ -92,7 +92,7 @@ const ForgotPasswordForm: NextPage = () => {
     }
   }
 
-  async function reset(e: React.FormEvent<HTMLFormElement>) {
+  async function reset(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!signIn) return;
     setPasswordError("");

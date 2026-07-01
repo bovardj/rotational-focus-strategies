@@ -82,7 +82,7 @@ export default function NotificationsPage() {
     loadScheduled();
   }, [loadScheduled]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {

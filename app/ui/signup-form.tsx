@@ -55,7 +55,7 @@ export default function Page() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoaded) return;
     setEmailError("");
@@ -83,7 +83,7 @@ export default function Page() {
     }
   };
 
-  const handleVerify = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleVerify = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoaded) return;
     setVerifyError("");

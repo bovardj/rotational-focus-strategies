@@ -518,11 +518,11 @@ export default function StyleGuidePage() {
             <div className="mt-5 rounded-lg bg-gray-50 px-4 py-3">
               <p className="mb-1 font-mono text-[10px] uppercase tracking-widest text-gray-400">classes</p>
               <code className="block whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-gray-600">
-                {`flex h-10 items-center rounded-lg bg-blue-500 px-4
+                {`flex h-10 items-center rounded-lg bg-blue-800 px-4
 text-sm font-medium text-white transition-colors
-hover:bg-blue-400 active:bg-blue-600
-focus-visible:outline focus-visible:outline-2
-focus-visible:outline-offset-2 focus-visible:outline-blue-500
+hover:bg-blue-900 active:bg-blue-900
+focus-visible:outline-2 focus-visible:outline-offset-2
+focus-visible:outline-blue-800
 aria-disabled:cursor-not-allowed aria-disabled:opacity-50`}
               </code>
             </div>
