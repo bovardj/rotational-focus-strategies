@@ -122,7 +122,7 @@ export default function UserNav({ compact = false, dark = false }: { compact?: b
             </button>
             <button
               role="menuitem"
-              onClick={() => signOut(() => router.push("/sign-in"))}
+              onClick={() => signOut(() => router.push("/"))}
               className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-800"
             >
               <ArrowRightStartOnRectangleIcon aria-hidden="true" className="h-4 w-4 text-gray-400" />
