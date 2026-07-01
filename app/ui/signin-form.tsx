@@ -131,9 +131,9 @@ export default function SignInForm() {
                 <EyeIcon aria-hidden="true" className="h-4.5 w-4.5" />
               )}
             </button>
-            <div aria-live="polite" className="absolute -bottom-5 left-0 text-xs text-red-800">
-              {capsLockOnMessage}
-            </div>
+          </div>
+          <div aria-live="polite" className="mt-1 min-h-4 text-xs text-red-800">
+            {capsLockOnMessage}
           </div>
         </div>
       </div>
