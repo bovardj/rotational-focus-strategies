@@ -339,14 +339,24 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm text-blue-200">Want to explore the app?</p>
-              <Link
-                href="/sign-up"
-                className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
-              >
-                Get started <ArrowRightIcon className="w-4" aria-hidden="true" />
-              </Link>
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <a
+                  href="https://johnbovard.dev/projects/rfs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+                >
+                  Learn more<span className="sr-only"> (opens in new tab)</span>
+                </a>
+                <Link
+                  href="/sign-up"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+                >
+                  Get started <ArrowRightIcon className="w-4" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
