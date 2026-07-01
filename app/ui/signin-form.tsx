@@ -137,7 +137,7 @@ export default function SignInForm() {
           </div>
         </div>
       </div>
-      <div role="alert" aria-live="assertive" className="min-h-5 text-sm text-red-800">
+      <div role="alert" aria-live="assertive" className="text-sm text-red-800">
         {formError}
       </div>
       <Button className="mt-4 w-full">
