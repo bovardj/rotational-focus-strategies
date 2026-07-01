@@ -71,10 +71,6 @@ export default function PasswordStrengthMeter({
     computeScore(password, userInputs ?? []);
   }, [password, userInputs, computeScore]);
 
-  if (password === "") {
-    return null;
-  }
-
   const level = score === null ? null : STRENGTH_LEVELS[score];
   // zxcvbn scores 0-4; scores 0 and 1 both map to "Weak" with 1 filled segment,
   // scores 2/3/4 map 1:1 to filled segments 2/3/4.
