@@ -102,6 +102,10 @@ No test suite is configured.
 
 ## Known Issues / Gotchas
 
+**zxcvbn-ts v4 API differs from training-data assumptions:** `@zxcvbn-ts/core` v4.x (used in `app/ui/password-strength-meter.tsx`) has no `zxcvbnOptions`/`zxcvbnAsync` exports — those are v3 APIs. Build a `new core.ZxcvbnFactory({ translations, graphs, dictionary })` instance once (memoize at module scope) and call `.checkAsync(password, userInputs)` on it. `result.score` is `0 | 1 | 2 | 3 | 4`.
+
+**Worktrees don't inherit `.env`/`.env.local`:** `EnterWorktree`-created worktrees under `.claude/worktrees/` start without env files (gitignored, not copied automatically) — `pnpm build`/`pnpm dev` will fail with cryptic errors (e.g. "No key set vapidDetails.publicKey"). Copy `.env` and `.env.local` from the main repo root into the worktree directory before building.
+
 **Satori `fontStyle: 'italic'` is silently ignored** unless a separate italic font `ArrayBuffer` is registered in the `fonts` array. Browsers render faux-italic in dev, masking the bug — the actual PNG will be upright. To italicize in `app/opengraph-image.tsx`, fetch and register an italic variant (e.g. `Lusitana:ital,wght@1,400`) alongside the bold.
 
 **Dynamic `[slug]` routes:** Export `generateStaticParams()` returning `strategyDictionary.map(s => ({ slug: s.href }))` to pre-render all pages statically at build time, and call `notFound()` for unrecognised slugs. See `app/dashboard/strategies/[slug]/page.tsx` for the established pattern.
