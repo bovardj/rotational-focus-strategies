@@ -10,7 +10,7 @@ Rotational Focus Strategies (RFS) is a Next.js 16 web app for people with ADHD. 
 
 ```bash
 pnpm dev          # Start dev server with Turbopack
-pnpm build        # Production build
+pnpm build        # Production build (runs TypeScript type-checking as part of the build — no separate tsc step needed)
 pnpm lint         # ESLint
 pnpm start        # Run production build locally
 ```
