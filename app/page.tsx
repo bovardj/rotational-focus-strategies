@@ -34,6 +34,7 @@ export default function Page() {
   const activePointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
   const pinchStartRef = useRef<{ distance: number; zoom: number } | null>(null);
   const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
+  const currentYear = new Date().getFullYear()
 
   const clampPan = (px: number, py: number, currentZoom: number) => {
     if (!containerRef.current) return { x: px, y: py };
@@ -404,7 +405,7 @@ export default function Page() {
           </nav>
         </div>
         <div className="mx-auto mt-8 max-w-4xl border-t border-white/10 pt-6">
-          <p className="text-xs text-blue-100">© 2026 John Bovard</p>
+          <p className="text-xs text-blue-100">© {currentYear} John Bovard</p>
         </div>
       </footer>
 
