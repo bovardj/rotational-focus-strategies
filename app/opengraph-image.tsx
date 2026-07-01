@@ -41,7 +41,6 @@ export default async function Image() {
           justifyContent: 'center',
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={orbitSrc} width={240} height={240} alt="" style={{ marginRight: '40px' }} />
         <div style={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
           <div
