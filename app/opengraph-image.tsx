@@ -56,7 +56,7 @@ export default async function Image() {
             <span>Rotational Focus</span>
             <span>Strategies</span>
           </div>
-          <div style={{ fontSize: 26, color: '#93c5fd', marginTop: 20 }}>
+          <div style={{ fontSize: 26, color: '#bfdbfe', fontStyle: 'italic', marginTop: 20 }}>
             A research-backed focus app by John Bovard
           </div>
           <div style={{ fontSize: 22, color: '#93c5fd', marginTop: 8 }}>
