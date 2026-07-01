@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import SideNav from "@/app/ui/onboarding/sidenav";
 import { syncUserToSupabase } from "@/app/onboarding/_actions";
+import SiteFooter from "@/app/ui/site-footer";
 
 export default async function RootLayout({
   children,
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <div className="grow max-w-3xl rounded-2xl border border-gray-100 bg-white p-6 shadow-xl shadow-blue-100/60 md:p-10">
           {children}
         </div>
+        <SiteFooter />
       </div>
     </div>
   );

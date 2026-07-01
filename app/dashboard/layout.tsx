@@ -1,5 +1,6 @@
 import SideNav from "@/app/ui/dashboard/sidenav";
 import NavLinks from "@/app/ui/dashboard/nav-links";
+import SiteFooter from "@/app/ui/site-footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -26,6 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Content panel */}
       <div id="main-content" className="relative min-w-0 flex grow flex-col">
         {children}
+        <SiteFooter />
       </div>
 
       {/* Mobile bottom nav */}
