@@ -23,6 +23,8 @@ export default function SignInForm() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [capsLockOnMessage, setCapsLockOnMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [formError, setFormError] = useState("");
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -37,9 +39,11 @@ export default function SignInForm() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isLoaded) return;
+    setEmailError("");
+    setFormError("");
     try {
       const signInAttempt = await signIn.create({
         identifier: email,
@@ -49,10 +53,18 @@ export default function SignInForm() {
         await setActive({ session: signInAttempt.createdSessionId });
         router.push("/dashboard");
       } else {
-        console.error(JSON.stringify(signInAttempt, null, 2));
+        setFormError("Sign in could not be completed. Please try again.");
       }
     } catch (err: unknown) {
-      console.error(JSON.stringify(err, null, 2));
+      const clerkError = err as { errors?: Array<{ message: string; code: string }> };
+      const code = clerkError.errors?.[0]?.code;
+      if (code === "form_param_format_invalid") {
+        setEmailError("Please enter a valid email address.");
+      } else if (code === "form_identifier_not_found") {
+        setEmailError("No account found with that email address.");
+      } else {
+        setFormError(clerkError.errors?.[0]?.message ?? "Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -71,7 +83,8 @@ export default function SignInForm() {
             <input
               className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
               id="email"
-              type="email"
+              type="text"
+              inputMode="email"
               name="email"
               autoComplete="email"
               placeholder="Enter your email address"
@@ -80,6 +93,9 @@ export default function SignInForm() {
               value={email}
             />
             <AtSymbolIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+          </div>
+          <div role="alert" aria-live="assertive" className="mt-1 text-sm text-red-800">
+            {emailError}
           </div>
         </div>
         <div className="mt-4">
@@ -98,7 +114,6 @@ export default function SignInForm() {
               autoComplete="current-password"
               placeholder="Enter password"
               required
-              minLength={8}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onKeyUp={handleKeyUp}
@@ -122,7 +137,10 @@ export default function SignInForm() {
           </div>
         </div>
       </div>
-      <Button className="mt-7 w-full">
+      <div role="alert" aria-live="assertive" className="min-h-5 text-sm text-red-800">
+        {formError}
+      </div>
+      <Button className="mt-4 w-full">
         Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
