@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, ArrowsPointingOutIcon, ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ArrowsPointingOutIcon, ChevronLeftIcon, ChevronRightIcon, GlobeAltIcon, MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -361,6 +361,52 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      <footer className="bg-blue-900 px-6 py-10">
+        <div className="mx-auto max-w-4xl flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-white">John Bovard</p>
+            <a
+              href="mailto:john@johnbovard.dev"
+              className="mt-1 block text-sm text-blue-100 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+            >
+              john@johnbovard.dev
+            </a>
+          </div>
+          <nav aria-label="Footer navigation" className="flex items-center gap-4">
+            <a
+              href="https://johnbovard.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Portfolio site (opens in new tab)"
+              className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+            >
+              <GlobeAltIcon className="h-7 w-7 text-white" aria-hidden="true" />
+            </a>
+              <a
+                href="https://github.com/bovardj"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub (opens in new tab)"
+                className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              >
+                <Image src="/logos/github-mark/github-mark-white.svg" alt="" width={24} height={24} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/john-bovard-/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn (opens in new tab)"
+                className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              >
+                <Image src="/logos/in-logo/InBug-White.png" alt="" width={24} height={24} />
+              </a>
+          </nav>
+        </div>
+        <div className="mx-auto mt-8 max-w-4xl border-t border-white/10 pt-6">
+          <p className="text-xs text-blue-100">© 2026 John Bovard</p>
+        </div>
+      </footer>
 
       {/* Screenshot lightbox */}
       {activeIndex !== null && (
