@@ -32,6 +32,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "bufferutil",
+      "sharp",
       "utf-8-validate"
     ]
   },
@@ -42,6 +43,7 @@
     "@types/react-dom": "19.2.3",
     "@types/web-push": "^3.6.4",
     "eslint": "^10.4.0",
-    "eslint-config-next": "^16.2.6"
+    "eslint-config-next": "^16.2.6",
+    "sharp": "^0.35.2"
   }
 }
