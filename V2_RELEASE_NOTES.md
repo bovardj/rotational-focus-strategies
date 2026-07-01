@@ -35,7 +35,8 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **RFS logo on auth pages links to `/`** — the logo in `AuthShell` is wrapped in `<Link href="/">` so users can return to the landing page from sign-in/sign-up.
 - **Hero byline added.** "by John Bovard" rendered as a Lusitana italic `<span>` inside the `<h1>`, tightly coupled to the title as a book-cover-style byline.
 - **Portfolio CTA added to Stack + CTA section.** An outlined secondary button ("Learn more") linking to `johnbovard.dev/projects/rfs` sits alongside the "Get started" primary CTA, targeting recruiters browsing the portfolio.
-- **Footer added.** Dark `bg-blue-900` footer with name, email (`john@johnbovard.dev`), and three icon links — globe (portfolio), GitHub, LinkedIn — using matching 24px icons with `opacity-70 hover:opacity-100` treatment. Copyright line below a `border-white/10` divider. All text WCAG AAA compliant on dark blue (`text-blue-100`, ~7.77:1).
+- **Footer added.** Dark `bg-blue-900` footer with name, email (`john@johnbovard.dev`), and three icon links — globe (portfolio), GitHub, LinkedIn — using matching 24px icons with `opacity-70 hover:opacity-100` treatment. Copyright line below a `border-white/10` divider. All text WCAG AAA compliant on dark blue (`text-blue-100`, ~7.77:1). Dynamic copyright year via `new Date().getFullYear()`.
+- **Site footer added to dashboard and onboarding layouts** (`app/ui/site-footer.tsx`). Lighter style on `bg-blue-50` — contact prompt ("Have any questions or need help? Feel free to send me an email.") linking to `john@johnbovard.dev`, dynamic copyright year. Positioned outside the white content card, capped at `max-w-3xl`. `text-gray-700` used throughout (AAA: ~8.3:1 on blue-50). `pb-28 md:pb-6` clears the fixed mobile bottom nav.
 
 ---
 
