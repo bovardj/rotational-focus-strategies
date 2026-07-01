@@ -6,7 +6,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ## Visual Design & Branding
 
-- **Open Graph image added.** `app/opengraph-image.tsx` renders a branded 1200×630px preview card (orbit mark + "Rotational Focus Strategies" + subtitle + URL on dark blue `#1e3a8a`) via `next/og` / `ImageResponse`. Wired in root layout with `openGraph` and `twitter` metadata fields. WCAG AAA compliant: title white (~10.4:1), subtitle/URL `#93c5fd` (~5.75:1 at large text sizes). Gracefully degrades if Google Fonts is unreachable.
+- **Open Graph image added.** `app/opengraph-image.tsx` renders a branded 1200×630px preview card (orbit mark + "Rotational Focus Strategies" + subtitle + URL on dark blue `#1e3a8a`) via `next/og` / `ImageResponse`. Wired in root layout with `openGraph` and `twitter` metadata fields. WCAG AAA compliant: title white (~10.4:1), subtitle `#dbeafe` blue-100 (~7.77:1), URL `#93c5fd` blue-300 (~5.75:1 at large text sizes). Gracefully degrades if Google Fonts is unreachable.
 - **Branded favicon and PWA icons.** `app/icon.svg` added — the RFS orbit mark (white on `#1e3a8a` dark blue rounded-square badge), served automatically by Next.js App Router as the browser tab icon. Five PNG sizes generated via `scripts/generate-favicons.js` (512×512, 192×192, 180×180, 32×32, 16×16) for PWA home screen and legacy browser support. PWA manifest `theme_color` corrected from `#3182ce` to `#1e3a8a`; icon list cleaned up (removed `.ico` entry, added all PNG sizes).
 - **Unified design language across all pages.** Every surface — landing, auth, onboarding, dashboard — now shares the same visual system: `bg-blue-50` outer background with three decorative radial glow divs (`bg-blue-100/80`, `bg-indigo-100/50`, `bg-blue-200/40` blurred with `blur-3xl`), a `rounded-2xl` white card with `shadow-xl shadow-blue-100/60`, and the RFS logo above the card.
 - **WCAG AAA color palette enforced.** The entire project was audited and locked to a AAA-compliant blue: `bg-blue-800` / `text-blue-800` for all interactive elements (~8.6:1 contrast ratio). `text-blue-600` was removed everywhere it appeared for text (~4.17:1, fails even AA). `text-gray-600` is the minimum for body text. `text-red-800` replaces red-500 for error text.
@@ -33,6 +33,9 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **Feature highlights grid:** Three white `rounded-2xl` cards (Rotation algorithm, Push notifications + PWA, Clerk + Supabase RLS) in a `grid-cols-1 sm:grid-cols-3` responsive layout.
 - **Stack + CTA footer:** Dark `bg-blue-900` card with tech chips (`<ul>`/`<li>` list) and a "Get started" CTA linking to `/sign-up`.
 - **RFS logo on auth pages links to `/`** — the logo in `AuthShell` is wrapped in `<Link href="/">` so users can return to the landing page from sign-in/sign-up.
+- **Hero byline added.** "by John Bovard" rendered as a Lusitana italic `<span>` inside the `<h1>`, tightly coupled to the title as a book-cover-style byline.
+- **Portfolio CTA added to Stack + CTA section.** An outlined secondary button ("Learn more") linking to `johnbovard.dev/projects/rfs` sits alongside the "Get started" primary CTA, targeting recruiters browsing the portfolio.
+- **Footer added.** Dark `bg-blue-900` footer with name, email (`john@johnbovard.dev`), and three icon links — globe (portfolio), GitHub, LinkedIn — using matching 24px icons with `opacity-70 hover:opacity-100` treatment. Copyright line below a `border-white/10` divider. All text WCAG AAA compliant on dark blue (`text-blue-100`, ~7.77:1).
 
 ---
 
