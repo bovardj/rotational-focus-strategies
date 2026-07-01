@@ -140,7 +140,7 @@ export default function Page() {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               autoComplete="one-time-code"
-              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
               placeholder="Enter verification code"
             />
             <ChevronDoubleRightIcon aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -169,7 +169,7 @@ export default function Page() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
               id="email"
               type="email"
               name="email"
@@ -195,7 +195,7 @@ export default function Page() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
@@ -238,7 +238,7 @@ export default function Page() {
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Already have an account?{" "}
-          <Link href="/sign-in" className="font-medium text-blue-800 hover:underline">
+          <Link href="/sign-in" className="rounded-sm font-medium text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2">
             Sign in
           </Link>
         </p>

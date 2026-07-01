@@ -145,7 +145,7 @@ const ForgotPasswordForm: NextPage = () => {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
                 id="email"
                 type="text"
                 inputMode="email"
@@ -187,7 +187,7 @@ const ForgotPasswordForm: NextPage = () => {
             <div className="relative">
               <input
                 ref={newPasswordRef}
-                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
                 id="password"
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -226,7 +226,7 @@ const ForgotPasswordForm: NextPage = () => {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+                className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
                 id="code"
                 type="text"
                 autoComplete="one-time-code"

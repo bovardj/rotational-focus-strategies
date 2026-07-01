@@ -81,7 +81,7 @@ export default function SignInForm() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
               id="email"
               type="text"
               inputMode="email"
@@ -107,7 +107,7 @@ export default function SignInForm() {
           </label>
           <div className="relative">
             <input
-              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm outline-2 placeholder:text-gray-600"
+              className="peer block w-full rounded-md border border-gray-200 py-2.25 pl-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 placeholder:text-gray-600"
               id="password"
               type={showPassword ? "text" : "password"}
               name="password"
@@ -146,7 +146,7 @@ export default function SignInForm() {
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="font-medium text-blue-800 hover:underline">
+          <Link href="/sign-up" className="rounded-sm font-medium text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2">
             Sign up
           </Link>
         </p>
@@ -154,7 +154,7 @@ export default function SignInForm() {
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Forgot your password?{" "}
-          <Link href="/forgot-password" className="font-medium text-blue-800 hover:underline">
+          <Link href="/forgot-password" className="rounded-sm font-medium text-blue-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2">
             Reset password
           </Link>
         </p>
