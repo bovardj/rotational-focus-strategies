@@ -48,9 +48,11 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
   - CapsLock warning converted from an absolutely-positioned `text-red-500` div to an always-rendered `<div aria-live="polite">` with `text-red-800` (AAA-safe).
   - Decorative icons get `aria-hidden="true"`. Eye/password-toggle button gets `aria-label`.
   - Links to `/sign-up` and `/forgot-password` updated from `text-blue-600` to `text-blue-800`.
+  - **Inline error handling added.** Clerk errors now surface as inline messages rather than being silently swallowed. Email-specific errors (`form_identifier_not_found`, `form_param_format_invalid`) appear below the email field; all other errors appear near the submit button. `type="email"` replaced with `type="text" inputMode="email"` and `minLength` removed — browser-native validation popups replaced by Clerk's inline errors. `role="alert" aria-live="assertive"` on all error regions.
 - **Sign-up form:**
   - When the email verification step appears, focus is programmatically shifted to the verification heading via `useRef` + `useEffect`, preventing the user's focus from being stranded on the now-hidden email/password inputs.
   - The verification code prompt now shows the specific email address the code was sent to (e.g. "Enter the verification code sent to **user@example.com**") rather than a generic "your email address" — making it easier to verify the correct inbox was used.
+  - **Inline error handling added.** Email errors (`form_identifier_exists`, `form_param_format_invalid`) appear below the email field; password errors (`form_password_too_short`, `form_password_pwned`) appear below the password field; verification code errors (`form_code_incorrect`, `verification_expired`) appear below the code input; unexpected errors appear near the submit button. `minLength` removed from password input — Clerk returns the error inline instead.
 - **Forgot-password form:**
   - Focus shifts programmatically to the new-password field after successful email verification.
   - "Sign in instead" link added at the bottom.
