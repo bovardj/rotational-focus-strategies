@@ -4,8 +4,16 @@ import { NextResponse } from 'next/server'
 const isOnboardingRoute = createRouteMatcher(['/onboarding(.*)'])
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', '/forgot-password(.*)', '/api/keep-alive'])
 const isAuthPageRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)', '/forgot-password(.*)'])
+// These cron routes authenticate via their own CRON_SECRET bearer token and never carry a
+// user session. Without this bypass, auth.protect() rejects the Bearer token as an invalid
+// Clerk JWT and redirects to /sign-in before the route handler's own auth check ever runs.
+const isCronRoute = createRouteMatcher(['/api/keep-alive', '/api/send-due'])
 
 export default clerkMiddleware(async (auth, req) => {
+  if (isCronRoute(req)) {
+    return NextResponse.next()
+  }
+
   const { userId, sessionClaims, redirectToSignIn } = await auth()
 
   if (!isPublicRoute(req)) {
