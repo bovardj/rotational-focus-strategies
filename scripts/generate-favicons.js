@@ -1,5 +1,6 @@
 import sharp from 'sharp';
-import { readFileSync } from 'fs';
+import pngToIco from 'png-to-ico';
+import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -23,3 +24,10 @@ for (const { name, size } of sizes) {
     .toFile(join(outDir, name));
   console.log(`✓ ${name}`);
 }
+
+const icoBuffer = await pngToIco([
+  join(outDir, 'favicon-16x16.png'),
+  join(outDir, 'favicon-32x32.png'),
+]);
+writeFileSync(join(outDir, 'favicon.ico'), icoBuffer);
+console.log('✓ favicon.ico');
