@@ -46,8 +46,12 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|txt)).*)',
+    // Skip Next.js internals, all static files, and the bare "/" landing route (requires at
+    // least one path segment via `.+`) — clerkMiddleware() performs its own handshake-related
+    // redirect logic before our callback ever runs, so excluding "/" from the matcher entirely
+    // (not just short-circuiting inside the callback) is what actually avoids the cross-domain
+    // handshake redirect for first-time visitors to the landing page.
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|txt)).+)',
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
