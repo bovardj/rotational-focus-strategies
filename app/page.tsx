@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon, ArrowsPointingOutIcon, ChevronLeftIcon, ChevronRightIcon, GlobeAltIcon, MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon, ArrowsPointingOutIcon, ArrowTopRightOnSquareIcon, ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "@/app/ui/fonts";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -374,34 +374,37 @@ export default function Page() {
               john@johnbovard.dev
             </a>
           </div>
-          <nav aria-label="Footer navigation" className="flex items-center gap-4">
+          <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-2">
+            <a
+              href="https://github.com/bovardj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+            >
+              <Image src="/logos/github-mark/github-mark-white.svg" alt="" width={18} height={18} aria-hidden="true" />
+              GitHub
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/john-bovard-/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+            >
+              <Image src="/logos/in-logo/InBug-White.png" alt="" width={18} height={18} aria-hidden="true" />
+              LinkedIn
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
             <a
               href="https://johnbovard.dev"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Portfolio site (opens in new tab)"
-              className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              className="flex items-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
-              <GlobeAltIcon className="h-7 w-7 text-white" aria-hidden="true" />
+              Portfolio
+              <ArrowTopRightOnSquareIcon className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only"> (opens in new tab)</span>
             </a>
-              <a
-                href="https://github.com/bovardj"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub (opens in new tab)"
-                className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
-              >
-                <Image src="/logos/github-mark/github-mark-white.svg" alt="" width={24} height={24} />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/john-bovard-/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn (opens in new tab)"
-                className="opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
-              >
-                <Image src="/logos/in-logo/InBug-White.png" alt="" width={24} height={24} />
-              </a>
           </nav>
         </div>
         <div className="mx-auto mt-8 max-w-4xl border-t border-white/10 pt-6">
