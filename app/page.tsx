@@ -364,8 +364,8 @@ export default function Page() {
       </main>
 
       <footer className="bg-blue-900 px-6 py-10">
-        <div className="mx-auto max-w-4xl flex flex-col items-end gap-6 sm:flex-row sm:items-start sm:justify-between">
-          <div className="text-right sm:text-left">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
+          <div>
             <p className="text-sm font-semibold text-white">John Bovard</p>
             <a
               href="mailto:john@johnbovard.dev"
@@ -374,12 +374,12 @@ export default function Page() {
               john@johnbovard.dev
             </a>
           </div>
-          <nav aria-label="Footer navigation" className="flex flex-col items-end gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+          <nav aria-label="Footer navigation" className="flex flex-col items-center gap-2 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href="https://github.com/bovardj"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-36 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              className="flex w-30 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               <Image src="/logos/github-mark/github-mark-white.svg" alt="" width={18} height={18} aria-hidden="true" />
               GitHub
@@ -389,7 +389,7 @@ export default function Page() {
               href="https://www.linkedin.com/in/john-bovard-/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-36 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              className="flex w-30 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               <Image src="/logos/in-logo/InBug-White.png" alt="" width={18} height={18} aria-hidden="true" />
               LinkedIn
@@ -399,7 +399,7 @@ export default function Page() {
               href="https://johnbovard.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-36 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
+              className="flex w-30 items-center justify-center gap-1.5 rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
             >
               Portfolio
               <ArrowTopRightOnSquareIcon className="h-4 w-4" aria-hidden="true" />
@@ -408,7 +408,7 @@ export default function Page() {
           </nav>
         </div>
         <div className="mx-auto mt-8 max-w-4xl border-t border-white/10 pt-6">
-          <p className="text-xs text-blue-100">© {currentYear} John Bovard</p>
+          <p className="text-center text-xs text-blue-100 sm:text-left">© {currentYear} John Bovard</p>
         </div>
       </footer>
 
