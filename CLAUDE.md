@@ -152,7 +152,15 @@ No test suite is configured.
 
 **Turbopack HMR failure on significant component changes:** When a client component gains new props or new static attributes (ARIA, classnames), Turbopack sometimes fails to update the client-side bundle via hot reload. Symptom: hydration errors where props that should be static (e.g. `aria-expanded`, `className` from a new conditional prop) differ between server and client. Fix: stop and restart the dev server (`pnpm dev`). **Also applies to `global.css` changes** — edits to `app/ui/global.css` (e.g. `overflow-x`, `scrollbar-gutter`) may not take effect via hot reload and require a full restart to be picked up.
 
-**pnpm build script approvals:** If Vercel warns about "ignored build scripts" for a package, add it to `pnpm.onlyBuiltDependencies` in `package.json` (e.g. `"pnpm": { "onlyBuiltDependencies": ["bufferutil", "utf-8-validate"] }`). Do not run `pnpm approve-builds` interactively — it won't persist to CI.
+**pnpm build script approvals:** Approvals live in `pnpm-workspace.yaml`, not `package.json` (pnpm 11 ignores the `"pnpm"` field). Add new packages to both the `allowBuilds:` map (`pkg: true`, pnpm 11) and the `onlyBuiltDependencies:` list (pnpm ≤10, in case Vercel uses an older pnpm). pnpm 11 auto-inserts `pkg: set this to true or false` placeholders for unapproved packages — replace them with `true` (or `false` if the script isn't needed, e.g. `unrs-resolver`). Do not run `pnpm approve-builds` interactively — it won't persist to CI.
+
+**pnpm major-version store mismatch:** `ERR_PNPM_UNEXPECTED_STORE` means `node_modules` was linked by an older pnpm major. Fix: `pnpm install --config.confirmModulesPurge=false` (the flag skips the TTY prompt that otherwise aborts non-interactive shells).
+
+**`react`/`react-dom` are pinned to `latest`:** any `pnpm up`/`pnpm update` can silently bump React. Check `pnpm ls react react-dom` after dependency changes.
+
+**Fixing `pnpm audit` findings:** `pnpm update` (within semver ranges) clears most transitive advisories; exact-pinned deps (`postcss`, `autoprefixer`, `tailwindcss`, `typescript`) need explicit `pnpm up pkg@x.y.z`. For a lingering transitive package, `pnpm update <name>` bumps it deep in the tree without needing an override. Many transitive findings come via `@clerk/clerk-js` → Solana/Coinbase wallet adapters or ESLint (dev-only) — prioritize anything under `next` directly.
+
+**`pnpm lint` scans `.claude/worktrees/`:** stale worktrees produce lint warnings unrelated to `main`. Ignore them, or delete old worktrees.
 
 ## Environment Variables
 
