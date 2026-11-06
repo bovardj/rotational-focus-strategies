@@ -195,7 +195,7 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 - **`getServiceSupabase()`** added (service role key, bypasses RLS) for tables with INSERT-only RLS policies.
 - **Dependency upgrades:** Next.js 15 → 16, React 19.1 → 19.2, Clerk 6 → 7, Supabase JS 2.49 → 2.105, TypeScript 5 → 6, ESLint 9 → 10, Tailwind 3 → 4, Zod 3 → 4.
 - **Clerk API version updated** from `2024-10-01` to `2026-05-12`. Code change: `updateUser()` with `publicMetadata` replaced by `updateUserMetadata()` in `completeOnboarding()` (the old parameter is removed in the new API version). `ClerkProvider` moved inside `<body>` per Core 3 requirements. Clerk Backend API version updated in the Clerk Dashboard.
-- **Resend integrated** for transactional email (`resend` package). Domain `focusapp.dev` verified in Resend. Used in `app/api/keep-alive/route.ts` to send failure alerts.
+- **Resend integrated** for transactional email (`resend` package). Domain `focusapp.dev` verified in Resend. Used in `app/api/keep-alive/route.ts` to send failure alerts and success confirmations.
 - **Tailwind v4 migration:** `tailwind.config.ts` removed; configuration moved to `@theme` blocks in `global.css`.
 - **`middleware.ts` renamed to `proxy.ts`** per Next.js 16 convention.
 - **Lighthouse audit performed on the landing page** (local production build): Performance 92–98, Accessibility 100, Best Practices 77, SEO 100. LCP ~2.4–3.3s, FCP ~0.9s, TTI ~3.1–3.8s (consistent across repeated runs, after the handshake-redirect fix below). Best Practices is capped by Clerk's `accounts.dev` third-party cookies/DevTools Issues entries — not fixable app-side without a custom Clerk domain.

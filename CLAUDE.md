@@ -174,4 +174,4 @@ Required in `.env`:
 - `NEXT_PUBLIC_VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` — for web push notifications
 - `SUPABASE_SECRET_KEY` — service role key (bypasses RLS); used in `getServiceSupabase()` in `data.ts` and all API routes
 - `CRON_SECRET` — bearer token for cron route auth. **Production-only — not in local `.env`.** To test cron routes locally, temporarily add `CRON_SECRET=test` to `.env`.
-- `RESEND_API_KEY` — Resend API key for transactional email. Domain `focusapp.dev` is verified in Resend; send from `alerts@focusapp.dev`. Used in `app/api/keep-alive/route.ts` to email `john@johnbovard.dev` on Supabase failure.
+- `RESEND_API_KEY` — Resend API key for transactional email. Domain `focusapp.dev` is verified in Resend; send from `alerts@focusapp.dev`. Used in `app/api/keep-alive/route.ts` to email `john@johnbovard.dev` on both Supabase keep-alive failure and success.
