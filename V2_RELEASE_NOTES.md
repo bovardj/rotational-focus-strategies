@@ -186,6 +186,11 @@ This document describes UI/UX and performance improvements made since v1.0.0 (St
 
 ## Performance & Code Quality
 
+- **Vercel functions moved to `pdx1` (Oregon)** via `regions` in `vercel.json`, next to the Supabase database in `us-west-2`. They previously ran in `iad1` (Virginia), so every query crossed the country.
+- **Dashboard loading state added.** `app/dashboard/loading.tsx` shows a placeholder card during page switches instead of no feedback until the server finishes rendering.
+- **Survey page queries consolidated.** `getSurveyPageData()` replaces 4 sequential rounds (3 of them reading the same `days_completed` row) with one parallel round.
+- **Removed `currentUser()` from the dashboard page**, which made a Clerk network call on every load when only the user ID was checked.
+- **Sign-in and sign-up pending states.** Buttons show progress text and are `aria-disabled` while submitting or while Clerk loads, and repeat submits are ignored. Previously a slow login could be submitted repeatedly, and a submit before Clerk loaded did nothing.
 - **Dashboard data fetching parallelised:** 6 sequential Supabase calls on the dashboard page replaced with a `getDashboardCounts()` function running 2 queries in `Promise.all`.
 - **`unstable_cache` applied** to `fetchUserStrategies()` and `getDaysExpected()` — both are immutable after onboarding and cached per-user with explicit cache tags.
 - **`getDailyStrategy()` short-circuits** if today's assignment is already fetched — skips a Supabase round-trip on repeat visits.

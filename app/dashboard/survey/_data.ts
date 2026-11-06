@@ -209,6 +209,34 @@ export const getBaselineCompleted = async () => {
     return data.baseline_completed
 }
 
+// Everything the survey page needs, in one days_completed read plus the submission dates.
+export async function getSurveyPageData() {
+    const { userId } = await auth()
+    if (!userId) {
+        throw new Error('No Logged In User')
+    }
+
+    const [completedResult, submissionDates] = await Promise.all([
+        getSupabase()
+            .from('days_completed')
+            .select('baseline_completed, daily_completed, end_survey_completed')
+            .eq('user_id', userId)
+            .single(),
+        getSurveySubmissionDates(),
+    ])
+
+    if (completedResult.error) {
+        throw new Error('Error fetching days_completed: ' + completedResult.error.message)
+    }
+
+    return {
+        baselineCompleted: completedResult.data.baseline_completed as boolean,
+        dailyCompleted: completedResult.data.daily_completed as boolean,
+        endSurveyCompleted: completedResult.data.end_survey_completed as boolean,
+        submissionDates,
+    }
+}
+
 // Get submission dates for baseline and daily surveys
 export const getSurveySubmissionDates = async () => {
     const { userId } = await auth()

@@ -2,12 +2,7 @@ import PageCard from "@/app/ui/dashboard/page-card";
 import { lusitana } from "@/app/ui/fonts";
 import SurveyForm from "@/app/ui/dashboard/survey/survey-form";
 import SurveyProgress from "@/app/ui/dashboard/survey/survey-progress";
-import {
-  getBaselineCompleted,
-  getDailyCompleted,
-  getEndSurveyCompleted,
-  getSurveySubmissionDates,
-} from "@/app/dashboard/survey/_data";
+import { getSurveyPageData } from "@/app/dashboard/survey/_data";
 
 export const metadata = {
   title: "RFS | Survey",
@@ -15,10 +10,8 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const baselineCompleted = await getBaselineCompleted();
-  const dailyCompleted = await getDailyCompleted();
-  const endSurveyCompleted = await getEndSurveyCompleted();
-  const submissionDates = await getSurveySubmissionDates();
+  const { baselineCompleted, dailyCompleted, endSurveyCompleted, submissionDates } =
+    await getSurveyPageData();
 
   return (
     <PageCard>

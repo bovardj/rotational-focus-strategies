@@ -4,7 +4,6 @@ import { lusitana } from "@/app/ui/fonts";
 import { getDailyStrategy } from "@/app/lib/actions/actions";
 import { getDashboardCounts } from "@/app/dashboard/survey/_data";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
 import { fetchUserStrategies, fetchAssignedStrategies } from "@/app//lib/data";
 import { strategyDictionary } from "@/app//lib/utils";
 import CollapseStrategy from "@/app/ui/dashboard/components/collapse-strategy";
@@ -19,14 +18,13 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const [counts, user, userStrategies, userAssignedStrategies] = await Promise.all([
+  const [counts, userStrategies, userAssignedStrategies] = await Promise.all([
     getDashboardCounts(),
-    currentUser(),
     fetchUserStrategies(),
     fetchAssignedStrategies(),
   ]);
 
-  if (!counts || !user?.id) {
+  if (!counts) {
     return <p className="text-center text-gray-500">Loading...</p>;
   }
 

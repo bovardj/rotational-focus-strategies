@@ -25,6 +25,7 @@ export default function SignInForm() {
   const [capsLockOnMessage, setCapsLockOnMessage] = useState("");
   const [emailError, setEmailError] = useState("");
   const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -41,9 +42,10 @@ export default function SignInForm() {
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || isSubmitting) return;
     setEmailError("");
     setFormError("");
+    setIsSubmitting(true);
     try {
       const signInAttempt = await signIn.create({
         identifier: email,
@@ -51,11 +53,14 @@ export default function SignInForm() {
       });
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
+        // Stay pending on success: the form unmounts once /dashboard finishes loading.
         router.push("/dashboard");
       } else {
+        setIsSubmitting(false);
         setFormError("Sign in could not be completed. Please try again.");
       }
     } catch (err: unknown) {
+      setIsSubmitting(false);
       const clerkError = err as { errors?: Array<{ message: string; code: string }> };
       const code = clerkError.errors?.[0]?.code;
       if (code === "form_param_format_invalid") {
@@ -140,8 +145,11 @@ export default function SignInForm() {
       <div role="alert" aria-live="assertive" className="text-sm text-red-800">
         {formError}
       </div>
-      <Button className="mt-4 w-full">
-        Sign in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
+      <div aria-live="polite" className="sr-only">
+        {isSubmitting ? "Signing in…" : ""}
+      </div>
+      <Button className="mt-4 w-full" aria-disabled={!isLoaded || isSubmitting}>
+        {isSubmitting ? "Signing in…" : "Sign in"} <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
         <p className="text-sm text-gray-600">

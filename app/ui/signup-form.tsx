@@ -23,6 +23,8 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [verifying, setVerifying] = useState(false);
   const [code, setCode] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -58,15 +60,17 @@ export default function Page() {
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || isSubmitting) return;
     setEmailError("");
     setPasswordError("");
     setFormError("");
+    setIsSubmitting(true);
     try {
       await signUp.create({ emailAddress, password });
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setVerifying(true);
     } catch (err: unknown) {
+      setIsSubmitting(false);
       const clerkError = err as { errors?: Array<{ message: string; code: string }> };
       const code = clerkError.errors?.[0]?.code;
       const message = clerkError.errors?.[0]?.message ?? "Something went wrong. Please try again.";
@@ -86,14 +90,17 @@ export default function Page() {
 
   const handleVerify = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isLoaded) return;
+    if (!isLoaded || isVerifying) return;
     setVerifyError("");
+    setIsVerifying(true);
     try {
       const signUpAttempt = await signUp.attemptEmailAddressVerification({ code });
       if (signUpAttempt.status === "complete") {
         await setActive({ session: signUpAttempt.createdSessionId });
+        // Stay pending on success: the form unmounts once /dashboard finishes loading.
         router.push("/dashboard");
       } else {
+        setIsVerifying(false);
         setVerifyError("Verification could not be completed. Please try again.");
       }
     } catch (err: unknown) {
@@ -102,6 +109,7 @@ export default function Page() {
         router.push("/dashboard");
         return;
       }
+      setIsVerifying(false);
       const code = clerkErr.errors?.[0]?.code;
       if (code === "form_code_incorrect") {
         setVerifyError("Incorrect code. Please check your email and try again.");
@@ -149,8 +157,11 @@ export default function Page() {
           <div role="alert" aria-live="assertive" className="mt-1 text-sm text-red-800">
             {verifyError}
           </div>
-          <Button className="mt-4 w-full">
-            Verify <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
+          <div aria-live="polite" className="sr-only">
+            {isVerifying ? "Verifying…" : ""}
+          </div>
+          <Button className="mt-4 w-full" aria-disabled={!isLoaded || isVerifying}>
+            {isVerifying ? "Verifying…" : "Verify"} <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
           </Button>
         </form>
       </div>
@@ -234,8 +245,11 @@ export default function Page() {
       <div role="alert" aria-live="assertive" className="text-sm text-red-800">
         {formError}
       </div>
-      <Button className="mt-4 w-full">
-        Sign up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
+      <div aria-live="polite" className="sr-only">
+        {isSubmitting ? "Creating account…" : ""}
+      </div>
+      <Button className="mt-4 w-full" aria-disabled={!isLoaded || isSubmitting}>
+        {isSubmitting ? "Creating account…" : "Sign up"} <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" aria-hidden="true" />
       </Button>
       <div className="text-center">
         <p className="text-sm text-gray-600">
